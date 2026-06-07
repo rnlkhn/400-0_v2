@@ -1,11 +1,14 @@
 import {
-  ROLE_LABELS,
   TOURNAMENT_OPPONENTS,
   createInitialState,
   draftPlayer,
+  getBattingOrderPlayers,
+  getBowlingOrderPlayers,
   getCurrentOpponent,
   getTeamMetrics,
   isAllRounderPlayer,
+  moveBattingOrder,
+  moveBowlingOrder,
   revealNextOpponent,
   rerollCandidates,
   simulateMatch,
@@ -18,7 +21,15 @@ let state = createInitialState();
 let career = loadCareer();
 
 function getPlayerRoleLabel(player) {
-  return isAllRounderPlayer(player) ? "All-rounder" : ROLE_LABELS[player.role];
+  if (isAllRounderPlayer(player)) {
+    return "All-rounder";
+  }
+
+  if (player.role === "wicketkeeper") {
+    return "WK";
+  }
+
+  return player.role === "batsman" ? "Batsman" : "Bowler";
 }
 
 function formatBattingEntry(entry) {
@@ -115,7 +126,6 @@ function rosterMarkup() {
         <article class="roster-card ${allRounder ? "roster-card--allrounder" : ""}">
           <div class="roster-matrix">
             <h3>${escapeHtml(player.name)}</h3>
-            <p class="card-role">${escapeHtml(getPlayerRoleLabel(player))}</p>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
             <dl class="roster-stats">
               <div><dt>Bat</dt><dd>${player.batting}</dd></div>
@@ -126,6 +136,67 @@ function rosterMarkup() {
       `;
     })
     .join("");
+}
+
+function canEditOrders() {
+  return state.phase === "tournament" && !state.currentOpponent && !state.champion && !state.eliminated;
+}
+
+function orderSetupMarkup() {
+  if (!canEditOrders()) {
+    return "";
+  }
+
+  const battingOrder = getBattingOrderPlayers(state);
+  const bowlingOrder = getBowlingOrderPlayers(state);
+
+  const renderOrderList = (players, type, hint) => `
+    <section class="surface-card surface-card--orders">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">${type === "batting" ? "Batting Order" : "Bowling Order"}</p>
+          <h2>${type === "batting" ? "Set your XI order" : "Set your bowling rotation"}</h2>
+          <p class="squad-note">${escapeHtml(hint)}</p>
+        </div>
+      </div>
+      <div class="order-list">
+        ${players
+          .map(
+            (player, index) => `
+              <article class="order-row">
+                <div class="order-row__meta">
+                  <span class="order-row__slot">${index + 1}</span>
+                  <div>
+                    <strong>${escapeHtml(player.name)}</strong>
+                    <p>${escapeHtml(type === "batting" ? `${player.team} ${player.year}` : `Bowl ${player.bowling} · Bat ${player.batting}`)}</p>
+                  </div>
+                </div>
+                <div class="order-row__actions">
+                  <button class="order-button" type="button" data-action="${type}-up" data-player-id="${player.id}" ${index === 0 ? "disabled" : ""}>Up</button>
+                  <button class="order-button" type="button" data-action="${type}-down" data-player-id="${player.id}" ${index === players.length - 1 ? "disabled" : ""}>Down</button>
+                </div>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+
+  return `
+    <div class="orders-grid">
+      ${renderOrderList(
+        battingOrder,
+        "batting",
+        "This order is used for every run chase and first innings.",
+      )}
+      ${renderOrderList(
+        bowlingOrder,
+        "bowling",
+        "The simulator cycles through this order over by over and respects bowling spells.",
+      )}
+    </div>
+  `;
 }
 
 function tournamentTotals() {
@@ -470,10 +541,10 @@ function statusCopy() {
     const opponent = getCurrentOpponent(state);
     if (!opponent) {
       if (state.results.length === 0 && state.matchIndex === 0) {
-        return "Your XI is set. Press Start Tournament to reveal your opening opponent.";
+        return "Your XI is set. Adjust batting and bowling order if you want, then press Start Tournament.";
       }
       return state.matchIndex < TOURNAMENT_OPPONENTS.length
-        ? "You are through. Press Proceed to next match to reveal your next opponent."
+        ? "You are through. You can tweak your batting or bowling order before pressing Proceed to next match."
         : "Tournament complete.";
     }
     return `${opponent.stage} is next: ${opponent.label}. ${opponent.note}`;
@@ -536,6 +607,7 @@ function render() {
             <div class="candidate-grid">${candidateMarkup()}</div>
           </section>
 
+          ${orderSetupMarkup()}
           ${showTournamentPanels ? resultMarkup() : ""}
           ${showTournamentPanels ? resultsHistoryMarkup() : ""}
         </div>
@@ -581,6 +653,30 @@ appElement.addEventListener("click", (event) => {
 
   if (action === "reveal-opponent") {
     state = revealNextOpponent(state);
+    render();
+    return;
+  }
+
+  if (action === "batting-up") {
+    state = moveBattingOrder(state, target.dataset.playerId, -1);
+    render();
+    return;
+  }
+
+  if (action === "batting-down") {
+    state = moveBattingOrder(state, target.dataset.playerId, 1);
+    render();
+    return;
+  }
+
+  if (action === "bowling-up") {
+    state = moveBowlingOrder(state, target.dataset.playerId, -1);
+    render();
+    return;
+  }
+
+  if (action === "bowling-down") {
+    state = moveBowlingOrder(state, target.dataset.playerId, 1);
     render();
     return;
   }

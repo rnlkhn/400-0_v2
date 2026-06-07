@@ -461,9 +461,9 @@ button {
 
 .roster-matrix {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto auto;
   column-gap: 10px;
-  row-gap: 4px;
+  row-gap: 3px;
   align-items: start;
 }
 
@@ -471,12 +471,6 @@ button {
   margin: 0;
   font-size: 0.9rem;
   line-height: 1.15;
-}
-
-.roster-matrix .card-role {
-  margin: 0;
-  text-align: right;
-  font-size: 0.62rem;
 }
 
 .card-meta {
@@ -490,11 +484,11 @@ button {
 }
 
 .roster-matrix .roster-stats {
-  grid-column: 2 / 3;
+  grid-column: 2 / 4;
   margin: 0;
   display: grid;
   grid-template-columns: repeat(2, auto);
-  gap: 10px;
+  gap: 8px;
   align-items: start;
 }
 
@@ -511,6 +505,83 @@ button {
 .roster-matrix .roster-stats dd {
   margin: 2px 0 0;
   font-size: 0.88rem;
+}
+
+.orders-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.surface-card--orders {
+  padding: 12px;
+}
+
+.order-list {
+  display: grid;
+  gap: 6px;
+}
+
+.order-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.order-row__meta {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.order-row__meta strong {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--grass-dark);
+}
+
+.order-row__meta p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+.order-row__slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(29, 49, 31, 0.08);
+  color: var(--grass-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.order-row__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.order-button {
+  min-height: 28px;
+  padding: 0 9px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--grass-dark);
+  font-size: 0.74rem;
+}
+
+.order-button[disabled] {
+  opacity: 0.45;
 }
 
 .schedule-list {
@@ -791,6 +862,10 @@ button {
     grid-template-columns: minmax(0, 1.52fr) minmax(280px, 0.72fr);
     align-items: start;
   }
+
+  .orders-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 720px) {
@@ -860,17 +935,29 @@ button {
   }
 
   .roster-matrix {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto auto;
   }
 
-  .roster-matrix .card-role,
   .roster-matrix .card-meta {
     text-align: left;
   }
 
   .roster-matrix .roster-stats {
-    grid-column: 1 / -1;
-    grid-template-columns: repeat(2, minmax(0, auto));
+    grid-column: 2 / 4;
+    grid-template-columns: repeat(2, auto);
+  }
+
+  .order-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .order-row__actions {
+    width: 100%;
+  }
+
+  .order-button {
+    width: 100%;
   }
 
   .result-row {

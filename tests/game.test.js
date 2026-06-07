@@ -7,9 +7,13 @@ import {
   TOURNAMENT_OPPONENTS,
   createInitialState,
   draftPlayer,
+  getBattingOrderPlayers,
+  getBowlingOrderPlayers,
   getRemainingSlots,
   getTeamMetrics,
   isAllRounderPlayer,
+  moveBattingOrder,
+  moveBowlingOrder,
   revealNextOpponent,
   rerollCandidates,
   simulateMatch,
@@ -154,7 +158,7 @@ test("simulateMatch ends the run when a weak XI loses", () => {
     eliminated: false,
   };
 
-  const nextState = simulateMatch(baseState, constantRandom(0));
+  const nextState = simulateMatch(baseState, constantRandom(0.1));
 
   assert.equal(nextState.phase, "finished");
   assert.equal(nextState.eliminated, true);
@@ -193,4 +197,49 @@ test("revealNextOpponent waits until asked and reveals the next stage opponent",
   const nextState = revealNextOpponent(tournamentState);
 
   assert.equal(nextState.currentOpponent.id, TOURNAMENT_OPPONENTS[2].id);
+});
+
+test("completing the draft seeds batting and bowling order state", () => {
+  const roster = createLegendXI();
+  const state = {
+    phase: "tournament",
+    roster,
+    battingOrder: roster.map((player) => player.id),
+    bowlingOrder: roster.filter((player) => player.role !== "wicketkeeper").map((player) => player.id),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: null,
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+  };
+
+  assert.equal(getBattingOrderPlayers(state).length, 11);
+  assert.ok(getBowlingOrderPlayers(state).length >= 5);
+});
+
+test("batting and bowling order can be moved before a match starts", () => {
+  const roster = createLegendXI();
+  let state = {
+    phase: "tournament",
+    roster,
+    battingOrder: roster.map((player) => player.id),
+    bowlingOrder: roster.filter((player) => player.role !== "wicketkeeper").map((player) => player.id),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: null,
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+  };
+
+  state = moveBattingOrder(state, roster[1].id, -1);
+  state = moveBowlingOrder(state, state.bowlingOrder[1], -1);
+
+  assert.equal(state.battingOrder[0], roster[1].id);
+  assert.notEqual(state.bowlingOrder[0], roster.filter((player) => player.role !== "wicketkeeper")[0].id);
 });

@@ -28,6 +28,15 @@ function randomSwing(random, size) {
   return (random() - 0.5) * 2 * size;
 }
 
+function hashValue(text) {
+  let value = 0;
+  for (const char of text) {
+    value = (value * 31 + char.charCodeAt(0)) % 1000003;
+  }
+
+  return value;
+}
+
 function getTotalRequiredPlayers() {
   return ROLE_ORDER.reduce((total, role) => total + REQUIRED_ROLES[role], 0);
 }
@@ -231,6 +240,8 @@ export function createInitialState(random = Math.random) {
   return {
     phase: "draft",
     roster: [],
+    battingOrder: [],
+    bowlingOrder: [],
     currentSquad: null,
     candidateSet: [],
     matchIndex: 0,
@@ -239,6 +250,106 @@ export function createInitialState(random = Math.random) {
     latestMatch: null,
     champion: false,
     eliminated: false,
+  };
+}
+
+function buildDefaultBattingOrder(roster) {
+  return roster.map((player) => player.id);
+}
+
+function buildDefaultBowlingOrder(roster) {
+  return [...roster]
+    .filter((player) => player.role !== "wicketkeeper")
+    .sort((left, right) => right.bowling - left.bowling || right.batting - left.batting)
+    .map((player) => player.id);
+}
+
+function ensureOrder(order, roster, fallbackIds) {
+  const rosterIds = new Set(roster.map((player) => player.id));
+  const seen = new Set();
+  const ordered = [];
+
+  for (const id of order) {
+    if (rosterIds.has(id) && !seen.has(id)) {
+      ordered.push(id);
+      seen.add(id);
+    }
+  }
+
+  for (const id of fallbackIds) {
+    if (rosterIds.has(id) && !seen.has(id)) {
+      ordered.push(id);
+      seen.add(id);
+    }
+  }
+
+  return ordered;
+}
+
+function buildTournamentOrders(roster) {
+  const battingOrder = buildDefaultBattingOrder(roster);
+  const bowlingOrder = buildDefaultBowlingOrder(roster);
+
+  return { battingOrder, bowlingOrder };
+}
+
+export function getBattingOrderPlayers(state) {
+  const fallback = buildDefaultBattingOrder(state.roster);
+  const orderIds = ensureOrder(state.battingOrder || [], state.roster, fallback);
+  const byId = new Map(state.roster.map((player) => [player.id, player]));
+  return orderIds.map((id) => byId.get(id)).filter(Boolean);
+}
+
+export function getBowlingOrderPlayers(state) {
+  const bowlingRoster = state.roster.filter((player) => player.role !== "wicketkeeper");
+  const fallback = buildDefaultBowlingOrder(state.roster);
+  const orderIds = ensureOrder(state.bowlingOrder || [], bowlingRoster, fallback);
+  const byId = new Map(state.roster.map((player) => [player.id, player]));
+  return orderIds.map((id) => byId.get(id)).filter(Boolean);
+}
+
+function moveId(order, playerId, direction) {
+  const index = order.indexOf(playerId);
+  if (index === -1) {
+    return order;
+  }
+
+  const nextIndex = index + direction;
+  if (nextIndex < 0 || nextIndex >= order.length) {
+    return order;
+  }
+
+  const nextOrder = [...order];
+  [nextOrder[index], nextOrder[nextIndex]] = [nextOrder[nextIndex], nextOrder[index]];
+  return nextOrder;
+}
+
+export function moveBattingOrder(state, playerId, direction) {
+  if (state.phase !== "tournament" || state.currentOpponent) {
+    return state;
+  }
+
+  const fallback = buildDefaultBattingOrder(state.roster);
+  const currentOrder = ensureOrder(state.battingOrder || [], state.roster, fallback);
+
+  return {
+    ...state,
+    battingOrder: moveId(currentOrder, playerId, direction),
+  };
+}
+
+export function moveBowlingOrder(state, playerId, direction) {
+  if (state.phase !== "tournament" || state.currentOpponent) {
+    return state;
+  }
+
+  const bowlingRoster = state.roster.filter((player) => player.role !== "wicketkeeper");
+  const fallback = buildDefaultBowlingOrder(state.roster);
+  const currentOrder = ensureOrder(state.bowlingOrder || [], bowlingRoster, fallback);
+
+  return {
+    ...state,
+    bowlingOrder: moveId(currentOrder, playerId, direction),
   };
 }
 
@@ -256,9 +367,11 @@ export function draftPlayer(state, playerId, random = Math.random) {
   const nextState = { ...state, roster };
 
   if (isRosterComplete(roster)) {
+    const orders = buildTournamentOrders(roster);
     return {
       ...nextState,
       phase: "tournament",
+      ...orders,
       currentSquad: null,
       candidateSet: [],
     };
@@ -530,6 +643,161 @@ function getOpponentRoster(opponent) {
   return roster.length > 0 ? roster : [];
 }
 
+function buildOpponentBattingOrder(roster) {
+  return [...roster]
+    .sort((left, right) => right.batting - left.batting || right.bowling - left.bowling)
+    .map((player) => player.id);
+}
+
+function buildOpponentBowlingOrder(roster) {
+  return [...roster]
+    .filter((player) => player.role !== "wicketkeeper")
+    .sort((left, right) => right.bowling - left.bowling || right.batting - left.batting)
+    .map((player) => player.id);
+}
+
+function formatScorecardRoster(roster, orderIds) {
+  const byId = new Map(roster.map((player) => [player.id, player]));
+  return orderIds.map((id) => byId.get(id)).filter(Boolean);
+}
+
+function pickNextBowler(rotation, stats, previousBowlerId) {
+  const available = rotation.filter((player) => (stats.get(player.id)?.ballsBowled || 0) < 60);
+  if (available.length === 0) {
+    return null;
+  }
+
+  const next = available.find((player) => player.id !== previousBowlerId);
+  return next || available[0];
+}
+
+function simulateOverByOver({
+  battingOrder,
+  bowlingOrder,
+  inningsIndex,
+  target,
+  random,
+}) {
+  let strikerIndex = 0;
+  let nonStrikerIndex = 1;
+  let nextBatterIndex = 2;
+  let totalRuns = 0;
+  let wickets = 0;
+  let balls = 0;
+  let previousBowlerId = null;
+
+  const battingStats = new Map(
+    battingOrder.map((player) => [player.id, { id: player.id, name: player.name, runs: 0, balls: 0 }]),
+  );
+  const bowlingStats = new Map(
+    bowlingOrder.map((player) => [
+      player.id,
+      { id: player.id, name: player.name, wickets: 0, runsConceded: 0, ballsBowled: 0 },
+    ]),
+  );
+
+  while (balls < 300 && wickets < 10) {
+    if (target && totalRuns >= target) {
+      break;
+    }
+
+    const striker = battingOrder[strikerIndex];
+    const bowler = pickNextBowler(bowlingOrder, bowlingStats, previousBowlerId);
+    if (!striker || !bowler) {
+      break;
+    }
+
+    const battingEntry = battingStats.get(striker.id);
+    const bowlingEntry = bowlingStats.get(bowler.id);
+
+    for (let ballInOver = 0; ballInOver < 6; ballInOver += 1) {
+      if (balls >= 300 || wickets >= 10 || (target && totalRuns >= target)) {
+        break;
+      }
+
+      const ballsRemaining = 300 - balls;
+      const runsNeeded = target ? Math.max(0, target - totalRuns) : 0;
+      const skillEdge = (striker.batting - bowler.bowling) / 100;
+      const chaseRate = target ? runsNeeded / Math.max(1, ballsRemaining) : 0;
+      const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
+      const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
+      const wicketChance = clamp(
+        0.034 - skillEdge * 0.012 + Math.max(0, pressureBoost) * 0.014 + deathOversBoost * 0.55,
+        0.018,
+        0.082,
+      );
+      const singleChance = clamp(0.31 + skillEdge * 0.05 - Math.max(0, pressureBoost) * 0.04, 0.22, 0.39);
+      const doubleChance = clamp(0.11 + skillEdge * 0.025, 0.06, 0.16);
+      const boundaryChance = clamp(0.12 + skillEdge * 0.04 + deathOversBoost, 0.06, 0.2);
+      const sixChance = clamp(0.018 + skillEdge * 0.018 + deathOversBoost, 0.006, 0.085);
+      const tripleChance = 0.012;
+      const chanceJitter =
+        (hashValue(`${inningsIndex}-${striker.id}-${bowler.id}-${balls}`) % 1000) / 1000;
+      const chance = (random() * 0.55 + chanceJitter * 0.45) % 1;
+
+      battingEntry.balls += 1;
+      bowlingEntry.ballsBowled += 1;
+      balls += 1;
+
+      if (chance < wicketChance) {
+        wickets += 1;
+        bowlingEntry.wickets += 1;
+
+        if (nextBatterIndex >= battingOrder.length) {
+          break;
+        }
+
+        strikerIndex = nextBatterIndex;
+        nextBatterIndex += 1;
+        continue;
+      }
+
+      let runs = 0;
+      if (chance < wicketChance) {
+        runs = 0;
+      } else if (chance < wicketChance + sixChance) {
+        runs = 6;
+      } else if (chance < wicketChance + sixChance + boundaryChance) {
+        runs = 4;
+      } else if (chance < wicketChance + sixChance + boundaryChance + tripleChance) {
+        runs = 3;
+      } else if (chance < wicketChance + sixChance + boundaryChance + tripleChance + doubleChance) {
+        runs = 2;
+      } else if (
+        chance <
+        wicketChance + sixChance + boundaryChance + tripleChance + doubleChance + singleChance
+      ) {
+        runs = 1;
+      } else {
+        runs = 0;
+      }
+
+      battingEntry.runs += runs;
+      bowlingEntry.runsConceded += runs;
+      totalRuns += runs;
+
+      if (runs % 2 === 1) {
+        [strikerIndex, nonStrikerIndex] = [nonStrikerIndex, strikerIndex];
+      }
+    }
+
+    [strikerIndex, nonStrikerIndex] = [nonStrikerIndex, strikerIndex];
+    previousBowlerId = bowler.id;
+  }
+
+  return {
+    runs: totalRuns,
+    wickets,
+    balls,
+    battingCard: [...battingStats.values()].sort(
+      (left, right) => right.runs - left.runs || left.balls - right.balls,
+    ),
+    bowlingCard: [...bowlingStats.values()]
+      .filter((entry) => entry.ballsBowled > 0)
+      .sort((left, right) => right.wickets - left.wickets || left.runsConceded - right.runsConceded),
+  };
+}
+
 export function simulateMatch(state, random = Math.random) {
   if (
     state.phase !== "tournament" ||
@@ -542,33 +810,56 @@ export function simulateMatch(state, random = Math.random) {
   const opponent = state.currentOpponent;
   const team = getTeamMetrics(state.roster);
   const opponentRoster = getOpponentRoster(opponent);
+  const playerBattingOrder = getBattingOrderPlayers(state);
+  const playerBowlingOrder = getBowlingOrderPlayers(state);
+  const opponentBattingOrder = formatScorecardRoster(
+    opponentRoster,
+    buildOpponentBattingOrder(opponentRoster),
+  );
+  const opponentBowlingOrder = formatScorecardRoster(
+    opponentRoster,
+    buildOpponentBowlingOrder(opponentRoster),
+  );
   const userBatsFirst = random() >= 0.5;
-  const playerPressure = Math.max(0, state.matchIndex - 2);
 
-  const playerBaseRuns = simulateInnings(team.batting, opponent.bowling, playerPressure, random);
-  const opponentBaseRuns = simulateInnings(
-    opponent.batting,
-    team.bowling,
-    opponent.pressure,
-    random,
-  );
+  const firstInnings = userBatsFirst
+    ? simulateOverByOver({
+        battingOrder: playerBattingOrder,
+        bowlingOrder: opponentBowlingOrder,
+        inningsIndex: 0,
+        target: null,
+        random,
+      })
+    : simulateOverByOver({
+        battingOrder: opponentBattingOrder,
+        bowlingOrder: playerBowlingOrder,
+        inningsIndex: 0,
+        target: null,
+        random,
+      });
 
-  const strengthEdge = team.overall - opponent.overall;
-  const edgeBoost = strengthEdge * 2.3;
+  const secondInnings = userBatsFirst
+    ? simulateOverByOver({
+        battingOrder: opponentBattingOrder,
+        bowlingOrder: playerBowlingOrder,
+        inningsIndex: 1,
+        target: firstInnings.runs + 1,
+        random,
+      })
+    : simulateOverByOver({
+        battingOrder: playerBattingOrder,
+        bowlingOrder: opponentBowlingOrder,
+        inningsIndex: 1,
+        target: firstInnings.runs + 1,
+        random,
+      });
 
-  const playerRuns = clamp(
-    round(playerBaseRuns + edgeBoost + team.chemistry * 0.55 + randomSwing(random, 7)),
-    150,
-    420,
-  );
-  const opponentRuns = clamp(
-    round(opponentBaseRuns - edgeBoost + randomSwing(random, 7)),
-    145,
-    410,
-  );
-
-  const playerWickets = estimateWickets(playerRuns, team.batting, opponent.bowling, random);
-  const opponentWickets = estimateWickets(opponentRuns, opponent.batting, team.bowling, random);
+  const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
+  const playerWickets = userBatsFirst ? firstInnings.wickets : secondInnings.wickets;
+  const playerBalls = userBatsFirst ? firstInnings.balls : secondInnings.balls;
+  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInnings.runs;
+  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInnings.wickets;
+  const opponentBalls = userBatsFirst ? secondInnings.balls : firstInnings.balls;
 
   const playerWon = userBatsFirst ? playerRuns > opponentRuns : playerRuns >= opponentRuns;
   const chasingSide = userBatsFirst ? "opponent" : "player";
@@ -586,37 +877,15 @@ export function simulateMatch(state, random = Math.random) {
     marginValue = Math.max(1, marginValue);
   }
 
+  const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
+  const playerBowlingCard = userBatsFirst ? secondInnings.bowlingCard : firstInnings.bowlingCard;
+  const opponentBattingCard = userBatsFirst ? secondInnings.battingCard : firstInnings.battingCard;
+  const opponentBowlingCard = userBatsFirst ? firstInnings.bowlingCard : secondInnings.bowlingCard;
   const performer = playerWon
-    ? chooseStandout(state.roster, marginType === "wickets" ? "batting" : "bowling", random)
-    : chooseStandout(state.roster, "bowling", random);
-
-  const playerBalls = estimateInningsBalls(
-    playerRuns,
-    playerWickets,
-    !userBatsFirst && playerWon,
-  );
-  const opponentBalls = estimateInningsBalls(
-    opponentRuns,
-    opponentWickets,
-    userBatsFirst ? !playerWon : false,
-  );
-
-  const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);
-  const playerBowlingCard = buildBowlingCard(
-    state.roster,
-    opponentRuns,
-    opponentWickets,
-    opponentBalls,
-    random,
-  );
-  const opponentBattingCard = buildBattingCard(opponentRoster, opponentRuns, opponentBalls, random);
-  const opponentBowlingCard = buildBowlingCard(
-    opponentRoster,
-    playerRuns,
-    playerWickets,
-    playerBalls,
-    random,
-  );
+    ? marginType === "wickets"
+      ? playerBattingCard[0]
+      : playerBowlingCard[0]
+    : playerBowlingCard[0] || chooseStandout(state.roster, "bowling", random);
 
   const result = {
     opponent,
