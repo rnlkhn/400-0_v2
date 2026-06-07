@@ -1,0 +1,11 @@
+{
+  "name": "400-0",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-app.js",
+    "dev": "node server.js",
+    "test": "node --test"
+  }
+}

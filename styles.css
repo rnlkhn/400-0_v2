@@ -1,0 +1,884 @@
+:root {
+  color-scheme: light;
+  --grass-dark: #113b22;
+  --grass: #1d5a33;
+  --grass-soft: #2f7343;
+  --pitch: #caa56a;
+  --pitch-deep: #b38749;
+  --crease: #f5f1df;
+  --ball: #8f1f21;
+  --ball-soft: #bb3934;
+  --scoreboard: rgba(247, 242, 225, 0.95);
+  --panel: rgba(245, 239, 220, 0.88);
+  --panel-strong: rgba(254, 251, 240, 0.96);
+  --border: rgba(59, 82, 44, 0.18);
+  --text: #17311f;
+  --muted: #5e6752;
+  --gold: #a5762f;
+  --shadow: 0 24px 60px rgba(24, 48, 29, 0.16);
+  font-family: "Space Grotesk", sans-serif;
+  background: linear-gradient(180deg, #dce8d5, #f7f4e8);
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.72), transparent 32%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(17, 59, 34, 0.06) 0,
+      rgba(17, 59, 34, 0.06) 220px,
+      rgba(29, 90, 51, 0.1) 220px,
+      rgba(29, 90, 51, 0.1) 440px
+    ),
+    linear-gradient(180deg, #d5e7d0, #eef2e5 35%, #f7f3e8);
+  color: var(--text);
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 14px;
+}
+
+.shell {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  animation: rise-in 0.7s ease;
+}
+
+.hero,
+.status-panel,
+.surface-card,
+.match-card {
+  backdrop-filter: blur(10px);
+}
+
+.hero {
+  display: grid;
+  gap: 18px;
+  padding: 18px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(202, 165, 106, 0.22), transparent 45%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.2)),
+    var(--scoreboard);
+  box-shadow: var(--shadow);
+}
+
+.hero__copy h1,
+.section-heading h2,
+.candidate-card h3,
+.roster-card h3,
+.match-card h3 {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.hero__copy h1 {
+  margin: 0;
+  font-size: clamp(3.2rem, 12vw, 5.6rem);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+  color: var(--grass-dark);
+}
+
+.hero__copy h1 span {
+  color: var(--ball);
+}
+
+.hero__lede,
+.status-panel p,
+.candidate-blurb,
+.empty-copy,
+.match-card p,
+.card-meta,
+.candidate-team,
+.squad-note {
+  color: var(--muted);
+}
+
+.hero__lede {
+  margin: 10px 0 0;
+  max-width: 48rem;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.career-board {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat-tile,
+.role-pill,
+.mini-metrics span,
+.schedule-outcome {
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.stat-tile {
+  padding: 14px;
+}
+
+.stat-tile span,
+.eyebrow,
+.card-role,
+.candidate-role,
+.candidate-era,
+.schedule-stage,
+.scoreline span,
+.rating-grid dt,
+.roster-stats dt {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--gold);
+}
+
+.stat-tile strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.35rem;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+}
+
+.eyebrow--live::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 8px;
+  border-radius: 999px;
+  background: var(--ball-soft);
+  box-shadow: 0 0 14px rgba(187, 57, 52, 0.42);
+  animation: pulse 1.8s infinite;
+}
+
+.status-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 22px;
+  background: rgba(245, 239, 220, 0.9);
+}
+
+.status-panel p {
+  margin: 0;
+  flex: 1;
+  line-height: 1.45;
+  font-size: 0.94rem;
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.action-button,
+.candidate-card {
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.action-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 1px solid rgba(143, 31, 33, 0.28);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(143, 31, 33, 0.92), rgba(113, 20, 23, 0.96));
+  color: #fffaf3;
+  cursor: pointer;
+}
+
+.action-button--ghost {
+  border-color: rgba(17, 59, 34, 0.16);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--grass-dark);
+}
+
+.action-button:hover,
+.action-button:focus-visible,
+.candidate-card:hover,
+.candidate-card:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(24, 48, 29, 0.14);
+}
+
+.action-button[disabled] {
+  opacity: 0.82;
+  cursor: wait;
+}
+
+.dashboard {
+  display: grid;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.dashboard__main,
+.dashboard__side {
+  display: grid;
+  gap: 18px;
+}
+
+.surface-card,
+.match-card {
+  padding: 16px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 26px;
+  background: rgba(250, 247, 236, 0.88);
+  box-shadow: var(--shadow);
+}
+
+.surface-card--pitch {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(202, 165, 106, 0.18) 0,
+      rgba(202, 165, 106, 0.18) 34%,
+      rgba(245, 241, 223, 0.42) 34%,
+      rgba(245, 241, 223, 0.42) 66%,
+      rgba(202, 165, 106, 0.18) 66%
+    ),
+    rgba(250, 247, 236, 0.92);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.3rem, 3.8vw, 1.7rem);
+  color: var(--grass-dark);
+}
+
+.squad-note {
+  margin: 6px 0 0;
+  max-width: 34rem;
+  line-height: 1.35;
+  font-size: 0.88rem;
+}
+
+.role-pills,
+.mini-metrics,
+.card-topline {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.role-pill,
+.mini-metrics span {
+  padding: 8px 10px;
+}
+
+.role-pill {
+  min-width: 88px;
+}
+
+.role-pill span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.role-pill strong {
+  font-size: 1rem;
+}
+
+.role-pill--done {
+  border-color: rgba(29, 90, 51, 0.28);
+  background: rgba(76, 130, 84, 0.16);
+}
+
+.candidate-grid,
+.roster-list {
+  display: grid;
+  gap: 8px;
+}
+
+.roster-list {
+  max-height: 54vh;
+  overflow: auto;
+  gap: 6px;
+}
+
+.candidate-grid {
+  max-height: 58vh;
+  overflow: auto;
+  padding-right: 2px;
+}
+
+.candidate-card {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(248, 244, 231, 0.94));
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.candidate-card--allrounder,
+.roster-card--allrounder {
+  border-color: rgba(143, 31, 33, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(143, 31, 33, 0.08);
+}
+
+.candidate-card__top,
+.candidate-listing,
+.scoreline,
+.schedule-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.candidate-listing {
+  align-items: flex-start;
+}
+
+.candidate-listing__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.candidate-card h3,
+.roster-card h3,
+.match-card h3 {
+  margin: 0 0 3px;
+  font-size: 1rem;
+}
+
+.candidate-team,
+.candidate-blurb,
+.headline,
+.performer,
+.empty-copy,
+.candidate-highlight {
+  margin: 0;
+}
+
+.candidate-team {
+  font-size: 0.84rem;
+}
+
+.candidate-ratings {
+  margin: 3px 0 0;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.candidate-highlight {
+  margin-top: 8px;
+  color: var(--ball);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.candidate-blurb {
+  margin-top: 8px;
+  line-height: 1.38;
+  font-size: 0.9rem;
+}
+
+.rating-grid,
+.roster-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.rating-grid div,
+.roster-stats div {
+  padding-top: 8px;
+  border-top: 1px solid rgba(17, 59, 34, 0.08);
+}
+
+.rating-grid dd,
+.roster-stats dd {
+  margin: 4px 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--grass-dark);
+}
+
+.draft-locked,
+.match-card--placeholder {
+  padding: 14px;
+  border: 1px dashed rgba(17, 59, 34, 0.16);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.roster-card {
+  padding: 8px 10px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.48);
+}
+
+.roster-matrix {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 10px;
+  row-gap: 4px;
+  align-items: start;
+}
+
+.roster-matrix h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.15;
+}
+
+.roster-matrix .card-role {
+  margin: 0;
+  text-align: right;
+  font-size: 0.62rem;
+}
+
+.card-meta {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.roster-matrix .card-meta {
+  grid-column: 1 / 2;
+}
+
+.roster-matrix .roster-stats {
+  grid-column: 2 / 3;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 10px;
+  align-items: start;
+}
+
+.roster-matrix .roster-stats div {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.roster-matrix .roster-stats dt {
+  font-size: 0.62rem;
+  margin: 0;
+}
+
+.roster-matrix .roster-stats dd {
+  margin: 2px 0 0;
+  font-size: 0.88rem;
+}
+
+.schedule-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule-item {
+  padding: 10px 12px;
+  border-radius: 18px;
+  border: 1px solid transparent;
+}
+
+.schedule-item + .schedule-item {
+  margin-top: 8px;
+}
+
+.schedule-item--done {
+  background: rgba(255, 255, 255, 0.44);
+}
+
+.schedule-item--active {
+  border-color: rgba(143, 31, 33, 0.24);
+  background: rgba(143, 31, 33, 0.08);
+}
+
+.schedule-outcome {
+  padding: 8px 10px;
+  color: var(--grass-dark);
+}
+
+.match-card--win {
+  border-color: rgba(29, 90, 51, 0.2);
+  background: rgba(245, 250, 239, 0.92);
+}
+
+.match-card--loss {
+  border-color: rgba(143, 31, 33, 0.24);
+  background: rgba(253, 246, 243, 0.92);
+}
+
+.scoreline {
+  margin: 12px 0;
+}
+
+.scoreline strong {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(1.5rem, 5.5vw, 2.4rem);
+  color: var(--grass-dark);
+}
+
+.scorecard-summary {
+  margin-top: 14px;
+}
+
+.scorecard-summary h4 {
+  margin: 0 0 10px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.05rem;
+  color: var(--grass-dark);
+}
+
+.innings-card + .innings-card {
+  margin-top: 10px;
+}
+
+.innings-card__header {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(29, 49, 31, 0.05);
+}
+
+.innings-card__header strong {
+  text-align: right;
+  font-size: 1rem;
+  color: var(--grass-dark);
+}
+
+.innings-team,
+.innings-tag {
+  display: inline-block;
+}
+
+.innings-team {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.8rem;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.innings-tag {
+  margin-left: 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.innings-card__rows {
+  margin-top: 4px;
+}
+
+.innings-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  padding: 10px 4px;
+  border-bottom: 1px solid rgba(17, 59, 34, 0.08);
+}
+
+.innings-row:last-child {
+  border-bottom: 0;
+}
+
+.innings-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.84rem;
+}
+
+.innings-entry strong {
+  flex-shrink: 0;
+  color: var(--grass-dark);
+}
+
+.innings-entry--bowling span {
+  text-align: left;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.summary-leaders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.summary-grid div {
+  padding: 10px 12px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.summary-leaders div {
+  padding: 10px 12px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.summary-grid span,
+.summary-leaders span,
+.result-scores span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.summary-grid strong,
+.summary-leaders strong {
+  display: block;
+  margin-top: 4px;
+  font-size: 1.25rem;
+  color: var(--grass-dark);
+}
+
+.surface-card--sheet {
+  padding: 12px;
+}
+
+.surface-card--sheet .section-heading {
+  margin-bottom: 8px;
+}
+
+.surface-card--sheet .section-heading h2 {
+  font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+}
+
+.surface-card--sheet .mini-metrics span {
+  padding: 6px 8px;
+  font-size: 0.84rem;
+}
+
+.surface-card--sheet .candidate-card h3,
+.surface-card--sheet .roster-card h3 {
+  font-size: 0.9rem;
+}
+
+.results-list {
+  display: grid;
+  gap: 8px;
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.result-scores {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.result-scores span + span {
+  margin-top: 4px;
+}
+
+.headline {
+  line-height: 1.42;
+  font-size: 0.92rem;
+}
+
+.performer {
+  margin-top: 8px;
+  color: var(--ball);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+
+  50% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 960px) {
+  .dashboard {
+    grid-template-columns: minmax(0, 1.52fr) minmax(280px, 0.72fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero,
+  .surface-card,
+  .match-card,
+  .status-panel {
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .career-board {
+    grid-template-columns: 1fr;
+  }
+
+  .status-panel,
+  .section-heading,
+  .scoreline,
+  .schedule-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .candidate-listing {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .action-row,
+  .action-button {
+    width: 100%;
+  }
+
+  .role-pill,
+  .mini-metrics span,
+  .schedule-outcome {
+    width: 100%;
+  }
+
+  .hero__copy h1 {
+    font-size: 3rem;
+  }
+
+  .hero__lede,
+  .status-panel p,
+  .candidate-blurb,
+  .headline {
+    font-size: 0.88rem;
+  }
+
+  .candidate-grid {
+    max-height: 44vh;
+  }
+
+  .summary-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .innings-card__header,
+  .innings-row,
+  .summary-leaders {
+    grid-template-columns: 1fr;
+  }
+
+  .innings-card__header strong {
+    text-align: left;
+  }
+
+  .roster-matrix {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .roster-matrix .card-role,
+  .roster-matrix .card-meta {
+    text-align: left;
+  }
+
+  .roster-matrix .roster-stats {
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(2, minmax(0, auto));
+  }
+
+  .result-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .result-scores {
+    text-align: left;
+  }
+}
