@@ -60,6 +60,18 @@ button {
   animation: rise-in 0.7s ease;
 }
 
+.small-print {
+  margin-top: 18px;
+  padding: 14px 16px 6px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  line-height: 1.5;
+}
+
+.small-print p {
+  margin: 0 0 8px;
+}
+
 .hero,
 .status-panel,
 .surface-card,
@@ -299,6 +311,45 @@ button {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.difficulty-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.difficulty-card {
+  padding: 14px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--grass-dark);
+  text-align: left;
+  cursor: pointer;
+}
+
+.difficulty-card strong,
+.difficulty-card span {
+  display: block;
+}
+
+.difficulty-card strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1rem;
+}
+
+.difficulty-card span {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.difficulty-card--active {
+  border-color: rgba(143, 31, 33, 0.34);
+  background: rgba(143, 31, 33, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(143, 31, 33, 0.08);
 }
 
 .role-pill,
@@ -584,6 +635,35 @@ button {
   opacity: 0.45;
 }
 
+.scout-list {
+  display: grid;
+  gap: 10px;
+}
+
+.scout-list div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.scout-list span {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.scout-list strong {
+  color: var(--grass-dark);
+  font-size: 1.02rem;
+}
+
 .schedule-list {
   margin: 0;
   padding: 0;
@@ -652,12 +732,19 @@ button {
 
 .innings-card__header {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border-radius: 12px;
   background: rgba(29, 49, 31, 0.05);
+}
+
+.innings-card__title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
 }
 
 .innings-card__header strong {
@@ -687,19 +774,15 @@ button {
 }
 
 .innings-card__rows {
-  margin-top: 4px;
+  margin-top: 6px;
+  display: grid;
+  gap: 0;
 }
 
-.innings-row {
+.innings-columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  padding: 10px 4px;
-  border-bottom: 1px solid rgba(17, 59, 34, 0.08);
-}
-
-.innings-row:last-child {
-  border-bottom: 0;
+  gap: 18px;
 }
 
 .innings-entry {
@@ -707,7 +790,17 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
+  padding: 11px 4px;
+  border-bottom: 1px solid rgba(17, 59, 34, 0.08);
   font-size: 0.84rem;
+}
+
+.innings-card__rows .innings-entry:last-child {
+  border-bottom: 0;
+}
+
+.innings-entry span {
+  min-width: 0;
 }
 
 .innings-entry strong {
@@ -924,8 +1017,11 @@ button {
     grid-template-columns: 1fr 1fr;
   }
 
+  .difficulty-grid {
+    grid-template-columns: 1fr;
+  }
+
   .innings-card__header,
-  .innings-row,
   .summary-leaders {
     grid-template-columns: 1fr;
   }

@@ -16,6 +16,38 @@ export {
   TOURNAMENT_OPPONENTS,
 };
 
+export const DIFFICULTY_LEVELS = [
+  {
+    id: "county",
+    label: "County",
+    description: "A friendlier ladder with a little breathing room.",
+    playerBatting: 6,
+    playerBowling: 6,
+    opponentBatting: -4,
+    opponentBowling: -4,
+  },
+  {
+    id: "international",
+    label: "International",
+    description: "Baseline World Cup difficulty.",
+    playerBatting: 0,
+    playerBowling: 0,
+    opponentBatting: 0,
+    opponentBowling: 0,
+  },
+  {
+    id: "legend",
+    label: "Legend",
+    description: "A harsher ladder where weak links get punished fast.",
+    playerBatting: -4,
+    playerBowling: -4,
+    opponentBatting: 6,
+    opponentBowling: 6,
+  },
+];
+
+const DIFFICULTY_BY_ID = new Map(DIFFICULTY_LEVELS.map((level) => [level.id, level]));
+
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
@@ -49,6 +81,10 @@ export function isAllRounderPlayer(player) {
   return player.batting > 50 && player.bowling > 50;
 }
 
+function getPlayerIdentity(player) {
+  return player.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, " ").trim();
+}
+
 function getCapabilityMask(player) {
   let mask = 0;
   const allRounder = isAllRounderPlayer(player);
@@ -78,11 +114,12 @@ function createMaskCounts() {
 
 function buildUndraftedInventory(state) {
   const draftedIds = new Set(state.roster.map((player) => player.id));
+  const draftedIdentities = new Set(state.roster.map(getPlayerIdentity));
   const maskCounts = createMaskCounts();
   const players = [];
 
   for (const player of PLAYER_POOL) {
-    if (draftedIds.has(player.id)) {
+    if (draftedIds.has(player.id) || draftedIdentities.has(getPlayerIdentity(player))) {
       continue;
     }
 
@@ -239,6 +276,7 @@ export function rerollCandidates(state, random = Math.random) {
 export function createInitialState(random = Math.random) {
   return {
     phase: "draft",
+    difficulty: "international",
     roster: [],
     battingOrder: [],
     bowlingOrder: [],
@@ -253,8 +291,32 @@ export function createInitialState(random = Math.random) {
   };
 }
 
+export function setDifficulty(state, difficultyId) {
+  if (state.phase !== "draft" || state.roster.length > 0 || state.currentSquad) {
+    return state;
+  }
+
+  if (!DIFFICULTY_BY_ID.has(difficultyId)) {
+    return state;
+  }
+
+  return {
+    ...state,
+    difficulty: difficultyId,
+  };
+}
+
 function buildDefaultBattingOrder(roster) {
-  return roster.map((player) => player.id);
+  return [...roster]
+    .sort((left, right) => {
+      const leftRoleWeight = left.role === "batsman" ? 8 : left.role === "wicketkeeper" ? 5 : 0;
+      const rightRoleWeight = right.role === "batsman" ? 8 : right.role === "wicketkeeper" ? 5 : 0;
+      return (
+        right.batting + rightRoleWeight - (left.batting + leftRoleWeight) ||
+        right.bowling - left.bowling
+      );
+    })
+    .map((player) => player.id);
 }
 
 function buildDefaultBowlingOrder(roster) {
@@ -359,6 +421,12 @@ export function draftPlayer(state, playerId, random = Math.random) {
   }
 
   const player = state.candidateSet.find((candidate) => candidate.id === playerId);
+  const draftedIdentities = new Set(state.roster.map(getPlayerIdentity));
+
+  if (!player || draftedIdentities.has(getPlayerIdentity(player))) {
+    return state;
+  }
+
   if (!canDraftPlayer(state, player)) {
     return state;
   }
@@ -482,7 +550,7 @@ function buildHeadline(won, marginType, marginValue, opponent) {
 
 function simulateInnings(battingRating, bowlingRating, pressure, random) {
   const rawScore =
-    168 + battingRating * 1.34 - bowlingRating * 0.5 + pressure * 2.8 + randomSwing(random, 22);
+    180 + battingRating * 1.55 - bowlingRating * 0.82 + pressure * 3.2 + randomSwing(random, 18);
 
   return clamp(round(rawScore), 145, 405);
 }
@@ -512,39 +580,38 @@ function distributeTotal(total, weights) {
 }
 
 function distributeCappedTotal(total, weights, cap) {
-  const result = distributeTotal(total, weights);
-  let adjusted = false;
-  let overflow = 0;
+  const result = new Array(weights.length).fill(0);
+  let remaining = total;
+  let openIndexes = weights.map((_, index) => index);
 
-  for (let index = 0; index < result.length; index += 1) {
-    if (result[index] > cap) {
-      overflow += result[index] - cap;
-      result[index] = cap;
-      adjusted = true;
+  while (remaining > 0 && openIndexes.length > 0) {
+    const shares = distributeTotal(
+      remaining,
+      openIndexes.map((index) => weights[index]),
+    );
+
+    let allocated = 0;
+    const nextOpenIndexes = [];
+
+    shares.forEach((share, position) => {
+      const index = openIndexes[position];
+      const room = cap - result[index];
+      const applied = Math.min(share, room);
+      result[index] += applied;
+      allocated += applied;
+
+      if (result[index] < cap) {
+        nextOpenIndexes.push(index);
+      }
+    });
+
+    if (allocated === 0) {
+      break;
     }
+
+    remaining -= allocated;
+    openIndexes = nextOpenIndexes;
   }
-
-  if (!adjusted || overflow === 0) {
-    return result;
-  }
-
-  const openIndexes = result
-    .map((value, index) => ({ value, index }))
-    .filter(({ value }) => value < cap)
-    .map(({ index }) => index);
-
-  if (openIndexes.length === 0) {
-    return result;
-  }
-
-  const redistributed = distributeTotal(
-    overflow,
-    openIndexes.map((index) => weights[index]),
-  );
-
-  redistributed.forEach((value, position) => {
-    result[openIndexes[position]] += value;
-  });
 
   return result;
 }
@@ -641,6 +708,27 @@ function buildBowlingCard(roster, totalRunsConceded, totalWickets, totalBalls, r
 function getOpponentRoster(opponent) {
   const roster = PLAYER_POOL.filter((player) => player.squadId === opponent.id);
   return roster.length > 0 ? roster : [];
+}
+
+export function getOpponentMetrics(opponent) {
+  const roster = getOpponentRoster(opponent);
+
+  if (roster.length === 0) {
+    return {
+      batting: 0,
+      bowling: 0,
+    };
+  }
+
+  const batting =
+    roster.reduce((total, player) => total + player.batting, 0) / roster.length;
+  const bowling =
+    roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
+
+  return {
+    batting: round(batting),
+    bowling: round(bowling),
+  };
 }
 
 function buildOpponentBattingOrder(roster) {
@@ -810,58 +898,42 @@ export function simulateMatch(state, random = Math.random) {
   const opponent = state.currentOpponent;
   const team = getTeamMetrics(state.roster);
   const opponentRoster = getOpponentRoster(opponent);
-  const playerBattingOrder = getBattingOrderPlayers(state);
-  const playerBowlingOrder = getBowlingOrderPlayers(state);
-  const opponentBattingOrder = formatScorecardRoster(
-    opponentRoster,
-    buildOpponentBattingOrder(opponentRoster),
-  );
-  const opponentBowlingOrder = formatScorecardRoster(
-    opponentRoster,
-    buildOpponentBowlingOrder(opponentRoster),
-  );
+  const opponentTeam = getTeamMetrics(opponentRoster);
+  const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
   const userBatsFirst = random() >= 0.5;
+  const stageBoost = state.matchIndex * 2;
+  const playerBatting = team.batting + difficulty.playerBatting;
+  const playerBowling = team.bowling + difficulty.playerBowling;
+  const opponentBatting = opponentTeam.batting + difficulty.opponentBatting + stageBoost;
+  const opponentBowling = opponentTeam.bowling + difficulty.opponentBowling + stageBoost;
 
-  const firstInnings = userBatsFirst
-    ? simulateOverByOver({
-        battingOrder: playerBattingOrder,
-        bowlingOrder: opponentBowlingOrder,
-        inningsIndex: 0,
-        target: null,
-        random,
-      })
-    : simulateOverByOver({
-        battingOrder: opponentBattingOrder,
-        bowlingOrder: playerBowlingOrder,
-        inningsIndex: 0,
-        target: null,
-        random,
-      });
+  const firstInningsRuns = userBatsFirst
+    ? simulateInnings(playerBatting, opponentBowling, 0, random)
+    : simulateInnings(opponentBatting, playerBowling, 0, random);
+  const firstInningsWickets = userBatsFirst
+    ? estimateWickets(firstInningsRuns, playerBatting, opponentBowling, random)
+    : estimateWickets(firstInningsRuns, opponentBatting, playerBowling, random);
 
-  const secondInnings = userBatsFirst
-    ? simulateOverByOver({
-        battingOrder: opponentBattingOrder,
-        bowlingOrder: playerBowlingOrder,
-        inningsIndex: 1,
-        target: firstInnings.runs + 1,
-        random,
-      })
-    : simulateOverByOver({
-        battingOrder: playerBattingOrder,
-        bowlingOrder: opponentBowlingOrder,
-        inningsIndex: 1,
-        target: firstInnings.runs + 1,
-        random,
-      });
+  const secondInningsPressure = 6;
+  const secondInningsRuns = userBatsFirst
+    ? simulateInnings(opponentBatting, playerBowling, secondInningsPressure, random)
+    : simulateInnings(playerBatting, opponentBowling, secondInningsPressure, random);
+  const secondInningsWickets = userBatsFirst
+    ? estimateWickets(secondInningsRuns, opponentBatting, playerBowling, random)
+    : estimateWickets(secondInningsRuns, playerBatting, opponentBowling, random);
 
-  const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
-  const playerWickets = userBatsFirst ? firstInnings.wickets : secondInnings.wickets;
-  const playerBalls = userBatsFirst ? firstInnings.balls : secondInnings.balls;
-  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInnings.runs;
-  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInnings.wickets;
-  const opponentBalls = userBatsFirst ? secondInnings.balls : firstInnings.balls;
-
+  const playerRuns = userBatsFirst ? firstInningsRuns : secondInningsRuns;
+  const playerWickets = userBatsFirst ? firstInningsWickets : secondInningsWickets;
+  const opponentRuns = userBatsFirst ? secondInningsRuns : firstInningsRuns;
+  const opponentWickets = userBatsFirst ? secondInningsWickets : firstInningsWickets;
   const playerWon = userBatsFirst ? playerRuns > opponentRuns : playerRuns >= opponentRuns;
+  const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
+  const opponentBalls = estimateInningsBalls(
+    opponentRuns,
+    opponentWickets,
+    userBatsFirst ? opponentRuns >= playerRuns : false,
+  );
+
   const chasingSide = userBatsFirst ? "opponent" : "player";
 
   let marginType = "runs";
@@ -877,10 +949,22 @@ export function simulateMatch(state, random = Math.random) {
     marginValue = Math.max(1, marginValue);
   }
 
-  const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
-  const playerBowlingCard = userBatsFirst ? secondInnings.bowlingCard : firstInnings.bowlingCard;
-  const opponentBattingCard = userBatsFirst ? secondInnings.battingCard : firstInnings.battingCard;
-  const opponentBowlingCard = userBatsFirst ? firstInnings.bowlingCard : secondInnings.bowlingCard;
+  const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);
+  const playerBowlingCard = buildBowlingCard(
+    state.roster,
+    opponentRuns,
+    opponentWickets,
+    opponentBalls,
+    random,
+  );
+  const opponentBattingCard = buildBattingCard(opponentRoster, opponentRuns, opponentBalls, random);
+  const opponentBowlingCard = buildBowlingCard(
+    opponentRoster,
+    playerRuns,
+    playerWickets,
+    playerBalls,
+    random,
+  );
   const performer = playerWon
     ? marginType === "wickets"
       ? playerBattingCard[0]

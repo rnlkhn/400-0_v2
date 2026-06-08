@@ -20757,7 +20757,28 @@ const DRAFT_SQUADS = [...BASE_DRAFT_SQUADS, ...GENERATED_DRAFT_SQUADS].sort(
   (left, right) => left.year - right.year || left.country.localeCompare(right.country),
 );
 
-const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS];
+const PLAYER_NAME_OVERRIDES = {
+  "Kumar Sangakkara": { role: "wicketkeeper", batting: 95, bowling: 0 },
+  "Mahela Jayawardene": { role: "batsman", batting: 93, bowling: 18 },
+  "Lasith Malinga": { role: "bowler", batting: 22, bowling: 95 },
+  "Marvan Atapattu": { role: "batsman", batting: 88, bowling: 12 },
+  "Upul Tharanga": { role: "batsman", batting: 86, bowling: 0 },
+  "Russel Arnold": { role: "batsman", batting: 80, bowling: 38 },
+  "Farveez Maharoof": { role: "bowler", batting: 64, bowling: 82 },
+  "Dilhara Fernando": { role: "bowler", batting: 24, bowling: 84 },
+  "Nuwan Kulasekara": { role: "bowler", batting: 33, bowling: 84 },
+  "Malinga Bandara": { role: "bowler", batting: 20, bowling: 80 },
+  "Chamara Silva": { role: "batsman", batting: 78, bowling: 18 },
+};
+
+function applyPlayerOverride(player) {
+  const override = PLAYER_NAME_OVERRIDES[player.name];
+  return override ? { ...player, ...override } : player;
+}
+
+const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS].map(
+  applyPlayerOverride,
+);
 
 const TOURNAMENT_OPPONENTS = [
   {
@@ -20831,6 +20852,38 @@ const TOURNAMENT_OPPONENTS = [
 
 
 
+const DIFFICULTY_LEVELS = [
+  {
+    id: "county",
+    label: "County",
+    description: "A friendlier ladder with a little breathing room.",
+    playerBatting: 6,
+    playerBowling: 6,
+    opponentBatting: -4,
+    opponentBowling: -4,
+  },
+  {
+    id: "international",
+    label: "International",
+    description: "Baseline World Cup difficulty.",
+    playerBatting: 0,
+    playerBowling: 0,
+    opponentBatting: 0,
+    opponentBowling: 0,
+  },
+  {
+    id: "legend",
+    label: "Legend",
+    description: "A harsher ladder where weak links get punished fast.",
+    playerBatting: -4,
+    playerBowling: -4,
+    opponentBatting: 6,
+    opponentBowling: 6,
+  },
+];
+
+const DIFFICULTY_BY_ID = new Map(DIFFICULTY_LEVELS.map((level) => [level.id, level]));
+
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
 }
@@ -20864,6 +20917,10 @@ function isAllRounderPlayer(player) {
   return player.batting > 50 && player.bowling > 50;
 }
 
+function getPlayerIdentity(player) {
+  return player.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, " ").trim();
+}
+
 function getCapabilityMask(player) {
   let mask = 0;
   const allRounder = isAllRounderPlayer(player);
@@ -20893,11 +20950,12 @@ function createMaskCounts() {
 
 function buildUndraftedInventory(state) {
   const draftedIds = new Set(state.roster.map((player) => player.id));
+  const draftedIdentities = new Set(state.roster.map(getPlayerIdentity));
   const maskCounts = createMaskCounts();
   const players = [];
 
   for (const player of PLAYER_POOL) {
-    if (draftedIds.has(player.id)) {
+    if (draftedIds.has(player.id) || draftedIdentities.has(getPlayerIdentity(player))) {
       continue;
     }
 
@@ -21054,6 +21112,7 @@ function rerollCandidates(state, random = Math.random) {
 function createInitialState(random = Math.random) {
   return {
     phase: "draft",
+    difficulty: "international",
     roster: [],
     battingOrder: [],
     bowlingOrder: [],
@@ -21068,8 +21127,32 @@ function createInitialState(random = Math.random) {
   };
 }
 
+function setDifficulty(state, difficultyId) {
+  if (state.phase !== "draft" || state.roster.length > 0 || state.currentSquad) {
+    return state;
+  }
+
+  if (!DIFFICULTY_BY_ID.has(difficultyId)) {
+    return state;
+  }
+
+  return {
+    ...state,
+    difficulty: difficultyId,
+  };
+}
+
 function buildDefaultBattingOrder(roster) {
-  return roster.map((player) => player.id);
+  return [...roster]
+    .sort((left, right) => {
+      const leftRoleWeight = left.role === "batsman" ? 8 : left.role === "wicketkeeper" ? 5 : 0;
+      const rightRoleWeight = right.role === "batsman" ? 8 : right.role === "wicketkeeper" ? 5 : 0;
+      return (
+        right.batting + rightRoleWeight - (left.batting + leftRoleWeight) ||
+        right.bowling - left.bowling
+      );
+    })
+    .map((player) => player.id);
 }
 
 function buildDefaultBowlingOrder(roster) {
@@ -21174,6 +21257,12 @@ function draftPlayer(state, playerId, random = Math.random) {
   }
 
   const player = state.candidateSet.find((candidate) => candidate.id === playerId);
+  const draftedIdentities = new Set(state.roster.map(getPlayerIdentity));
+
+  if (!player || draftedIdentities.has(getPlayerIdentity(player))) {
+    return state;
+  }
+
   if (!canDraftPlayer(state, player)) {
     return state;
   }
@@ -21297,7 +21386,7 @@ function buildHeadline(won, marginType, marginValue, opponent) {
 
 function simulateInnings(battingRating, bowlingRating, pressure, random) {
   const rawScore =
-    168 + battingRating * 1.34 - bowlingRating * 0.5 + pressure * 2.8 + randomSwing(random, 22);
+    180 + battingRating * 1.55 - bowlingRating * 0.82 + pressure * 3.2 + randomSwing(random, 18);
 
   return clamp(round(rawScore), 145, 405);
 }
@@ -21327,39 +21416,38 @@ function distributeTotal(total, weights) {
 }
 
 function distributeCappedTotal(total, weights, cap) {
-  const result = distributeTotal(total, weights);
-  let adjusted = false;
-  let overflow = 0;
+  const result = new Array(weights.length).fill(0);
+  let remaining = total;
+  let openIndexes = weights.map((_, index) => index);
 
-  for (let index = 0; index < result.length; index += 1) {
-    if (result[index] > cap) {
-      overflow += result[index] - cap;
-      result[index] = cap;
-      adjusted = true;
+  while (remaining > 0 && openIndexes.length > 0) {
+    const shares = distributeTotal(
+      remaining,
+      openIndexes.map((index) => weights[index]),
+    );
+
+    let allocated = 0;
+    const nextOpenIndexes = [];
+
+    shares.forEach((share, position) => {
+      const index = openIndexes[position];
+      const room = cap - result[index];
+      const applied = Math.min(share, room);
+      result[index] += applied;
+      allocated += applied;
+
+      if (result[index] < cap) {
+        nextOpenIndexes.push(index);
+      }
+    });
+
+    if (allocated === 0) {
+      break;
     }
+
+    remaining -= allocated;
+    openIndexes = nextOpenIndexes;
   }
-
-  if (!adjusted || overflow === 0) {
-    return result;
-  }
-
-  const openIndexes = result
-    .map((value, index) => ({ value, index }))
-    .filter(({ value }) => value < cap)
-    .map(({ index }) => index);
-
-  if (openIndexes.length === 0) {
-    return result;
-  }
-
-  const redistributed = distributeTotal(
-    overflow,
-    openIndexes.map((index) => weights[index]),
-  );
-
-  redistributed.forEach((value, position) => {
-    result[openIndexes[position]] += value;
-  });
 
   return result;
 }
@@ -21456,6 +21544,27 @@ function buildBowlingCard(roster, totalRunsConceded, totalWickets, totalBalls, r
 function getOpponentRoster(opponent) {
   const roster = PLAYER_POOL.filter((player) => player.squadId === opponent.id);
   return roster.length > 0 ? roster : [];
+}
+
+function getOpponentMetrics(opponent) {
+  const roster = getOpponentRoster(opponent);
+
+  if (roster.length === 0) {
+    return {
+      batting: 0,
+      bowling: 0,
+    };
+  }
+
+  const batting =
+    roster.reduce((total, player) => total + player.batting, 0) / roster.length;
+  const bowling =
+    roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
+
+  return {
+    batting: round(batting),
+    bowling: round(bowling),
+  };
 }
 
 function buildOpponentBattingOrder(roster) {
@@ -21625,58 +21734,42 @@ function simulateMatch(state, random = Math.random) {
   const opponent = state.currentOpponent;
   const team = getTeamMetrics(state.roster);
   const opponentRoster = getOpponentRoster(opponent);
-  const playerBattingOrder = getBattingOrderPlayers(state);
-  const playerBowlingOrder = getBowlingOrderPlayers(state);
-  const opponentBattingOrder = formatScorecardRoster(
-    opponentRoster,
-    buildOpponentBattingOrder(opponentRoster),
-  );
-  const opponentBowlingOrder = formatScorecardRoster(
-    opponentRoster,
-    buildOpponentBowlingOrder(opponentRoster),
-  );
+  const opponentTeam = getTeamMetrics(opponentRoster);
+  const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
   const userBatsFirst = random() >= 0.5;
+  const stageBoost = state.matchIndex * 2;
+  const playerBatting = team.batting + difficulty.playerBatting;
+  const playerBowling = team.bowling + difficulty.playerBowling;
+  const opponentBatting = opponentTeam.batting + difficulty.opponentBatting + stageBoost;
+  const opponentBowling = opponentTeam.bowling + difficulty.opponentBowling + stageBoost;
 
-  const firstInnings = userBatsFirst
-    ? simulateOverByOver({
-        battingOrder: playerBattingOrder,
-        bowlingOrder: opponentBowlingOrder,
-        inningsIndex: 0,
-        target: null,
-        random,
-      })
-    : simulateOverByOver({
-        battingOrder: opponentBattingOrder,
-        bowlingOrder: playerBowlingOrder,
-        inningsIndex: 0,
-        target: null,
-        random,
-      });
+  const firstInningsRuns = userBatsFirst
+    ? simulateInnings(playerBatting, opponentBowling, 0, random)
+    : simulateInnings(opponentBatting, playerBowling, 0, random);
+  const firstInningsWickets = userBatsFirst
+    ? estimateWickets(firstInningsRuns, playerBatting, opponentBowling, random)
+    : estimateWickets(firstInningsRuns, opponentBatting, playerBowling, random);
 
-  const secondInnings = userBatsFirst
-    ? simulateOverByOver({
-        battingOrder: opponentBattingOrder,
-        bowlingOrder: playerBowlingOrder,
-        inningsIndex: 1,
-        target: firstInnings.runs + 1,
-        random,
-      })
-    : simulateOverByOver({
-        battingOrder: playerBattingOrder,
-        bowlingOrder: opponentBowlingOrder,
-        inningsIndex: 1,
-        target: firstInnings.runs + 1,
-        random,
-      });
+  const secondInningsPressure = 6;
+  const secondInningsRuns = userBatsFirst
+    ? simulateInnings(opponentBatting, playerBowling, secondInningsPressure, random)
+    : simulateInnings(playerBatting, opponentBowling, secondInningsPressure, random);
+  const secondInningsWickets = userBatsFirst
+    ? estimateWickets(secondInningsRuns, opponentBatting, playerBowling, random)
+    : estimateWickets(secondInningsRuns, playerBatting, opponentBowling, random);
 
-  const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
-  const playerWickets = userBatsFirst ? firstInnings.wickets : secondInnings.wickets;
-  const playerBalls = userBatsFirst ? firstInnings.balls : secondInnings.balls;
-  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInnings.runs;
-  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInnings.wickets;
-  const opponentBalls = userBatsFirst ? secondInnings.balls : firstInnings.balls;
-
+  const playerRuns = userBatsFirst ? firstInningsRuns : secondInningsRuns;
+  const playerWickets = userBatsFirst ? firstInningsWickets : secondInningsWickets;
+  const opponentRuns = userBatsFirst ? secondInningsRuns : firstInningsRuns;
+  const opponentWickets = userBatsFirst ? secondInningsWickets : firstInningsWickets;
   const playerWon = userBatsFirst ? playerRuns > opponentRuns : playerRuns >= opponentRuns;
+  const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
+  const opponentBalls = estimateInningsBalls(
+    opponentRuns,
+    opponentWickets,
+    userBatsFirst ? opponentRuns >= playerRuns : false,
+  );
+
   const chasingSide = userBatsFirst ? "opponent" : "player";
 
   let marginType = "runs";
@@ -21692,10 +21785,22 @@ function simulateMatch(state, random = Math.random) {
     marginValue = Math.max(1, marginValue);
   }
 
-  const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
-  const playerBowlingCard = userBatsFirst ? secondInnings.bowlingCard : firstInnings.bowlingCard;
-  const opponentBattingCard = userBatsFirst ? secondInnings.battingCard : firstInnings.battingCard;
-  const opponentBowlingCard = userBatsFirst ? firstInnings.bowlingCard : secondInnings.bowlingCard;
+  const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);
+  const playerBowlingCard = buildBowlingCard(
+    state.roster,
+    opponentRuns,
+    opponentWickets,
+    opponentBalls,
+    random,
+  );
+  const opponentBattingCard = buildBattingCard(opponentRoster, opponentRuns, opponentBalls, random);
+  const opponentBowlingCard = buildBowlingCard(
+    opponentRoster,
+    playerRuns,
+    playerWickets,
+    playerBalls,
+    random,
+  );
   const performer = playerWon
     ? marginType === "wickets"
       ? playerBattingCard[0]
@@ -21807,8 +21912,35 @@ const STATS_KEY = "400-0-career";
 let state = createInitialState();
 let career = loadCareer();
 
+function cleanPlayerName(name) {
+  return name
+    .replace(/\(\s*vc\s*&\s*wk\s*\)/gi, "")
+    .replace(/\(\s*wk\s*&\s*vc\s*\)/gi, "")
+    .replace(/\(\s*vc\s*\/\s*wk\s*\)/gi, "")
+    .replace(/\(\s*wk\s*\/\s*vc\s*\)/gi, "")
+    .replace(/\(\s*vice[\s-]*captain\s*&\s*wk\s*\)/gi, "")
+    .replace(/\(\s*wk\s*&\s*vice[\s-]*captain\s*\)/gi, "")
+    .replace(/\(\s*vc\s*\)/gi, "")
+    .replace(/\(\s*vice[\s-]*captain\s*\)/gi, "")
+    .replace(/\(\s*c\s*\/\s*wk\s*\)/gi, "")
+    .replace(/\(\s*wk\s*\/\s*c\s*\)/gi, "")
+    .replace(/\(\s*captain\s*\/\s*wk\s*\)/gi, "")
+    .replace(/\(\s*wk\s*\)/gi, "")
+    .replace(/\(\s*c\s*\)/gi, "")
+    .replace(/\(\s*captain\s*\)/gi, "")
+    .trim();
+}
+
 function getPlayerRoleLabel(player) {
   if (isAllRounderPlayer(player)) {
+    if (player.batting - player.bowling >= 15) {
+      return "Batting AR";
+    }
+
+    if (player.bowling - player.batting >= 15) {
+      return "Bowling AR";
+    }
+
     return "All-rounder";
   }
 
@@ -21912,7 +22044,7 @@ function rosterMarkup() {
       return `
         <article class="roster-card ${allRounder ? "roster-card--allrounder" : ""}">
           <div class="roster-matrix">
-            <h3>${escapeHtml(player.name)}</h3>
+            <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
             <dl class="roster-stats">
               <div><dt>Bat</dt><dd>${player.batting}</dd></div>
@@ -21925,64 +22057,79 @@ function rosterMarkup() {
     .join("");
 }
 
-function canEditOrders() {
-  return state.phase === "tournament" && !state.currentOpponent && !state.champion && !state.eliminated;
-}
-
-function orderSetupMarkup() {
-  if (!canEditOrders()) {
+function difficultyMarkup() {
+  if (state.phase !== "draft" || state.roster.length > 0 || state.currentSquad) {
     return "";
   }
 
-  const battingOrder = getBattingOrderPlayers(state);
-  const bowlingOrder = getBowlingOrderPlayers(state);
-
-  const renderOrderList = (players, type, hint) => `
-    <section class="surface-card surface-card--orders">
+  return `
+    <section class="surface-card">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">${type === "batting" ? "Batting Order" : "Bowling Order"}</p>
-          <h2>${type === "batting" ? "Set your XI order" : "Set your bowling rotation"}</h2>
-          <p class="squad-note">${escapeHtml(hint)}</p>
+          <p class="eyebrow">Mode</p>
+          <h2>Pick your difficulty</h2>
+          <p class="squad-note">Choose the ladder before you start drafting.</p>
         </div>
       </div>
-      <div class="order-list">
-        ${players
-          .map(
-            (player, index) => `
-              <article class="order-row">
-                <div class="order-row__meta">
-                  <span class="order-row__slot">${index + 1}</span>
-                  <div>
-                    <strong>${escapeHtml(player.name)}</strong>
-                    <p>${escapeHtml(type === "batting" ? `${player.team} ${player.year}` : `Bowl ${player.bowling} · Bat ${player.batting}`)}</p>
-                  </div>
-                </div>
-                <div class="order-row__actions">
-                  <button class="order-button" type="button" data-action="${type}-up" data-player-id="${player.id}" ${index === 0 ? "disabled" : ""}>Up</button>
-                  <button class="order-button" type="button" data-action="${type}-down" data-player-id="${player.id}" ${index === players.length - 1 ? "disabled" : ""}>Down</button>
-                </div>
-              </article>
-            `,
-          )
-          .join("")}
+      <div class="difficulty-grid">
+        ${DIFFICULTY_LEVELS.map((level) => `
+          <button
+            class="difficulty-card ${state.difficulty === level.id ? "difficulty-card--active" : ""}"
+            type="button"
+            data-action="difficulty"
+            data-difficulty="${level.id}"
+          >
+            <strong>${escapeHtml(level.label)}</strong>
+            <span>${escapeHtml(level.description)}</span>
+          </button>
+        `).join("")}
       </div>
     </section>
   `;
+}
+
+function draftPanelMarkup() {
+  if (state.phase !== "draft" || !state.currentSquad) {
+    return "";
+  }
 
   return `
-    <div class="orders-grid">
-      ${renderOrderList(
-        battingOrder,
-        "batting",
-        "This order is used for every run chase and first innings.",
-      )}
-      ${renderOrderList(
-        bowlingOrder,
-        "bowling",
-        "The simulator cycles through this order over by over and respects bowling spells.",
-      )}
-    </div>
+    <section class="surface-card surface-card--pitch">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Draft Board</p>
+          <h2>${escapeHtml(state.currentSquad.label)}</h2>
+          <p class="squad-note">${escapeHtml(state.currentSquad.note)}</p>
+        </div>
+      </div>
+      <div class="candidate-grid">${candidateMarkup()}</div>
+    </section>
+  `;
+}
+
+function opponentPanelMarkup() {
+  const opponent = getCurrentOpponent(state);
+  if (state.phase !== "tournament" || !opponent) {
+    return "";
+  }
+
+  const metrics = getOpponentMetrics(opponent);
+
+  return `
+    <section class="surface-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Next Opponent</p>
+          <h2>${escapeHtml(opponent.label)}</h2>
+          <p class="squad-note">${escapeHtml(opponent.note)}</p>
+        </div>
+      </div>
+      <div class="scout-list">
+        <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
+        <div><span>Batting</span><strong>${metrics.batting}</strong></div>
+        <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
+      </div>
+    </section>
   `;
 }
 
@@ -22031,90 +22178,100 @@ function tournamentLeaders() {
   return { topRunScorer, topWicketTaker };
 }
 
-function inningsScorecardMarkup(match, battingSide, inningsLabel) {
-  const isPlayerInnings = battingSide === "player";
-  const battingTeam = isPlayerInnings ? "You" : match.opponent.shortName;
-  const score = isPlayerInnings ? match.playerScore : match.opponentScore;
-  const balls = isPlayerInnings ? match.playerBalls : match.opponentBalls;
-  const batters = topThree(
-    isPlayerInnings ? match.playerBattingCard || [] : match.opponentBattingCard || [],
-    "runs",
-  );
-  const bowlers = topThree(
-    isPlayerInnings ? match.opponentBowlingCard || [] : match.playerBowlingCard || [],
-    "wickets",
-  );
-
-  const rows = Array.from({ length: Math.max(batters.length, bowlers.length) }, (_, index) => ({
-    batter: batters[index],
-    bowler: bowlers[index],
-  }));
-
-  return `
-    <section class="innings-card">
-      <div class="innings-card__header">
-        <div>
-          <p class="innings-team">${escapeHtml(battingTeam)}</p>
-          <span class="innings-tag">${escapeHtml(inningsLabel)}</span>
-        </div>
-        <strong>${escapeHtml(`${score} (${formatOvers(balls)} Overs)`)}</strong>
-      </div>
-      <div class="innings-card__rows">
-        ${rows
-          .map(
-            ({ batter, bowler }) => `
-              <div class="innings-row">
-                <div class="innings-entry">
-                  ${
-                    batter
-                      ? `<span>${escapeHtml(batter.name)}</span><strong>${escapeHtml(formatBattingEntry(batter))}</strong>`
-                      : '<span></span><strong></strong>'
-                  }
-                </div>
-                <div class="innings-entry innings-entry--bowling">
-                  ${
-                    bowler
-                      ? `<span>${escapeHtml(bowler.name)}</span><strong>${escapeHtml(formatBowlingEntry(bowler))}</strong>`
-                      : '<span></span><strong></strong>'
-                  }
-                </div>
-              </div>
-            `,
-          )
-          .join("")}
-      </div>
-    </section>
-  `;
-}
-
 function scorecardSummaryMarkup(match) {
-  const firstInningsSide = match.battingFirst;
-  const secondInningsSide = match.battingFirst === "player" ? "opponent" : "player";
+  const buildInningsMarkup = ({
+    teamLabel,
+    inningsLabel,
+    score,
+    balls,
+    batters,
+    bowlers,
+  }) => {
+    return `
+      <section class="innings-card">
+        <div class="innings-card__header">
+          <div class="innings-card__title">
+            <p class="innings-team">${escapeHtml(teamLabel)}</p>
+            <span class="innings-tag">${escapeHtml(inningsLabel)}</span>
+          </div>
+          <strong>${escapeHtml(`${score} (${formatOvers(balls)} Overs)`)}</strong>
+        </div>
+        <div class="innings-columns">
+          <div class="innings-column">
+            <div class="innings-card__rows">
+              ${batters
+                .map(
+                  (batter) => `
+                    <div class="innings-entry">
+                      <span>${escapeHtml(cleanPlayerName(batter.name))}</span>
+                      <strong>${escapeHtml(formatBattingEntry(batter))}</strong>
+                    </div>
+                  `,
+                )
+                .join("")}
+            </div>
+          </div>
+          <div class="innings-column">
+            <div class="innings-card__rows">
+              ${bowlers
+                .map(
+                  (bowler) => `
+                    <div class="innings-entry innings-entry--bowling">
+                      <span>${escapeHtml(cleanPlayerName(bowler.name))}</span>
+                      <strong>${escapeHtml(formatBowlingEntry(bowler))}</strong>
+                    </div>
+                  `,
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  };
 
   return `
     <div class="scorecard-summary">
       <h4>Scorecard summary</h4>
-      ${inningsScorecardMarkup(match, firstInningsSide, "1st Inn")}
-      ${inningsScorecardMarkup(match, secondInningsSide, "2nd Inn")}
+      ${buildInningsMarkup({
+        teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
+        inningsLabel: "1st Inn",
+        score: match.battingFirst === "player" ? match.playerScore : match.opponentScore,
+        balls: match.battingFirst === "player" ? match.playerBalls : match.opponentBalls,
+        batters: topThree(
+          match.battingFirst === "player" ? match.playerBattingCard || [] : match.opponentBattingCard || [],
+          "runs",
+        ),
+        bowlers: topThree(
+          match.battingFirst === "player" ? match.opponentBowlingCard || [] : match.playerBowlingCard || [],
+          "wickets",
+        ),
+      })}
+      ${buildInningsMarkup({
+        teamLabel: match.battingFirst === "player" ? match.opponent.shortName : "You",
+        inningsLabel: "2nd Inn",
+        score: match.battingFirst === "player" ? match.opponentScore : match.playerScore,
+        balls: match.battingFirst === "player" ? match.opponentBalls : match.playerBalls,
+        batters: topThree(
+          match.battingFirst === "player" ? match.opponentBattingCard || [] : match.playerBattingCard || [],
+          "runs",
+        ),
+        bowlers: topThree(
+          match.battingFirst === "player" ? match.playerBowlingCard || [] : match.opponentBowlingCard || [],
+          "wickets",
+        ),
+      })}
     </div>
   `;
 }
 
 function candidateMarkup() {
   if (state.phase !== "draft") {
-    return `
-      <div class="draft-locked">
-        <p>Your XI is locked. Time to run the World Cup gauntlet.</p>
-      </div>
-    `;
+    return "";
   }
 
   if (!state.currentSquad) {
-    return `
-      <div class="draft-locked">
-        <p>${state.roster.length === 0 ? "Press Start Draft to reveal your first country and year." : "Pick locked in. Press Next Draft to reveal the next country and year."}</p>
-      </div>
-    `;
+    return "";
   }
 
   return state.candidateSet
@@ -22125,7 +22282,7 @@ function candidateMarkup() {
         <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${player.id}">
           <div class="candidate-listing">
             <div>
-              <h3>${escapeHtml(player.name)}</h3>
+              <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
               <p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>
             </div>
             <div class="candidate-listing__meta">
@@ -22184,11 +22341,11 @@ function resultMarkup() {
         <div class="summary-leaders">
           <div>
             <span>Top Run Scorer</span>
-            <strong>${leaders.topRunScorer ? `${escapeHtml(leaders.topRunScorer.name)} · ${leaders.topRunScorer.runs}` : "--"}</strong>
+            <strong>${leaders.topRunScorer ? `${escapeHtml(cleanPlayerName(leaders.topRunScorer.name))} · ${leaders.topRunScorer.runs}` : "--"}</strong>
           </div>
           <div>
             <span>Top Wicket Taker</span>
-            <strong>${leaders.topWicketTaker ? `${escapeHtml(leaders.topWicketTaker.name)} · ${leaders.topWicketTaker.wickets}` : "--"}</strong>
+            <strong>${leaders.topWicketTaker ? `${escapeHtml(cleanPlayerName(leaders.topWicketTaker.name))} · ${leaders.topWicketTaker.wickets}` : "--"}</strong>
           </div>
         </div>
         <p class="headline">${
@@ -22205,7 +22362,7 @@ function resultMarkup() {
       <div class="match-card match-card--placeholder">
         <p class="eyebrow">Tournament Desk</p>
         <h3>World Cup run waiting</h3>
-        <p>Draft your XI, then sim each match with batting-vs-bowling strength only. Tougher opposition arrives every round.</p>
+        <p>Draft your XI, then sim each match. Tougher opposition arrives every round.</p>
       </div>
     `;
   }
@@ -22225,7 +22382,7 @@ function resultMarkup() {
         </div>
       </div>
       <p class="headline">${escapeHtml(state.latestMatch.headline)}</p>
-      <p class="performer">Standout: ${escapeHtml(state.latestMatch.performer.name)}</p>
+      <p class="performer">Standout: ${escapeHtml(cleanPlayerName(state.latestMatch.performer.name))}</p>
       ${scorecardSummaryMarkup(state.latestMatch)}
     </article>
   `;
@@ -22315,26 +22472,27 @@ function statusCopy() {
     if (!state.currentSquad) {
       const slotsLeft = 11 - state.roster.length;
       if (state.roster.length === 0) {
-        return "Press Start Draft to reveal your first country and year.";
+        const difficulty = DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty);
+        return `${difficulty?.label || "International"} mode selected. Press Start Draft to reveal your first country and year.`;
       }
 
       return `Pick made. ${slotsLeft} players left. Press Next Draft to reveal another country and year.`;
     }
 
-    return `${state.currentSquad.label} is live. Pick one player to add to your XI.`;
+    return "Pick one player to add to your XI.";
   }
 
   if (state.phase === "tournament") {
     const opponent = getCurrentOpponent(state);
     if (!opponent) {
       if (state.results.length === 0 && state.matchIndex === 0) {
-        return "Your XI is set. Adjust batting and bowling order if you want, then press Start Tournament.";
+        return "Your XI is set. Press Start Tournament when you're ready.";
       }
       return state.matchIndex < TOURNAMENT_OPPONENTS.length
-        ? "You are through. You can tweak your batting or bowling order before pressing Proceed to next match."
+        ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return `${opponent.stage} is next: ${opponent.label}. ${opponent.note}`;
+    return "Next opponent loaded. Press Play match when you're ready.";
   }
 
   if (state.champion) {
@@ -22365,10 +22523,6 @@ function render() {
             <span>Best Finish</span>
             <strong>${escapeHtml(career.bestFinish)}</strong>
           </div>
-          <div class="stat-tile">
-            <span>Team Rating</span>
-            <strong>${metrics.overall || "--"}</strong>
-          </div>
         </div>
       </header>
 
@@ -22379,22 +22533,9 @@ function render() {
 
       <section class="dashboard">
         <div class="dashboard__main">
-          <section class="surface-card surface-card--pitch">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Squad Wheel</p>
-                <h2>${state.currentSquad ? escapeHtml(state.currentSquad.label) : "Build your XI"}</h2>
-                ${
-                  state.currentSquad
-                    ? `<p class="squad-note">${escapeHtml(state.currentSquad.note)}</p>`
-                    : ""
-                }
-              </div>
-            </div>
-            <div class="candidate-grid">${candidateMarkup()}</div>
-          </section>
-
-          ${orderSetupMarkup()}
+          ${difficultyMarkup()}
+          ${draftPanelMarkup()}
+          ${opponentPanelMarkup()}
           ${showTournamentPanels ? resultMarkup() : ""}
           ${showTournamentPanels ? resultsHistoryMarkup() : ""}
         </div>
@@ -22415,6 +22556,11 @@ function render() {
           </section>
         </aside>
       </section>
+
+      <footer class="small-print">
+        <p>Inspired by and with thanks to 82-0.com.</p>
+        <p>400-0 is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
+      </footer>
     </section>
   `;
 }
@@ -22444,26 +22590,8 @@ appElement.addEventListener("click", (event) => {
     return;
   }
 
-  if (action === "batting-up") {
-    state = moveBattingOrder(state, target.dataset.playerId, -1);
-    render();
-    return;
-  }
-
-  if (action === "batting-down") {
-    state = moveBattingOrder(state, target.dataset.playerId, 1);
-    render();
-    return;
-  }
-
-  if (action === "bowling-up") {
-    state = moveBowlingOrder(state, target.dataset.playerId, -1);
-    render();
-    return;
-  }
-
-  if (action === "bowling-down") {
-    state = moveBowlingOrder(state, target.dataset.playerId, 1);
+  if (action === "difficulty") {
+    state = setDifficulty(state, target.dataset.difficulty);
     render();
     return;
   }

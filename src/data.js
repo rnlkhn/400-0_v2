@@ -1242,7 +1242,28 @@ export const DRAFT_SQUADS = [...BASE_DRAFT_SQUADS, ...GENERATED_DRAFT_SQUADS].so
   (left, right) => left.year - right.year || left.country.localeCompare(right.country),
 );
 
-export const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS];
+const PLAYER_NAME_OVERRIDES = {
+  "Kumar Sangakkara": { role: "wicketkeeper", batting: 95, bowling: 0 },
+  "Mahela Jayawardene": { role: "batsman", batting: 93, bowling: 18 },
+  "Lasith Malinga": { role: "bowler", batting: 22, bowling: 95 },
+  "Marvan Atapattu": { role: "batsman", batting: 88, bowling: 12 },
+  "Upul Tharanga": { role: "batsman", batting: 86, bowling: 0 },
+  "Russel Arnold": { role: "batsman", batting: 80, bowling: 38 },
+  "Farveez Maharoof": { role: "bowler", batting: 64, bowling: 82 },
+  "Dilhara Fernando": { role: "bowler", batting: 24, bowling: 84 },
+  "Nuwan Kulasekara": { role: "bowler", batting: 33, bowling: 84 },
+  "Malinga Bandara": { role: "bowler", batting: 20, bowling: 80 },
+  "Chamara Silva": { role: "batsman", batting: 78, bowling: 18 },
+};
+
+function applyPlayerOverride(player) {
+  const override = PLAYER_NAME_OVERRIDES[player.name];
+  return override ? { ...player, ...override } : player;
+}
+
+export const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS].map(
+  applyPlayerOverride,
+);
 
 export const TOURNAMENT_OPPONENTS = [
   {

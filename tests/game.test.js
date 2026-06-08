@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 
 import {
+  DIFFICULTY_LEVELS,
   DRAFT_SQUADS,
   PLAYER_POOL,
   TOURNAMENT_OPPONENTS,
@@ -9,6 +10,8 @@ import {
   draftPlayer,
   getBattingOrderPlayers,
   getBowlingOrderPlayers,
+  getEligiblePlayers,
+  getOpponentMetrics,
   getRemainingSlots,
   getTeamMetrics,
   isAllRounderPlayer,
@@ -16,6 +19,7 @@ import {
   moveBowlingOrder,
   revealNextOpponent,
   rerollCandidates,
+  setDifficulty,
   simulateMatch,
 } from "../src/game.js";
 
@@ -44,6 +48,14 @@ test("initial state waits for the first draft spin", () => {
 
   assert.equal(state.currentSquad, null);
   assert.deepEqual(state.candidateSet, []);
+  assert.equal(state.difficulty, "international");
+});
+
+test("difficulty can be chosen before the draft starts", () => {
+  const state = setDifficulty(createInitialState(), "legend");
+
+  assert.equal(state.difficulty, "legend");
+  assert.equal(DIFFICULTY_LEVELS.some((level) => level.id === state.difficulty), true);
 });
 
 test("drafting a player updates the roster and waits for a manual re-spin", () => {
@@ -56,6 +68,27 @@ test("drafting a player updates the roster and waits for a manual re-spin", () =
   assert.equal(state.roster[0].id, player.id);
   assert.equal(state.currentSquad, null);
   assert.deepEqual(state.candidateSet, []);
+});
+
+test("drafting a player blocks the same cricketer across other world cup years", () => {
+  const gilchrist2003 = PLAYER_POOL.find((player) => player.id === "australia-2003-adam-gilchrist");
+  const gilchrist2007 = PLAYER_POOL.find((player) => player.id === "australia-2007-adam-gilchrist");
+
+  const draftedState = draftPlayer(
+    {
+      ...createInitialState(),
+      currentSquad: DRAFT_SQUADS.find((squad) => squad.id === "australia-2003"),
+      candidateSet: [gilchrist2003],
+    },
+    gilchrist2003.id,
+  );
+
+  assert.equal(draftedState.roster.length, 1);
+  assert.equal(draftedState.roster[0].name, "Adam Gilchrist");
+  assert.equal(
+    getEligiblePlayers(draftedState).some((player) => player.id === gilchrist2007.id),
+    false,
+  );
 });
 
 test("rerollCandidates changes the active squad when alternatives exist", () => {
@@ -124,8 +157,10 @@ test("simulateMatch advances a strong XI after a win", () => {
   assert.equal(nextState.results[0].won, true);
   assert.equal(nextState.results[0].playerBattingCard.length, 11);
   assert.ok(nextState.results[0].playerBowlingCard.length >= 3);
+  assert.ok(nextState.results[0].playerBowlingCard.every((entry) => entry.ballsBowled <= 60));
   assert.ok(nextState.results[0].opponentBattingCard.length >= 11);
   assert.ok(nextState.results[0].opponentBowlingCard.length >= 3);
+  assert.ok(nextState.results[0].opponentBowlingCard.every((entry) => entry.ballsBowled <= 60));
   assert.equal(nextState.matchIndex, 1);
   assert.equal(nextState.phase, "tournament");
 });
@@ -197,6 +232,15 @@ test("revealNextOpponent waits until asked and reveals the next stage opponent",
   const nextState = revealNextOpponent(tournamentState);
 
   assert.equal(nextState.currentOpponent.id, TOURNAMENT_OPPONENTS[2].id);
+});
+
+test("opponent metrics return rounded batting and bowling averages", () => {
+  const metrics = getOpponentMetrics(TOURNAMENT_OPPONENTS[0]);
+
+  assert.deepEqual(metrics, {
+    batting: 69,
+    bowling: 55,
+  });
 });
 
 test("completing the draft seeds batting and bowling order state", () => {
