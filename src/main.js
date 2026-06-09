@@ -79,17 +79,34 @@ function formatOvers(balls) {
 }
 
 function loadCareer() {
+  const fallback = {
+    titles: 0,
+    bestFinish: "Draft Room",
+    deepestMatch: 0,
+  };
+
   const stored = window.localStorage.getItem(STATS_KEY);
 
   if (!stored) {
-    return {
-      titles: 0,
-      bestFinish: "Draft Room",
-      deepestMatch: 0,
-    };
+    return fallback;
   }
 
-  return JSON.parse(stored);
+  try {
+    const parsed = JSON.parse(stored);
+
+    if (
+      typeof parsed?.titles !== "number" ||
+      typeof parsed?.bestFinish !== "string" ||
+      typeof parsed?.deepestMatch !== "number"
+    ) {
+      throw new Error("Invalid career shape");
+    }
+
+    return parsed;
+  } catch {
+    window.localStorage.removeItem(STATS_KEY);
+    return fallback;
+  }
 }
 
 function saveCareer() {
@@ -465,13 +482,7 @@ function resultMarkup() {
   }
 
   if (!state.latestMatch) {
-    return `
-      <div class="match-card match-card--placeholder">
-        <p class="eyebrow">Tournament Desk</p>
-        <h3>World Cup run waiting</h3>
-        <p>Draft your XI, then sim each match. Tougher opposition arrives every round.</p>
-      </div>
-    `;
+    return "";
   }
 
   return `

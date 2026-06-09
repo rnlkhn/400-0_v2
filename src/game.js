@@ -463,32 +463,15 @@ export function getTeamMetrics(roster) {
     };
   }
 
-  const battingWeights = {
-    batsman: 1.18,
-    wicketkeeper: 1.08,
-    bowler: 0.24,
-  };
-  const bowlingWeights = {
-    batsman: 0.18,
-    wicketkeeper: 0,
-    bowler: 1.14,
-  };
+  const topBatters = [...roster]
+    .sort((left, right) => right.batting - left.batting || right.bowling - left.bowling)
+    .slice(0, Math.min(11, roster.length));
+  const topBowlers = [...roster]
+    .sort((left, right) => right.bowling - left.bowling || right.batting - left.batting)
+    .slice(0, Math.min(11, roster.length));
 
-  const battingWeightTotal = roster.reduce(
-    (total, player) => total + battingWeights[player.role],
-    0,
-  );
-  const bowlingWeightTotal = roster.reduce(
-    (total, player) => total + bowlingWeights[player.role],
-    0,
-  );
-
-  const batting =
-    roster.reduce((total, player) => total + player.batting * battingWeights[player.role], 0) /
-    battingWeightTotal;
-  const bowling =
-    roster.reduce((total, player) => total + player.bowling * bowlingWeights[player.role], 0) /
-    bowlingWeightTotal;
+  const batting = topBatters.reduce((total, player) => total + player.batting, 0) / topBatters.length;
+  const bowling = topBowlers.reduce((total, player) => total + player.bowling, 0) / topBowlers.length;
 
   const allRounders = roster.filter(isAllRounderPlayer).length;
   const counts = getRoleCounts(roster);
@@ -553,6 +536,19 @@ function simulateInnings(battingRating, bowlingRating, pressure, random) {
     180 + battingRating * 1.55 - bowlingRating * 0.82 + pressure * 3.2 + randomSwing(random, 18);
 
   return clamp(round(rawScore), 145, 405);
+}
+
+function resolveChaseScore(projectedRuns, firstInningsRuns, battingRating, bowlingRating, random) {
+  const target = firstInningsRuns + 1;
+  const chaseSucceeded = projectedRuns >= target;
+  const runs = chaseSucceeded ? target : Math.min(projectedRuns, firstInningsRuns - 1);
+  const wickets = estimateWickets(runs, battingRating, bowlingRating, random);
+
+  return {
+    runs,
+    wickets,
+    chaseSucceeded,
+  };
 }
 
 function distributeTotal(total, weights) {
@@ -720,10 +716,7 @@ export function getOpponentMetrics(opponent) {
     };
   }
 
-  const batting =
-    roster.reduce((total, player) => total + player.batting, 0) / roster.length;
-  const bowling =
-    roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
+  const { batting, bowling } = getTeamMetrics(roster);
 
   return {
     batting: round(batting),
@@ -915,18 +908,30 @@ export function simulateMatch(state, random = Math.random) {
     : estimateWickets(firstInningsRuns, opponentBatting, playerBowling, random);
 
   const secondInningsPressure = 6;
-  const secondInningsRuns = userBatsFirst
+  const secondInningsProjection = userBatsFirst
     ? simulateInnings(opponentBatting, playerBowling, secondInningsPressure, random)
     : simulateInnings(playerBatting, opponentBowling, secondInningsPressure, random);
-  const secondInningsWickets = userBatsFirst
-    ? estimateWickets(secondInningsRuns, opponentBatting, playerBowling, random)
-    : estimateWickets(secondInningsRuns, playerBatting, opponentBowling, random);
+  const secondInnings = userBatsFirst
+    ? resolveChaseScore(
+        secondInningsProjection,
+        firstInningsRuns,
+        opponentBatting,
+        playerBowling,
+        random,
+      )
+    : resolveChaseScore(
+        secondInningsProjection,
+        firstInningsRuns,
+        playerBatting,
+        opponentBowling,
+        random,
+      );
 
-  const playerRuns = userBatsFirst ? firstInningsRuns : secondInningsRuns;
-  const playerWickets = userBatsFirst ? firstInningsWickets : secondInningsWickets;
-  const opponentRuns = userBatsFirst ? secondInningsRuns : firstInningsRuns;
-  const opponentWickets = userBatsFirst ? secondInningsWickets : firstInningsWickets;
-  const chaseSucceeded = userBatsFirst ? opponentRuns >= playerRuns : playerRuns >= opponentRuns;
+  const playerRuns = userBatsFirst ? firstInningsRuns : secondInnings.runs;
+  const playerWickets = userBatsFirst ? firstInningsWickets : secondInnings.wickets;
+  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInningsRuns;
+  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInningsWickets;
+  const chaseSucceeded = secondInnings.chaseSucceeded;
   const playerWon = userBatsFirst ? !chaseSucceeded : chaseSucceeded;
   const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
   const opponentBalls = estimateInningsBalls(

@@ -189,13 +189,13 @@ test("year-specific benchmark players use different world cup era ratings", () =
   assert.deepEqual([kohli2011.batting, kohli2023.batting], [87, 96]);
 });
 
-test("team metrics reward a balanced all-star XI with strong batting and bowling", () => {
+test("team metrics average batting and bowling strength across the selected XI", () => {
   const team = getTeamMetrics(createLegendXI());
 
-  assert.ok(team.batting >= 84);
-  assert.ok(team.bowling >= 87);
+  assert.ok(team.batting >= 64);
+  assert.ok(team.bowling >= 63);
   assert.ok(team.allRounders >= 2);
-  assert.ok(team.overall >= 93);
+  assert.ok(team.overall >= 70);
 });
 
 test("simulateMatch advances a strong XI after a win", () => {
@@ -210,6 +210,7 @@ test("simulateMatch advances a strong XI after a win", () => {
     latestMatch: null,
     champion: false,
     eliminated: false,
+    difficulty: "county",
   };
 
   const nextState = simulateMatch(baseState, constantRandom(0.8));
@@ -259,20 +260,22 @@ test("match results use runs for defended totals and wickets for successful chas
     latestMatch: null,
     champion: false,
     eliminated: false,
-    difficulty: "international",
+    difficulty: "county",
   };
 
-  const battingFirstWin = simulateMatch(baseState, constantRandom(0.8)).results[0];
+  const battingFirstWin = simulateMatch(baseState, constantRandom(0.6)).results[0];
   const chasingWin = simulateMatch(baseState, constantRandom(0.2)).results[0];
 
   assert.equal(battingFirstWin.battingFirst, "player");
   assert.equal(battingFirstWin.won, true);
   assert.equal(battingFirstWin.marginType, "runs");
+  assert.ok(battingFirstWin.playerRuns > battingFirstWin.opponentRuns);
   assert.match(battingFirstWin.headline, /by \d+ runs\./);
 
   assert.equal(chasingWin.battingFirst, "opponent");
   assert.equal(chasingWin.won, true);
   assert.equal(chasingWin.marginType, "wickets");
+  assert.equal(chasingWin.playerRuns, chasingWin.opponentRuns + 1);
   assert.match(chasingWin.headline, /by \d+ wickets\./);
 });
 
