@@ -43,6 +43,22 @@ function createLegendXI() {
   ].map((id) => PLAYER_POOL.find((player) => player.id === id));
 }
 
+function createWeakXI() {
+  return [
+    "syed-kirmani",
+    "kris-srikkanth",
+    "sunil-gavaskar",
+    "asaranka-gurusinha",
+    "saud-shakeel",
+    "mohinder-amarnath",
+    "mohammad-saifuddin",
+    "damien-fleming",
+    "haris-rauf",
+    "ian-bishop",
+    "mujeeb-ur-rahman",
+  ].map((id) => PLAYER_POOL.find((player) => player.id === id));
+}
+
 test("initial state waits for the first draft spin", () => {
   const state = createInitialState(constantRandom(0));
 
@@ -128,6 +144,51 @@ test("all-rounder status applies to players with both batting and bowling above 
   assert.equal(isAllRounderPlayer(amarnath), true);
 });
 
+test("wicketkeeper overrides survive stripped captain and vice-captain markers", () => {
+  const quinton = PLAYER_POOL.find((player) => player.id === "south-africa-2019-quinton-de-kock");
+  const sarfaraz = PLAYER_POOL.find((player) => player.id === "pakistan-2019-sarfaraz-ahmed");
+
+  assert.equal(quinton.name, "Quinton de Kock");
+  assert.equal(quinton.role, "wicketkeeper");
+  assert.equal(sarfaraz.name, "Sarfaraz Ahmed");
+  assert.equal(sarfaraz.role, "wicketkeeper");
+});
+
+test("england generator anomalies are corrected in the player pool", () => {
+  const pietersen = PLAYER_POOL.find((player) => player.id === "england-2007-kevin-pietersen");
+  const anderson = PLAYER_POOL.find((player) => player.id === "england-2007-james-anderson");
+  const strauss = PLAYER_POOL.find((player) => player.id === "england-2007-andrew-strauss");
+  const thorpe = PLAYER_POOL.find((player) => player.id === "england-1999-graham-thorpe");
+
+  assert.equal(pietersen.role, "batsman");
+  assert.ok(pietersen.batting > pietersen.bowling);
+  assert.equal(anderson.role, "bowler");
+  assert.ok(anderson.bowling > anderson.batting);
+  assert.equal(strauss.role, "batsman");
+  assert.equal(thorpe.role, "batsman");
+});
+
+test("year-specific benchmark players use different world cup era ratings", () => {
+  const tamim2007 = PLAYER_POOL.find((player) => player.id === "bangladesh-2007-tamim-iqbal");
+  const tamim2019 = PLAYER_POOL.find((player) => player.id === "tamim-iqbal");
+  const shakib2007 = PLAYER_POOL.find((player) => player.id === "bangladesh-2007-shakib-al-hasan");
+  const shakib2019 = PLAYER_POOL.find((player) => player.id === "shakib-al-hasan");
+  const mushfiqur2007 = PLAYER_POOL.find((player) => player.id === "bangladesh-2007-mushfiqur-rahim");
+  const mushfiqur2019 = PLAYER_POOL.find((player) => player.id === "mushfiqur-rahim");
+  const kohli2011 = PLAYER_POOL.find((player) => player.id === "virat-kohli");
+  const kohli2023 = PLAYER_POOL.find((player) => player.id === "virat-kohli-2023");
+
+  assert.deepEqual(
+    [tamim2007.batting, tamim2019.batting, shakib2007.batting, shakib2019.batting],
+    [78, 88, 80, 93],
+  );
+  assert.deepEqual(
+    [shakib2007.bowling, shakib2019.bowling, mushfiqur2007.batting, mushfiqur2019.batting],
+    [82, 89, 72, 88],
+  );
+  assert.deepEqual([kohli2011.batting, kohli2023.batting], [87, 96]);
+});
+
 test("team metrics reward a balanced all-star XI with strong batting and bowling", () => {
   const team = getTeamMetrics(createLegendXI());
 
@@ -166,23 +227,9 @@ test("simulateMatch advances a strong XI after a win", () => {
 });
 
 test("simulateMatch ends the run when a weak XI loses", () => {
-  const weakRoster = [
-    "syed-kirmani",
-    "kris-srikkanth",
-    "sunil-gavaskar",
-    "asaranka-gurusinha",
-    "saud-shakeel",
-    "mohinder-amarnath",
-    "mohammad-saifuddin",
-    "damien-fleming",
-    "haris-rauf",
-    "ian-bishop",
-    "mujeeb-ur-rahman",
-  ].map((id) => PLAYER_POOL.find((player) => player.id === id));
-
   const baseState = {
     phase: "tournament",
-    roster: weakRoster,
+    roster: createWeakXI(),
     currentSquad: null,
     candidateSet: [],
     matchIndex: TOURNAMENT_OPPONENTS.length - 1,
@@ -198,6 +245,64 @@ test("simulateMatch ends the run when a weak XI loses", () => {
   assert.equal(nextState.phase, "finished");
   assert.equal(nextState.eliminated, true);
   assert.equal(nextState.champion, false);
+});
+
+test("match results use runs for defended totals and wickets for successful chases", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createLegendXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: TOURNAMENT_OPPONENTS[0],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "international",
+  };
+
+  const battingFirstWin = simulateMatch(baseState, constantRandom(0.8)).results[0];
+  const chasingWin = simulateMatch(baseState, constantRandom(0.2)).results[0];
+
+  assert.equal(battingFirstWin.battingFirst, "player");
+  assert.equal(battingFirstWin.won, true);
+  assert.equal(battingFirstWin.marginType, "runs");
+  assert.match(battingFirstWin.headline, /by \d+ runs\./);
+
+  assert.equal(chasingWin.battingFirst, "opponent");
+  assert.equal(chasingWin.won, true);
+  assert.equal(chasingWin.marginType, "wickets");
+  assert.match(chasingWin.headline, /by \d+ wickets\./);
+});
+
+test("failed chases lose by runs and successful chases against you lose by wickets", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createWeakXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: TOURNAMENT_OPPONENTS.length - 1,
+    currentOpponent: TOURNAMENT_OPPONENTS[TOURNAMENT_OPPONENTS.length - 1],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "international",
+  };
+
+  const failedChase = simulateMatch(baseState, constantRandom(0.2)).results[0];
+  const chasedDown = simulateMatch(baseState, constantRandom(0.8)).results[0];
+
+  assert.equal(failedChase.battingFirst, "opponent");
+  assert.equal(failedChase.won, false);
+  assert.equal(failedChase.marginType, "runs");
+  assert.match(failedChase.headline, /by \d+ runs/);
+
+  assert.equal(chasedDown.battingFirst, "player");
+  assert.equal(chasedDown.won, false);
+  assert.equal(chasedDown.marginType, "wickets");
+  assert.match(chasedDown.headline, /with \d+ wickets in hand\./);
 });
 
 test("remaining slots reflect the hidden 1-1-1 coverage floor", () => {
@@ -239,7 +344,7 @@ test("opponent metrics return rounded batting and bowling averages", () => {
 
   assert.deepEqual(metrics, {
     batting: 69,
-    bowling: 55,
+    bowling: 54,
   });
 });
 

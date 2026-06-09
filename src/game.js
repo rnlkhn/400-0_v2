@@ -926,7 +926,8 @@ export function simulateMatch(state, random = Math.random) {
   const playerWickets = userBatsFirst ? firstInningsWickets : secondInningsWickets;
   const opponentRuns = userBatsFirst ? secondInningsRuns : firstInningsRuns;
   const opponentWickets = userBatsFirst ? secondInningsWickets : firstInningsWickets;
-  const playerWon = userBatsFirst ? playerRuns > opponentRuns : playerRuns >= opponentRuns;
+  const chaseSucceeded = userBatsFirst ? opponentRuns >= playerRuns : playerRuns >= opponentRuns;
+  const playerWon = userBatsFirst ? !chaseSucceeded : chaseSucceeded;
   const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
   const opponentBalls = estimateInningsBalls(
     opponentRuns,
@@ -934,19 +935,14 @@ export function simulateMatch(state, random = Math.random) {
     userBatsFirst ? opponentRuns >= playerRuns : false,
   );
 
-  const chasingSide = userBatsFirst ? "opponent" : "player";
-
   let marginType = "runs";
-  let marginValue = Math.abs(playerRuns - opponentRuns);
+  let marginValue = Math.max(1, Math.abs(playerRuns - opponentRuns));
 
-  if (playerWon && chasingSide === "player") {
+  if (chaseSucceeded) {
     marginType = "wickets";
-    marginValue = clamp(10 - playerWickets, 1, 9);
-  } else if (!playerWon && chasingSide === "opponent") {
-    marginType = "wickets";
-    marginValue = clamp(10 - opponentWickets, 1, 9);
-  } else {
-    marginValue = Math.max(1, marginValue);
+    marginValue = userBatsFirst
+      ? clamp(10 - opponentWickets, 1, 9)
+      : clamp(10 - playerWickets, 1, 9);
   }
 
   const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);

@@ -15,6 +15,41 @@ export const REQUIRED_ROLES = {
   bowler: 1,
 };
 
+const STRIPPABLE_NAME_FLAGS = new Set([
+  "c",
+  "captain",
+  "vc",
+  "vice captain",
+  "vice-captain",
+  "wk",
+]);
+
+function parseNameFlags(value) {
+  return value
+    .toLowerCase()
+    .replace(/\band\b/g, "&")
+    .split(/[,/&]+/)
+    .map((token) => token.trim().replace(/\s+/g, " "))
+    .filter(Boolean);
+}
+
+function hasOnlyMetadataFlags(value) {
+  const tokens = parseNameFlags(value);
+  return tokens.length > 0 && tokens.every((token) => STRIPPABLE_NAME_FLAGS.has(token));
+}
+
+function normalizePlayerName(name) {
+  return name
+    .replace(/\(([^)]+)\)/g, (match, contents) => (hasOnlyMetadataFlags(contents) ? "" : match))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function hasWicketkeeperFlag(name) {
+  const groups = [...name.matchAll(/\(([^)]+)\)/g)];
+  return groups.some((group) => parseNameFlags(group[1]).includes("wk"));
+}
+
 const BASE_DRAFT_SQUADS = [
   {
     id: "india-1983",
@@ -1254,11 +1289,58 @@ const PLAYER_NAME_OVERRIDES = {
   "Nuwan Kulasekara": { role: "bowler", batting: 33, bowling: 84 },
   "Malinga Bandara": { role: "bowler", batting: 20, bowling: 80 },
   "Chamara Silva": { role: "batsman", batting: 78, bowling: 18 },
+  "Quinton de Kock": { role: "wicketkeeper", batting: 90, bowling: 0 },
+  "Sarfaraz Ahmed": { role: "wicketkeeper", batting: 82, bowling: 0 },
+  "James Anderson": { role: "bowler", batting: 19, bowling: 91 },
+  "Kevin Pietersen": { role: "batsman", batting: 94, bowling: 24 },
+  "Graham Thorpe": { role: "batsman", batting: 88, bowling: 18 },
+  "Andrew Strauss": { role: "batsman", batting: 87, bowling: 10 },
+  "Michael Vaughan": { role: "batsman", batting: 86, bowling: 14 },
+  "Matt Prior": { role: "wicketkeeper", batting: 84, bowling: 0 },
+  "Gary Wilson": { role: "wicketkeeper", batting: 76, bowling: 0 },
+  "Maurice Ouma": { role: "wicketkeeper", batting: 71, bowling: 0 },
+  "Morne van Wyk": { role: "wicketkeeper", batting: 80, bowling: 0 },
+  "Afsar Zazai": { role: "wicketkeeper", batting: 70, bowling: 0 },
+  "Shafiqullah": { role: "wicketkeeper", batting: 76, bowling: 0 },
+  "Wesley Barresi": { role: "wicketkeeper", batting: 74, bowling: 0 },
+};
+
+const PLAYER_ID_OVERRIDES = {
+  "bangladesh-2007-tamim-iqbal": { batting: 78, bowling: 8 },
+  "bangladesh-2011-tamim-iqbal": { batting: 84, bowling: 8 },
+  "bangladesh-2015-tamim-iqbal": { batting: 87, bowling: 8 },
+  "tamim-iqbal": { batting: 88, bowling: 8 },
+
+  "bangladesh-2007-shakib-al-hasan": { batting: 80, bowling: 82 },
+  "bangladesh-2011-shakib-al-hasan": { batting: 86, bowling: 87 },
+  "bangladesh-2015-shakib-al-hasan": { batting: 89, bowling: 88 },
+  "shakib-al-hasan": { batting: 93, bowling: 89 },
+  "bangladesh-2023-shakib-al-hasan": { batting: 89, bowling: 85 },
+
+  "bangladesh-2007-mushfiqur-rahim": { batting: 72, bowling: 0 },
+  "bangladesh-2011-mushfiqur-rahim": { batting: 78, bowling: 0 },
+  "bangladesh-2015-mushfiqur-rahim": { batting: 84, bowling: 0 },
+  "mushfiqur-rahim": { batting: 88, bowling: 0 },
+  "bangladesh-2023-mushfiqur-rahim": { batting: 85, bowling: 0 },
+
+  "virat-kohli": { batting: 87, bowling: 8 },
+  "india-2015-virat-kohli": { batting: 92, bowling: 8 },
+  "india-2019-virat-kohli": { batting: 94, bowling: 8 },
+  "virat-kohli-2023": { batting: 96, bowling: 8 },
 };
 
 function applyPlayerOverride(player) {
-  const override = PLAYER_NAME_OVERRIDES[player.name];
-  return override ? { ...player, ...override } : player;
+  const normalizedName = normalizePlayerName(player.name);
+  const override = PLAYER_NAME_OVERRIDES[normalizedName];
+  const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
+
+  return {
+    ...player,
+    name: normalizedName,
+    role: inferredRole,
+    ...(override || {}),
+    ...(PLAYER_ID_OVERRIDES[player.id] || {}),
+  };
 }
 
 export const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS].map(

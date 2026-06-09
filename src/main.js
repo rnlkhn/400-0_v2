@@ -21,21 +21,20 @@ let state = createInitialState();
 let career = loadCareer();
 
 function cleanPlayerName(name) {
+  const flagTokens = new Set(["c", "captain", "vc", "vice captain", "vice-captain", "wk"]);
+
   return name
-    .replace(/\(\s*vc\s*&\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*&\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vc\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\/\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vice[\s-]*captain\s*&\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*&\s*vice[\s-]*captain\s*\)/gi, "")
-    .replace(/\(\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vice[\s-]*captain\s*\)/gi, "")
-    .replace(/\(\s*c\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\/\s*c\s*\)/gi, "")
-    .replace(/\(\s*captain\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\)/gi, "")
-    .replace(/\(\s*c\s*\)/gi, "")
-    .replace(/\(\s*captain\s*\)/gi, "")
+    .replace(/\(([^)]+)\)/g, (match, contents) => {
+      const tokens = contents
+        .toLowerCase()
+        .replace(/\band\b/g, "&")
+        .split(/[,/&]+/)
+        .map((token) => token.trim().replace(/\s+/g, " "))
+        .filter(Boolean);
+
+      return tokens.length > 0 && tokens.every((token) => flagTokens.has(token)) ? "" : match;
+    })
+    .replace(/\s+/g, " ")
     .trim();
 }
 

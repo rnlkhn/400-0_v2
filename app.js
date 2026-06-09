@@ -19530,6 +19530,41 @@ const REQUIRED_ROLES = {
   bowler: 1,
 };
 
+const STRIPPABLE_NAME_FLAGS = new Set([
+  "c",
+  "captain",
+  "vc",
+  "vice captain",
+  "vice-captain",
+  "wk",
+]);
+
+function parseNameFlags(value) {
+  return value
+    .toLowerCase()
+    .replace(/\band\b/g, "&")
+    .split(/[,/&]+/)
+    .map((token) => token.trim().replace(/\s+/g, " "))
+    .filter(Boolean);
+}
+
+function hasOnlyMetadataFlags(value) {
+  const tokens = parseNameFlags(value);
+  return tokens.length > 0 && tokens.every((token) => STRIPPABLE_NAME_FLAGS.has(token));
+}
+
+function normalizePlayerName(name) {
+  return name
+    .replace(/\(([^)]+)\)/g, (match, contents) => (hasOnlyMetadataFlags(contents) ? "" : match))
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function hasWicketkeeperFlag(name) {
+  const groups = [...name.matchAll(/\(([^)]+)\)/g)];
+  return groups.some((group) => parseNameFlags(group[1]).includes("wk"));
+}
+
 const BASE_DRAFT_SQUADS = [
   {
     id: "india-1983",
@@ -20769,11 +20804,58 @@ const PLAYER_NAME_OVERRIDES = {
   "Nuwan Kulasekara": { role: "bowler", batting: 33, bowling: 84 },
   "Malinga Bandara": { role: "bowler", batting: 20, bowling: 80 },
   "Chamara Silva": { role: "batsman", batting: 78, bowling: 18 },
+  "Quinton de Kock": { role: "wicketkeeper", batting: 90, bowling: 0 },
+  "Sarfaraz Ahmed": { role: "wicketkeeper", batting: 82, bowling: 0 },
+  "James Anderson": { role: "bowler", batting: 19, bowling: 91 },
+  "Kevin Pietersen": { role: "batsman", batting: 94, bowling: 24 },
+  "Graham Thorpe": { role: "batsman", batting: 88, bowling: 18 },
+  "Andrew Strauss": { role: "batsman", batting: 87, bowling: 10 },
+  "Michael Vaughan": { role: "batsman", batting: 86, bowling: 14 },
+  "Matt Prior": { role: "wicketkeeper", batting: 84, bowling: 0 },
+  "Gary Wilson": { role: "wicketkeeper", batting: 76, bowling: 0 },
+  "Maurice Ouma": { role: "wicketkeeper", batting: 71, bowling: 0 },
+  "Morne van Wyk": { role: "wicketkeeper", batting: 80, bowling: 0 },
+  "Afsar Zazai": { role: "wicketkeeper", batting: 70, bowling: 0 },
+  "Shafiqullah": { role: "wicketkeeper", batting: 76, bowling: 0 },
+  "Wesley Barresi": { role: "wicketkeeper", batting: 74, bowling: 0 },
+};
+
+const PLAYER_ID_OVERRIDES = {
+  "bangladesh-2007-tamim-iqbal": { batting: 78, bowling: 8 },
+  "bangladesh-2011-tamim-iqbal": { batting: 84, bowling: 8 },
+  "bangladesh-2015-tamim-iqbal": { batting: 87, bowling: 8 },
+  "tamim-iqbal": { batting: 88, bowling: 8 },
+
+  "bangladesh-2007-shakib-al-hasan": { batting: 80, bowling: 82 },
+  "bangladesh-2011-shakib-al-hasan": { batting: 86, bowling: 87 },
+  "bangladesh-2015-shakib-al-hasan": { batting: 89, bowling: 88 },
+  "shakib-al-hasan": { batting: 93, bowling: 89 },
+  "bangladesh-2023-shakib-al-hasan": { batting: 89, bowling: 85 },
+
+  "bangladesh-2007-mushfiqur-rahim": { batting: 72, bowling: 0 },
+  "bangladesh-2011-mushfiqur-rahim": { batting: 78, bowling: 0 },
+  "bangladesh-2015-mushfiqur-rahim": { batting: 84, bowling: 0 },
+  "mushfiqur-rahim": { batting: 88, bowling: 0 },
+  "bangladesh-2023-mushfiqur-rahim": { batting: 85, bowling: 0 },
+
+  "virat-kohli": { batting: 87, bowling: 8 },
+  "india-2015-virat-kohli": { batting: 92, bowling: 8 },
+  "india-2019-virat-kohli": { batting: 94, bowling: 8 },
+  "virat-kohli-2023": { batting: 96, bowling: 8 },
 };
 
 function applyPlayerOverride(player) {
-  const override = PLAYER_NAME_OVERRIDES[player.name];
-  return override ? { ...player, ...override } : player;
+  const normalizedName = normalizePlayerName(player.name);
+  const override = PLAYER_NAME_OVERRIDES[normalizedName];
+  const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
+
+  return {
+    ...player,
+    name: normalizedName,
+    role: inferredRole,
+    ...(override || {}),
+    ...(PLAYER_ID_OVERRIDES[player.id] || {}),
+  };
 }
 
 const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS].map(
@@ -21762,7 +21844,8 @@ function simulateMatch(state, random = Math.random) {
   const playerWickets = userBatsFirst ? firstInningsWickets : secondInningsWickets;
   const opponentRuns = userBatsFirst ? secondInningsRuns : firstInningsRuns;
   const opponentWickets = userBatsFirst ? secondInningsWickets : firstInningsWickets;
-  const playerWon = userBatsFirst ? playerRuns > opponentRuns : playerRuns >= opponentRuns;
+  const chaseSucceeded = userBatsFirst ? opponentRuns >= playerRuns : playerRuns >= opponentRuns;
+  const playerWon = userBatsFirst ? !chaseSucceeded : chaseSucceeded;
   const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
   const opponentBalls = estimateInningsBalls(
     opponentRuns,
@@ -21770,19 +21853,14 @@ function simulateMatch(state, random = Math.random) {
     userBatsFirst ? opponentRuns >= playerRuns : false,
   );
 
-  const chasingSide = userBatsFirst ? "opponent" : "player";
-
   let marginType = "runs";
-  let marginValue = Math.abs(playerRuns - opponentRuns);
+  let marginValue = Math.max(1, Math.abs(playerRuns - opponentRuns));
 
-  if (playerWon && chasingSide === "player") {
+  if (chaseSucceeded) {
     marginType = "wickets";
-    marginValue = clamp(10 - playerWickets, 1, 9);
-  } else if (!playerWon && chasingSide === "opponent") {
-    marginType = "wickets";
-    marginValue = clamp(10 - opponentWickets, 1, 9);
-  } else {
-    marginValue = Math.max(1, marginValue);
+    marginValue = userBatsFirst
+      ? clamp(10 - opponentWickets, 1, 9)
+      : clamp(10 - playerWickets, 1, 9);
   }
 
   const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);
@@ -21913,21 +21991,20 @@ let state = createInitialState();
 let career = loadCareer();
 
 function cleanPlayerName(name) {
+  const flagTokens = new Set(["c", "captain", "vc", "vice captain", "vice-captain", "wk"]);
+
   return name
-    .replace(/\(\s*vc\s*&\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*&\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vc\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\/\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vice[\s-]*captain\s*&\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*&\s*vice[\s-]*captain\s*\)/gi, "")
-    .replace(/\(\s*vc\s*\)/gi, "")
-    .replace(/\(\s*vice[\s-]*captain\s*\)/gi, "")
-    .replace(/\(\s*c\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\/\s*c\s*\)/gi, "")
-    .replace(/\(\s*captain\s*\/\s*wk\s*\)/gi, "")
-    .replace(/\(\s*wk\s*\)/gi, "")
-    .replace(/\(\s*c\s*\)/gi, "")
-    .replace(/\(\s*captain\s*\)/gi, "")
+    .replace(/\(([^)]+)\)/g, (match, contents) => {
+      const tokens = contents
+        .toLowerCase()
+        .replace(/\band\b/g, "&")
+        .split(/[,/&]+/)
+        .map((token) => token.trim().replace(/\s+/g, " "))
+        .filter(Boolean);
+
+      return tokens.length > 0 && tokens.every((token) => flagTokens.has(token)) ? "" : match;
+    })
+    .replace(/\s+/g, " ")
     .trim();
 }
 
