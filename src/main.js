@@ -619,7 +619,7 @@ function render() {
         <div class="hero__copy">
           <p class="eyebrow eyebrow--live">ODI World Cup Draft Game</p>
           <h1>400<span>-</span>0</h1>
-          <p class="hero__lede">Draw from iconic World Cup squads, draft an all-time XI, and survive a knockout climb that gets harsher every round.</p>
+          <p class="hero__lede">Draw from iconic ICC Cricket World Cup squads, draft an all-time line-up, and survive against some of the best cricket teams the world has seen.</p>
         </div>
         <div class="career-board">
           <div class="stat-tile">
@@ -667,6 +667,7 @@ function render() {
       <footer class="small-print">
         <p>Inspired by and with thanks to 82-0.com.</p>
         <p>400-0 is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
+        <p>Ronel Khan, 2026.</p>
       </footer>
     </section>
   `;
