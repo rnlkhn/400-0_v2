@@ -1,4 +1,5 @@
 import {
+  BATTING_AGGRESSION_LEVELS,
   DIFFICULTY_LEVELS,
   TOURNAMENT_OPPONENTS,
   createInitialState,
@@ -10,6 +11,7 @@ import {
   isAllRounderPlayer,
   revealNextOpponent,
   rerollCandidates,
+  setBattingAggression,
   setDifficulty,
   simulateMatch,
 } from "./game.js";
@@ -252,6 +254,21 @@ function opponentPanelMarkup() {
         <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
         <div><span>Batting</span><strong>${metrics.batting}</strong></div>
         <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
+      </div>
+      <div class="aggression-panel">
+        <p class="aggression-panel__label">Batting approach</p>
+        <div class="aggression-toggle">
+          ${BATTING_AGGRESSION_LEVELS.map((level) => `
+            <button
+              class="aggression-chip ${state.battingAggression === level.id ? "aggression-chip--active" : ""}"
+              type="button"
+              data-action="aggression"
+              data-aggression="${level.id}"
+            >
+              ${escapeHtml(level.label)}
+            </button>
+          `).join("")}
+        </div>
       </div>
     </section>
   `;
@@ -610,7 +627,7 @@ function statusCopy() {
         ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return "Next opponent loaded. Press Play match when you're ready.";
+    return "Next opponent loaded. Set your batting approach, then press Play match.";
   }
 
   if (state.champion) {
@@ -711,6 +728,12 @@ appElement.addEventListener("click", (event) => {
 
   if (action === "difficulty") {
     state = setDifficulty(state, target.dataset.difficulty);
+    render();
+    return;
+  }
+
+  if (action === "aggression") {
+    state = setBattingAggression(state, target.dataset.aggression);
     render();
     return;
   }

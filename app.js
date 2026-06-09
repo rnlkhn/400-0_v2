@@ -25481,7 +25481,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Rahul Dravid": { role: "batsman", batting: 92, bowling: 8 },
   "AB de Villiers": { role: "batsman", batting: 95, bowling: 39 },
   "Eoin Morgan": { role: "batsman", batting: 88, bowling: 0 },
-  "KL Rahul": { role: "batsman", batting: 89, bowling: 0 },
+  "KL Rahul": { role: "batsman", batting: 90, bowling: 0 },
   "Jonny Bairstow": { role: "batsman", batting: 90, bowling: 0 },
   "Younis Khan": { role: "batsman", batting: 84, bowling: 0 },
   "Javed Miandad": { role: "batsman", batting: 89, bowling: 28 },
@@ -25570,6 +25570,166 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Vinod Kambli": { role: "batsman", batting: 82, bowling: 0 },
   "Tertius Bosch": { role: "bowler", batting: 18, bowling: 79 },
   "Angus Fraser": { role: "bowler", batting: 12, bowling: 88 },
+  "Adam Gilchrist": { role: "wicketkeeper", batting: 92, bowling: 0 },
+  "Adam Zampa": { role: "bowler", batting: 22, bowling: 82 },
+  "Adil Rashid": { role: "bowler", batting: 28, bowling: 84 },
+  "Aiden Markram": { role: "batsman", batting: 84, bowling: 28 },
+  "Alex Carey": { role: "wicketkeeper", batting: 80, bowling: 0 },
+  "Alex Hales": { role: "batsman", batting: 85, bowling: 0 },
+  "Andile Phehlukwayo": { role: "bowler", batting: 58, bowling: 72 },
+  "Andrew Flintoff": { role: "batsman", batting: 78, bowling: 80 },
+  "Andrew Hall": { role: "bowler", batting: 63, bowling: 72 },
+  "Andrew Symonds": { role: "batsman", batting: 84, bowling: 78 },
+  "André Nel": { role: "bowler", batting: 18, bowling: 78 },
+  "Anrich Nortje": { role: "bowler", batting: 16, bowling: 84 },
+  "Ashton Agar": { role: "bowler", batting: 56, bowling: 68 },
+  "Axar Patel": { role: "bowler", batting: 68, bowling: 74 },
+  "Ben Stokes": { role: "batsman", batting: 88, bowling: 62 },
+  "Bhuvneshwar Kumar": { role: "bowler", batting: 32, bowling: 84 },
+  "Brad Haddin": { role: "wicketkeeper", batting: 82, bowling: 0 },
+  "Brad Hogg": { role: "bowler", batting: 56, bowling: 82 },
+  "Brendon McCullum": { role: "wicketkeeper", batting: 89, bowling: 0 },
+  "Brett Lee": { role: "bowler", batting: 36, bowling: 91 },
+  "Brydon Carse": { role: "bowler", batting: 42, bowling: 70 },
+  "Chris Jordan": { role: "bowler", batting: 42, bowling: 78 },
+  "Chris Morris": { role: "bowler", batting: 69, bowling: 76 },
+  "Chris Woakes": { role: "bowler", batting: 65, bowling: 82 },
+  "Chris Tremlett": { role: "bowler", batting: 24, bowling: 82 },
+  "Colin de Grandhomme": { role: "batsman", batting: 69, bowling: 72 },
+  "Corey Anderson": { role: "batsman", batting: 74, bowling: 68 },
+  "Craig McMillan": { role: "batsman", batting: 76, bowling: 46 },
+  "Dale Steyn": { role: "bowler", batting: 22, bowling: 90 },
+  "Daniel Vettori": { role: "bowler", batting: 58, bowling: 87 },
+  "Daryl Mitchell": { role: "batsman", batting: 84, bowling: 44 },
+  "Daryl Tuffey": { role: "bowler", batting: 18, bowling: 74 },
+  "David Miller": { role: "batsman", batting: 87, bowling: 0 },
+  "David Willey": { role: "bowler", batting: 62, bowling: 76 },
+  "David Warner": { role: "batsman", batting: 94, bowling: 0 },
+  "Dawid Malan": { role: "batsman", batting: 88, bowling: 0 },
+  "Devon Conway": { role: "batsman", batting: 87, bowling: 0 },
+  "Dinesh Karthik": { role: "wicketkeeper", batting: 78, bowling: 0 },
+  "Dwaine Pretorius": { role: "bowler", batting: 58, bowling: 74 },
+  "Faf du Plessis": { role: "batsman", batting: 89, bowling: 0 },
+  "Francois du Plessis": { role: "batsman", batting: 89, bowling: 0 },
+  "Gautam Gambhir": { role: "batsman", batting: 86, bowling: 0 },
+  "George Bailey": { role: "batsman", batting: 82, bowling: 0 },
+  "Gerald Coetzee": { role: "bowler", batting: 18, bowling: 82 },
+  "Glenn Maxwell": { role: "batsman", batting: 87, bowling: 59 },
+  "Glenn Phillips": { role: "batsman", batting: 82, bowling: 28 },
+  "Graeme Smith": { role: "batsman", batting: 86, bowling: 22 },
+  "Graeme Swann": { role: "bowler", batting: 36, bowling: 82 },
+  "Grant Elliott": { role: "batsman", batting: 76, bowling: 60 },
+  "Gus Atkinson": { role: "bowler", batting: 14, bowling: 74 },
+  "Hardik Pandya": { role: "batsman", batting: 82, bowling: 72 },
+  "Harry Brook": { role: "batsman", batting: 84, bowling: 0 },
+  "Hashim Amla": { role: "batsman", batting: 94, bowling: 0 },
+  "Heinrich Klaasen": { role: "wicketkeeper", batting: 90, bowling: 0 },
+  "Henry Nicholls": { role: "batsman", batting: 77, bowling: 0 },
+  "Herschelle Gibbs": { role: "batsman", batting: 87, bowling: 0 },
+  "Ian Bell": { role: "batsman", batting: 82, bowling: 24 },
+  "Imran Tahir": { role: "bowler", batting: 18, bowling: 87 },
+  "Irfan Pathan": { role: "bowler", batting: 67, bowling: 78 },
+  "Ish Sodhi": { role: "bowler", batting: 18, bowling: 74 },
+  "JP Duminy": { role: "batsman", batting: 83, bowling: 61 },
+  "Jacob Oram": { role: "bowler", batting: 70, bowling: 77 },
+  "James Faulkner": { role: "bowler", batting: 74, bowling: 79 },
+  "James Franklin": { role: "batsman", batting: 61, bowling: 67 },
+  "James Neesham": { role: "batsman", batting: 74, bowling: 66 },
+  "Jimmy Neesham": { role: "batsman", batting: 74, bowling: 66 },
+  "Jason Roy": { role: "batsman", batting: 88, bowling: 0 },
+  "Jasprit Bumrah": { role: "bowler", batting: 20, bowling: 93 },
+  "Jhye Richardson": { role: "bowler", batting: 14, bowling: 76 },
+  "Joe Root": { role: "batsman", batting: 92, bowling: 22 },
+  "Jofra Archer": { role: "bowler", batting: 26, bowling: 86 },
+  "Johan Botha": { role: "bowler", batting: 48, bowling: 66 },
+  "Jonny Bairstow": { role: "batsman", batting: 91, bowling: 0 },
+  "Jos Buttler": { role: "wicketkeeper", batting: 90, bowling: 0 },
+  "Josh Hazlewood": { role: "bowler", batting: 20, bowling: 86 },
+  "Josh Inglis": { role: "wicketkeeper", batting: 78, bowling: 0 },
+  "Kagiso Rabada": { role: "bowler", batting: 24, bowling: 88 },
+  "Kane Williamson": { role: "batsman", batting: 92, bowling: 22 },
+  "Kyle Abbott": { role: "bowler", batting: 16, bowling: 76 },
+  "Kyle Jamieson": { role: "bowler", batting: 42, bowling: 78 },
+  "Kyle Mills": { role: "bowler", batting: 28, bowling: 83 },
+  "Kuldeep Yadav": { role: "bowler", batting: 18, bowling: 85 },
+  "Liam Livingstone": { role: "batsman", batting: 76, bowling: 48 },
+  "Liam Plunkett": { role: "bowler", batting: 28, bowling: 79 },
+  "Lizaad Williams": { role: "bowler", batting: 14, bowling: 74 },
+  "Lockie Ferguson": { role: "bowler", batting: 12, bowling: 84 },
+  "Lungi Ngidi": { role: "bowler", batting: 18, bowling: 78 },
+  "M.S. Dhoni": { role: "wicketkeeper", batting: 91, bowling: 0 },
+  "MS Dhoni": { role: "wicketkeeper", batting: 91, bowling: 0 },
+  "Makhaya Ntini": { role: "bowler", batting: 18, bowling: 88 },
+  "Marco Jansen": { role: "bowler", batting: 66, bowling: 78 },
+  "Marcus Stoinis": { role: "batsman", batting: 76, bowling: 62 },
+  "Mark Boucher": { role: "wicketkeeper", batting: 79, bowling: 0 },
+  "Mark Wood": { role: "bowler", batting: 18, bowling: 82 },
+  "Marnus Labuschagne": { role: "batsman", batting: 83, bowling: 18 },
+  "Martin Guptill": { role: "batsman", batting: 88, bowling: 0 },
+  "Matt Henry": { role: "bowler", batting: 18, bowling: 85 },
+  "Matt Prior": { role: "wicketkeeper", batting: 84, bowling: 0 },
+  "Matthew Hayden": { role: "batsman", batting: 92, bowling: 0 },
+  "Michael Clarke": { role: "batsman", batting: 89, bowling: 24 },
+  "Michael Hussey": { role: "batsman", batting: 90, bowling: 0 },
+  "Mitchell Johnson": { role: "bowler", batting: 35, bowling: 90 },
+  "Mitchell Marsh": { role: "batsman", batting: 84, bowling: 56 },
+  "Mitchell Santner": { role: "bowler", batting: 71, bowling: 76 },
+  "Mitchell Starc": { role: "bowler", batting: 28, bowling: 93 },
+  "Moeen Ali": { role: "batsman", batting: 76, bowling: 64 },
+  "Mohammed Shami": { role: "bowler", batting: 18, bowling: 90 },
+  "Mohammed Siraj": { role: "bowler", batting: 16, bowling: 82 },
+  "Morne van Wyk": { role: "wicketkeeper", batting: 78, bowling: 0 },
+  "Morné Morkel": { role: "bowler", batting: 22, bowling: 86 },
+  "Nathan Bracken": { role: "bowler", batting: 26, bowling: 87 },
+  "Nathan Lyon": { role: "bowler", batting: 18, bowling: 68 },
+  "Nathan McCullum": { role: "bowler", batting: 52, bowling: 70 },
+  "Nathan Mitchell Coulter-Nile": { role: "bowler", batting: 58, bowling: 74 },
+  "Pat Cummins": { role: "bowler", batting: 32, bowling: 89 },
+  "Paul Collingwood": { role: "batsman", batting: 78, bowling: 52 },
+  "Quinton de Kock": { role: "wicketkeeper", batting: 91, bowling: 0 },
+  "Rachin Ravindra": { role: "batsman", batting: 84, bowling: 61 },
+  "Rassie van der Dussen": { role: "batsman", batting: 88, bowling: 0 },
+  "Ravichandran Ashwin": { role: "bowler", batting: 55, bowling: 82 },
+  "Ravindra Jadeja": { role: "bowler", batting: 78, bowling: 83 },
+  "Reece Topley": { role: "bowler", batting: 12, bowling: 78 },
+  "Reeza Hendricks": { role: "batsman", batting: 77, bowling: 0 },
+  "Rilee Rossouw": { role: "batsman", batting: 82, bowling: 0 },
+  "Rishabh Pant": { role: "wicketkeeper", batting: 81, bowling: 0 },
+  "Robin Peterson": { role: "bowler", batting: 60, bowling: 70 },
+  "Rohit Sharma": { role: "batsman", batting: 95, bowling: 18 },
+  "Ross Taylor": { role: "batsman", batting: 91, bowling: 0 },
+  "Sam Curran": { role: "bowler", batting: 68, bowling: 74 },
+  "Scott Styris": { role: "batsman", batting: 77, bowling: 68 },
+  "Sean Abbott": { role: "bowler", batting: 58, bowling: 70 },
+  "Shane Bond": { role: "bowler", batting: 18, bowling: 93 },
+  "Shane Watson": { role: "batsman", batting: 86, bowling: 76 },
+  "Shikhar Dhawan": { role: "batsman", batting: 91, bowling: 0 },
+  "Shreyas Iyer": { role: "batsman", batting: 90, bowling: 0 },
+  "Shubman Gill": { role: "batsman", batting: 93, bowling: 0 },
+  "Shaun Pollock": { role: "bowler", batting: 65, bowling: 88 },
+  "Shaun Tait": { role: "bowler", batting: 14, bowling: 82 },
+  "Steve Smith": { role: "batsman", batting: 91, bowling: 20 },
+  "Steven Finn": { role: "bowler", batting: 14, bowling: 78 },
+  "Stuart Binny": { role: "batsman", batting: 64, bowling: 66 },
+  "Stuart Broad": { role: "bowler", batting: 24, bowling: 79 },
+  "Stuart Clark": { role: "bowler", batting: 26, bowling: 78 },
+  "Suresh Raina": { role: "batsman", batting: 84, bowling: 34 },
+  "Tabraiz Shamsi": { role: "bowler", batting: 10, bowling: 78 },
+  "Temba Bavuma": { role: "batsman", batting: 82, bowling: 0 },
+  "Tim Bresnan": { role: "bowler", batting: 62, bowling: 74 },
+  "Tim Southee": { role: "bowler", batting: 34, bowling: 84 },
+  "Tom Latham": { role: "wicketkeeper", batting: 82, bowling: 0 },
+  "Travis Head": { role: "batsman", batting: 91, bowling: 26 },
+  "Trent Boult": { role: "bowler", batting: 26, bowling: 90 },
+  "Umesh Yadav": { role: "bowler", batting: 16, bowling: 80 },
+  "Usman Khawaja": { role: "batsman", batting: 85, bowling: 0 },
+  "Virender Sehwag": { role: "batsman", batting: 90, bowling: 32 },
+  "Wayne Parnell": { role: "bowler", batting: 60, bowling: 74 },
+  "Will Young": { role: "batsman", batting: 79, bowling: 0 },
+  "Yusuf Pathan": { role: "batsman", batting: 74, bowling: 62 },
+  "Yuvraj Singh": { role: "batsman", batting: 88, bowling: 62 },
+  "Yuzvendra Chahal": { role: "bowler", batting: 14, bowling: 82 },
+  "Zaheer Khan": { role: "bowler", batting: 30, bowling: 88 },
 };
 
 const PLAYER_AUDIT_SUMMARY = AUDITED_PLAYER_SUMMARY;
@@ -25749,6 +25909,46 @@ const DIFFICULTY_LEVELS = [
 ];
 
 const DIFFICULTY_BY_ID = new Map(DIFFICULTY_LEVELS.map((level) => [level.id, level]));
+
+const BATTING_AGGRESSION_LEVELS = [
+  {
+    id: "cautious",
+    label: "Cautious",
+    description: "Bank wickets and trust the long chase.",
+    scoreBias: -18,
+    wicketBias: -1.4,
+    boundaryDelta: -0.02,
+    sixDelta: -0.01,
+    singleDelta: 0.03,
+    doubleDelta: 0.012,
+  },
+  {
+    id: "mid",
+    label: "Mid",
+    description: "Balanced ODI tempo.",
+    scoreBias: 0,
+    wicketBias: 0,
+    boundaryDelta: 0,
+    sixDelta: 0,
+    singleDelta: 0,
+    doubleDelta: 0,
+  },
+  {
+    id: "aggressive",
+    label: "Aggressive",
+    description: "Push the rate and accept more dismissal risk.",
+    scoreBias: 22,
+    wicketBias: 1.8,
+    boundaryDelta: 0.028,
+    sixDelta: 0.016,
+    singleDelta: -0.025,
+    doubleDelta: 0.008,
+  },
+];
+
+const BATTING_AGGRESSION_BY_ID = new Map(
+  BATTING_AGGRESSION_LEVELS.map((level) => [level.id, level]),
+);
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -25979,6 +26179,7 @@ function createInitialState(random = Math.random) {
   return {
     phase: "draft",
     difficulty: "international",
+    battingAggression: "mid",
     roster: [],
     battingOrder: [],
     bowlingOrder: [],
@@ -26005,6 +26206,21 @@ function setDifficulty(state, difficultyId) {
   return {
     ...state,
     difficulty: difficultyId,
+  };
+}
+
+function setBattingAggression(state, aggressionId) {
+  if (state.phase !== "tournament" || !state.currentOpponent) {
+    return state;
+  }
+
+  if (!BATTING_AGGRESSION_BY_ID.has(aggressionId)) {
+    return state;
+  }
+
+  return {
+    ...state,
+    battingAggression: aggressionId,
   };
 }
 
@@ -26208,6 +26424,14 @@ function estimateWickets(runs, battingRating, bowlingRating, random) {
   return clamp(round(wickets), 2, 10);
 }
 
+function adjustRosterSkills(roster, battingDelta, bowlingDelta) {
+  return roster.map((player) => ({
+    ...player,
+    batting: clamp(round(player.batting + battingDelta), 0, 99),
+    bowling: clamp(round(player.bowling + bowlingDelta), 0, 99),
+  }));
+}
+
 function chooseStandout(roster, skill, random) {
   const sorted = [...roster].sort(
     (left, right) =>
@@ -26326,14 +26550,30 @@ function estimateInningsBalls(runs, wickets, isChaseCompleted) {
   return 300;
 }
 
-function buildBattingCard(roster, totalRuns, totalBalls, random) {
-  const weights = roster.map((player) => {
+function getProjectedBattingOrder(roster) {
+  return [...roster].sort((left, right) => {
+    const leftRoleWeight = left.role === "batsman" ? 10 : left.role === "wicketkeeper" ? 7 : 0;
+    const rightRoleWeight = right.role === "batsman" ? 10 : right.role === "wicketkeeper" ? 7 : 0;
+    return (
+      right.batting + rightRoleWeight - (left.batting + leftRoleWeight) ||
+      right.bowling - left.bowling
+    );
+  });
+}
+
+function buildBattingCard(roster, totalRuns, totalBalls, totalWickets, random) {
+  const battingOrder = getProjectedBattingOrder(roster);
+  const activeCount = clamp(totalWickets + 2, 2, battingOrder.length);
+  const activeBatters = battingOrder.slice(0, activeCount);
+  const inactiveBatters = battingOrder.slice(activeCount);
+  const weights = activeBatters.map((player, index) => {
     const roleBoost =
-      player.role === "batsman" ? 1.18 : player.role === "wicketkeeper" ? 1.06 : 0.86;
-    return Math.max(1, player.batting * roleBoost + randomSwing(random, 6));
+      player.role === "batsman" ? 1.22 : player.role === "wicketkeeper" ? 1.08 : 0.92;
+    const topOrderBoost = Math.max(0.7, 1.3 - index * 0.08);
+    return Math.max(1, player.batting * roleBoost * topOrderBoost + randomSwing(random, 8));
   });
   const runs = distributeTotal(totalRuns, weights);
-  const rawBalls = roster.map((player, index) => {
+  const rawBalls = activeBatters.map((player, index) => {
     const strikeRate = clamp(66 + player.batting * 0.46 + randomSwing(random, 11), 58, 128);
     const playerRuns = runs[index];
     return playerRuns === 0
@@ -26342,18 +26582,27 @@ function buildBattingCard(roster, totalRuns, totalBalls, random) {
   });
   const balls = distributeTotal(totalBalls, rawBalls.map((value) => Math.max(1, value)));
 
-  return roster
-    .map((player, index) => {
-      const playerRuns = runs[index];
+  const activeEntries = activeBatters.map((player, index) => {
+    const playerRuns = runs[index];
 
-      return {
-        id: player.id,
-        name: player.name,
-        runs: playerRuns,
-        balls: balls[index],
-      };
-    })
-    .sort((left, right) => right.runs - left.runs || left.balls - right.balls);
+    return {
+      id: player.id,
+      name: player.name,
+      runs: playerRuns,
+      balls: balls[index],
+    };
+  });
+
+  const inactiveEntries = inactiveBatters.map((player) => ({
+    id: player.id,
+    name: player.name,
+    runs: 0,
+    balls: 0,
+  }));
+
+  return [...activeEntries, ...inactiveEntries].sort(
+    (left, right) => right.runs - left.runs || left.balls - right.balls,
+  );
 }
 
 function buildBowlingCard(roster, totalRunsConceded, totalWickets, totalBalls, random) {
@@ -26460,7 +26709,9 @@ function simulateOverByOver({
   inningsIndex,
   target,
   random,
+  aggression = "mid",
 }) {
+  const aggressionProfile = BATTING_AGGRESSION_BY_ID.get(aggression) || BATTING_AGGRESSION_BY_ID.get("mid");
   let strikerIndex = 0;
   let nonStrikerIndex = 1;
   let nextBatterIndex = 2;
@@ -26505,14 +26756,34 @@ function simulateOverByOver({
       const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
       const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
       const wicketChance = clamp(
-        0.034 - skillEdge * 0.012 + Math.max(0, pressureBoost) * 0.014 + deathOversBoost * 0.55,
+        0.034 -
+          skillEdge * 0.012 +
+          Math.max(0, pressureBoost) * 0.014 +
+          deathOversBoost * 0.55 +
+          aggressionProfile.wicketRisk,
         0.018,
         0.082,
       );
-      const singleChance = clamp(0.31 + skillEdge * 0.05 - Math.max(0, pressureBoost) * 0.04, 0.22, 0.39);
-      const doubleChance = clamp(0.11 + skillEdge * 0.025, 0.06, 0.16);
-      const boundaryChance = clamp(0.12 + skillEdge * 0.04 + deathOversBoost, 0.06, 0.2);
-      const sixChance = clamp(0.018 + skillEdge * 0.018 + deathOversBoost, 0.006, 0.085);
+      const singleChance = clamp(
+        0.31 + skillEdge * 0.05 - Math.max(0, pressureBoost) * 0.04 + aggressionProfile.singleDelta,
+        0.2,
+        0.41,
+      );
+      const doubleChance = clamp(
+        0.11 + skillEdge * 0.025 + aggressionProfile.doubleDelta,
+        0.05,
+        0.18,
+      );
+      const boundaryChance = clamp(
+        0.12 + skillEdge * 0.04 + deathOversBoost + aggressionProfile.boundaryDelta,
+        0.05,
+        0.24,
+      );
+      const sixChance = clamp(
+        0.018 + skillEdge * 0.018 + deathOversBoost + aggressionProfile.sixDelta,
+        0.004,
+        0.095,
+      );
       const tripleChance = 0.012;
       const chanceJitter =
         (hashValue(`${inningsIndex}-${striker.id}-${bowler.id}-${balls}`) % 1000) / 1000;
@@ -26595,39 +26866,50 @@ function simulateMatch(state, random = Math.random) {
   const opponentRoster = getOpponentRoster(opponent);
   const opponentTeam = getTeamMetrics(opponentRoster);
   const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
+  const aggression =
+    BATTING_AGGRESSION_BY_ID.get(state.battingAggression) || BATTING_AGGRESSION_BY_ID.get("mid");
   const userBatsFirst = random() >= 0.5;
   const stageBoost = state.matchIndex * 2;
   const playerBatting = team.batting + difficulty.playerBatting;
   const playerBowling = team.bowling + difficulty.playerBowling;
   const opponentBatting = opponentTeam.batting + difficulty.opponentBatting + stageBoost;
   const opponentBowling = opponentTeam.bowling + difficulty.opponentBowling + stageBoost;
-
   const firstInningsRuns = userBatsFirst
-    ? simulateInnings(playerBatting, opponentBowling, 0, random)
+    ? simulateInnings(playerBatting + aggression.scoreBias, opponentBowling, 0, random)
     : simulateInnings(opponentBatting, playerBowling, 0, random);
   const firstInningsWickets = userBatsFirst
-    ? estimateWickets(firstInningsRuns, playerBatting, opponentBowling, random)
+    ? clamp(
+        round(
+          estimateWickets(firstInningsRuns, playerBatting, opponentBowling, random) +
+            aggression.wicketBias,
+        ),
+        2,
+        10,
+      )
     : estimateWickets(firstInningsRuns, opponentBatting, playerBowling, random);
 
   const secondInningsPressure = 6;
   const secondInningsProjection = userBatsFirst
     ? simulateInnings(opponentBatting, playerBowling, secondInningsPressure, random)
-    : simulateInnings(playerBatting, opponentBowling, secondInningsPressure, random);
-  const secondInnings = userBatsFirst
-    ? resolveChaseScore(
-        secondInningsProjection,
-        firstInningsRuns,
-        opponentBatting,
-        playerBowling,
-        random,
-      )
-    : resolveChaseScore(
-        secondInningsProjection,
-        firstInningsRuns,
-        playerBatting,
+    : simulateInnings(
+        playerBatting + aggression.scoreBias,
         opponentBowling,
+        secondInningsPressure,
         random,
       );
+  const secondInningsBase = resolveChaseScore(
+    secondInningsProjection,
+    firstInningsRuns,
+    userBatsFirst ? opponentBatting : playerBatting,
+    userBatsFirst ? playerBowling : opponentBowling,
+    random,
+  );
+  const secondInnings = userBatsFirst
+    ? secondInningsBase
+    : {
+        ...secondInningsBase,
+        wickets: clamp(round(secondInningsBase.wickets + aggression.wicketBias), 2, 10),
+      };
 
   const playerRuns = userBatsFirst ? firstInningsRuns : secondInnings.runs;
   const playerWickets = userBatsFirst ? firstInningsWickets : secondInnings.wickets;
@@ -26652,7 +26934,13 @@ function simulateMatch(state, random = Math.random) {
       : clamp(10 - playerWickets, 1, 9);
   }
 
-  const playerBattingCard = buildBattingCard(state.roster, playerRuns, playerBalls, random);
+  const playerBattingCard = buildBattingCard(
+    state.roster,
+    playerRuns,
+    playerBalls,
+    playerWickets,
+    random,
+  );
   const playerBowlingCard = buildBowlingCard(
     state.roster,
     opponentRuns,
@@ -26660,7 +26948,13 @@ function simulateMatch(state, random = Math.random) {
     opponentBalls,
     random,
   );
-  const opponentBattingCard = buildBattingCard(opponentRoster, opponentRuns, opponentBalls, random);
+  const opponentBattingCard = buildBattingCard(
+    opponentRoster,
+    opponentRuns,
+    opponentBalls,
+    opponentWickets,
+    random,
+  );
   const opponentBowlingCard = buildBowlingCard(
     opponentRoster,
     playerRuns,
@@ -26747,6 +27041,7 @@ function revealNextOpponent(state) {
 
   return {
     ...state,
+    battingAggression: "mid",
     currentOpponent: TOURNAMENT_OPPONENTS[state.matchIndex],
   };
 }
@@ -27011,6 +27306,21 @@ function opponentPanelMarkup() {
         <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
         <div><span>Batting</span><strong>${metrics.batting}</strong></div>
         <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
+      </div>
+      <div class="aggression-panel">
+        <p class="aggression-panel__label">Batting approach</p>
+        <div class="aggression-toggle">
+          ${BATTING_AGGRESSION_LEVELS.map((level) => `
+            <button
+              class="aggression-chip ${state.battingAggression === level.id ? "aggression-chip--active" : ""}"
+              type="button"
+              data-action="aggression"
+              data-aggression="${level.id}"
+            >
+              ${escapeHtml(level.label)}
+            </button>
+          `).join("")}
+        </div>
       </div>
     </section>
   `;
@@ -27369,7 +27679,7 @@ function statusCopy() {
         ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return "Next opponent loaded. Press Play match when you're ready.";
+    return "Next opponent loaded. Set your batting approach, then press Play match.";
   }
 
   if (state.champion) {
@@ -27470,6 +27780,12 @@ appElement.addEventListener("click", (event) => {
 
   if (action === "difficulty") {
     state = setDifficulty(state, target.dataset.difficulty);
+    render();
+    return;
+  }
+
+  if (action === "aggression") {
+    state = setBattingAggression(state, target.dataset.aggression);
     render();
     return;
   }

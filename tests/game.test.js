@@ -279,6 +279,59 @@ test("match results use runs for defended totals and wickets for successful chas
   assert.match(chasingWin.headline, /by \d+ wickets\./);
 });
 
+test("batting aggression changes scoring profile and wicket risk", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createLegendXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: TOURNAMENT_OPPONENTS[0],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "county",
+    battingOrder: [],
+    bowlingOrder: [],
+  };
+
+  const cautious = simulateMatch({ ...baseState, battingAggression: "cautious" }, constantRandom(0.6)).results[0];
+  const mid = simulateMatch({ ...baseState, battingAggression: "mid" }, constantRandom(0.6)).results[0];
+  const aggressive = simulateMatch({ ...baseState, battingAggression: "aggressive" }, constantRandom(0.6)).results[0];
+
+  assert.ok(cautious.playerRuns < mid.playerRuns);
+  assert.ok(mid.playerRuns < aggressive.playerRuns);
+  assert.ok(cautious.playerWickets <= mid.playerWickets);
+  assert.ok(mid.playerWickets <= aggressive.playerWickets);
+});
+
+test("batting cards stay plausible in high-scoring low-wicket innings", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createLegendXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: TOURNAMENT_OPPONENTS[0],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "county",
+    battingAggression: "mid",
+    battingOrder: [],
+    bowlingOrder: [],
+  };
+
+  const result = simulateMatch(baseState, constantRandom(0.6)).results[0];
+
+  assert.ok(result.playerRuns >= 250);
+  assert.ok(result.playerWickets <= 4);
+  assert.ok(result.playerBattingCard[0].runs >= 50);
+  assert.ok(result.playerBattingCard[1].runs >= 40);
+});
+
 test("failed chases lose by runs and successful chases against you lose by wickets", () => {
   const baseState = {
     phase: "tournament",
