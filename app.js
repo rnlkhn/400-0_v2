@@ -20792,7 +20792,38 @@ const DRAFT_SQUADS = [...BASE_DRAFT_SQUADS, ...GENERATED_DRAFT_SQUADS].sort(
   (left, right) => left.year - right.year || left.country.localeCompare(right.country),
 );
 
-const PLAYER_NAME_OVERRIDES = {
+const MANUAL_PLAYER_NAME_OVERRIDES = {
+  "Sachin Tendulkar": { role: "batsman", batting: 96, bowling: 43 },
+  "Ricky Ponting": { role: "batsman", batting: 95, bowling: 8 },
+  "Brian Lara": { role: "batsman", batting: 97, bowling: 10 },
+  "Shane Warne": { role: "bowler", batting: 34, bowling: 95 },
+  "Muttiah Muralitharan": { role: "bowler", batting: 24, bowling: 95 },
+  "Glenn McGrath": { role: "bowler", batting: 18, bowling: 95 },
+  "Jacques Kallis": { role: "batsman", batting: 93, bowling: 84 },
+  "Allan Donald": { role: "bowler", batting: 18, bowling: 93 },
+  "Anil Kumble": { role: "bowler", batting: 28, bowling: 92 },
+  "Rahul Dravid": { role: "batsman", batting: 92, bowling: 8 },
+  "AB de Villiers": { role: "batsman", batting: 95, bowling: 39 },
+  "Eoin Morgan": { role: "batsman", batting: 88, bowling: 0 },
+  "KL Rahul": { role: "batsman", batting: 89, bowling: 0 },
+  "Jonny Bairstow": { role: "batsman", batting: 90, bowling: 0 },
+  "Younis Khan": { role: "batsman", batting: 84, bowling: 0 },
+  "Javed Miandad": { role: "batsman", batting: 89, bowling: 28 },
+  "Saleem Malik": { role: "batsman", batting: 84, bowling: 22 },
+  "Boeta Dippenaar": { role: "batsman", batting: 78, bowling: 0 },
+  "Bruce Edgar": { role: "batsman", batting: 76, bowling: 12 },
+  "Tillakaratne Dilshan": { role: "batsman", batting: 90, bowling: 70 },
+  "Ali Shah": { role: "bowler", batting: 51, bowling: 58 },
+  "Keith Sheridan": { role: "bowler", batting: 34, bowling: 62 },
+  "Peter Steindl": { role: "bowler", batting: 32, bowling: 54 },
+  "Wayne James": { role: "wicketkeeper", batting: 59, bowling: 0 },
+  "Tariq Iqbal": { role: "wicketkeeper", batting: 56, bowling: 0 },
+  "Marcel Schewe": { role: "wicketkeeper", batting: 44, bowling: 0 },
+  "Steve Palframan": { role: "wicketkeeper", batting: 52, bowling: 0 },
+  "Imtiaz Abbasi": { role: "wicketkeeper", batting: 43, bowling: 0 },
+  "Alec Davies": { role: "wicketkeeper", batting: 48, bowling: 0 },
+  "Melt van Schoor": { role: "wicketkeeper", batting: 46, bowling: 0 },
+  "Andre van Schoor": { role: "wicketkeeper", batting: 42, bowling: 0 },
   "Kumar Sangakkara": { role: "wicketkeeper", batting: 95, bowling: 0 },
   "Mahela Jayawardene": { role: "batsman", batting: 93, bowling: 18 },
   "Lasith Malinga": { role: "bowler", batting: 22, bowling: 95 },
@@ -20809,6 +20840,8 @@ const PLAYER_NAME_OVERRIDES = {
   "James Anderson": { role: "bowler", batting: 19, bowling: 91 },
   "Kevin Pietersen": { role: "batsman", batting: 94, bowling: 24 },
   "Graham Thorpe": { role: "batsman", batting: 88, bowling: 18 },
+  "Graeme Fowler": { role: "batsman", batting: 82, bowling: 8 },
+  "Graeme Hick": { role: "batsman", batting: 86, bowling: 36 },
   "Andrew Strauss": { role: "batsman", batting: 87, bowling: 10 },
   "Michael Vaughan": { role: "batsman", batting: 86, bowling: 14 },
   "Matt Prior": { role: "wicketkeeper", batting: 84, bowling: 0 },
@@ -20818,7 +20851,52 @@ const PLAYER_NAME_OVERRIDES = {
   "Afsar Zazai": { role: "wicketkeeper", batting: 70, bowling: 0 },
   "Shafiqullah": { role: "wicketkeeper", batting: 76, bowling: 0 },
   "Wesley Barresi": { role: "wicketkeeper", batting: 74, bowling: 0 },
+  "Mohammad Ashraful": { role: "batsman", batting: 83, bowling: 38 },
+  "Habibul Bashar": { role: "batsman", batting: 82, bowling: 12 },
+  "Javed Omar": { role: "batsman", batting: 76, bowling: 8 },
+  "Shahriar Nafees": { role: "batsman", batting: 74, bowling: 0 },
+  "Aftab Ahmed": { role: "batsman", batting: 77, bowling: 26 },
+  "Alok Kapali": { role: "batsman", batting: 72, bowling: 54 },
+  "Imrul Kayes": { role: "batsman", batting: 74, bowling: 8 },
+  "Junaid Siddique": { role: "batsman", batting: 77, bowling: 10 },
+  "Naeem Islam": { role: "batsman", batting: 71, bowling: 66 },
+  "Rajin Saleh": { role: "batsman", batting: 72, bowling: 18 },
+  "Mahmudullah": { role: "batsman", batting: 84, bowling: 72 },
+  "Mahmudullah Riyad": { role: "batsman", batting: 84, bowling: 72 },
+  "Sabbir Rahman": { role: "batsman", batting: 78, bowling: 24 },
+  "Taskin Ahmed": { role: "bowler", batting: 24, bowling: 86 },
+  "Anderson Cummins": { role: "bowler", batting: 18, bowling: 82 },
+  "Geoff Lawson": { role: "bowler", batting: 18, bowling: 86 },
+  "Rodney Hogg": { role: "bowler", batting: 14, bowling: 82 },
+  "Tom Hogan": { role: "bowler", batting: 12, bowling: 78 },
+  "Winston Davis": { role: "bowler", batting: 18, bowling: 84 },
+  "Gordon Greenidge": { role: "batsman", batting: 93, bowling: 16 },
+  "Joel Garner": { role: "bowler", batting: 16, bowling: 94 },
+  "Larry Gomes": { role: "batsman", batting: 82, bowling: 24 },
+  "Wayne Daniel": { role: "bowler", batting: 18, bowling: 85 },
+  "Neil Foster": { role: "bowler", batting: 18, bowling: 83 },
+  "Andrew Hudson": { role: "batsman", batting: 84, bowling: 8 },
+  "Omar Henry": { role: "bowler", batting: 20, bowling: 78 },
+  "Peter Kirsten": { role: "batsman", batting: 80, bowling: 12 },
+  "Neil Fairbrother": { role: "batsman", batting: 85, bowling: 12 },
+  "Rodney Latham": { role: "batsman", batting: 76, bowling: 18 },
+  "Fanie de Villiers": { role: "bowler", batting: 28, bowling: 89 },
+  "Andy Caddick": { role: "bowler", batting: 18, bowling: 90 },
+  "Kepler Wessels": { role: "batsman", batting: 83, bowling: 0 },
+  "Tharindu Kaushal": { role: "bowler", batting: 24, bowling: 76 },
+  "Dushan Hemantha": { role: "bowler", batting: 48, bowling: 68 },
+  "Vijay Shankar": { role: "batsman", batting: 74, bowling: 58 },
+  "Mansoor Akhtar": { role: "batsman", batting: 73, bowling: 12 },
+  "Mohsin Khan": { role: "batsman", batting: 82, bowling: 10 },
+  "Carlisle Best": { role: "wicketkeeper", batting: 71, bowling: 0 },
+  "Merv Hughes": { role: "bowler", batting: 16, bowling: 81 },
+  "Richard Illingworth": { role: "bowler", batting: 58, bowling: 71 },
+  "Vinod Kambli": { role: "batsman", batting: 82, bowling: 0 },
+  "Tertius Bosch": { role: "bowler", batting: 18, bowling: 79 },
+  "Angus Fraser": { role: "bowler", batting: 12, bowling: 88 },
 };
+
+const PLAYER_AUDIT_SUMMARY = AUDITED_PLAYER_SUMMARY;
 
 const PLAYER_ID_OVERRIDES = {
   "bangladesh-2007-tamim-iqbal": { batting: 78, bowling: 8 },
@@ -20842,11 +20920,43 @@ const PLAYER_ID_OVERRIDES = {
   "india-2015-virat-kohli": { batting: 92, bowling: 8 },
   "india-2019-virat-kohli": { batting: 94, bowling: 8 },
   "virat-kohli-2023": { batting: 96, bowling: 8 },
+  "pakistan-1983-rashid-khan": { role: "batsman", batting: 64, bowling: 18 },
 };
+
+const RAW_PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS];
+
+const AMBIGUOUS_AUDIT_NAMES = (() => {
+  const teamsByName = new Map();
+
+  for (const player of RAW_PLAYER_POOL) {
+    const normalizedName = normalizePlayerName(player.name);
+    const teams = teamsByName.get(normalizedName) || new Set();
+    teams.add(player.team);
+    teamsByName.set(normalizedName, teams);
+  }
+
+  return new Set(
+    [...teamsByName.entries()]
+      .filter(([, teams]) => teams.size > 1)
+      .map(([normalizedName]) => normalizedName),
+  );
+})();
+
+function getPlayerNameOverride(player) {
+  const normalizedName = normalizePlayerName(player.name);
+  const auditedOverride = AMBIGUOUS_AUDIT_NAMES.has(normalizedName)
+    ? null
+    : AUDITED_PLAYER_NAME_OVERRIDES[normalizedName];
+
+  return {
+    ...(auditedOverride || {}),
+    ...(MANUAL_PLAYER_NAME_OVERRIDES[normalizedName] || {}),
+  };
+}
 
 function applyPlayerOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
-  const override = PLAYER_NAME_OVERRIDES[normalizedName];
+  const override = getPlayerNameOverride(player);
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
 
   return {
@@ -20858,9 +20968,7 @@ function applyPlayerOverride(player) {
   };
 }
 
-const PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS].map(
-  applyPlayerOverride,
-);
+const PLAYER_POOL = RAW_PLAYER_POOL.map(applyPlayerOverride);
 
 const TOURNAMENT_OPPONENTS = [
   {

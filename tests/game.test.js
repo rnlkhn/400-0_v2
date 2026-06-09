@@ -192,10 +192,10 @@ test("year-specific benchmark players use different world cup era ratings", () =
 test("team metrics reward a balanced all-star XI with strong batting and bowling", () => {
   const team = getTeamMetrics(createLegendXI());
 
-  assert.ok(team.batting >= 86);
-  assert.ok(team.bowling >= 89);
+  assert.ok(team.batting >= 84);
+  assert.ok(team.bowling >= 87);
   assert.ok(team.allRounders >= 2);
-  assert.ok(team.overall >= 94);
+  assert.ok(team.overall >= 93);
 });
 
 test("simulateMatch advances a strong XI after a win", () => {
@@ -343,8 +343,8 @@ test("opponent metrics return rounded batting and bowling averages", () => {
   const metrics = getOpponentMetrics(TOURNAMENT_OPPONENTS[0]);
 
   assert.deepEqual(metrics, {
-    batting: 69,
-    bowling: 54,
+    batting: 66,
+    bowling: 48,
   });
 });
 
