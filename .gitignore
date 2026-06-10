@@ -3,3 +3,6 @@ zoom-2-gong-bridge/
 zoom-2-gong-py/
 zoom-gong-bridge/
 data/howstat-audit-cache.json
+data/odi_player_match_stats_1979_2023.csv
+data/odi_source_cache/
+scripts/__pycache__/

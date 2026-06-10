@@ -1,5 +1,4 @@
 import {
-  BATTING_AGGRESSION_LEVELS,
   DIFFICULTY_LEVELS,
   TOURNAMENT_OPPONENTS,
   createInitialState,
@@ -11,7 +10,6 @@ import {
   isAllRounderPlayer,
   revealNextOpponent,
   rerollCandidates,
-  setBattingAggression,
   setDifficulty,
   simulateMatch,
 } from "./game.js";
@@ -58,6 +56,32 @@ function getPlayerRoleLabel(player) {
   }
 
   return player.role === "batsman" ? "Batsman" : "Bowler";
+}
+
+function formatBattingHand(player) {
+  if (player.battingHand === "Left") {
+    return "LHB";
+  }
+
+  if (player.battingHand === "Right") {
+    return "RHB";
+  }
+
+  return "";
+}
+
+function formatBowlingStyle(player) {
+  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling <= 0) {
+    return "";
+  }
+
+  return player.bowlingHand ? `${player.bowlingHand} arm ${player.bowlingStyle}` : player.bowlingStyle;
+}
+
+function playerTraitMarkup(player) {
+  return [formatBattingHand(player), player.battingStyle || player.aggressionLevel || "", formatBowlingStyle(player)]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 function formatBattingEntry(entry) {
@@ -172,6 +196,7 @@ function rosterMarkup() {
           <div class="roster-matrix">
             <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
+            <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
             <dl class="roster-stats">
               <div><dt>Bat</dt><dd>${player.batting}</dd></div>
               <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
@@ -252,23 +277,9 @@ function opponentPanelMarkup() {
       </div>
       <div class="scout-list">
         <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
+        <div><span>Weather</span><strong>${escapeHtml(opponent.weather?.label || "--")}</strong></div>
         <div><span>Batting</span><strong>${metrics.batting}</strong></div>
         <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
-      </div>
-      <div class="aggression-panel">
-        <p class="aggression-panel__label">Batting approach</p>
-        <div class="aggression-toggle">
-          ${BATTING_AGGRESSION_LEVELS.map((level) => `
-            <button
-              class="aggression-chip ${state.battingAggression === level.id ? "aggression-chip--active" : ""}"
-              type="button"
-              data-action="aggression"
-              data-aggression="${level.id}"
-            >
-              ${escapeHtml(level.label)}
-            </button>
-          `).join("")}
-        </div>
       </div>
     </section>
   `;
@@ -424,6 +435,7 @@ function candidateMarkup() {
           <div class="candidate-listing">
             <div>
               <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
+              <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
               <p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>
             </div>
             <div class="candidate-listing__meta">
@@ -627,7 +639,7 @@ function statusCopy() {
         ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return "Next opponent loaded. Set your batting approach, then press Play match.";
+    return "Next opponent loaded. Check the weather, then press Play match.";
   }
 
   if (state.champion) {
@@ -728,12 +740,6 @@ appElement.addEventListener("click", (event) => {
 
   if (action === "difficulty") {
     state = setDifficulty(state, target.dataset.difficulty);
-    render();
-    return;
-  }
-
-  if (action === "aggression") {
-    state = setBattingAggression(state, target.dataset.aggression);
     render();
     return;
   }

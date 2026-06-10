@@ -3,6 +3,10 @@ import {
   AUDITED_PLAYER_NAME_OVERRIDES,
   AUDITED_PLAYER_SUMMARY,
 } from "./generated-player-audit.js";
+import {
+  PLAYER_INTERVAL_ENRICHMENT_BY_ID,
+  PLAYER_INTERVAL_ENRICHMENT_SUMMARY,
+} from "./generated-player-enrichment.js";
 import { GENERATED_DRAFT_SQUADS, GENERATED_PLAYERS } from "./generated-world-cup-data.js";
 
 export const ROLE_ORDER = ["batsman", "wicketkeeper", "bowler"];
@@ -1546,29 +1550,9 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
 };
 
 export const PLAYER_AUDIT_SUMMARY = AUDITED_PLAYER_SUMMARY;
+export const PLAYER_INTERVAL_SUMMARY = PLAYER_INTERVAL_ENRICHMENT_SUMMARY;
 
 const PLAYER_ID_OVERRIDES = {
-  "bangladesh-2007-tamim-iqbal": { batting: 78, bowling: 8 },
-  "bangladesh-2011-tamim-iqbal": { batting: 84, bowling: 8 },
-  "bangladesh-2015-tamim-iqbal": { batting: 87, bowling: 8 },
-  "tamim-iqbal": { batting: 88, bowling: 8 },
-
-  "bangladesh-2007-shakib-al-hasan": { batting: 80, bowling: 82 },
-  "bangladesh-2011-shakib-al-hasan": { batting: 86, bowling: 87 },
-  "bangladesh-2015-shakib-al-hasan": { batting: 89, bowling: 88 },
-  "shakib-al-hasan": { batting: 93, bowling: 89 },
-  "bangladesh-2023-shakib-al-hasan": { batting: 89, bowling: 85 },
-
-  "bangladesh-2007-mushfiqur-rahim": { batting: 72, bowling: 0 },
-  "bangladesh-2011-mushfiqur-rahim": { batting: 78, bowling: 0 },
-  "bangladesh-2015-mushfiqur-rahim": { batting: 84, bowling: 0 },
-  "mushfiqur-rahim": { batting: 88, bowling: 0 },
-  "bangladesh-2023-mushfiqur-rahim": { batting: 85, bowling: 0 },
-
-  "virat-kohli": { batting: 87, bowling: 8 },
-  "india-2015-virat-kohli": { batting: 92, bowling: 8 },
-  "india-2019-virat-kohli": { batting: 94, bowling: 8 },
-  "virat-kohli-2023": { batting: 96, bowling: 8 },
   "pakistan-1983-rashid-khan": { role: "batsman", batting: 64, bowling: 18 },
 };
 
@@ -1606,14 +1590,24 @@ function getPlayerNameOverride(player) {
 function applyPlayerOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
   const override = getPlayerNameOverride(player);
+  const intervalEnrichment = PLAYER_INTERVAL_ENRICHMENT_BY_ID[player.id] || {};
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
+  const role = intervalEnrichment.role || inferredRole;
 
   return {
     ...player,
     name: normalizedName,
-    role: inferredRole,
+    role,
     ...(override || {}),
+    ...(intervalEnrichment || {}),
     ...(PLAYER_ID_OVERRIDES[player.id] || {}),
+    battingHand: intervalEnrichment.battingHand || "",
+    bowlingHand: intervalEnrichment.bowlingHand || "",
+    bowlingStyle:
+      intervalEnrichment.bowlingStyle ||
+      ((role === "bowler" || intervalEnrichment.bowling > 0 || player.bowling > 0) ? "Unspecified" : ""),
+    aggressionLevel: intervalEnrichment.aggressionLevel || "Balanced",
+    battingStyle: intervalEnrichment.battingStyle || intervalEnrichment.aggressionLevel || "Balanced",
   };
 }
 

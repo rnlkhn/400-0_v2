@@ -13,6 +13,7 @@ function stripModuleSyntax(source) {
 const files = [
   resolve(root, "src/extra-players.js"),
   resolve(root, "src/generated-player-audit.js"),
+  resolve(root, "src/generated-player-enrichment.js"),
   resolve(root, "src/generated-world-cup-data.js"),
   resolve(root, "src/data.js"),
   resolve(root, "src/game.js"),

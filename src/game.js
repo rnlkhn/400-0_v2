@@ -48,45 +48,204 @@ export const DIFFICULTY_LEVELS = [
 
 const DIFFICULTY_BY_ID = new Map(DIFFICULTY_LEVELS.map((level) => [level.id, level]));
 
-export const BATTING_AGGRESSION_LEVELS = [
-  {
-    id: "cautious",
-    label: "Cautious",
-    description: "Bank wickets and trust the long chase.",
-    scoreBias: -18,
-    wicketBias: -1.4,
-    boundaryDelta: -0.02,
-    sixDelta: -0.01,
-    singleDelta: 0.03,
-    doubleDelta: 0.012,
+const AGGRESSION_PROFILES = {
+  "Very Aggressive": {
+    boundaryDelta: 0.05,
+    sixDelta: 0.024,
+    singleDelta: -0.035,
+    doubleDelta: 0.01,
+    wicketRisk: 0.018,
   },
-  {
-    id: "mid",
-    label: "Mid",
-    description: "Balanced ODI tempo.",
-    scoreBias: 0,
-    wicketBias: 0,
+  Aggressive: {
+    boundaryDelta: 0.03,
+    sixDelta: 0.012,
+    singleDelta: -0.02,
+    doubleDelta: 0.006,
+    wicketRisk: 0.009,
+  },
+  Balanced: {
     boundaryDelta: 0,
     sixDelta: 0,
     singleDelta: 0,
     doubleDelta: 0,
+    wicketRisk: 0,
   },
-  {
-    id: "aggressive",
-    label: "Aggressive",
-    description: "Push the rate and accept more dismissal risk.",
-    scoreBias: 22,
-    wicketBias: 1.8,
-    boundaryDelta: 0.028,
-    sixDelta: 0.016,
-    singleDelta: -0.025,
-    doubleDelta: 0.008,
+  Cautious: {
+    boundaryDelta: -0.02,
+    sixDelta: -0.01,
+    singleDelta: 0.02,
+    doubleDelta: 0.004,
+    wicketRisk: -0.008,
   },
-];
+  "Very Cautious": {
+    boundaryDelta: -0.038,
+    sixDelta: -0.016,
+    singleDelta: 0.03,
+    doubleDelta: 0.006,
+    wicketRisk: -0.014,
+  },
+};
 
-const BATTING_AGGRESSION_BY_ID = new Map(
-  BATTING_AGGRESSION_LEVELS.map((level) => [level.id, level]),
-);
+const WEATHER_PATTERNS = {
+  overcast: {
+    id: "overcast",
+    label: "Overcast",
+    batting: -3,
+    seam: 5,
+    swing: 6,
+    spin: -2,
+    pace: 3,
+    chase: -1,
+  },
+  "cool-and-true": {
+    id: "cool-and-true",
+    label: "Cool and true",
+    batting: 1,
+    seam: 2,
+    swing: 1,
+    spin: 0,
+    pace: 1,
+    chase: 0,
+  },
+  "hot-and-dry": {
+    id: "hot-and-dry",
+    label: "Hot and dry",
+    batting: 2,
+    seam: -1,
+    swing: -2,
+    spin: 4,
+    pace: 0,
+    chase: 0,
+  },
+  humid: {
+    id: "humid",
+    label: "Humid",
+    batting: 0,
+    seam: 1,
+    swing: 3,
+    spin: -1,
+    pace: 1,
+    chase: 1,
+  },
+  "used-surface": {
+    id: "used-surface",
+    label: "Used surface",
+    batting: -1,
+    seam: 0,
+    swing: -1,
+    spin: 5,
+    pace: -1,
+    chase: -1,
+  },
+  "hard-and-fast": {
+    id: "hard-and-fast",
+    label: "Hard and fast",
+    batting: 1,
+    seam: 2,
+    swing: 0,
+    spin: -1,
+    pace: 4,
+    chase: 0,
+  },
+  "flat-and-clear": {
+    id: "flat-and-clear",
+    label: "Flat and clear",
+    batting: 4,
+    seam: -2,
+    swing: -2,
+    spin: -1,
+    pace: 0,
+    chase: 1,
+  },
+  dewy: {
+    id: "dewy",
+    label: "Dewy evening",
+    batting: 2,
+    seam: 0,
+    swing: 1,
+    spin: -3,
+    pace: 0,
+    chase: 3,
+  },
+};
+
+const WEATHER_WEIGHTS_BY_TEAM = {
+  england: [
+    ["overcast", 5],
+    ["cool-and-true", 3],
+    ["flat-and-clear", 1],
+  ],
+  "new zealand": [
+    ["overcast", 4],
+    ["cool-and-true", 4],
+    ["hard-and-fast", 1],
+  ],
+  ireland: [
+    ["overcast", 5],
+    ["cool-and-true", 3],
+    ["humid", 1],
+  ],
+  scotland: [
+    ["overcast", 5],
+    ["cool-and-true", 3],
+    ["humid", 1],
+  ],
+  netherlands: [
+    ["overcast", 4],
+    ["cool-and-true", 4],
+    ["flat-and-clear", 1],
+  ],
+  india: [
+    ["hot-and-dry", 4],
+    ["used-surface", 3],
+    ["dewy", 2],
+  ],
+  pakistan: [
+    ["hot-and-dry", 3],
+    ["humid", 3],
+    ["used-surface", 2],
+  ],
+  sri_lanka: [
+    ["hot-and-dry", 3],
+    ["humid", 3],
+    ["dewy", 2],
+  ],
+  bangladesh: [
+    ["humid", 4],
+    ["hot-and-dry", 2],
+    ["dewy", 3],
+  ],
+  afghanistan: [
+    ["hot-and-dry", 4],
+    ["used-surface", 3],
+    ["hard-and-fast", 2],
+  ],
+  australia: [
+    ["hard-and-fast", 5],
+    ["flat-and-clear", 3],
+    ["hot-and-dry", 1],
+  ],
+  "south africa": [
+    ["hard-and-fast", 5],
+    ["flat-and-clear", 2],
+    ["hot-and-dry", 2],
+  ],
+  zimbabwe: [
+    ["hard-and-fast", 3],
+    ["hot-and-dry", 3],
+    ["flat-and-clear", 2],
+  ],
+  namibia: [
+    ["hard-and-fast", 4],
+    ["hot-and-dry", 3],
+    ["flat-and-clear", 1],
+  ],
+  "west indies": [
+    ["humid", 4],
+    ["dewy", 3],
+    ["flat-and-clear", 2],
+  ],
+};
 
 function clamp(value, min, max) {
   return Math.min(max, Math.max(min, value));
@@ -107,6 +266,32 @@ function hashValue(text) {
   }
 
   return value;
+}
+
+function normalizeTeamKey(team) {
+  return team.toLowerCase().replace(/\s+/g, "_");
+}
+
+function getAggressionProfile(player) {
+  return AGGRESSION_PROFILES[player.aggressionLevel] || AGGRESSION_PROFILES.Balanced;
+}
+
+function getWeatherPatternForOpponent(opponent, random = Math.random) {
+  const weatherWeights =
+    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.shortName)] ||
+    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.label.split(" ").slice(0, -1).join(" "))] ||
+    [["flat-and-clear", 1]];
+  const totalWeight = weatherWeights.reduce((sum, [, weight]) => sum + weight, 0);
+  let threshold = random() * totalWeight;
+
+  for (const [weatherId, weight] of weatherWeights) {
+    threshold -= weight;
+    if (threshold <= 0) {
+      return WEATHER_PATTERNS[weatherId];
+    }
+  }
+
+  return WEATHER_PATTERNS[weatherWeights[weatherWeights.length - 1][0]];
 }
 
 function getTotalRequiredPlayers() {
@@ -317,7 +502,6 @@ export function createInitialState(random = Math.random) {
   return {
     phase: "draft",
     difficulty: "international",
-    battingAggression: "mid",
     roster: [],
     battingOrder: [],
     bowlingOrder: [],
@@ -344,21 +528,6 @@ export function setDifficulty(state, difficultyId) {
   return {
     ...state,
     difficulty: difficultyId,
-  };
-}
-
-export function setBattingAggression(state, aggressionId) {
-  if (state.phase !== "tournament" || !state.currentOpponent) {
-    return state;
-  }
-
-  if (!BATTING_AGGRESSION_BY_ID.has(aggressionId)) {
-    return state;
-  }
-
-  return {
-    ...state,
-    battingAggression: aggressionId,
   };
 }
 
@@ -549,6 +718,85 @@ export function getTeamMetrics(roster) {
     allRounders,
     overall: round(overall),
   };
+}
+
+function getTopAverage(roster, skill, count) {
+  if (roster.length === 0) {
+    return 0;
+  }
+
+  const selected = [...roster]
+    .sort((left, right) => right[skill] - left[skill] || right.batting + right.bowling - (left.batting + left.bowling))
+    .slice(0, Math.min(count, roster.length));
+
+  return selected.reduce((total, player) => total + player[skill], 0) / selected.length;
+}
+
+function takeBestPlayers(pool, scoreFn, count, selectedIds) {
+  const picks = [];
+
+  for (const player of [...pool]
+    .filter((candidate) => !selectedIds.has(candidate.id))
+    .sort((left, right) => scoreFn(right) - scoreFn(left))) {
+    if (picks.length >= count) {
+      break;
+    }
+
+    picks.push(player);
+    selectedIds.add(player.id);
+  }
+
+  return picks;
+}
+
+function selectBestXI(roster) {
+  if (roster.length <= 11) {
+    return [...roster];
+  }
+
+  const selectedIds = new Set();
+  const xi = [];
+  const wicketkeeper = [...roster]
+    .filter((player) => player.role === "wicketkeeper")
+    .sort((left, right) => right.batting - left.batting || right.bowling - left.bowling)[0];
+
+  if (wicketkeeper) {
+    xi.push(wicketkeeper);
+    selectedIds.add(wicketkeeper.id);
+  }
+
+  xi.push(
+    ...takeBestPlayers(
+      roster,
+      (player) => player.bowling * 1.1 + player.batting * 0.18 + (isAllRounderPlayer(player) ? 5 : 0),
+      4,
+      selectedIds,
+    ),
+  );
+
+  xi.push(
+    ...takeBestPlayers(
+      roster,
+      (player) =>
+        player.batting * 1.08 +
+        player.bowling * 0.16 +
+        (player.role === "wicketkeeper" ? 3 : 0) +
+        (isAllRounderPlayer(player) ? 4 : 0),
+      4,
+      selectedIds,
+    ),
+  );
+
+  xi.push(
+    ...takeBestPlayers(
+      roster,
+      (player) => player.batting * 0.58 + player.bowling * 0.42 + (isAllRounderPlayer(player) ? 6 : 0),
+      11 - xi.length,
+      selectedIds,
+    ),
+  );
+
+  return xi.slice(0, 11);
 }
 
 function formatScore(runs, wickets) {
@@ -796,7 +1044,7 @@ function getOpponentRoster(opponent) {
 }
 
 export function getOpponentMetrics(opponent) {
-  const roster = getOpponentRoster(opponent);
+  const roster = selectBestXI(getOpponentRoster(opponent));
 
   if (roster.length === 0) {
     return {
@@ -805,11 +1053,9 @@ export function getOpponentMetrics(opponent) {
     };
   }
 
-  const { batting, bowling } = getTeamMetrics(roster);
-
   return {
-    batting: round(batting),
-    bowling: round(bowling),
+    batting: round(getTopAverage(roster, "batting", 5)),
+    bowling: round(getTopAverage(roster, "bowling", 5)),
   };
 }
 
@@ -831,6 +1077,103 @@ function formatScorecardRoster(roster, orderIds) {
   return orderIds.map((id) => byId.get(id)).filter(Boolean);
 }
 
+function getStyleFlags(player) {
+  const style = (player.bowlingStyle || "").toLowerCase();
+
+  return {
+    pace:
+      style.includes("fast") ||
+      style.includes("medium fast") ||
+      style.includes("fast medium") ||
+      style === "medium",
+    swing:
+      style.includes("fast") ||
+      style.includes("medium") ||
+      style.includes("seam"),
+    spin:
+      style.includes("break") ||
+      style.includes("orthodox") ||
+      style.includes("chinaman") ||
+      style.includes("slow"),
+    wrist:
+      style.includes("leg break") ||
+      style.includes("googly") ||
+      style.includes("chinaman"),
+    finger:
+      style.includes("off break") || style.includes("orthodox"),
+    leftArm: (player.bowlingHand || "").toLowerCase() === "left",
+  };
+}
+
+function getMatchupAdvantage(striker, bowler) {
+  const hand = (striker.battingHand || "").toLowerCase();
+  const style = (bowler.bowlingStyle || "").toLowerCase();
+
+  if (!hand || !style) {
+    return 0;
+  }
+
+  if (hand === "left" && style.includes("off break")) {
+    return 0.03;
+  }
+
+  if (hand === "right" && style.includes("leg break")) {
+    return 0.03;
+  }
+
+  if (hand === "right" && style.includes("orthodox")) {
+    return 0.024;
+  }
+
+  if (hand === "left" && style.includes("chinaman")) {
+    return 0.024;
+  }
+
+  if (hand === "right" && getStyleFlags(bowler).leftArm && getStyleFlags(bowler).pace) {
+    return 0.018;
+  }
+
+  return 0;
+}
+
+function getWeatherAdvantage(weather, bowler, ballNumber, inningsIndex) {
+  const flags = getStyleFlags(bowler);
+  const inNewBall = ballNumber < 120;
+  let value = weather.batting * -0.002;
+
+  if (flags.pace) {
+    value += weather.pace * 0.004;
+  }
+
+  if (flags.swing && inNewBall) {
+    value += weather.swing * 0.005;
+  }
+
+  if (flags.spin && ballNumber >= 120) {
+    value += weather.spin * 0.004;
+  }
+
+  if (inningsIndex === 1 && weather.id === "dewy" && flags.spin && ballNumber >= 150) {
+    value -= 0.02;
+  }
+
+  return value;
+}
+
+function getBattingWeatherModifier(weather, inningsIndex) {
+  let modifier = weather.batting * 0.004;
+  if (inningsIndex === 1) {
+    modifier += weather.chase * 0.003;
+  }
+  return modifier;
+}
+
+function reorderAdjustedRoster(adjustedRoster, orderIds, fallbackOrderBuilder) {
+  const fallbackIds = fallbackOrderBuilder(adjustedRoster);
+  const orderedIds = ensureOrder(orderIds || [], adjustedRoster, fallbackIds);
+  return formatScorecardRoster(adjustedRoster, orderedIds);
+}
+
 function pickNextBowler(rotation, stats, previousBowlerId) {
   const available = rotation.filter((player) => (stats.get(player.id)?.ballsBowled || 0) < 60);
   if (available.length === 0) {
@@ -847,9 +1190,8 @@ function simulateOverByOver({
   inningsIndex,
   target,
   random,
-  aggression = "mid",
+  weather,
 }) {
-  const aggressionProfile = BATTING_AGGRESSION_BY_ID.get(aggression) || BATTING_AGGRESSION_BY_ID.get("mid");
   let strikerIndex = 0;
   let nonStrikerIndex = 1;
   let nextBatterIndex = 2;
@@ -873,56 +1215,79 @@ function simulateOverByOver({
       break;
     }
 
-    const striker = battingOrder[strikerIndex];
-    const bowler = pickNextBowler(bowlingOrder, bowlingStats, previousBowlerId);
-    if (!striker || !bowler) {
-      break;
-    }
-
-    const battingEntry = battingStats.get(striker.id);
-    const bowlingEntry = bowlingStats.get(bowler.id);
-
-    for (let ballInOver = 0; ballInOver < 6; ballInOver += 1) {
-      if (balls >= 300 || wickets >= 10 || (target && totalRuns >= target)) {
+      const striker = battingOrder[strikerIndex];
+      const bowler = pickNextBowler(bowlingOrder, bowlingStats, previousBowlerId);
+      if (!striker || !bowler) {
         break;
       }
 
-      const ballsRemaining = 300 - balls;
-      const runsNeeded = target ? Math.max(0, target - totalRuns) : 0;
-      const skillEdge = (striker.batting - bowler.bowling) / 100;
-      const chaseRate = target ? runsNeeded / Math.max(1, ballsRemaining) : 0;
-      const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
-      const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
-      const wicketChance = clamp(
-        0.034 -
-          skillEdge * 0.012 +
-          Math.max(0, pressureBoost) * 0.014 +
-          deathOversBoost * 0.55 +
-          aggressionProfile.wicketRisk,
-        0.018,
-        0.082,
-      );
-      const singleChance = clamp(
-        0.31 + skillEdge * 0.05 - Math.max(0, pressureBoost) * 0.04 + aggressionProfile.singleDelta,
-        0.2,
-        0.41,
-      );
-      const doubleChance = clamp(
-        0.11 + skillEdge * 0.025 + aggressionProfile.doubleDelta,
-        0.05,
-        0.18,
-      );
-      const boundaryChance = clamp(
-        0.12 + skillEdge * 0.04 + deathOversBoost + aggressionProfile.boundaryDelta,
-        0.05,
-        0.24,
-      );
-      const sixChance = clamp(
-        0.018 + skillEdge * 0.018 + deathOversBoost + aggressionProfile.sixDelta,
-        0.004,
-        0.095,
-      );
-      const tripleChance = 0.012;
+      const battingEntry = battingStats.get(striker.id);
+      const bowlingEntry = bowlingStats.get(bowler.id);
+      const aggressionProfile = getAggressionProfile(striker);
+      const matchupAdvantage = getMatchupAdvantage(striker, bowler);
+      const weatherAdvantage = getWeatherAdvantage(weather, bowler, balls, inningsIndex);
+      const battingWeather = getBattingWeatherModifier(weather, inningsIndex);
+
+      for (let ballInOver = 0; ballInOver < 6; ballInOver += 1) {
+        if (balls >= 300 || wickets >= 10 || (target && totalRuns >= target)) {
+        break;
+      }
+
+        const ballsRemaining = 300 - balls;
+        const runsNeeded = target ? Math.max(0, target - totalRuns) : 0;
+        const skillEdge = (striker.batting - bowler.bowling) / 100;
+        const chaseRate = target ? runsNeeded / Math.max(1, ballsRemaining) : 0;
+        const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
+        const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
+        const newBallBoost = balls < 120 ? 0.012 : 0;
+        const wicketChance = clamp(
+          0.085 -
+            skillEdge * 0.02 +
+            matchupAdvantage +
+            weatherAdvantage +
+            newBallBoost +
+            Math.max(0, pressureBoost) * 0.02 +
+            deathOversBoost * 0.5 +
+            aggressionProfile.wicketRisk -
+            battingWeather * 0.3,
+          0.028,
+          0.16,
+        );
+        const singleChance = clamp(
+          0.27 +
+            skillEdge * 0.025 +
+            battingWeather * 0.2 -
+            Math.max(0, pressureBoost) * 0.04 +
+            aggressionProfile.singleDelta,
+          0.18,
+          0.36,
+        );
+        const doubleChance = clamp(
+          0.065 + skillEdge * 0.014 + battingWeather * 0.04 + aggressionProfile.doubleDelta,
+          0.025,
+          0.1,
+        );
+        const boundaryChance = clamp(
+          0.072 +
+            skillEdge * 0.025 +
+            battingWeather * 0.8 +
+            deathOversBoost +
+            aggressionProfile.boundaryDelta -
+            weatherAdvantage * 0.35,
+          0.028,
+          0.14,
+        );
+        const sixChance = clamp(
+          0.007 +
+            skillEdge * 0.01 +
+            battingWeather * 0.6 +
+            deathOversBoost +
+            aggressionProfile.sixDelta -
+            weatherAdvantage * 0.12,
+          0.001,
+          0.04,
+        );
+        const tripleChance = 0.005;
       const chanceJitter =
         (hashValue(`${inningsIndex}-${striker.id}-${bowler.id}-${balls}`) % 1000) / 1000;
       const chance = (random() * 0.55 + chanceJitter * 0.45) % 1;
@@ -1001,66 +1366,65 @@ export function simulateMatch(state, random = Math.random) {
 
   const opponent = state.currentOpponent;
   const team = getTeamMetrics(state.roster);
-  const opponentRoster = getOpponentRoster(opponent);
+  const opponentRoster = selectBestXI(getOpponentRoster(opponent));
   const opponentTeam = getTeamMetrics(opponentRoster);
   const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
-  const aggression =
-    BATTING_AGGRESSION_BY_ID.get(state.battingAggression) || BATTING_AGGRESSION_BY_ID.get("mid");
   const userBatsFirst = random() >= 0.5;
   const stageBoost = state.matchIndex * 2;
-  const playerBatting = team.batting + difficulty.playerBatting;
-  const playerBowling = team.bowling + difficulty.playerBowling;
-  const opponentBatting = opponentTeam.batting + difficulty.opponentBatting + stageBoost;
-  const opponentBowling = opponentTeam.bowling + difficulty.opponentBowling + stageBoost;
-  const firstInningsRuns = userBatsFirst
-    ? simulateInnings(playerBatting + aggression.scoreBias, opponentBowling, 0, random)
-    : simulateInnings(opponentBatting, playerBowling, 0, random);
-  const firstInningsWickets = userBatsFirst
-    ? clamp(
-        round(
-          estimateWickets(firstInningsRuns, playerBatting, opponentBowling, random) +
-            aggression.wicketBias,
-        ),
-        2,
-        10,
-      )
-    : estimateWickets(firstInningsRuns, opponentBatting, playerBowling, random);
+  const playerRoster = adjustRosterSkills(
+    state.roster,
+    difficulty.playerBatting,
+    difficulty.playerBowling,
+  );
+  const opponentAdjusted = adjustRosterSkills(
+    opponentRoster,
+    difficulty.opponentBatting + stageBoost,
+    difficulty.opponentBowling + stageBoost,
+  );
+  const playerBattingOrder = reorderAdjustedRoster(
+    playerRoster,
+    state.battingOrder,
+    buildDefaultBattingOrder,
+  );
+  const playerBowlingOrder = reorderAdjustedRoster(
+    playerRoster.filter((player) => player.role !== "wicketkeeper"),
+    state.bowlingOrder,
+    buildDefaultBowlingOrder,
+  );
+  const opponentBattingOrder = buildOpponentBattingOrder(opponentAdjusted)
+    .map((id) => opponentAdjusted.find((player) => player.id === id))
+    .filter(Boolean);
+  const opponentBowlingOrder = buildOpponentBowlingOrder(opponentAdjusted)
+    .map((id) => opponentAdjusted.find((player) => player.id === id))
+    .filter(Boolean);
 
-  const secondInningsPressure = 6;
-  const secondInningsProjection = userBatsFirst
-    ? simulateInnings(opponentBatting, playerBowling, secondInningsPressure, random)
-    : simulateInnings(
-        playerBatting + aggression.scoreBias,
-        opponentBowling,
-        secondInningsPressure,
-        random,
-      );
-  const secondInningsBase = resolveChaseScore(
-    secondInningsProjection,
-    firstInningsRuns,
-    userBatsFirst ? opponentBatting : playerBatting,
-    userBatsFirst ? playerBowling : opponentBowling,
+  const firstInnings = simulateOverByOver({
+    battingOrder: userBatsFirst ? playerBattingOrder : opponentBattingOrder,
+    bowlingOrder: userBatsFirst ? opponentBowlingOrder : playerBowlingOrder,
+    inningsIndex: 0,
+    target: null,
     random,
-  );
-  const secondInnings = userBatsFirst
-    ? secondInningsBase
-    : {
-        ...secondInningsBase,
-        wickets: clamp(round(secondInningsBase.wickets + aggression.wicketBias), 2, 10),
-      };
+    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+  });
 
-  const playerRuns = userBatsFirst ? firstInningsRuns : secondInnings.runs;
-  const playerWickets = userBatsFirst ? firstInningsWickets : secondInnings.wickets;
-  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInningsRuns;
-  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInningsWickets;
-  const chaseSucceeded = secondInnings.chaseSucceeded;
+  const secondInningsTarget = firstInnings.runs + 1;
+  const secondInnings = simulateOverByOver({
+    battingOrder: userBatsFirst ? opponentBattingOrder : playerBattingOrder,
+    bowlingOrder: userBatsFirst ? playerBowlingOrder : opponentBowlingOrder,
+    inningsIndex: 1,
+    target: secondInningsTarget,
+    random,
+    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+  });
+
+  const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
+  const playerWickets = userBatsFirst ? firstInnings.wickets : secondInnings.wickets;
+  const opponentRuns = userBatsFirst ? secondInnings.runs : firstInnings.runs;
+  const opponentWickets = userBatsFirst ? secondInnings.wickets : firstInnings.wickets;
+  const chaseSucceeded = secondInnings.runs >= secondInningsTarget;
   const playerWon = userBatsFirst ? !chaseSucceeded : chaseSucceeded;
-  const playerBalls = estimateInningsBalls(playerRuns, playerWickets, !userBatsFirst && playerWon);
-  const opponentBalls = estimateInningsBalls(
-    opponentRuns,
-    opponentWickets,
-    userBatsFirst ? opponentRuns >= playerRuns : false,
-  );
+  const playerBalls = userBatsFirst ? firstInnings.balls : secondInnings.balls;
+  const opponentBalls = userBatsFirst ? secondInnings.balls : firstInnings.balls;
 
   let marginType = "runs";
   let marginValue = Math.max(1, Math.abs(playerRuns - opponentRuns));
@@ -1072,34 +1436,10 @@ export function simulateMatch(state, random = Math.random) {
       : clamp(10 - playerWickets, 1, 9);
   }
 
-  const playerBattingCard = buildBattingCard(
-    state.roster,
-    playerRuns,
-    playerBalls,
-    playerWickets,
-    random,
-  );
-  const playerBowlingCard = buildBowlingCard(
-    state.roster,
-    opponentRuns,
-    opponentWickets,
-    opponentBalls,
-    random,
-  );
-  const opponentBattingCard = buildBattingCard(
-    opponentRoster,
-    opponentRuns,
-    opponentBalls,
-    opponentWickets,
-    random,
-  );
-  const opponentBowlingCard = buildBowlingCard(
-    opponentRoster,
-    playerRuns,
-    playerWickets,
-    playerBalls,
-    random,
-  );
+  const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
+  const playerBowlingCard = userBatsFirst ? secondInnings.bowlingCard : firstInnings.bowlingCard;
+  const opponentBattingCard = userBatsFirst ? secondInnings.battingCard : firstInnings.battingCard;
+  const opponentBowlingCard = userBatsFirst ? firstInnings.bowlingCard : secondInnings.bowlingCard;
   const performer = playerWon
     ? marginType === "wickets"
       ? playerBattingCard[0]
@@ -1109,6 +1449,7 @@ export function simulateMatch(state, random = Math.random) {
   const result = {
     opponent,
     stage: opponent.stage,
+    weather: opponent.weather,
     won: playerWon,
     battingFirst: userBatsFirst ? "player" : "opponent",
     playerRuns,
@@ -1179,8 +1520,10 @@ export function revealNextOpponent(state) {
 
   return {
     ...state,
-    battingAggression: "mid",
-    currentOpponent: TOURNAMENT_OPPONENTS[state.matchIndex],
+    currentOpponent: {
+      ...TOURNAMENT_OPPONENTS[state.matchIndex],
+      weather: getWeatherPatternForOpponent(TOURNAMENT_OPPONENTS[state.matchIndex]),
+    },
   };
 }
 
