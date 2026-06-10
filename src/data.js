@@ -1575,6 +1575,208 @@ const AMBIGUOUS_AUDIT_NAMES = (() => {
   );
 })();
 
+const LEFT_HANDED_BATTER_OVERRIDES = new Set(
+  [
+    "Adam Gilchrist",
+    "Alastair Cook",
+    "Arjuna Ranatunga",
+    "Brian Lara",
+    "Chris Gayle",
+    "David Warner",
+    "Daniel Vettori",
+    "Darren Lehmann",
+    "Eoin Morgan",
+    "Gautam Gambhir",
+    "Graeme Smith",
+    "Herschelle Gibbs",
+    "Kumar Sangakkara",
+    "Lance Klusener",
+    "Marcus Trescothick",
+    "Matthew Hayden",
+    "Michael Hussey",
+    "Misbah-ul-Haq",
+    "Mohammad Ashraful",
+    "Ravindra Jadeja",
+    "Saeed Anwar",
+    "Saurav Ganguly",
+    "Shahid Afridi",
+    "Shakib Al Hasan",
+    "Tamim Iqbal",
+    "Sanath Jayasuriya",
+    "Tillakaratne Dilshan",
+    "Yuvraj Singh",
+  ].map((name) => normalizePlayerName(name)),
+);
+
+const LEFT_ARM_BOWLER_OVERRIDES = new Set(
+  [
+    "Chaminda Vaas",
+    "Daniel Vettori",
+    "Mitchell Johnson",
+    "Mitchell Starc",
+    "Nathan Bracken",
+    "Ravindra Jadeja",
+    "Shakib Al Hasan",
+    "Sohail Tanvir",
+    "Trent Boult",
+    "Zaheer Khan",
+    "Ashantha de Mel",
+    "Mustafizur Rahman",
+    "Taijul Islam",
+    "Abdur Razzak",
+    "Reece Topley",
+    "David Willey",
+    "Sam Curran",
+    "Keshav Maharaj",
+    "Tabraiz Shamsi",
+  ].map((name) => normalizePlayerName(name)),
+);
+
+const BOWLING_STYLE_OVERRIDES = new Map(
+  Object.entries({
+    "Andrew Flintoff": "Fast Medium",
+    "Anil Kumble": "Leg Break",
+    "Ajit Agarkar": "Fast Medium",
+    "Ashley Giles": "Orthodox",
+    "Brett Lee": "Fast",
+    "Chaminda Vaas": "Fast Medium",
+    "Chris Harris": "Medium",
+    "Daniel Vettori": "Orthodox",
+    "Dale Steyn": "Fast",
+    "Darren Lehmann": "Orthodox",
+    "David Willey": "Fast Medium",
+    "Glenn Maxwell": "Off Break",
+    "Glenn McGrath": "Fast Medium",
+    "Graeme Swann": "Off Break",
+    "Harbhajan Singh": "Off Break",
+    "Imran Tahir": "Leg Break",
+    "Ish Sodhi": "Leg Break",
+    "Jacob Oram": "Medium Fast",
+    "Jacques Kallis": "Medium Fast",
+    "James Anderson": "Fast Medium",
+    "Javagal Srinath": "Fast Medium",
+    "Johan Botha": "Off Break",
+    "Jon Lewis": "Fast Medium",
+    "Keshav Maharaj": "Orthodox",
+    "Kuldeep Yadav": "Wrist Spin (Chinaman)",
+    "Liam Plunkett": "Fast Medium",
+    "Lungi Ngidi": "Fast Medium",
+    "Mark Waugh": "Off Break",
+    "Michael Bevan": "Orthodox",
+    "Michael Clarke": "Off Break",
+    "Michael Hussey": "Off Break",
+    "Michael Vaughan": "Off Break",
+    "Mitchell Johnson": "Fast",
+    "Mitchell Santner": "Orthodox",
+    "Mitchell Starc": "Fast",
+    "Moeen Ali": "Off Break",
+    "Muralitharan": "Off Break",
+    "Muttiah Muralitharan": "Off Break",
+    "Nathan Hauritz": "Off Break",
+    "Nathan Lyon": "Off Break",
+    "Paul Collingwood": "Medium",
+    "Ravichandran Ashwin": "Off Break",
+    "Ravindra Jadeja": "Orthodox",
+    "Ravi Bopara": "Medium Fast",
+    "Ricky Ponting": "Medium",
+    "Robin Peterson": "Orthodox",
+    "Ryan ten Doeschate": "Medium Fast",
+    "Saqlain Mushtaq": "Off Break",
+    "Scott Styris": "Medium Fast",
+    "Shadab Khan": "Leg Break",
+    "Shahid Afridi": "Leg Break",
+    "Shane Warne": "Leg Break",
+    "Shaun Pollock": "Fast Medium",
+    "Shoaib Malik": "Off Break",
+    "Stuart Broad": "Fast Medium",
+    "Sunil Joshi": "Orthodox",
+    "Tabraiz Shamsi": "Wrist Spin (Chinaman)",
+    "Tim Southee": "Fast Medium",
+    "Trent Boult": "Fast Medium",
+    "Wasim Akram": "Fast Medium",
+    "Yuvraj Singh": "Orthodox",
+    "Zaheer Khan": "Fast Medium",
+  }).map(([name, style]) => [normalizePlayerName(name), style]),
+);
+
+function hasMeaningfulBowling(player) {
+  return (player.bowling || 0) >= 40;
+}
+
+function inferBattingHand(player) {
+  if (player.battingHand === "Left" || player.battingHand === "Right") {
+    return player.battingHand;
+  }
+
+  return LEFT_HANDED_BATTER_OVERRIDES.has(normalizePlayerName(player.name)) ? "Left" : "Right";
+}
+
+function inferBowlingHand(player) {
+  if (!hasMeaningfulBowling(player)) {
+    return "";
+  }
+
+  if (player.bowlingHand === "Left" || player.bowlingHand === "Right") {
+    return player.bowlingHand;
+  }
+
+  if (LEFT_ARM_BOWLER_OVERRIDES.has(normalizePlayerName(player.name))) {
+    return "Left";
+  }
+
+  return "Right";
+}
+
+function inferBowlingStyle(player, role, bowlingHand) {
+  if (!hasMeaningfulBowling(player)) {
+    return "";
+  }
+
+  if (player.bowlingStyle && player.bowlingStyle !== "Unspecified") {
+    return player.bowlingStyle;
+  }
+
+  const normalizedName = normalizePlayerName(player.name);
+  if (BOWLING_STYLE_OVERRIDES.has(normalizedName)) {
+    return BOWLING_STYLE_OVERRIDES.get(normalizedName);
+  }
+
+  const battingLead = (player.batting || 0) - (player.bowling || 0) >= 15;
+  const bowlingLead = (player.bowling || 0) - (player.batting || 0) >= 15 || role === "bowler";
+  const economy = player.bowlingEconomy || 0;
+  const strikeRate = player.bowlingStrikeRate || 0;
+
+  if (bowlingHand === "Left") {
+    if (bowlingLead && (player.bowling || 0) >= 75) {
+      return "Fast Medium";
+    }
+
+    return "Orthodox";
+  }
+
+  if (bowlingLead) {
+    if ((player.bowling || 0) >= 88) {
+      return "Fast Medium";
+    }
+
+    if (economy > 0 && economy <= 4.45 && strikeRate >= 48) {
+      return "Off Break";
+    }
+
+    return "Fast Medium";
+  }
+
+  if (battingLead) {
+    if (economy > 0 && economy <= 4.65 && strikeRate >= 52) {
+      return "Off Break";
+    }
+
+    return "Medium";
+  }
+
+  return economy > 0 && economy <= 4.6 ? "Off Break" : "Medium";
+}
+
 function getPlayerNameOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
   const auditedOverride = AMBIGUOUS_AUDIT_NAMES.has(normalizedName)
@@ -1592,20 +1794,35 @@ function applyPlayerOverride(player) {
   const override = getPlayerNameOverride(player);
   const intervalEnrichment = PLAYER_INTERVAL_ENRICHMENT_BY_ID[player.id] || {};
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
-  const role = intervalEnrichment.role || inferredRole;
-
-  return {
+  const hasUsableEnrichmentRatings =
+    (intervalEnrichment.batting || 0) > 0 || (intervalEnrichment.bowling || 0) > 0;
+  const role = hasUsableEnrichmentRatings ? intervalEnrichment.role || inferredRole : inferredRole;
+  const merged = {
     ...player,
     name: normalizedName,
-    role,
     ...(override || {}),
-    ...(intervalEnrichment || {}),
     ...(PLAYER_ID_OVERRIDES[player.id] || {}),
-    battingHand: intervalEnrichment.battingHand || "",
-    bowlingHand: intervalEnrichment.bowlingHand || "",
-    bowlingStyle:
-      intervalEnrichment.bowlingStyle ||
-      ((role === "bowler" || intervalEnrichment.bowling > 0 || player.bowling > 0) ? "Unspecified" : ""),
+  };
+  const batting =
+    (intervalEnrichment.batting || 0) > 0 ? intervalEnrichment.batting : merged.batting;
+  const bowling =
+    (intervalEnrichment.bowling || 0) > 0 ? intervalEnrichment.bowling : merged.bowling;
+  const enriched = {
+    ...merged,
+    ...(intervalEnrichment || {}),
+    role,
+    batting,
+    bowling,
+  };
+  const battingHand = inferBattingHand(enriched);
+  const bowlingHand = inferBowlingHand(enriched);
+  const bowlingStyle = inferBowlingStyle(enriched, role, bowlingHand);
+
+  return {
+    ...enriched,
+    battingHand,
+    bowlingHand,
+    bowlingStyle,
     aggressionLevel: intervalEnrichment.aggressionLevel || "Balanced",
     battingStyle: intervalEnrichment.battingStyle || intervalEnrichment.aggressionLevel || "Balanced",
   };
@@ -1618,7 +1835,7 @@ export const TOURNAMENT_OPPONENTS = [
     id: "bangladesh-2019",
     label: "Bangladesh 2019",
     shortName: "Bangladesh",
-    stage: "Group Stage A",
+    stage: "Group Stage Match 1",
     batting: 82,
     bowling: 80,
     overall: 80,
@@ -1629,7 +1846,7 @@ export const TOURNAMENT_OPPONENTS = [
     id: "india-1983",
     label: "India 1983",
     shortName: "India",
-    stage: "Group Stage B",
+    stage: "Group Stage Match 2",
     batting: 81,
     bowling: 83,
     overall: 82,
@@ -1640,7 +1857,7 @@ export const TOURNAMENT_OPPONENTS = [
     id: "pakistan-1992",
     label: "Pakistan 1992",
     shortName: "Pakistan",
-    stage: "Group Stage C",
+    stage: "Group Stage Match 3",
     batting: 84,
     bowling: 87,
     overall: 85,
@@ -1651,7 +1868,7 @@ export const TOURNAMENT_OPPONENTS = [
     id: "south-africa-1999",
     label: "South Africa 1999",
     shortName: "South Africa",
-    stage: "Quarter-final",
+    stage: "QF",
     batting: 89,
     bowling: 89,
     overall: 89,
@@ -1662,11 +1879,11 @@ export const TOURNAMENT_OPPONENTS = [
     id: "india-2011",
     label: "India 2011",
     shortName: "India",
-    stage: "Semi-final",
+    stage: "SF",
     batting: 92,
     bowling: 88,
     overall: 92,
-    pressure: 6,
+    pressure: 7,
     note: "Elite chase control backed by experienced middle-overs bowling.",
   },
   {
@@ -1677,7 +1894,7 @@ export const TOURNAMENT_OPPONENTS = [
     batting: 92,
     bowling: 93,
     overall: 94,
-    pressure: 8,
+    pressure: 10,
     note: "A champion side with superstar bowling and no emotional drop-off.",
   },
 ];

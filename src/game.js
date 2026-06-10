@@ -20,29 +20,23 @@ export const DIFFICULTY_LEVELS = [
   {
     id: "county",
     label: "County",
-    description: "A friendlier ladder with a little breathing room.",
-    playerBatting: 6,
-    playerBowling: 6,
-    opponentBatting: -4,
-    opponentBowling: -4,
+    description: "Your drafted players perform at their peak ratings.",
+    usePrimeRatings: true,
+    hideRatings: false,
   },
   {
     id: "international",
     label: "International",
     description: "Baseline World Cup difficulty.",
-    playerBatting: 0,
-    playerBowling: 0,
-    opponentBatting: 0,
-    opponentBowling: 0,
+    usePrimeRatings: false,
+    hideRatings: false,
   },
   {
     id: "legend",
     label: "Legend",
-    description: "A harsher ladder where weak links get punished fast.",
-    playerBatting: -4,
-    playerBowling: -4,
-    opponentBatting: 6,
-    opponentBowling: 6,
+    description: "Player ratings are hidden, so you draft on instinct.",
+    usePrimeRatings: false,
+    hideRatings: true,
   },
 ];
 
@@ -86,34 +80,34 @@ const AGGRESSION_PROFILES = {
   },
 };
 
-const WEATHER_PATTERNS = {
+const WEATHER_OPTIONS = {
   overcast: {
     id: "overcast",
     label: "Overcast",
-    batting: -3,
-    seam: 5,
+    batting: -2,
+    seam: 4,
     swing: 6,
-    spin: -2,
-    pace: 3,
+    spin: -1,
+    pace: 2,
     chase: -1,
   },
-  "cool-and-true": {
-    id: "cool-and-true",
-    label: "Cool and true",
-    batting: 1,
+  cool: {
+    id: "cool",
+    label: "Cool",
+    batting: 0,
     seam: 2,
     swing: 1,
     spin: 0,
     pace: 1,
     chase: 0,
   },
-  "hot-and-dry": {
-    id: "hot-and-dry",
-    label: "Hot and dry",
-    batting: 2,
+  hot: {
+    id: "hot",
+    label: "Hot",
+    batting: 1,
     seam: -1,
     swing: -2,
-    spin: 4,
+    spin: 2,
     pace: 0,
     chase: 0,
   },
@@ -127,33 +121,13 @@ const WEATHER_PATTERNS = {
     pace: 1,
     chase: 1,
   },
-  "used-surface": {
-    id: "used-surface",
-    label: "Used surface",
-    batting: -1,
-    seam: 0,
+  clear: {
+    id: "clear",
+    label: "Clear",
+    batting: 2,
+    seam: -1,
     swing: -1,
-    spin: 5,
-    pace: -1,
-    chase: -1,
-  },
-  "hard-and-fast": {
-    id: "hard-and-fast",
-    label: "Hard and fast",
-    batting: 1,
-    seam: 2,
-    swing: 0,
-    spin: -1,
-    pace: 4,
-    chase: 0,
-  },
-  "flat-and-clear": {
-    id: "flat-and-clear",
-    label: "Flat and clear",
-    batting: 4,
-    seam: -2,
-    swing: -2,
-    spin: -1,
+    spin: 0,
     pace: 0,
     chase: 1,
   },
@@ -169,82 +143,206 @@ const WEATHER_PATTERNS = {
   },
 };
 
+const SURFACE_OPTIONS = {
+  green: {
+    id: "green",
+    label: "Green",
+    batting: -2,
+    seam: 5,
+    swing: 2,
+    spin: -2,
+    pace: 3,
+  },
+  dry: {
+    id: "dry",
+    label: "Dry",
+    batting: 0,
+    seam: -1,
+    swing: -1,
+    spin: 4,
+    pace: 0,
+  },
+  crumbling: {
+    id: "crumbling",
+    label: "Crumbling",
+    batting: -3,
+    seam: -1,
+    swing: -1,
+    spin: 6,
+    pace: -1,
+  },
+  hard: {
+    id: "hard",
+    label: "Hard",
+    batting: 1,
+    seam: 1,
+    swing: 0,
+    spin: -1,
+    pace: 4,
+  },
+  flat: {
+    id: "flat",
+    label: "Flat",
+    batting: 4,
+    seam: -2,
+    swing: -2,
+    spin: -1,
+    pace: 0,
+  },
+  used: {
+    id: "used",
+    label: "Used",
+    batting: -1,
+    seam: 0,
+    swing: -1,
+    spin: 3,
+    pace: -1,
+  },
+};
+
+const OUTFIELD_OPTIONS = {
+  fast: {
+    id: "fast",
+    label: "Fast",
+    batting: 3,
+    boundary: 0.03,
+    double: -0.005,
+  },
+  average: {
+    id: "average",
+    label: "Average",
+    batting: 0,
+    boundary: 0,
+    double: 0,
+  },
+  slow: {
+    id: "slow",
+    label: "Slow",
+    batting: -2,
+    boundary: -0.02,
+    double: 0.008,
+  },
+  heavy: {
+    id: "heavy",
+    label: "Heavy",
+    batting: -3,
+    boundary: -0.03,
+    double: 0.01,
+  },
+};
+
 const WEATHER_WEIGHTS_BY_TEAM = {
   england: [
     ["overcast", 5],
-    ["cool-and-true", 3],
-    ["flat-and-clear", 1],
+    ["cool", 3],
+    ["clear", 1],
   ],
   "new zealand": [
     ["overcast", 4],
-    ["cool-and-true", 4],
-    ["hard-and-fast", 1],
+    ["cool", 4],
+    ["clear", 1],
   ],
   ireland: [
     ["overcast", 5],
-    ["cool-and-true", 3],
+    ["cool", 3],
     ["humid", 1],
   ],
   scotland: [
     ["overcast", 5],
-    ["cool-and-true", 3],
+    ["cool", 3],
     ["humid", 1],
   ],
   netherlands: [
     ["overcast", 4],
-    ["cool-and-true", 4],
-    ["flat-and-clear", 1],
+    ["cool", 4],
+    ["clear", 1],
   ],
   india: [
-    ["hot-and-dry", 4],
-    ["used-surface", 3],
+    ["hot", 4],
+    ["clear", 2],
     ["dewy", 2],
   ],
   pakistan: [
-    ["hot-and-dry", 3],
+    ["hot", 3],
     ["humid", 3],
-    ["used-surface", 2],
+    ["clear", 2],
   ],
   sri_lanka: [
-    ["hot-and-dry", 3],
+    ["hot", 3],
     ["humid", 3],
     ["dewy", 2],
   ],
   bangladesh: [
     ["humid", 4],
-    ["hot-and-dry", 2],
+    ["hot", 2],
     ["dewy", 3],
   ],
   afghanistan: [
-    ["hot-and-dry", 4],
-    ["used-surface", 3],
-    ["hard-and-fast", 2],
+    ["hot", 4],
+    ["clear", 2],
+    ["dewy", 1],
   ],
   australia: [
-    ["hard-and-fast", 5],
-    ["flat-and-clear", 3],
-    ["hot-and-dry", 1],
+    ["clear", 4],
+    ["hot", 3],
+    ["dewy", 1],
   ],
   "south africa": [
-    ["hard-and-fast", 5],
-    ["flat-and-clear", 2],
-    ["hot-and-dry", 2],
+    ["clear", 4],
+    ["hot", 3],
+    ["cool", 1],
   ],
   zimbabwe: [
-    ["hard-and-fast", 3],
-    ["hot-and-dry", 3],
-    ["flat-and-clear", 2],
+    ["hot", 3],
+    ["clear", 3],
+    ["humid", 1],
   ],
   namibia: [
-    ["hard-and-fast", 4],
-    ["hot-and-dry", 3],
-    ["flat-and-clear", 1],
+    ["clear", 4],
+    ["hot", 3],
+    ["cool", 1],
   ],
   "west indies": [
     ["humid", 4],
     ["dewy", 3],
-    ["flat-and-clear", 2],
+    ["clear", 2],
   ],
+};
+
+const SURFACE_WEIGHTS_BY_TEAM = {
+  england: [["green", 4], ["used", 2], ["flat", 1]],
+  "new zealand": [["green", 3], ["used", 2], ["hard", 1]],
+  ireland: [["green", 4], ["used", 2], ["flat", 1]],
+  scotland: [["green", 4], ["used", 2], ["flat", 1]],
+  netherlands: [["green", 3], ["used", 2], ["flat", 1]],
+  india: [["dry", 3], ["used", 3], ["crumbling", 2], ["flat", 1]],
+  pakistan: [["dry", 2], ["used", 3], ["flat", 2]],
+  sri_lanka: [["dry", 3], ["used", 3], ["crumbling", 1]],
+  bangladesh: [["used", 3], ["dry", 2], ["flat", 2]],
+  afghanistan: [["dry", 4], ["crumbling", 2], ["hard", 1]],
+  australia: [["hard", 4], ["flat", 3], ["green", 1]],
+  "south africa": [["hard", 4], ["green", 2], ["flat", 2]],
+  zimbabwe: [["hard", 3], ["dry", 2], ["used", 2]],
+  namibia: [["hard", 4], ["dry", 2], ["flat", 1]],
+  "west indies": [["flat", 3], ["used", 2], ["dry", 1]],
+};
+
+const OUTFIELD_WEIGHTS_BY_TEAM = {
+  england: [["average", 3], ["slow", 2], ["fast", 1]],
+  "new zealand": [["average", 3], ["fast", 2], ["slow", 1]],
+  ireland: [["slow", 3], ["average", 2], ["heavy", 1]],
+  scotland: [["slow", 3], ["average", 2], ["heavy", 1]],
+  netherlands: [["average", 3], ["slow", 2], ["fast", 1]],
+  india: [["fast", 3], ["average", 2], ["slow", 1]],
+  pakistan: [["fast", 2], ["average", 3], ["slow", 1]],
+  sri_lanka: [["fast", 2], ["average", 2], ["heavy", 1]],
+  bangladesh: [["slow", 2], ["average", 3], ["heavy", 1]],
+  afghanistan: [["fast", 2], ["average", 2], ["slow", 1]],
+  australia: [["fast", 4], ["average", 2], ["slow", 1]],
+  "south africa": [["fast", 4], ["average", 2], ["slow", 1]],
+  zimbabwe: [["average", 3], ["fast", 2], ["slow", 1]],
+  namibia: [["fast", 3], ["average", 2], ["slow", 1]],
+  "west indies": [["fast", 3], ["average", 2], ["slow", 1]],
 };
 
 function clamp(value, min, max) {
@@ -276,22 +374,33 @@ function getAggressionProfile(player) {
   return AGGRESSION_PROFILES[player.aggressionLevel] || AGGRESSION_PROFILES.Balanced;
 }
 
-function getWeatherPatternForOpponent(opponent, random = Math.random) {
-  const weatherWeights =
-    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.shortName)] ||
-    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.label.split(" ").slice(0, -1).join(" "))] ||
-    [["flat-and-clear", 1]];
-  const totalWeight = weatherWeights.reduce((sum, [, weight]) => sum + weight, 0);
+function pickWeightedOption(optionsById, weights, random = Math.random) {
+  const totalWeight = weights.reduce((sum, [, weight]) => sum + weight, 0);
   let threshold = random() * totalWeight;
 
-  for (const [weatherId, weight] of weatherWeights) {
+  for (const [optionId, weight] of weights) {
     threshold -= weight;
     if (threshold <= 0) {
-      return WEATHER_PATTERNS[weatherId];
+      return optionsById[optionId];
     }
   }
 
-  return WEATHER_PATTERNS[weatherWeights[weatherWeights.length - 1][0]];
+  return optionsById[weights[weights.length - 1][0]];
+}
+
+function getConditionsForOpponent(opponent, random = Math.random) {
+  const teamKey =
+    normalizeTeamKey(opponent.shortName) ||
+    normalizeTeamKey(opponent.label.split(" ").slice(0, -1).join(" "));
+  const weatherWeights = WEATHER_WEIGHTS_BY_TEAM[teamKey] || [["clear", 1]];
+  const surfaceWeights = SURFACE_WEIGHTS_BY_TEAM[teamKey] || [["flat", 1]];
+  const outfieldWeights = OUTFIELD_WEIGHTS_BY_TEAM[teamKey] || [["average", 1]];
+
+  return {
+    weather: pickWeightedOption(WEATHER_OPTIONS, weatherWeights, random),
+    surface: pickWeightedOption(SURFACE_OPTIONS, surfaceWeights, random),
+    outfield: pickWeightedOption(OUTFIELD_OPTIONS, outfieldWeights, random),
+  };
 }
 
 function getTotalRequiredPlayers() {
@@ -464,8 +573,12 @@ export function getAvailableSquads(state) {
 
 export function buildCandidateSet(state, squadId) {
   return getSquadPlayers(state, squadId).sort((left, right) => {
-    const leftValue = left.batting + left.bowling + (isAllRounderPlayer(left) ? 8 : 0);
-    const rightValue = right.batting + right.bowling + (isAllRounderPlayer(right) ? 8 : 0);
+    const adjustedLeft = getDifficultyAdjustedPlayer(left, state.difficulty);
+    const adjustedRight = getDifficultyAdjustedPlayer(right, state.difficulty);
+    const leftValue =
+      adjustedLeft.batting + adjustedLeft.bowling + (isAllRounderPlayer(adjustedLeft) ? 8 : 0);
+    const rightValue =
+      adjustedRight.batting + adjustedRight.bowling + (isAllRounderPlayer(adjustedRight) ? 8 : 0);
     return rightValue - leftValue;
   });
 }
@@ -690,10 +803,10 @@ export function getTeamMetrics(roster) {
 
   const topBatters = [...roster]
     .sort((left, right) => right.batting - left.batting || right.bowling - left.bowling)
-    .slice(0, Math.min(11, roster.length));
+    .slice(0, Math.min(5, roster.length));
   const topBowlers = [...roster]
     .sort((left, right) => right.bowling - left.bowling || right.batting - left.batting)
-    .slice(0, Math.min(11, roster.length));
+    .slice(0, Math.min(5, roster.length));
 
   const batting = topBatters.reduce((total, player) => total + player.batting, 0) / topBatters.length;
   const bowling = topBowlers.reduce((total, player) => total + player.bowling, 0) / topBowlers.length;
@@ -709,7 +822,7 @@ export function getTeamMetrics(roster) {
   const bowlingDepth = counts.bowler + allRounders * 0.75;
   const balancePenalty =
     Math.max(0, 5 - battingDepth) * 1.6 + Math.max(0, 5 - bowlingDepth) * 1.9;
-  const overall = batting * 0.54 + bowling * 0.46 + chemistry - balancePenalty;
+  const overall = batting * 0.5 + bowling * 0.5 + chemistry * 0.15 - balancePenalty;
 
   return {
     batting: round(batting),
@@ -719,6 +832,26 @@ export function getTeamMetrics(roster) {
     overall: round(overall),
   };
 }
+
+function buildPrimeRatingsMap() {
+  const byIdentity = new Map();
+
+  for (const player of PLAYER_POOL) {
+    const identity = getPlayerIdentity(player);
+    const current = byIdentity.get(identity) || {
+      batting: player.batting,
+      bowling: player.bowling,
+    };
+
+    current.batting = Math.max(current.batting, player.batting);
+    current.bowling = Math.max(current.bowling, player.bowling);
+    byIdentity.set(identity, current);
+  }
+
+  return byIdentity;
+}
+
+const PRIME_RATINGS_BY_IDENTITY = buildPrimeRatingsMap();
 
 function getTopAverage(roster, skill, count) {
   if (roster.length === 0) {
@@ -800,6 +933,10 @@ function selectBestXI(roster) {
 }
 
 function formatScore(runs, wickets) {
+  if (wickets >= 10) {
+    return `${runs}`;
+  }
+
   return `${runs}/${wickets}`;
 }
 
@@ -816,6 +953,35 @@ function adjustRosterSkills(roster, battingDelta, bowlingDelta) {
     batting: clamp(round(player.batting + battingDelta), 0, 99),
     bowling: clamp(round(player.bowling + bowlingDelta), 0, 99),
   }));
+}
+
+function applyDifficultyProfileToPlayer(player, difficultyId) {
+  if (!player) {
+    return player;
+  }
+
+  if (difficultyId !== "county") {
+    return player;
+  }
+
+  const prime = PRIME_RATINGS_BY_IDENTITY.get(getPlayerIdentity(player));
+  if (!prime) {
+    return player;
+  }
+
+  return {
+    ...player,
+    batting: Math.max(player.batting, prime.batting),
+    bowling: Math.max(player.bowling, prime.bowling),
+  };
+}
+
+export function getDifficultyAdjustedPlayer(player, difficultyId) {
+  return applyDifficultyProfileToPlayer(player, difficultyId);
+}
+
+export function getDisplayRoster(roster, difficultyId) {
+  return roster.map((player) => getDifficultyAdjustedPlayer(player, difficultyId));
 }
 
 function chooseStandout(roster, skill, random) {
@@ -1086,6 +1252,11 @@ function getStyleFlags(player) {
       style.includes("medium fast") ||
       style.includes("fast medium") ||
       style === "medium",
+    seam:
+      style.includes("fast") ||
+      style.includes("medium fast") ||
+      style.includes("fast medium") ||
+      style === "medium",
     swing:
       style.includes("fast") ||
       style.includes("medium") ||
@@ -1136,21 +1307,26 @@ function getMatchupAdvantage(striker, bowler) {
   return 0;
 }
 
-function getWeatherAdvantage(weather, bowler, ballNumber, inningsIndex) {
+function getBowlingConditionsAdvantage(conditions, bowler, ballNumber, inningsIndex) {
   const flags = getStyleFlags(bowler);
   const inNewBall = ballNumber < 120;
-  let value = weather.batting * -0.002;
+  const { weather, surface, outfield } = conditions;
+  let value = (weather.batting + surface.batting + outfield.batting) * -0.0015;
 
   if (flags.pace) {
-    value += weather.pace * 0.004;
+    value += (weather.pace + surface.pace) * 0.0045;
   }
 
   if (flags.swing && inNewBall) {
-    value += weather.swing * 0.005;
+    value += (weather.swing + surface.swing) * 0.0055;
+  }
+
+  if (flags.seam && inNewBall) {
+    value += surface.seam * 0.004;
   }
 
   if (flags.spin && ballNumber >= 120) {
-    value += weather.spin * 0.004;
+    value += (weather.spin + surface.spin) * 0.0048;
   }
 
   if (inningsIndex === 1 && weather.id === "dewy" && flags.spin && ballNumber >= 150) {
@@ -1160,12 +1336,17 @@ function getWeatherAdvantage(weather, bowler, ballNumber, inningsIndex) {
   return value;
 }
 
-function getBattingWeatherModifier(weather, inningsIndex) {
-  let modifier = weather.batting * 0.004;
+function getBattingConditionsModifier(conditions, inningsIndex) {
+  const { weather, surface, outfield } = conditions;
+  let modifier = (weather.batting + surface.batting + outfield.batting) * 0.0035;
   if (inningsIndex === 1) {
     modifier += weather.chase * 0.003;
   }
   return modifier;
+}
+
+function getOutfieldModifier(conditions) {
+  return conditions.outfield;
 }
 
 function reorderAdjustedRoster(adjustedRoster, orderIds, fallbackOrderBuilder) {
@@ -1190,7 +1371,7 @@ function simulateOverByOver({
   inningsIndex,
   target,
   random,
-  weather,
+  conditions,
 }) {
   let strikerIndex = 0;
   let nonStrikerIndex = 1;
@@ -1225,8 +1406,9 @@ function simulateOverByOver({
       const bowlingEntry = bowlingStats.get(bowler.id);
       const aggressionProfile = getAggressionProfile(striker);
       const matchupAdvantage = getMatchupAdvantage(striker, bowler);
-      const weatherAdvantage = getWeatherAdvantage(weather, bowler, balls, inningsIndex);
-      const battingWeather = getBattingWeatherModifier(weather, inningsIndex);
+      const bowlingConditions = getBowlingConditionsAdvantage(conditions, bowler, balls, inningsIndex);
+      const battingConditions = getBattingConditionsModifier(conditions, inningsIndex);
+      const outfield = getOutfieldModifier(conditions);
 
       for (let ballInOver = 0; ballInOver < 6; ballInOver += 1) {
         if (balls >= 300 || wickets >= 10 || (target && totalRuns >= target)) {
@@ -1238,52 +1420,71 @@ function simulateOverByOver({
         const skillEdge = (striker.batting - bowler.bowling) / 100;
         const chaseRate = target ? runsNeeded / Math.max(1, ballsRemaining) : 0;
         const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
+        const currentRunRate = balls > 0 ? totalRuns / balls : 0;
+        const chaseUrgency = target ? clamp(chaseRate - currentRunRate, 0, 1.2) : 0;
+        const lateChaseDesperation = target
+          ? clamp((balls - 180) / 120, 0, 1) * clamp(chaseRate - 0.82, 0, 0.8)
+          : 0;
         const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
         const newBallBoost = balls < 120 ? 0.012 : 0;
         const wicketChance = clamp(
           0.085 -
             skillEdge * 0.02 +
             matchupAdvantage +
-            weatherAdvantage +
+            bowlingConditions +
             newBallBoost +
             Math.max(0, pressureBoost) * 0.02 +
+            chaseUrgency * 0.03 +
+            lateChaseDesperation * 0.05 +
             deathOversBoost * 0.5 +
             aggressionProfile.wicketRisk -
-            battingWeather * 0.3,
+            battingConditions * 0.3,
           0.028,
           0.16,
         );
         const singleChance = clamp(
           0.27 +
             skillEdge * 0.025 +
-            battingWeather * 0.2 -
+            battingConditions * 0.2 -
             Math.max(0, pressureBoost) * 0.04 +
+            chaseUrgency * -0.03 +
+            lateChaseDesperation * -0.045 +
             aggressionProfile.singleDelta,
           0.18,
           0.36,
         );
         const doubleChance = clamp(
-          0.065 + skillEdge * 0.014 + battingWeather * 0.04 + aggressionProfile.doubleDelta,
+          0.065 +
+            skillEdge * 0.014 +
+            battingConditions * 0.03 +
+            chaseUrgency * 0.006 +
+            aggressionProfile.doubleDelta +
+            outfield.double,
           0.025,
           0.1,
         );
         const boundaryChance = clamp(
           0.072 +
             skillEdge * 0.025 +
-            battingWeather * 0.8 +
+            battingConditions * 0.7 +
             deathOversBoost +
+            chaseUrgency * 0.03 +
+            lateChaseDesperation * 0.05 +
             aggressionProfile.boundaryDelta -
-            weatherAdvantage * 0.35,
+            bowlingConditions * 0.32 +
+            outfield.boundary,
           0.028,
           0.14,
         );
         const sixChance = clamp(
           0.007 +
             skillEdge * 0.01 +
-            battingWeather * 0.6 +
+            battingConditions * 0.55 +
             deathOversBoost +
+            chaseUrgency * 0.012 +
+            lateChaseDesperation * 0.02 +
             aggressionProfile.sixDelta -
-            weatherAdvantage * 0.12,
+            bowlingConditions * 0.1,
           0.001,
           0.04,
         );
@@ -1365,21 +1566,14 @@ export function simulateMatch(state, random = Math.random) {
   }
 
   const opponent = state.currentOpponent;
-  const team = getTeamMetrics(state.roster);
-  const opponentRoster = selectBestXI(getOpponentRoster(opponent));
-  const opponentTeam = getTeamMetrics(opponentRoster);
-  const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
   const userBatsFirst = random() >= 0.5;
-  const stageBoost = state.matchIndex * 2;
-  const playerRoster = adjustRosterSkills(
-    state.roster,
-    difficulty.playerBatting,
-    difficulty.playerBowling,
-  );
+  const stageBoost = opponent.pressure;
+  const playerRoster = getDisplayRoster(state.roster, state.difficulty);
+  const opponentRoster = selectBestXI(getOpponentRoster(opponent));
   const opponentAdjusted = adjustRosterSkills(
     opponentRoster,
-    difficulty.opponentBatting + stageBoost,
-    difficulty.opponentBowling + stageBoost,
+    stageBoost,
+    stageBoost,
   );
   const playerBattingOrder = reorderAdjustedRoster(
     playerRoster,
@@ -1404,7 +1598,12 @@ export function simulateMatch(state, random = Math.random) {
     inningsIndex: 0,
     target: null,
     random,
-    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+    conditions:
+      opponent.conditions || {
+        weather: WEATHER_OPTIONS.clear,
+        surface: SURFACE_OPTIONS.flat,
+        outfield: OUTFIELD_OPTIONS.average,
+      },
   });
 
   const secondInningsTarget = firstInnings.runs + 1;
@@ -1414,7 +1613,12 @@ export function simulateMatch(state, random = Math.random) {
     inningsIndex: 1,
     target: secondInningsTarget,
     random,
-    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+    conditions:
+      opponent.conditions || {
+        weather: WEATHER_OPTIONS.clear,
+        surface: SURFACE_OPTIONS.flat,
+        outfield: OUTFIELD_OPTIONS.average,
+      },
   });
 
   const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
@@ -1432,8 +1636,8 @@ export function simulateMatch(state, random = Math.random) {
   if (chaseSucceeded) {
     marginType = "wickets";
     marginValue = userBatsFirst
-      ? clamp(10 - opponentWickets, 1, 9)
-      : clamp(10 - playerWickets, 1, 9);
+      ? clamp(10 - opponentWickets, 1, 10)
+      : clamp(10 - playerWickets, 1, 10);
   }
 
   const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
@@ -1449,7 +1653,7 @@ export function simulateMatch(state, random = Math.random) {
   const result = {
     opponent,
     stage: opponent.stage,
-    weather: opponent.weather,
+    conditions: opponent.conditions,
     won: playerWon,
     battingFirst: userBatsFirst ? "player" : "opponent",
     playerRuns,
@@ -1471,6 +1675,10 @@ export function simulateMatch(state, random = Math.random) {
   };
 
   const results = [...state.results, result];
+  const isGroupStage = state.matchIndex < 3;
+  const completedGroupMatches = results.filter((match, index) => index < 3);
+  const groupWins = completedGroupMatches.filter((match) => match.won).length;
+  const groupStageComplete = state.matchIndex === 2;
   const lastMatch = state.matchIndex === TOURNAMENT_OPPONENTS.length - 1;
 
   if (playerWon && lastMatch) {
@@ -1486,6 +1694,37 @@ export function simulateMatch(state, random = Math.random) {
   }
 
   if (playerWon) {
+    if (groupStageComplete && groupWins < 2) {
+      return {
+        ...state,
+        results,
+        latestMatch: result,
+        eliminated: true,
+        phase: "finished",
+        currentOpponent: null,
+      };
+    }
+
+    return {
+      ...state,
+      results,
+      latestMatch: result,
+      currentOpponent: null,
+      matchIndex: state.matchIndex + 1,
+    };
+  }
+
+  if (isGroupStage && !groupStageComplete) {
+    return {
+      ...state,
+      results,
+      latestMatch: result,
+      currentOpponent: null,
+      matchIndex: state.matchIndex + 1,
+    };
+  }
+
+  if (groupStageComplete && groupWins >= 2) {
     return {
       ...state,
       results,
@@ -1522,7 +1761,7 @@ export function revealNextOpponent(state) {
     ...state,
     currentOpponent: {
       ...TOURNAMENT_OPPONENTS[state.matchIndex],
-      weather: getWeatherPatternForOpponent(TOURNAMENT_OPPONENTS[state.matchIndex]),
+      conditions: getConditionsForOpponent(TOURNAMENT_OPPONENTS[state.matchIndex]),
     },
   };
 }

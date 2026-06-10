@@ -119,6 +119,7 @@ button {
 .match-card p,
 .card-meta,
 .card-traits,
+.card-preference-row,
 .candidate-team,
 .squad-note {
   color: var(--muted);
@@ -461,10 +462,21 @@ button {
   font-weight: 700;
 }
 
-.card-traits {
+.card-preferences {
   margin: 2px 0 0;
+  display: grid;
+  gap: 2px;
+}
+
+.card-preference-row {
+  margin: 0;
   font-size: 0.72rem;
   line-height: 1.35;
+}
+
+.card-preference-row strong {
+  color: var(--text);
+  font-weight: 600;
 }
 
 .candidate-highlight {
@@ -538,6 +550,10 @@ button {
 }
 
 .roster-matrix .card-meta {
+  grid-column: 1 / 2;
+}
+
+.roster-matrix .card-preferences {
   grid-column: 1 / 2;
 }
 

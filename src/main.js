@@ -3,6 +3,8 @@ import {
   TOURNAMENT_OPPONENTS,
   createInitialState,
   draftPlayer,
+  getDifficultyAdjustedPlayer,
+  getDisplayRoster,
   getCurrentOpponent,
   getOpponentMetrics,
   getProgressLabel,
@@ -19,6 +21,14 @@ const STATS_KEY = "400-0-career";
 
 let state = createInitialState();
 let career = loadCareer();
+
+function currentDifficulty() {
+  return DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty) || DIFFICULTY_LEVELS[1];
+}
+
+function ratingsAreHidden() {
+  return currentDifficulty().hideRatings;
+}
 
 function cleanPlayerName(name) {
   const flagTokens = new Set(["c", "captain", "vc", "vice captain", "vice-captain", "wk"]);
@@ -71,17 +81,25 @@ function formatBattingHand(player) {
 }
 
 function formatBowlingStyle(player) {
-  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling <= 0) {
-    return "";
+  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling < 40) {
+    return "None";
   }
 
-  return player.bowlingHand ? `${player.bowlingHand} arm ${player.bowlingStyle}` : player.bowlingStyle;
+  return player.bowlingHand ? `${player.bowlingHand} Arm ${player.bowlingStyle}` : player.bowlingStyle;
 }
 
-function playerTraitMarkup(player) {
-  return [formatBattingHand(player), player.battingStyle || player.aggressionLevel || "", formatBowlingStyle(player)]
+function playerPreferenceRowsMarkup(player) {
+  const battingPreferences = [formatBattingHand(player), player.battingStyle || player.aggressionLevel || "Balanced"]
     .filter(Boolean)
     .join(" · ");
+  const bowlingPreferences = formatBowlingStyle(player);
+
+  return `
+    <div class="card-preferences">
+      <p class="card-preference-row"><strong>Batting Preferences:</strong> ${escapeHtml(battingPreferences)}</p>
+      <p class="card-preference-row"><strong>Bowling Preferences:</strong> ${escapeHtml(bowlingPreferences)}</p>
+    </div>
+  `;
 }
 
 function formatBattingEntry(entry) {
@@ -187,20 +205,27 @@ function rosterMarkup() {
     return `<p class="empty-copy">Your XI starts empty. Start the draft and build from World Cup history.</p>`;
   }
 
-  return state.roster
+  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
+
+  return displayRoster
     .map((player) => {
       const allRounder = isAllRounderPlayer(player);
+      const ratingsMarkup = ratingsAreHidden()
+        ? ""
+        : `
+            <dl class="roster-stats">
+              <div><dt>Bat</dt><dd>${player.batting}</dd></div>
+              <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
+            </dl>
+          `;
 
       return `
         <article class="roster-card ${allRounder ? "roster-card--allrounder" : ""}">
           <div class="roster-matrix">
             <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
-            <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
-            <dl class="roster-stats">
-              <div><dt>Bat</dt><dd>${player.batting}</dd></div>
-              <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
-            </dl>
+            ${playerPreferenceRowsMarkup(player)}
+            ${ratingsMarkup}
           </div>
         </article>
       `;
@@ -277,7 +302,9 @@ function opponentPanelMarkup() {
       </div>
       <div class="scout-list">
         <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
-        <div><span>Weather</span><strong>${escapeHtml(opponent.weather?.label || "--")}</strong></div>
+        <div><span>Weather</span><strong>${escapeHtml(opponent.conditions?.weather?.label || "--")}</strong></div>
+        <div><span>Surface</span><strong>${escapeHtml(opponent.conditions?.surface?.label || "--")}</strong></div>
+        <div><span>Outfield</span><strong>${escapeHtml(opponent.conditions?.outfield?.label || "--")}</strong></div>
         <div><span>Batting</span><strong>${metrics.batting}</strong></div>
         <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
       </div>
@@ -417,6 +444,20 @@ function scorecardSummaryMarkup(match) {
   `;
 }
 
+function inningsOrderedScoreRows(match) {
+  if (match.battingFirst === "player") {
+    return [
+      { label: "You", score: match.playerScore },
+      { label: match.opponent.shortName, score: match.opponentScore },
+    ];
+  }
+
+  return [
+    { label: match.opponent.shortName, score: match.opponentScore },
+    { label: "You", score: match.playerScore },
+  ];
+}
+
 function candidateMarkup() {
   if (state.phase !== "draft") {
     return "";
@@ -427,16 +468,20 @@ function candidateMarkup() {
   }
 
   return state.candidateSet
-    .map((player) => {
+    .map((basePlayer) => {
+      const player = getDifficultyAdjustedPlayer(basePlayer, state.difficulty);
       const allRounder = isAllRounderPlayer(player);
+      const ratingsMarkup = ratingsAreHidden()
+        ? ""
+        : `<p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>`;
 
       return `
-        <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${player.id}">
+        <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${basePlayer.id}">
           <div class="candidate-listing">
             <div>
               <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
-              <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
-              <p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>
+              ${playerPreferenceRowsMarkup(player)}
+              ${ratingsMarkup}
             </div>
             <div class="candidate-listing__meta">
               <span class="candidate-role">${getPlayerRoleLabel(player)}</span>
@@ -519,14 +564,16 @@ function resultMarkup() {
       <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
       <h3>${escapeHtml(state.latestMatch.opponent.label)}</h3>
       <div class="scoreline">
-        <div>
-          <span>You</span>
-          <strong>${escapeHtml(state.latestMatch.playerScore)}</strong>
-        </div>
-        <div>
-          <span>${escapeHtml(state.latestMatch.opponent.shortName)}</span>
-          <strong>${escapeHtml(state.latestMatch.opponentScore)}</strong>
-        </div>
+        ${inningsOrderedScoreRows(state.latestMatch)
+          .map(
+            (entry) => `
+              <div>
+                <span>${escapeHtml(entry.label)}</span>
+                <strong>${escapeHtml(entry.score)}</strong>
+              </div>
+            `,
+          )
+          .join("")}
       </div>
       <p class="headline">${escapeHtml(state.latestMatch.headline)}</p>
       <p class="performer">Standout: ${escapeHtml(cleanPlayerName(state.latestMatch.performer.name))}</p>
@@ -550,8 +597,9 @@ function resultsHistoryMarkup() {
       </div>
       <div class="results-list">
         ${state.results
-          .map(
-            (match) => `
+          .map((match) => {
+            const scoreRows = inningsOrderedScoreRows(match);
+            return `
               <article class="result-row">
                 <div>
                   <p class="schedule-stage">${escapeHtml(match.stage)}</p>
@@ -559,12 +607,15 @@ function resultsHistoryMarkup() {
                   <p class="candidate-team">${escapeHtml(match.headline)}</p>
                 </div>
                 <div class="result-scores">
-                  <span>You ${escapeHtml(match.playerScore)}</span>
-                  <span>${escapeHtml(match.opponent.shortName)} ${escapeHtml(match.opponentScore)}</span>
+                  ${scoreRows
+                    .map(
+                      (entry) => `<span>${escapeHtml(entry.label)} ${escapeHtml(entry.score)}</span>`,
+                    )
+                    .join("")}
                 </div>
               </article>
-            `,
-          )
+            `;
+          })
           .join("")}
       </div>
     </section>
@@ -633,24 +684,38 @@ function statusCopy() {
     const opponent = getCurrentOpponent(state);
     if (!opponent) {
       if (state.results.length === 0 && state.matchIndex === 0) {
-        return "Your XI is set. Press Start Tournament when you're ready.";
+        return "Your XI is set. Three group matches await, and you need 2 wins to qualify. Press Start Tournament when you're ready.";
       }
       return state.matchIndex < TOURNAMENT_OPPONENTS.length
         ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return "Next opponent loaded. Check the weather, then press Play match.";
+    return "Next opponent loaded. Check the conditions, then press Play match.";
   }
 
   if (state.champion) {
-    return "You went the distance and lifted the 400-0 World Cup.";
+    return "You went the distance and lifted the Cricket World Cup.";
   }
 
   return "The run is over. Rework the squad balance and go again.";
 }
 
+function teamSummaryMarkup(metrics) {
+  if (state.roster.length < 11) {
+    return "";
+  }
+
+  return `
+    <div class="scout-list scout-list--compact">
+      <div><span>Batting</span><strong>${metrics.batting}</strong></div>
+      <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
+    </div>
+  `;
+}
+
 function render() {
-  const metrics = getTeamMetrics(state.roster);
+  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
+  const metrics = getTeamMetrics(displayRoster);
   const showTournamentPanels = state.phase !== "draft" || state.results.length > 0;
 
   appElement.innerHTML = `
@@ -694,11 +759,8 @@ function render() {
                 <p class="eyebrow">Squad Sheet</p>
                 <h2>${state.roster.length}/11 picked</h2>
               </div>
-              <div class="mini-metrics">
-                <span>Bat ${metrics.batting || "--"}</span>
-                <span>Bowl ${metrics.bowling || "--"}</span>
-              </div>
             </div>
+            ${teamSummaryMarkup(metrics)}
             <div class="roster-list">${rosterMarkup()}</div>
           </section>
         </aside>

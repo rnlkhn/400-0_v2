@@ -45417,6 +45417,208 @@ const AMBIGUOUS_AUDIT_NAMES = (() => {
   );
 })();
 
+const LEFT_HANDED_BATTER_OVERRIDES = new Set(
+  [
+    "Adam Gilchrist",
+    "Alastair Cook",
+    "Arjuna Ranatunga",
+    "Brian Lara",
+    "Chris Gayle",
+    "David Warner",
+    "Daniel Vettori",
+    "Darren Lehmann",
+    "Eoin Morgan",
+    "Gautam Gambhir",
+    "Graeme Smith",
+    "Herschelle Gibbs",
+    "Kumar Sangakkara",
+    "Lance Klusener",
+    "Marcus Trescothick",
+    "Matthew Hayden",
+    "Michael Hussey",
+    "Misbah-ul-Haq",
+    "Mohammad Ashraful",
+    "Ravindra Jadeja",
+    "Saeed Anwar",
+    "Saurav Ganguly",
+    "Shahid Afridi",
+    "Shakib Al Hasan",
+    "Tamim Iqbal",
+    "Sanath Jayasuriya",
+    "Tillakaratne Dilshan",
+    "Yuvraj Singh",
+  ].map((name) => normalizePlayerName(name)),
+);
+
+const LEFT_ARM_BOWLER_OVERRIDES = new Set(
+  [
+    "Chaminda Vaas",
+    "Daniel Vettori",
+    "Mitchell Johnson",
+    "Mitchell Starc",
+    "Nathan Bracken",
+    "Ravindra Jadeja",
+    "Shakib Al Hasan",
+    "Sohail Tanvir",
+    "Trent Boult",
+    "Zaheer Khan",
+    "Ashantha de Mel",
+    "Mustafizur Rahman",
+    "Taijul Islam",
+    "Abdur Razzak",
+    "Reece Topley",
+    "David Willey",
+    "Sam Curran",
+    "Keshav Maharaj",
+    "Tabraiz Shamsi",
+  ].map((name) => normalizePlayerName(name)),
+);
+
+const BOWLING_STYLE_OVERRIDES = new Map(
+  Object.entries({
+    "Andrew Flintoff": "Fast Medium",
+    "Anil Kumble": "Leg Break",
+    "Ajit Agarkar": "Fast Medium",
+    "Ashley Giles": "Orthodox",
+    "Brett Lee": "Fast",
+    "Chaminda Vaas": "Fast Medium",
+    "Chris Harris": "Medium",
+    "Daniel Vettori": "Orthodox",
+    "Dale Steyn": "Fast",
+    "Darren Lehmann": "Orthodox",
+    "David Willey": "Fast Medium",
+    "Glenn Maxwell": "Off Break",
+    "Glenn McGrath": "Fast Medium",
+    "Graeme Swann": "Off Break",
+    "Harbhajan Singh": "Off Break",
+    "Imran Tahir": "Leg Break",
+    "Ish Sodhi": "Leg Break",
+    "Jacob Oram": "Medium Fast",
+    "Jacques Kallis": "Medium Fast",
+    "James Anderson": "Fast Medium",
+    "Javagal Srinath": "Fast Medium",
+    "Johan Botha": "Off Break",
+    "Jon Lewis": "Fast Medium",
+    "Keshav Maharaj": "Orthodox",
+    "Kuldeep Yadav": "Wrist Spin (Chinaman)",
+    "Liam Plunkett": "Fast Medium",
+    "Lungi Ngidi": "Fast Medium",
+    "Mark Waugh": "Off Break",
+    "Michael Bevan": "Orthodox",
+    "Michael Clarke": "Off Break",
+    "Michael Hussey": "Off Break",
+    "Michael Vaughan": "Off Break",
+    "Mitchell Johnson": "Fast",
+    "Mitchell Santner": "Orthodox",
+    "Mitchell Starc": "Fast",
+    "Moeen Ali": "Off Break",
+    "Muralitharan": "Off Break",
+    "Muttiah Muralitharan": "Off Break",
+    "Nathan Hauritz": "Off Break",
+    "Nathan Lyon": "Off Break",
+    "Paul Collingwood": "Medium",
+    "Ravichandran Ashwin": "Off Break",
+    "Ravindra Jadeja": "Orthodox",
+    "Ravi Bopara": "Medium Fast",
+    "Ricky Ponting": "Medium",
+    "Robin Peterson": "Orthodox",
+    "Ryan ten Doeschate": "Medium Fast",
+    "Saqlain Mushtaq": "Off Break",
+    "Scott Styris": "Medium Fast",
+    "Shadab Khan": "Leg Break",
+    "Shahid Afridi": "Leg Break",
+    "Shane Warne": "Leg Break",
+    "Shaun Pollock": "Fast Medium",
+    "Shoaib Malik": "Off Break",
+    "Stuart Broad": "Fast Medium",
+    "Sunil Joshi": "Orthodox",
+    "Tabraiz Shamsi": "Wrist Spin (Chinaman)",
+    "Tim Southee": "Fast Medium",
+    "Trent Boult": "Fast Medium",
+    "Wasim Akram": "Fast Medium",
+    "Yuvraj Singh": "Orthodox",
+    "Zaheer Khan": "Fast Medium",
+  }).map(([name, style]) => [normalizePlayerName(name), style]),
+);
+
+function hasMeaningfulBowling(player) {
+  return (player.bowling || 0) >= 40;
+}
+
+function inferBattingHand(player) {
+  if (player.battingHand === "Left" || player.battingHand === "Right") {
+    return player.battingHand;
+  }
+
+  return LEFT_HANDED_BATTER_OVERRIDES.has(normalizePlayerName(player.name)) ? "Left" : "Right";
+}
+
+function inferBowlingHand(player) {
+  if (!hasMeaningfulBowling(player)) {
+    return "";
+  }
+
+  if (player.bowlingHand === "Left" || player.bowlingHand === "Right") {
+    return player.bowlingHand;
+  }
+
+  if (LEFT_ARM_BOWLER_OVERRIDES.has(normalizePlayerName(player.name))) {
+    return "Left";
+  }
+
+  return "Right";
+}
+
+function inferBowlingStyle(player, role, bowlingHand) {
+  if (!hasMeaningfulBowling(player)) {
+    return "";
+  }
+
+  if (player.bowlingStyle && player.bowlingStyle !== "Unspecified") {
+    return player.bowlingStyle;
+  }
+
+  const normalizedName = normalizePlayerName(player.name);
+  if (BOWLING_STYLE_OVERRIDES.has(normalizedName)) {
+    return BOWLING_STYLE_OVERRIDES.get(normalizedName);
+  }
+
+  const battingLead = (player.batting || 0) - (player.bowling || 0) >= 15;
+  const bowlingLead = (player.bowling || 0) - (player.batting || 0) >= 15 || role === "bowler";
+  const economy = player.bowlingEconomy || 0;
+  const strikeRate = player.bowlingStrikeRate || 0;
+
+  if (bowlingHand === "Left") {
+    if (bowlingLead && (player.bowling || 0) >= 75) {
+      return "Fast Medium";
+    }
+
+    return "Orthodox";
+  }
+
+  if (bowlingLead) {
+    if ((player.bowling || 0) >= 88) {
+      return "Fast Medium";
+    }
+
+    if (economy > 0 && economy <= 4.45 && strikeRate >= 48) {
+      return "Off Break";
+    }
+
+    return "Fast Medium";
+  }
+
+  if (battingLead) {
+    if (economy > 0 && economy <= 4.65 && strikeRate >= 52) {
+      return "Off Break";
+    }
+
+    return "Medium";
+  }
+
+  return economy > 0 && economy <= 4.6 ? "Off Break" : "Medium";
+}
+
 function getPlayerNameOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
   const auditedOverride = AMBIGUOUS_AUDIT_NAMES.has(normalizedName)
@@ -45434,20 +45636,35 @@ function applyPlayerOverride(player) {
   const override = getPlayerNameOverride(player);
   const intervalEnrichment = PLAYER_INTERVAL_ENRICHMENT_BY_ID[player.id] || {};
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
-  const role = intervalEnrichment.role || inferredRole;
-
-  return {
+  const hasUsableEnrichmentRatings =
+    (intervalEnrichment.batting || 0) > 0 || (intervalEnrichment.bowling || 0) > 0;
+  const role = hasUsableEnrichmentRatings ? intervalEnrichment.role || inferredRole : inferredRole;
+  const merged = {
     ...player,
     name: normalizedName,
-    role,
     ...(override || {}),
-    ...(intervalEnrichment || {}),
     ...(PLAYER_ID_OVERRIDES[player.id] || {}),
-    battingHand: intervalEnrichment.battingHand || "",
-    bowlingHand: intervalEnrichment.bowlingHand || "",
-    bowlingStyle:
-      intervalEnrichment.bowlingStyle ||
-      ((role === "bowler" || intervalEnrichment.bowling > 0 || player.bowling > 0) ? "Unspecified" : ""),
+  };
+  const batting =
+    (intervalEnrichment.batting || 0) > 0 ? intervalEnrichment.batting : merged.batting;
+  const bowling =
+    (intervalEnrichment.bowling || 0) > 0 ? intervalEnrichment.bowling : merged.bowling;
+  const enriched = {
+    ...merged,
+    ...(intervalEnrichment || {}),
+    role,
+    batting,
+    bowling,
+  };
+  const battingHand = inferBattingHand(enriched);
+  const bowlingHand = inferBowlingHand(enriched);
+  const bowlingStyle = inferBowlingStyle(enriched, role, bowlingHand);
+
+  return {
+    ...enriched,
+    battingHand,
+    bowlingHand,
+    bowlingStyle,
     aggressionLevel: intervalEnrichment.aggressionLevel || "Balanced",
     battingStyle: intervalEnrichment.battingStyle || intervalEnrichment.aggressionLevel || "Balanced",
   };
@@ -45460,7 +45677,7 @@ const TOURNAMENT_OPPONENTS = [
     id: "bangladesh-2019",
     label: "Bangladesh 2019",
     shortName: "Bangladesh",
-    stage: "Group Stage A",
+    stage: "Group Stage Match 1",
     batting: 82,
     bowling: 80,
     overall: 80,
@@ -45471,7 +45688,7 @@ const TOURNAMENT_OPPONENTS = [
     id: "india-1983",
     label: "India 1983",
     shortName: "India",
-    stage: "Group Stage B",
+    stage: "Group Stage Match 2",
     batting: 81,
     bowling: 83,
     overall: 82,
@@ -45482,7 +45699,7 @@ const TOURNAMENT_OPPONENTS = [
     id: "pakistan-1992",
     label: "Pakistan 1992",
     shortName: "Pakistan",
-    stage: "Group Stage C",
+    stage: "Group Stage Match 3",
     batting: 84,
     bowling: 87,
     overall: 85,
@@ -45493,7 +45710,7 @@ const TOURNAMENT_OPPONENTS = [
     id: "south-africa-1999",
     label: "South Africa 1999",
     shortName: "South Africa",
-    stage: "Quarter-final",
+    stage: "QF",
     batting: 89,
     bowling: 89,
     overall: 89,
@@ -45504,11 +45721,11 @@ const TOURNAMENT_OPPONENTS = [
     id: "india-2011",
     label: "India 2011",
     shortName: "India",
-    stage: "Semi-final",
+    stage: "SF",
     batting: 92,
     bowling: 88,
     overall: 92,
-    pressure: 6,
+    pressure: 7,
     note: "Elite chase control backed by experienced middle-overs bowling.",
   },
   {
@@ -45519,7 +45736,7 @@ const TOURNAMENT_OPPONENTS = [
     batting: 92,
     bowling: 93,
     overall: 94,
-    pressure: 8,
+    pressure: 10,
     note: "A champion side with superstar bowling and no emotional drop-off.",
   },
 ];
@@ -45531,29 +45748,23 @@ const DIFFICULTY_LEVELS = [
   {
     id: "county",
     label: "County",
-    description: "A friendlier ladder with a little breathing room.",
-    playerBatting: 6,
-    playerBowling: 6,
-    opponentBatting: -4,
-    opponentBowling: -4,
+    description: "Your drafted players perform at their peak ratings.",
+    usePrimeRatings: true,
+    hideRatings: false,
   },
   {
     id: "international",
     label: "International",
     description: "Baseline World Cup difficulty.",
-    playerBatting: 0,
-    playerBowling: 0,
-    opponentBatting: 0,
-    opponentBowling: 0,
+    usePrimeRatings: false,
+    hideRatings: false,
   },
   {
     id: "legend",
     label: "Legend",
-    description: "A harsher ladder where weak links get punished fast.",
-    playerBatting: -4,
-    playerBowling: -4,
-    opponentBatting: 6,
-    opponentBowling: 6,
+    description: "Player ratings are hidden, so you draft on instinct.",
+    usePrimeRatings: false,
+    hideRatings: true,
   },
 ];
 
@@ -45597,34 +45808,34 @@ const AGGRESSION_PROFILES = {
   },
 };
 
-const WEATHER_PATTERNS = {
+const WEATHER_OPTIONS = {
   overcast: {
     id: "overcast",
     label: "Overcast",
-    batting: -3,
-    seam: 5,
+    batting: -2,
+    seam: 4,
     swing: 6,
-    spin: -2,
-    pace: 3,
+    spin: -1,
+    pace: 2,
     chase: -1,
   },
-  "cool-and-true": {
-    id: "cool-and-true",
-    label: "Cool and true",
-    batting: 1,
+  cool: {
+    id: "cool",
+    label: "Cool",
+    batting: 0,
     seam: 2,
     swing: 1,
     spin: 0,
     pace: 1,
     chase: 0,
   },
-  "hot-and-dry": {
-    id: "hot-and-dry",
-    label: "Hot and dry",
-    batting: 2,
+  hot: {
+    id: "hot",
+    label: "Hot",
+    batting: 1,
     seam: -1,
     swing: -2,
-    spin: 4,
+    spin: 2,
     pace: 0,
     chase: 0,
   },
@@ -45638,33 +45849,13 @@ const WEATHER_PATTERNS = {
     pace: 1,
     chase: 1,
   },
-  "used-surface": {
-    id: "used-surface",
-    label: "Used surface",
-    batting: -1,
-    seam: 0,
+  clear: {
+    id: "clear",
+    label: "Clear",
+    batting: 2,
+    seam: -1,
     swing: -1,
-    spin: 5,
-    pace: -1,
-    chase: -1,
-  },
-  "hard-and-fast": {
-    id: "hard-and-fast",
-    label: "Hard and fast",
-    batting: 1,
-    seam: 2,
-    swing: 0,
-    spin: -1,
-    pace: 4,
-    chase: 0,
-  },
-  "flat-and-clear": {
-    id: "flat-and-clear",
-    label: "Flat and clear",
-    batting: 4,
-    seam: -2,
-    swing: -2,
-    spin: -1,
+    spin: 0,
     pace: 0,
     chase: 1,
   },
@@ -45680,82 +45871,206 @@ const WEATHER_PATTERNS = {
   },
 };
 
+const SURFACE_OPTIONS = {
+  green: {
+    id: "green",
+    label: "Green",
+    batting: -2,
+    seam: 5,
+    swing: 2,
+    spin: -2,
+    pace: 3,
+  },
+  dry: {
+    id: "dry",
+    label: "Dry",
+    batting: 0,
+    seam: -1,
+    swing: -1,
+    spin: 4,
+    pace: 0,
+  },
+  crumbling: {
+    id: "crumbling",
+    label: "Crumbling",
+    batting: -3,
+    seam: -1,
+    swing: -1,
+    spin: 6,
+    pace: -1,
+  },
+  hard: {
+    id: "hard",
+    label: "Hard",
+    batting: 1,
+    seam: 1,
+    swing: 0,
+    spin: -1,
+    pace: 4,
+  },
+  flat: {
+    id: "flat",
+    label: "Flat",
+    batting: 4,
+    seam: -2,
+    swing: -2,
+    spin: -1,
+    pace: 0,
+  },
+  used: {
+    id: "used",
+    label: "Used",
+    batting: -1,
+    seam: 0,
+    swing: -1,
+    spin: 3,
+    pace: -1,
+  },
+};
+
+const OUTFIELD_OPTIONS = {
+  fast: {
+    id: "fast",
+    label: "Fast",
+    batting: 3,
+    boundary: 0.03,
+    double: -0.005,
+  },
+  average: {
+    id: "average",
+    label: "Average",
+    batting: 0,
+    boundary: 0,
+    double: 0,
+  },
+  slow: {
+    id: "slow",
+    label: "Slow",
+    batting: -2,
+    boundary: -0.02,
+    double: 0.008,
+  },
+  heavy: {
+    id: "heavy",
+    label: "Heavy",
+    batting: -3,
+    boundary: -0.03,
+    double: 0.01,
+  },
+};
+
 const WEATHER_WEIGHTS_BY_TEAM = {
   england: [
     ["overcast", 5],
-    ["cool-and-true", 3],
-    ["flat-and-clear", 1],
+    ["cool", 3],
+    ["clear", 1],
   ],
   "new zealand": [
     ["overcast", 4],
-    ["cool-and-true", 4],
-    ["hard-and-fast", 1],
+    ["cool", 4],
+    ["clear", 1],
   ],
   ireland: [
     ["overcast", 5],
-    ["cool-and-true", 3],
+    ["cool", 3],
     ["humid", 1],
   ],
   scotland: [
     ["overcast", 5],
-    ["cool-and-true", 3],
+    ["cool", 3],
     ["humid", 1],
   ],
   netherlands: [
     ["overcast", 4],
-    ["cool-and-true", 4],
-    ["flat-and-clear", 1],
+    ["cool", 4],
+    ["clear", 1],
   ],
   india: [
-    ["hot-and-dry", 4],
-    ["used-surface", 3],
+    ["hot", 4],
+    ["clear", 2],
     ["dewy", 2],
   ],
   pakistan: [
-    ["hot-and-dry", 3],
+    ["hot", 3],
     ["humid", 3],
-    ["used-surface", 2],
+    ["clear", 2],
   ],
   sri_lanka: [
-    ["hot-and-dry", 3],
+    ["hot", 3],
     ["humid", 3],
     ["dewy", 2],
   ],
   bangladesh: [
     ["humid", 4],
-    ["hot-and-dry", 2],
+    ["hot", 2],
     ["dewy", 3],
   ],
   afghanistan: [
-    ["hot-and-dry", 4],
-    ["used-surface", 3],
-    ["hard-and-fast", 2],
+    ["hot", 4],
+    ["clear", 2],
+    ["dewy", 1],
   ],
   australia: [
-    ["hard-and-fast", 5],
-    ["flat-and-clear", 3],
-    ["hot-and-dry", 1],
+    ["clear", 4],
+    ["hot", 3],
+    ["dewy", 1],
   ],
   "south africa": [
-    ["hard-and-fast", 5],
-    ["flat-and-clear", 2],
-    ["hot-and-dry", 2],
+    ["clear", 4],
+    ["hot", 3],
+    ["cool", 1],
   ],
   zimbabwe: [
-    ["hard-and-fast", 3],
-    ["hot-and-dry", 3],
-    ["flat-and-clear", 2],
+    ["hot", 3],
+    ["clear", 3],
+    ["humid", 1],
   ],
   namibia: [
-    ["hard-and-fast", 4],
-    ["hot-and-dry", 3],
-    ["flat-and-clear", 1],
+    ["clear", 4],
+    ["hot", 3],
+    ["cool", 1],
   ],
   "west indies": [
     ["humid", 4],
     ["dewy", 3],
-    ["flat-and-clear", 2],
+    ["clear", 2],
   ],
+};
+
+const SURFACE_WEIGHTS_BY_TEAM = {
+  england: [["green", 4], ["used", 2], ["flat", 1]],
+  "new zealand": [["green", 3], ["used", 2], ["hard", 1]],
+  ireland: [["green", 4], ["used", 2], ["flat", 1]],
+  scotland: [["green", 4], ["used", 2], ["flat", 1]],
+  netherlands: [["green", 3], ["used", 2], ["flat", 1]],
+  india: [["dry", 3], ["used", 3], ["crumbling", 2], ["flat", 1]],
+  pakistan: [["dry", 2], ["used", 3], ["flat", 2]],
+  sri_lanka: [["dry", 3], ["used", 3], ["crumbling", 1]],
+  bangladesh: [["used", 3], ["dry", 2], ["flat", 2]],
+  afghanistan: [["dry", 4], ["crumbling", 2], ["hard", 1]],
+  australia: [["hard", 4], ["flat", 3], ["green", 1]],
+  "south africa": [["hard", 4], ["green", 2], ["flat", 2]],
+  zimbabwe: [["hard", 3], ["dry", 2], ["used", 2]],
+  namibia: [["hard", 4], ["dry", 2], ["flat", 1]],
+  "west indies": [["flat", 3], ["used", 2], ["dry", 1]],
+};
+
+const OUTFIELD_WEIGHTS_BY_TEAM = {
+  england: [["average", 3], ["slow", 2], ["fast", 1]],
+  "new zealand": [["average", 3], ["fast", 2], ["slow", 1]],
+  ireland: [["slow", 3], ["average", 2], ["heavy", 1]],
+  scotland: [["slow", 3], ["average", 2], ["heavy", 1]],
+  netherlands: [["average", 3], ["slow", 2], ["fast", 1]],
+  india: [["fast", 3], ["average", 2], ["slow", 1]],
+  pakistan: [["fast", 2], ["average", 3], ["slow", 1]],
+  sri_lanka: [["fast", 2], ["average", 2], ["heavy", 1]],
+  bangladesh: [["slow", 2], ["average", 3], ["heavy", 1]],
+  afghanistan: [["fast", 2], ["average", 2], ["slow", 1]],
+  australia: [["fast", 4], ["average", 2], ["slow", 1]],
+  "south africa": [["fast", 4], ["average", 2], ["slow", 1]],
+  zimbabwe: [["average", 3], ["fast", 2], ["slow", 1]],
+  namibia: [["fast", 3], ["average", 2], ["slow", 1]],
+  "west indies": [["fast", 3], ["average", 2], ["slow", 1]],
 };
 
 function clamp(value, min, max) {
@@ -45787,22 +46102,33 @@ function getAggressionProfile(player) {
   return AGGRESSION_PROFILES[player.aggressionLevel] || AGGRESSION_PROFILES.Balanced;
 }
 
-function getWeatherPatternForOpponent(opponent, random = Math.random) {
-  const weatherWeights =
-    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.shortName)] ||
-    WEATHER_WEIGHTS_BY_TEAM[normalizeTeamKey(opponent.label.split(" ").slice(0, -1).join(" "))] ||
-    [["flat-and-clear", 1]];
-  const totalWeight = weatherWeights.reduce((sum, [, weight]) => sum + weight, 0);
+function pickWeightedOption(optionsById, weights, random = Math.random) {
+  const totalWeight = weights.reduce((sum, [, weight]) => sum + weight, 0);
   let threshold = random() * totalWeight;
 
-  for (const [weatherId, weight] of weatherWeights) {
+  for (const [optionId, weight] of weights) {
     threshold -= weight;
     if (threshold <= 0) {
-      return WEATHER_PATTERNS[weatherId];
+      return optionsById[optionId];
     }
   }
 
-  return WEATHER_PATTERNS[weatherWeights[weatherWeights.length - 1][0]];
+  return optionsById[weights[weights.length - 1][0]];
+}
+
+function getConditionsForOpponent(opponent, random = Math.random) {
+  const teamKey =
+    normalizeTeamKey(opponent.shortName) ||
+    normalizeTeamKey(opponent.label.split(" ").slice(0, -1).join(" "));
+  const weatherWeights = WEATHER_WEIGHTS_BY_TEAM[teamKey] || [["clear", 1]];
+  const surfaceWeights = SURFACE_WEIGHTS_BY_TEAM[teamKey] || [["flat", 1]];
+  const outfieldWeights = OUTFIELD_WEIGHTS_BY_TEAM[teamKey] || [["average", 1]];
+
+  return {
+    weather: pickWeightedOption(WEATHER_OPTIONS, weatherWeights, random),
+    surface: pickWeightedOption(SURFACE_OPTIONS, surfaceWeights, random),
+    outfield: pickWeightedOption(OUTFIELD_OPTIONS, outfieldWeights, random),
+  };
 }
 
 function getTotalRequiredPlayers() {
@@ -45975,8 +46301,12 @@ function getAvailableSquads(state) {
 
 function buildCandidateSet(state, squadId) {
   return getSquadPlayers(state, squadId).sort((left, right) => {
-    const leftValue = left.batting + left.bowling + (isAllRounderPlayer(left) ? 8 : 0);
-    const rightValue = right.batting + right.bowling + (isAllRounderPlayer(right) ? 8 : 0);
+    const adjustedLeft = getDifficultyAdjustedPlayer(left, state.difficulty);
+    const adjustedRight = getDifficultyAdjustedPlayer(right, state.difficulty);
+    const leftValue =
+      adjustedLeft.batting + adjustedLeft.bowling + (isAllRounderPlayer(adjustedLeft) ? 8 : 0);
+    const rightValue =
+      adjustedRight.batting + adjustedRight.bowling + (isAllRounderPlayer(adjustedRight) ? 8 : 0);
     return rightValue - leftValue;
   });
 }
@@ -46201,10 +46531,10 @@ function getTeamMetrics(roster) {
 
   const topBatters = [...roster]
     .sort((left, right) => right.batting - left.batting || right.bowling - left.bowling)
-    .slice(0, Math.min(11, roster.length));
+    .slice(0, Math.min(5, roster.length));
   const topBowlers = [...roster]
     .sort((left, right) => right.bowling - left.bowling || right.batting - left.batting)
-    .slice(0, Math.min(11, roster.length));
+    .slice(0, Math.min(5, roster.length));
 
   const batting = topBatters.reduce((total, player) => total + player.batting, 0) / topBatters.length;
   const bowling = topBowlers.reduce((total, player) => total + player.bowling, 0) / topBowlers.length;
@@ -46220,7 +46550,7 @@ function getTeamMetrics(roster) {
   const bowlingDepth = counts.bowler + allRounders * 0.75;
   const balancePenalty =
     Math.max(0, 5 - battingDepth) * 1.6 + Math.max(0, 5 - bowlingDepth) * 1.9;
-  const overall = batting * 0.54 + bowling * 0.46 + chemistry - balancePenalty;
+  const overall = batting * 0.5 + bowling * 0.5 + chemistry * 0.15 - balancePenalty;
 
   return {
     batting: round(batting),
@@ -46230,6 +46560,26 @@ function getTeamMetrics(roster) {
     overall: round(overall),
   };
 }
+
+function buildPrimeRatingsMap() {
+  const byIdentity = new Map();
+
+  for (const player of PLAYER_POOL) {
+    const identity = getPlayerIdentity(player);
+    const current = byIdentity.get(identity) || {
+      batting: player.batting,
+      bowling: player.bowling,
+    };
+
+    current.batting = Math.max(current.batting, player.batting);
+    current.bowling = Math.max(current.bowling, player.bowling);
+    byIdentity.set(identity, current);
+  }
+
+  return byIdentity;
+}
+
+const PRIME_RATINGS_BY_IDENTITY = buildPrimeRatingsMap();
 
 function getTopAverage(roster, skill, count) {
   if (roster.length === 0) {
@@ -46311,6 +46661,10 @@ function selectBestXI(roster) {
 }
 
 function formatScore(runs, wickets) {
+  if (wickets >= 10) {
+    return `${runs}`;
+  }
+
   return `${runs}/${wickets}`;
 }
 
@@ -46327,6 +46681,35 @@ function adjustRosterSkills(roster, battingDelta, bowlingDelta) {
     batting: clamp(round(player.batting + battingDelta), 0, 99),
     bowling: clamp(round(player.bowling + bowlingDelta), 0, 99),
   }));
+}
+
+function applyDifficultyProfileToPlayer(player, difficultyId) {
+  if (!player) {
+    return player;
+  }
+
+  if (difficultyId !== "county") {
+    return player;
+  }
+
+  const prime = PRIME_RATINGS_BY_IDENTITY.get(getPlayerIdentity(player));
+  if (!prime) {
+    return player;
+  }
+
+  return {
+    ...player,
+    batting: Math.max(player.batting, prime.batting),
+    bowling: Math.max(player.bowling, prime.bowling),
+  };
+}
+
+function getDifficultyAdjustedPlayer(player, difficultyId) {
+  return applyDifficultyProfileToPlayer(player, difficultyId);
+}
+
+function getDisplayRoster(roster, difficultyId) {
+  return roster.map((player) => getDifficultyAdjustedPlayer(player, difficultyId));
 }
 
 function chooseStandout(roster, skill, random) {
@@ -46597,6 +46980,11 @@ function getStyleFlags(player) {
       style.includes("medium fast") ||
       style.includes("fast medium") ||
       style === "medium",
+    seam:
+      style.includes("fast") ||
+      style.includes("medium fast") ||
+      style.includes("fast medium") ||
+      style === "medium",
     swing:
       style.includes("fast") ||
       style.includes("medium") ||
@@ -46647,21 +47035,26 @@ function getMatchupAdvantage(striker, bowler) {
   return 0;
 }
 
-function getWeatherAdvantage(weather, bowler, ballNumber, inningsIndex) {
+function getBowlingConditionsAdvantage(conditions, bowler, ballNumber, inningsIndex) {
   const flags = getStyleFlags(bowler);
   const inNewBall = ballNumber < 120;
-  let value = weather.batting * -0.002;
+  const { weather, surface, outfield } = conditions;
+  let value = (weather.batting + surface.batting + outfield.batting) * -0.0015;
 
   if (flags.pace) {
-    value += weather.pace * 0.004;
+    value += (weather.pace + surface.pace) * 0.0045;
   }
 
   if (flags.swing && inNewBall) {
-    value += weather.swing * 0.005;
+    value += (weather.swing + surface.swing) * 0.0055;
+  }
+
+  if (flags.seam && inNewBall) {
+    value += surface.seam * 0.004;
   }
 
   if (flags.spin && ballNumber >= 120) {
-    value += weather.spin * 0.004;
+    value += (weather.spin + surface.spin) * 0.0048;
   }
 
   if (inningsIndex === 1 && weather.id === "dewy" && flags.spin && ballNumber >= 150) {
@@ -46671,12 +47064,17 @@ function getWeatherAdvantage(weather, bowler, ballNumber, inningsIndex) {
   return value;
 }
 
-function getBattingWeatherModifier(weather, inningsIndex) {
-  let modifier = weather.batting * 0.004;
+function getBattingConditionsModifier(conditions, inningsIndex) {
+  const { weather, surface, outfield } = conditions;
+  let modifier = (weather.batting + surface.batting + outfield.batting) * 0.0035;
   if (inningsIndex === 1) {
     modifier += weather.chase * 0.003;
   }
   return modifier;
+}
+
+function getOutfieldModifier(conditions) {
+  return conditions.outfield;
 }
 
 function reorderAdjustedRoster(adjustedRoster, orderIds, fallbackOrderBuilder) {
@@ -46701,7 +47099,7 @@ function simulateOverByOver({
   inningsIndex,
   target,
   random,
-  weather,
+  conditions,
 }) {
   let strikerIndex = 0;
   let nonStrikerIndex = 1;
@@ -46736,8 +47134,9 @@ function simulateOverByOver({
       const bowlingEntry = bowlingStats.get(bowler.id);
       const aggressionProfile = getAggressionProfile(striker);
       const matchupAdvantage = getMatchupAdvantage(striker, bowler);
-      const weatherAdvantage = getWeatherAdvantage(weather, bowler, balls, inningsIndex);
-      const battingWeather = getBattingWeatherModifier(weather, inningsIndex);
+      const bowlingConditions = getBowlingConditionsAdvantage(conditions, bowler, balls, inningsIndex);
+      const battingConditions = getBattingConditionsModifier(conditions, inningsIndex);
+      const outfield = getOutfieldModifier(conditions);
 
       for (let ballInOver = 0; ballInOver < 6; ballInOver += 1) {
         if (balls >= 300 || wickets >= 10 || (target && totalRuns >= target)) {
@@ -46749,52 +47148,71 @@ function simulateOverByOver({
         const skillEdge = (striker.batting - bowler.bowling) / 100;
         const chaseRate = target ? runsNeeded / Math.max(1, ballsRemaining) : 0;
         const pressureBoost = target ? clamp(chaseRate - 1, -0.18, 0.45) : 0;
+        const currentRunRate = balls > 0 ? totalRuns / balls : 0;
+        const chaseUrgency = target ? clamp(chaseRate - currentRunRate, 0, 1.2) : 0;
+        const lateChaseDesperation = target
+          ? clamp((balls - 180) / 120, 0, 1) * clamp(chaseRate - 0.82, 0, 0.8)
+          : 0;
         const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
         const newBallBoost = balls < 120 ? 0.012 : 0;
         const wicketChance = clamp(
           0.085 -
             skillEdge * 0.02 +
             matchupAdvantage +
-            weatherAdvantage +
+            bowlingConditions +
             newBallBoost +
             Math.max(0, pressureBoost) * 0.02 +
+            chaseUrgency * 0.03 +
+            lateChaseDesperation * 0.05 +
             deathOversBoost * 0.5 +
             aggressionProfile.wicketRisk -
-            battingWeather * 0.3,
+            battingConditions * 0.3,
           0.028,
           0.16,
         );
         const singleChance = clamp(
           0.27 +
             skillEdge * 0.025 +
-            battingWeather * 0.2 -
+            battingConditions * 0.2 -
             Math.max(0, pressureBoost) * 0.04 +
+            chaseUrgency * -0.03 +
+            lateChaseDesperation * -0.045 +
             aggressionProfile.singleDelta,
           0.18,
           0.36,
         );
         const doubleChance = clamp(
-          0.065 + skillEdge * 0.014 + battingWeather * 0.04 + aggressionProfile.doubleDelta,
+          0.065 +
+            skillEdge * 0.014 +
+            battingConditions * 0.03 +
+            chaseUrgency * 0.006 +
+            aggressionProfile.doubleDelta +
+            outfield.double,
           0.025,
           0.1,
         );
         const boundaryChance = clamp(
           0.072 +
             skillEdge * 0.025 +
-            battingWeather * 0.8 +
+            battingConditions * 0.7 +
             deathOversBoost +
+            chaseUrgency * 0.03 +
+            lateChaseDesperation * 0.05 +
             aggressionProfile.boundaryDelta -
-            weatherAdvantage * 0.35,
+            bowlingConditions * 0.32 +
+            outfield.boundary,
           0.028,
           0.14,
         );
         const sixChance = clamp(
           0.007 +
             skillEdge * 0.01 +
-            battingWeather * 0.6 +
+            battingConditions * 0.55 +
             deathOversBoost +
+            chaseUrgency * 0.012 +
+            lateChaseDesperation * 0.02 +
             aggressionProfile.sixDelta -
-            weatherAdvantage * 0.12,
+            bowlingConditions * 0.1,
           0.001,
           0.04,
         );
@@ -46876,21 +47294,14 @@ function simulateMatch(state, random = Math.random) {
   }
 
   const opponent = state.currentOpponent;
-  const team = getTeamMetrics(state.roster);
-  const opponentRoster = selectBestXI(getOpponentRoster(opponent));
-  const opponentTeam = getTeamMetrics(opponentRoster);
-  const difficulty = DIFFICULTY_BY_ID.get(state.difficulty) || DIFFICULTY_BY_ID.get("international");
   const userBatsFirst = random() >= 0.5;
-  const stageBoost = state.matchIndex * 2;
-  const playerRoster = adjustRosterSkills(
-    state.roster,
-    difficulty.playerBatting,
-    difficulty.playerBowling,
-  );
+  const stageBoost = opponent.pressure;
+  const playerRoster = getDisplayRoster(state.roster, state.difficulty);
+  const opponentRoster = selectBestXI(getOpponentRoster(opponent));
   const opponentAdjusted = adjustRosterSkills(
     opponentRoster,
-    difficulty.opponentBatting + stageBoost,
-    difficulty.opponentBowling + stageBoost,
+    stageBoost,
+    stageBoost,
   );
   const playerBattingOrder = reorderAdjustedRoster(
     playerRoster,
@@ -46915,7 +47326,12 @@ function simulateMatch(state, random = Math.random) {
     inningsIndex: 0,
     target: null,
     random,
-    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+    conditions:
+      opponent.conditions || {
+        weather: WEATHER_OPTIONS.clear,
+        surface: SURFACE_OPTIONS.flat,
+        outfield: OUTFIELD_OPTIONS.average,
+      },
   });
 
   const secondInningsTarget = firstInnings.runs + 1;
@@ -46925,7 +47341,12 @@ function simulateMatch(state, random = Math.random) {
     inningsIndex: 1,
     target: secondInningsTarget,
     random,
-    weather: opponent.weather || WEATHER_PATTERNS["flat-and-clear"],
+    conditions:
+      opponent.conditions || {
+        weather: WEATHER_OPTIONS.clear,
+        surface: SURFACE_OPTIONS.flat,
+        outfield: OUTFIELD_OPTIONS.average,
+      },
   });
 
   const playerRuns = userBatsFirst ? firstInnings.runs : secondInnings.runs;
@@ -46943,8 +47364,8 @@ function simulateMatch(state, random = Math.random) {
   if (chaseSucceeded) {
     marginType = "wickets";
     marginValue = userBatsFirst
-      ? clamp(10 - opponentWickets, 1, 9)
-      : clamp(10 - playerWickets, 1, 9);
+      ? clamp(10 - opponentWickets, 1, 10)
+      : clamp(10 - playerWickets, 1, 10);
   }
 
   const playerBattingCard = userBatsFirst ? firstInnings.battingCard : secondInnings.battingCard;
@@ -46960,7 +47381,7 @@ function simulateMatch(state, random = Math.random) {
   const result = {
     opponent,
     stage: opponent.stage,
-    weather: opponent.weather,
+    conditions: opponent.conditions,
     won: playerWon,
     battingFirst: userBatsFirst ? "player" : "opponent",
     playerRuns,
@@ -46982,6 +47403,10 @@ function simulateMatch(state, random = Math.random) {
   };
 
   const results = [...state.results, result];
+  const isGroupStage = state.matchIndex < 3;
+  const completedGroupMatches = results.filter((match, index) => index < 3);
+  const groupWins = completedGroupMatches.filter((match) => match.won).length;
+  const groupStageComplete = state.matchIndex === 2;
   const lastMatch = state.matchIndex === TOURNAMENT_OPPONENTS.length - 1;
 
   if (playerWon && lastMatch) {
@@ -46997,6 +47422,37 @@ function simulateMatch(state, random = Math.random) {
   }
 
   if (playerWon) {
+    if (groupStageComplete && groupWins < 2) {
+      return {
+        ...state,
+        results,
+        latestMatch: result,
+        eliminated: true,
+        phase: "finished",
+        currentOpponent: null,
+      };
+    }
+
+    return {
+      ...state,
+      results,
+      latestMatch: result,
+      currentOpponent: null,
+      matchIndex: state.matchIndex + 1,
+    };
+  }
+
+  if (isGroupStage && !groupStageComplete) {
+    return {
+      ...state,
+      results,
+      latestMatch: result,
+      currentOpponent: null,
+      matchIndex: state.matchIndex + 1,
+    };
+  }
+
+  if (groupStageComplete && groupWins >= 2) {
     return {
       ...state,
       results,
@@ -47033,7 +47489,7 @@ function revealNextOpponent(state) {
     ...state,
     currentOpponent: {
       ...TOURNAMENT_OPPONENTS[state.matchIndex],
-      weather: getWeatherPatternForOpponent(TOURNAMENT_OPPONENTS[state.matchIndex]),
+      conditions: getConditionsForOpponent(TOURNAMENT_OPPONENTS[state.matchIndex]),
     },
   };
 }
@@ -47065,6 +47521,14 @@ const STATS_KEY = "400-0-career";
 
 let state = createInitialState();
 let career = loadCareer();
+
+function currentDifficulty() {
+  return DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty) || DIFFICULTY_LEVELS[1];
+}
+
+function ratingsAreHidden() {
+  return currentDifficulty().hideRatings;
+}
 
 function cleanPlayerName(name) {
   const flagTokens = new Set(["c", "captain", "vc", "vice captain", "vice-captain", "wk"]);
@@ -47117,17 +47581,25 @@ function formatBattingHand(player) {
 }
 
 function formatBowlingStyle(player) {
-  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling <= 0) {
-    return "";
+  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling < 40) {
+    return "None";
   }
 
-  return player.bowlingHand ? `${player.bowlingHand} arm ${player.bowlingStyle}` : player.bowlingStyle;
+  return player.bowlingHand ? `${player.bowlingHand} Arm ${player.bowlingStyle}` : player.bowlingStyle;
 }
 
-function playerTraitMarkup(player) {
-  return [formatBattingHand(player), player.battingStyle || player.aggressionLevel || "", formatBowlingStyle(player)]
+function playerPreferenceRowsMarkup(player) {
+  const battingPreferences = [formatBattingHand(player), player.battingStyle || player.aggressionLevel || "Balanced"]
     .filter(Boolean)
     .join(" · ");
+  const bowlingPreferences = formatBowlingStyle(player);
+
+  return `
+    <div class="card-preferences">
+      <p class="card-preference-row"><strong>Batting Preferences:</strong> ${escapeHtml(battingPreferences)}</p>
+      <p class="card-preference-row"><strong>Bowling Preferences:</strong> ${escapeHtml(bowlingPreferences)}</p>
+    </div>
+  `;
 }
 
 function formatBattingEntry(entry) {
@@ -47233,20 +47705,27 @@ function rosterMarkup() {
     return `<p class="empty-copy">Your XI starts empty. Start the draft and build from World Cup history.</p>`;
   }
 
-  return state.roster
+  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
+
+  return displayRoster
     .map((player) => {
       const allRounder = isAllRounderPlayer(player);
+      const ratingsMarkup = ratingsAreHidden()
+        ? ""
+        : `
+            <dl class="roster-stats">
+              <div><dt>Bat</dt><dd>${player.batting}</dd></div>
+              <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
+            </dl>
+          `;
 
       return `
         <article class="roster-card ${allRounder ? "roster-card--allrounder" : ""}">
           <div class="roster-matrix">
             <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
-            <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
-            <dl class="roster-stats">
-              <div><dt>Bat</dt><dd>${player.batting}</dd></div>
-              <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
-            </dl>
+            ${playerPreferenceRowsMarkup(player)}
+            ${ratingsMarkup}
           </div>
         </article>
       `;
@@ -47323,7 +47802,9 @@ function opponentPanelMarkup() {
       </div>
       <div class="scout-list">
         <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
-        <div><span>Weather</span><strong>${escapeHtml(opponent.weather?.label || "--")}</strong></div>
+        <div><span>Weather</span><strong>${escapeHtml(opponent.conditions?.weather?.label || "--")}</strong></div>
+        <div><span>Surface</span><strong>${escapeHtml(opponent.conditions?.surface?.label || "--")}</strong></div>
+        <div><span>Outfield</span><strong>${escapeHtml(opponent.conditions?.outfield?.label || "--")}</strong></div>
         <div><span>Batting</span><strong>${metrics.batting}</strong></div>
         <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
       </div>
@@ -47463,6 +47944,20 @@ function scorecardSummaryMarkup(match) {
   `;
 }
 
+function inningsOrderedScoreRows(match) {
+  if (match.battingFirst === "player") {
+    return [
+      { label: "You", score: match.playerScore },
+      { label: match.opponent.shortName, score: match.opponentScore },
+    ];
+  }
+
+  return [
+    { label: match.opponent.shortName, score: match.opponentScore },
+    { label: "You", score: match.playerScore },
+  ];
+}
+
 function candidateMarkup() {
   if (state.phase !== "draft") {
     return "";
@@ -47473,16 +47968,20 @@ function candidateMarkup() {
   }
 
   return state.candidateSet
-    .map((player) => {
+    .map((basePlayer) => {
+      const player = getDifficultyAdjustedPlayer(basePlayer, state.difficulty);
       const allRounder = isAllRounderPlayer(player);
+      const ratingsMarkup = ratingsAreHidden()
+        ? ""
+        : `<p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>`;
 
       return `
-        <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${player.id}">
+        <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${basePlayer.id}">
           <div class="candidate-listing">
             <div>
               <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
-              <p class="card-traits">${escapeHtml(playerTraitMarkup(player))}</p>
-              <p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>
+              ${playerPreferenceRowsMarkup(player)}
+              ${ratingsMarkup}
             </div>
             <div class="candidate-listing__meta">
               <span class="candidate-role">${getPlayerRoleLabel(player)}</span>
@@ -47565,14 +48064,16 @@ function resultMarkup() {
       <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
       <h3>${escapeHtml(state.latestMatch.opponent.label)}</h3>
       <div class="scoreline">
-        <div>
-          <span>You</span>
-          <strong>${escapeHtml(state.latestMatch.playerScore)}</strong>
-        </div>
-        <div>
-          <span>${escapeHtml(state.latestMatch.opponent.shortName)}</span>
-          <strong>${escapeHtml(state.latestMatch.opponentScore)}</strong>
-        </div>
+        ${inningsOrderedScoreRows(state.latestMatch)
+          .map(
+            (entry) => `
+              <div>
+                <span>${escapeHtml(entry.label)}</span>
+                <strong>${escapeHtml(entry.score)}</strong>
+              </div>
+            `,
+          )
+          .join("")}
       </div>
       <p class="headline">${escapeHtml(state.latestMatch.headline)}</p>
       <p class="performer">Standout: ${escapeHtml(cleanPlayerName(state.latestMatch.performer.name))}</p>
@@ -47596,8 +48097,9 @@ function resultsHistoryMarkup() {
       </div>
       <div class="results-list">
         ${state.results
-          .map(
-            (match) => `
+          .map((match) => {
+            const scoreRows = inningsOrderedScoreRows(match);
+            return `
               <article class="result-row">
                 <div>
                   <p class="schedule-stage">${escapeHtml(match.stage)}</p>
@@ -47605,12 +48107,15 @@ function resultsHistoryMarkup() {
                   <p class="candidate-team">${escapeHtml(match.headline)}</p>
                 </div>
                 <div class="result-scores">
-                  <span>You ${escapeHtml(match.playerScore)}</span>
-                  <span>${escapeHtml(match.opponent.shortName)} ${escapeHtml(match.opponentScore)}</span>
+                  ${scoreRows
+                    .map(
+                      (entry) => `<span>${escapeHtml(entry.label)} ${escapeHtml(entry.score)}</span>`,
+                    )
+                    .join("")}
                 </div>
               </article>
-            `,
-          )
+            `;
+          })
           .join("")}
       </div>
     </section>
@@ -47679,24 +48184,38 @@ function statusCopy() {
     const opponent = getCurrentOpponent(state);
     if (!opponent) {
       if (state.results.length === 0 && state.matchIndex === 0) {
-        return "Your XI is set. Press Start Tournament when you're ready.";
+        return "Your XI is set. Three group matches await, and you need 2 wins to qualify. Press Start Tournament when you're ready.";
       }
       return state.matchIndex < TOURNAMENT_OPPONENTS.length
         ? "You are through. Press Proceed to next match when you're ready."
         : "Tournament complete.";
     }
-    return "Next opponent loaded. Check the weather, then press Play match.";
+    return "Next opponent loaded. Check the conditions, then press Play match.";
   }
 
   if (state.champion) {
-    return "You went the distance and lifted the 400-0 World Cup.";
+    return "You went the distance and lifted the Cricket World Cup.";
   }
 
   return "The run is over. Rework the squad balance and go again.";
 }
 
+function teamSummaryMarkup(metrics) {
+  if (state.roster.length < 11) {
+    return "";
+  }
+
+  return `
+    <div class="scout-list scout-list--compact">
+      <div><span>Batting</span><strong>${metrics.batting}</strong></div>
+      <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
+    </div>
+  `;
+}
+
 function render() {
-  const metrics = getTeamMetrics(state.roster);
+  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
+  const metrics = getTeamMetrics(displayRoster);
   const showTournamentPanels = state.phase !== "draft" || state.results.length > 0;
 
   appElement.innerHTML = `
@@ -47740,11 +48259,8 @@ function render() {
                 <p class="eyebrow">Squad Sheet</p>
                 <h2>${state.roster.length}/11 picked</h2>
               </div>
-              <div class="mini-metrics">
-                <span>Bat ${metrics.batting || "--"}</span>
-                <span>Bowl ${metrics.bowling || "--"}</span>
-              </div>
             </div>
+            ${teamSummaryMarkup(metrics)}
             <div class="roster-list">${rosterMarkup()}</div>
           </section>
         </aside>

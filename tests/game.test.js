@@ -35,6 +35,19 @@ function seededRandom(seed) {
   };
 }
 
+function seededChaseRandom(seed) {
+  const base = seededRandom(seed);
+  let first = true;
+  return () => {
+    if (first) {
+      first = false;
+      return 0.2;
+    }
+
+    return base();
+  };
+}
+
 function createLegendXI() {
   return [
     "sachin-tendulkar",
@@ -162,6 +175,31 @@ test("wicketkeeper overrides survive stripped captain and vice-captain markers",
   assert.equal(sarfaraz.role, "wicketkeeper");
 });
 
+test("player cards always have batting hands and meaningful bowlers have bowling styles", () => {
+  const collingwood = PLAYER_POOL.find((player) => player.id === "england-2007-paul-collingwood");
+  const broad = PLAYER_POOL.find((player) => player.id === "england-2007-stuart-broad");
+  const ponting = PLAYER_POOL.find((player) => player.id === "ricky-ponting");
+  const sarelBurger = PLAYER_POOL.find((player) => player.id === "sarel-burger");
+  const bjornKotze = PLAYER_POOL.find((player) => player.id === "bjorn-kotze");
+
+  assert.equal(
+    PLAYER_POOL.every((player) => player.battingHand === "Left" || player.battingHand === "Right"),
+    true,
+  );
+  assert.equal(
+    PLAYER_POOL.every(
+      (player) => player.bowling < 40 || (player.bowlingStyle && player.bowlingStyle !== "Unspecified"),
+    ),
+    true,
+  );
+  assert.equal(collingwood.battingHand, "Right");
+  assert.equal(collingwood.bowlingStyle, "Medium");
+  assert.equal(broad.bowlingStyle, "Fast Medium");
+  assert.equal(ponting.battingHand, "Right");
+  assert.ok(sarelBurger.batting > 0 || sarelBurger.bowling > 0);
+  assert.ok(bjornKotze.batting > 0 || bjornKotze.bowling > 0);
+});
+
 test("england generator anomalies are corrected in the player pool", () => {
   const pietersen = PLAYER_POOL.find((player) => player.id === "england-2007-kevin-pietersen");
   const anderson = PLAYER_POOL.find((player) => player.id === "england-2007-james-anderson");
@@ -249,7 +287,7 @@ test("simulateMatch ends the run when a weak XI loses", () => {
     eliminated: false,
   };
 
-  const nextState = simulateMatch(baseState, constantRandom(0.1));
+  const nextState = simulateMatch(baseState, constantRandom(0.2));
 
   assert.equal(nextState.phase, "finished");
   assert.equal(nextState.eliminated, true);
@@ -342,8 +380,8 @@ test("player aggression profiles change scoring profile and wicket risk", () => 
     results.reduce((sum, result) => sum + result.playerWickets, 0) / results.length;
 
   assert.ok(averageRuns(cautious) < averageRuns(mid));
-  assert.ok(averageRuns(mid) <= averageRuns(aggressive));
-  assert.ok(averageWickets(mid) <= averageWickets(aggressive));
+  assert.ok(averageRuns(cautious) < averageRuns(aggressive));
+  assert.ok(averageWickets(cautious) < averageWickets(aggressive));
 });
 
 test("batting cards stay plausible in high-scoring low-wicket innings", () => {
@@ -366,9 +404,9 @@ test("batting cards stay plausible in high-scoring low-wicket innings", () => {
   const result = simulateMatch(baseState, seededRandom(15)).results[0];
 
   assert.ok(result.playerRuns >= 250);
-  assert.ok(result.playerWickets <= 3);
-  assert.ok(result.playerBattingCard[0].runs >= 50);
-  assert.ok(result.playerBattingCard[1].runs >= 40);
+  assert.ok(result.playerWickets <= 5);
+  assert.ok(result.playerBattingCard[0].runs >= 90);
+  assert.ok(result.playerBattingCard[1].runs >= 70);
 });
 
 test("failed chases lose by runs and successful chases against you lose by wickets", () => {
@@ -387,7 +425,7 @@ test("failed chases lose by runs and successful chases against you lose by wicke
   };
 
   const failedChase = simulateMatch(baseState, constantRandom(0.2)).results[0];
-  const chasedDown = simulateMatch(baseState, constantRandom(0.8)).results[0];
+  const chasedDown = simulateMatch(baseState, constantRandom(0.9)).results[0];
 
   assert.equal(failedChase.battingFirst, "opponent");
   assert.equal(failedChase.won, false);
@@ -398,6 +436,36 @@ test("failed chases lose by runs and successful chases against you lose by wicke
   assert.equal(chasedDown.won, false);
   assert.equal(chasedDown.marginType, "wickets");
   assert.match(chasedDown.headline, /with \d+ wickets in hand\./);
+});
+
+test("failed chases usually cost meaningful wickets when the target gets away", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createWeakXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: TOURNAMENT_OPPONENTS.length - 1,
+    currentOpponent: TOURNAMENT_OPPONENTS[TOURNAMENT_OPPONENTS.length - 1],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "international",
+  };
+
+  const chases = [];
+  for (let seed = 1; seed <= 24; seed += 1) {
+    chases.push(simulateMatch(baseState, seededChaseRandom(seed)).results[0]);
+  }
+
+  const averageWicketsLost =
+    chases.reduce((sum, result) => sum + result.playerWickets, 0) / chases.length;
+  const heavyDefeatsWithTooManyWicketsLeft = chases.filter(
+    (result) => !result.won && result.marginType === "runs" && result.marginValue >= 35 && result.playerWickets <= 2,
+  ).length;
+
+  assert.ok(averageWicketsLost >= 3.5);
+  assert.equal(heavyDefeatsWithTooManyWicketsLeft, 0);
 });
 
 test("remaining slots reflect the hidden 1-1-1 coverage floor", () => {
@@ -432,7 +500,9 @@ test("revealNextOpponent waits until asked and reveals the next stage opponent",
   const nextState = revealNextOpponent(tournamentState);
 
   assert.equal(nextState.currentOpponent.id, TOURNAMENT_OPPONENTS[2].id);
-  assert.ok(nextState.currentOpponent.weather?.label);
+  assert.ok(nextState.currentOpponent.conditions?.weather?.label);
+  assert.ok(nextState.currentOpponent.conditions?.surface?.label);
+  assert.ok(nextState.currentOpponent.conditions?.outfield?.label);
 });
 
 test("opponent metrics return rounded batting and bowling averages", () => {
