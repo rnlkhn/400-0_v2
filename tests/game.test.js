@@ -48,6 +48,19 @@ function seededChaseRandom(seed) {
   };
 }
 
+function seededBatFirstRandom(seed) {
+  const base = seededRandom(seed);
+  let first = true;
+  return () => {
+    if (first) {
+      first = false;
+      return 0.9;
+    }
+
+    return base();
+  };
+}
+
 function createLegendXI() {
   return [
     "sachin-tendulkar",
@@ -287,7 +300,7 @@ test("simulateMatch ends the run when a weak XI loses", () => {
     eliminated: false,
   };
 
-  const nextState = simulateMatch(baseState, constantRandom(0.2));
+  const nextState = simulateMatch(baseState, constantRandom(0.05));
 
   assert.equal(nextState.phase, "finished");
   assert.equal(nextState.eliminated, true);
@@ -409,6 +422,38 @@ test("batting cards stay plausible in high-scoring low-wicket innings", () => {
   assert.ok(result.playerBattingCard[1].runs >= 70);
 });
 
+test("innings with wickets in hand avoid drifting too often into passive 50-over totals", () => {
+  const baseState = {
+    phase: "tournament",
+    roster: createLegendXI(),
+    currentSquad: null,
+    candidateSet: [],
+    matchIndex: 0,
+    currentOpponent: TOURNAMENT_OPPONENTS[0],
+    results: [],
+    latestMatch: null,
+    champion: false,
+    eliminated: false,
+    difficulty: "county",
+    battingOrder: [],
+    bowlingOrder: [],
+  };
+
+  const preservedWicketInnings = [];
+  for (let seed = 1; seed <= 40; seed += 1) {
+    const result = simulateMatch(baseState, seededBatFirstRandom(seed)).results[0];
+    if (result.playerWickets <= 3) {
+      preservedWicketInnings.push(result.playerRuns);
+    }
+  }
+
+  const averageRuns =
+    preservedWicketInnings.reduce((sum, value) => sum + value, 0) / preservedWicketInnings.length;
+
+  assert.ok(preservedWicketInnings.length >= 5);
+  assert.ok(averageRuns >= 235);
+});
+
 test("failed chases lose by runs and successful chases against you lose by wickets", () => {
   const baseState = {
     phase: "tournament",
@@ -424,7 +469,7 @@ test("failed chases lose by runs and successful chases against you lose by wicke
     difficulty: "international",
   };
 
-  const failedChase = simulateMatch(baseState, constantRandom(0.2)).results[0];
+  const failedChase = simulateMatch(baseState, constantRandom(0.05)).results[0];
   const chasedDown = simulateMatch(baseState, constantRandom(0.9)).results[0];
 
   assert.equal(failedChase.battingFirst, "opponent");

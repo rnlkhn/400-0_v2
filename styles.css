@@ -120,6 +120,7 @@ button {
 .card-meta,
 .card-traits,
 .card-preference-row,
+.scorecard-conditions,
 .candidate-team,
 .squad-note {
   color: var(--muted);
@@ -747,6 +748,13 @@ button {
   font-family: "Bricolage Grotesque", sans-serif;
   font-size: 1.05rem;
   color: var(--grass-dark);
+}
+
+.scorecard-conditions {
+  margin: -2px 0 12px;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .innings-card + .innings-card {

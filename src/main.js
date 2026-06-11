@@ -358,6 +358,14 @@ function tournamentLeaders() {
 }
 
 function scorecardSummaryMarkup(match) {
+  const conditionsLabel = [
+    match.conditions?.weather?.label,
+    match.conditions?.surface?.label,
+    match.conditions?.outfield?.label ? `${match.conditions.outfield.label} outfield` : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   const buildInningsMarkup = ({
     teamLabel,
     inningsLabel,
@@ -412,6 +420,7 @@ function scorecardSummaryMarkup(match) {
   return `
     <div class="scorecard-summary">
       <h4>Scorecard summary</h4>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       ${buildInningsMarkup({
         teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
         inningsLabel: "1st Inn",

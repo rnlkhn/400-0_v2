@@ -47153,6 +47153,9 @@ function simulateOverByOver({
         const lateChaseDesperation = target
           ? clamp((balls - 180) / 120, 0, 1) * clamp(chaseRate - 0.82, 0, 0.8)
           : 0;
+        const wicketsInHand = 10 - wickets;
+        const wicketsInHandBoost = clamp((wicketsInHand - 5) / 5, 0, 1);
+        const lateOversFreedom = clamp((balls - 210) / 90, 0, 1) * wicketsInHandBoost;
         const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
         const newBallBoost = balls < 120 ? 0.012 : 0;
         const wicketChance = clamp(
@@ -47164,6 +47167,7 @@ function simulateOverByOver({
             Math.max(0, pressureBoost) * 0.02 +
             chaseUrgency * 0.03 +
             lateChaseDesperation * 0.05 +
+            lateOversFreedom * 0.012 +
             deathOversBoost * 0.5 +
             aggressionProfile.wicketRisk -
             battingConditions * 0.3,
@@ -47177,6 +47181,7 @@ function simulateOverByOver({
             Math.max(0, pressureBoost) * 0.04 +
             chaseUrgency * -0.03 +
             lateChaseDesperation * -0.045 +
+            lateOversFreedom * -0.018 +
             aggressionProfile.singleDelta,
           0.18,
           0.36,
@@ -47186,6 +47191,7 @@ function simulateOverByOver({
             skillEdge * 0.014 +
             battingConditions * 0.03 +
             chaseUrgency * 0.006 +
+            lateOversFreedom * 0.004 +
             aggressionProfile.doubleDelta +
             outfield.double,
           0.025,
@@ -47198,6 +47204,7 @@ function simulateOverByOver({
             deathOversBoost +
             chaseUrgency * 0.03 +
             lateChaseDesperation * 0.05 +
+            lateOversFreedom * 0.022 +
             aggressionProfile.boundaryDelta -
             bowlingConditions * 0.32 +
             outfield.boundary,
@@ -47211,6 +47218,7 @@ function simulateOverByOver({
             deathOversBoost +
             chaseUrgency * 0.012 +
             lateChaseDesperation * 0.02 +
+            lateOversFreedom * 0.008 +
             aggressionProfile.sixDelta -
             bowlingConditions * 0.1,
           0.001,
@@ -47858,6 +47866,14 @@ function tournamentLeaders() {
 }
 
 function scorecardSummaryMarkup(match) {
+  const conditionsLabel = [
+    match.conditions?.weather?.label,
+    match.conditions?.surface?.label,
+    match.conditions?.outfield?.label ? `${match.conditions.outfield.label} outfield` : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   const buildInningsMarkup = ({
     teamLabel,
     inningsLabel,
@@ -47912,6 +47928,7 @@ function scorecardSummaryMarkup(match) {
   return `
     <div class="scorecard-summary">
       <h4>Scorecard summary</h4>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       ${buildInningsMarkup({
         teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
         inningsLabel: "1st Inn",
