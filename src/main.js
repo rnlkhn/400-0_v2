@@ -106,6 +106,10 @@ function formatBattingEntry(entry) {
   return `${entry.runs} (${entry.balls})`;
 }
 
+function formatBatterName(entry) {
+  return `${cleanPlayerName(entry.name)}${entry.notOut ? "*" : ""}`;
+}
+
 function formatBowlingEntry(entry) {
   return `${entry.wickets}/${entry.runsConceded} (${formatOvers(entry.ballsBowled)})`;
 }
@@ -358,14 +362,6 @@ function tournamentLeaders() {
 }
 
 function scorecardSummaryMarkup(match) {
-  const conditionsLabel = [
-    match.conditions?.weather?.label,
-    match.conditions?.surface?.label,
-    match.conditions?.outfield?.label ? `${match.conditions.outfield.label} outfield` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
-
   const buildInningsMarkup = ({
     teamLabel,
     inningsLabel,
@@ -390,7 +386,7 @@ function scorecardSummaryMarkup(match) {
                 .map(
                   (batter) => `
                     <div class="innings-entry">
-                      <span>${escapeHtml(cleanPlayerName(batter.name))}</span>
+                      <span>${escapeHtml(formatBatterName(batter))}</span>
                       <strong>${escapeHtml(formatBattingEntry(batter))}</strong>
                     </div>
                   `,
@@ -420,7 +416,6 @@ function scorecardSummaryMarkup(match) {
   return `
     <div class="scorecard-summary">
       <h4>Scorecard summary</h4>
-      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       ${buildInningsMarkup({
         teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
         inningsLabel: "1st Inn",
@@ -568,9 +563,18 @@ function resultMarkup() {
     return "";
   }
 
+  const conditionsLabel = [
+    state.latestMatch.conditions?.weather?.label,
+    state.latestMatch.conditions?.surface?.label,
+    state.latestMatch.conditions?.outfield?.label ? `${state.latestMatch.conditions.outfield.label} outfield` : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   return `
     <article class="match-card ${state.latestMatch.won ? "match-card--win" : "match-card--loss"}">
       <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       <h3>${escapeHtml(state.latestMatch.opponent.label)}</h3>
       <div class="scoreline">
         ${inningsOrderedScoreRows(state.latestMatch)

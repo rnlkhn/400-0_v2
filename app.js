@@ -46721,20 +46721,24 @@ function chooseStandout(roster, skill, random) {
   return sorted[0];
 }
 
+function pluralize(value, singular, plural = `${singular}s`) {
+  return `${value} ${value === 1 ? singular : plural}`;
+}
+
 function buildHeadline(won, marginType, marginValue, opponent) {
   if (won && marginType === "runs") {
-    return `You defended sharply and beat ${opponent.shortName} by ${marginValue} runs.`;
+    return `You defended well and beat ${opponent.shortName} by ${pluralize(marginValue, "run")}.`;
   }
 
   if (won) {
-    return `The chase stayed under control and you beat ${opponent.shortName} by ${marginValue} wickets.`;
+    return `The chase stayed under control and you beat ${opponent.shortName} by ${pluralize(marginValue, "wicket")}.`;
   }
 
   if (marginType === "runs") {
-    return `${opponent.shortName} squeezed you by ${marginValue} runs and ended the run.`;
+    return `${opponent.shortName} squeezed you by ${pluralize(marginValue, "run")} and ended the run.`;
   }
 
-  return `${opponent.shortName} chased it with ${marginValue} wickets in hand.`;
+  return `${opponent.shortName} chased it with ${pluralize(marginValue, "wicket")} in hand.`;
 }
 
 function simulateInnings(battingRating, bowlingRating, pressure, random) {
@@ -47110,7 +47114,10 @@ function simulateOverByOver({
   let previousBowlerId = null;
 
   const battingStats = new Map(
-    battingOrder.map((player) => [player.id, { id: player.id, name: player.name, runs: 0, balls: 0 }]),
+    battingOrder.map((player) => [
+      player.id,
+      { id: player.id, name: player.name, runs: 0, balls: 0, out: false, notOut: false },
+    ]),
   );
   const bowlingStats = new Map(
     bowlingOrder.map((player) => [
@@ -47156,6 +47163,11 @@ function simulateOverByOver({
         const wicketsInHand = 10 - wickets;
         const wicketsInHandBoost = clamp((wicketsInHand - 5) / 5, 0, 1);
         const lateOversFreedom = clamp((balls - 210) / 90, 0, 1) * wicketsInHandBoost;
+        const finalTenOversChaseIntent = target
+          ? clamp((balls - 240) / 60, 0, 1) *
+            wicketsInHandBoost *
+            clamp(runsNeeded / Math.max(1, ballsRemaining), 0.85, 1.4)
+          : 0;
         const deathOversBoost = balls >= 240 ? 0.03 : balls >= 180 ? 0.01 : 0;
         const newBallBoost = balls < 120 ? 0.012 : 0;
         const wicketChance = clamp(
@@ -47168,6 +47180,7 @@ function simulateOverByOver({
             chaseUrgency * 0.03 +
             lateChaseDesperation * 0.05 +
             lateOversFreedom * 0.012 +
+            finalTenOversChaseIntent * 0.03 +
             deathOversBoost * 0.5 +
             aggressionProfile.wicketRisk -
             battingConditions * 0.3,
@@ -47182,6 +47195,7 @@ function simulateOverByOver({
             chaseUrgency * -0.03 +
             lateChaseDesperation * -0.045 +
             lateOversFreedom * -0.018 +
+            finalTenOversChaseIntent * -0.03 +
             aggressionProfile.singleDelta,
           0.18,
           0.36,
@@ -47192,6 +47206,7 @@ function simulateOverByOver({
             battingConditions * 0.03 +
             chaseUrgency * 0.006 +
             lateOversFreedom * 0.004 +
+            finalTenOversChaseIntent * 0.005 +
             aggressionProfile.doubleDelta +
             outfield.double,
           0.025,
@@ -47205,6 +47220,7 @@ function simulateOverByOver({
             chaseUrgency * 0.03 +
             lateChaseDesperation * 0.05 +
             lateOversFreedom * 0.022 +
+            finalTenOversChaseIntent * 0.03 +
             aggressionProfile.boundaryDelta -
             bowlingConditions * 0.32 +
             outfield.boundary,
@@ -47219,6 +47235,7 @@ function simulateOverByOver({
             chaseUrgency * 0.012 +
             lateChaseDesperation * 0.02 +
             lateOversFreedom * 0.008 +
+            finalTenOversChaseIntent * 0.012 +
             aggressionProfile.sixDelta -
             bowlingConditions * 0.1,
           0.001,
@@ -47236,6 +47253,8 @@ function simulateOverByOver({
       if (chance < wicketChance) {
         wickets += 1;
         bowlingEntry.wickets += 1;
+        battingEntry.out = true;
+        battingEntry.notOut = false;
 
         if (nextBatterIndex >= battingOrder.length) {
           break;
@@ -47278,6 +47297,23 @@ function simulateOverByOver({
     [strikerIndex, nonStrikerIndex] = [nonStrikerIndex, strikerIndex];
     previousBowlerId = bowler.id;
   }
+
+  const markNotOut = (index) => {
+    const batter = battingOrder[index];
+    if (!batter) {
+      return;
+    }
+
+    const entry = battingStats.get(batter.id);
+    if (!entry || entry.out || entry.balls === 0) {
+      return;
+    }
+
+    entry.notOut = true;
+  };
+
+  markNotOut(strikerIndex);
+  markNotOut(nonStrikerIndex);
 
   return {
     runs: totalRuns,
@@ -47614,6 +47650,10 @@ function formatBattingEntry(entry) {
   return `${entry.runs} (${entry.balls})`;
 }
 
+function formatBatterName(entry) {
+  return `${cleanPlayerName(entry.name)}${entry.notOut ? "*" : ""}`;
+}
+
 function formatBowlingEntry(entry) {
   return `${entry.wickets}/${entry.runsConceded} (${formatOvers(entry.ballsBowled)})`;
 }
@@ -47866,14 +47906,6 @@ function tournamentLeaders() {
 }
 
 function scorecardSummaryMarkup(match) {
-  const conditionsLabel = [
-    match.conditions?.weather?.label,
-    match.conditions?.surface?.label,
-    match.conditions?.outfield?.label ? `${match.conditions.outfield.label} outfield` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
-
   const buildInningsMarkup = ({
     teamLabel,
     inningsLabel,
@@ -47898,7 +47930,7 @@ function scorecardSummaryMarkup(match) {
                 .map(
                   (batter) => `
                     <div class="innings-entry">
-                      <span>${escapeHtml(cleanPlayerName(batter.name))}</span>
+                      <span>${escapeHtml(formatBatterName(batter))}</span>
                       <strong>${escapeHtml(formatBattingEntry(batter))}</strong>
                     </div>
                   `,
@@ -47928,7 +47960,6 @@ function scorecardSummaryMarkup(match) {
   return `
     <div class="scorecard-summary">
       <h4>Scorecard summary</h4>
-      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       ${buildInningsMarkup({
         teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
         inningsLabel: "1st Inn",
@@ -48076,9 +48107,18 @@ function resultMarkup() {
     return "";
   }
 
+  const conditionsLabel = [
+    state.latestMatch.conditions?.weather?.label,
+    state.latestMatch.conditions?.surface?.label,
+    state.latestMatch.conditions?.outfield?.label ? `${state.latestMatch.conditions.outfield.label} outfield` : "",
+  ]
+    .filter(Boolean)
+    .join(" · ");
+
   return `
     <article class="match-card ${state.latestMatch.won ? "match-card--win" : "match-card--loss"}">
       <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
       <h3>${escapeHtml(state.latestMatch.opponent.label)}</h3>
       <div class="scoreline">
         ${inningsOrderedScoreRows(state.latestMatch)
