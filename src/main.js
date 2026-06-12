@@ -1,26 +1,35 @@
 import {
   DIFFICULTY_LEVELS,
   TOURNAMENT_OPPONENTS,
+  chooseBowler,
+  chooseNextBatter,
+  chooseTossDecision,
+  confirmChaseOpeners,
   createInitialState,
   draftPlayer,
+  formatOvers,
+  getCurrentOpponent,
   getDifficultyAdjustedPlayer,
   getDisplayRoster,
-  getCurrentOpponent,
+  getLiveContext,
   getOpponentMetrics,
+  getPregameContext,
   getProgressLabel,
+  getRecommendedBowler,
   getTeamMetrics,
   isAllRounderPlayer,
-  revealNextOpponent,
+  playOver,
   rerollCandidates,
+  revealNextOpponent,
   setDifficulty,
+  simulateInnings,
   simulateMatch,
+  startMatch,
+  toggleOpener,
 } from "./game.js";
 
 const appElement = document.querySelector("#app");
-const STATS_KEY = "400-0-career";
-
 let state = createInitialState();
-let career = loadCareer();
 
 function currentDifficulty() {
   return DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty) || DIFFICULTY_LEVELS[1];
@@ -28,6 +37,14 @@ function currentDifficulty() {
 
 function ratingsAreHidden() {
   return currentDifficulty().hideRatings;
+}
+
+function escapeHtml(text) {
+  return String(text)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function cleanPlayerName(name) {
@@ -48,35 +65,13 @@ function cleanPlayerName(name) {
     .trim();
 }
 
-function getPlayerRoleLabel(player) {
-  if (isAllRounderPlayer(player)) {
-    if (player.batting - player.bowling >= 15) {
-      return "Batting AR";
-    }
-
-    if (player.bowling - player.batting >= 15) {
-      return "Bowling AR";
-    }
-
-    return "All-rounder";
-  }
-
-  if (player.role === "wicketkeeper") {
-    return "WK";
-  }
-
-  return player.role === "batsman" ? "Batsman" : "Bowler";
-}
-
 function formatBattingHand(player) {
   if (player.battingHand === "Left") {
     return "LHB";
   }
-
   if (player.battingHand === "Right") {
     return "RHB";
   }
-
   return "";
 }
 
@@ -86,6 +81,60 @@ function formatBowlingStyle(player) {
   }
 
   return player.bowlingHand ? `${player.bowlingHand} Arm ${player.bowlingStyle}` : player.bowlingStyle;
+}
+
+function getPlayerRoleLabel(player) {
+  if (isAllRounderPlayer(player)) {
+    if (player.batting - player.bowling >= 15) {
+      return "Batting AR";
+    }
+    if (player.bowling - player.batting >= 15) {
+      return "Bowling AR";
+    }
+    return "All-rounder";
+  }
+  if (player.role === "wicketkeeper") {
+    return "WK";
+  }
+  return player.role === "batsman" ? "Batsman" : "Bowler";
+}
+
+function formatConditions(conditions) {
+  return `${conditions.weather.label} · ${conditions.surface.label} · ${conditions.outfield.label}`;
+}
+
+function formatTossDecision(decision) {
+  return decision === "bowl" ? "field first" : "bat first";
+}
+
+function userBatsFirstFromPregame(pregame) {
+  return pregame.tossWinner === "user" ? pregame.userDecision === "bat" : pregame.userDecision === "bowl";
+}
+
+function formatRatings(player) {
+  return `Bat ${Math.round(player.batting)} · Bowl ${Math.round(player.bowling)}`;
+}
+
+function formatScore(runs, wickets) {
+  return wickets >= 10 ? `${runs}` : `${runs}/${wickets}`;
+}
+
+function formatBattingEntry(entry) {
+  return `${entry.runs} (${entry.balls})`;
+}
+
+function formatBatterName(entry) {
+  return `${cleanPlayerName(entry.name)}${entry.notOut ? "*" : ""}`;
+}
+
+function formatBowlingEntry(entry) {
+  return `${entry.wickets}/${entry.runsConceded} (${formatOvers(entry.balls)})`;
+}
+
+function topThree(entries, key, secondaryKey) {
+  return [...entries]
+    .sort((left, right) => right[key] - left[key] || left[secondaryKey] - right[secondaryKey])
+    .slice(0, 3);
 }
 
 function playerPreferenceRowsMarkup(player) {
@@ -102,135 +151,33 @@ function playerPreferenceRowsMarkup(player) {
   `;
 }
 
-function formatBattingEntry(entry) {
-  return `${entry.runs} (${entry.balls})`;
-}
-
-function formatBatterName(entry) {
-  return `${cleanPlayerName(entry.name)}${entry.notOut ? "*" : ""}`;
-}
-
-function formatBowlingEntry(entry) {
-  return `${entry.wickets}/${entry.runsConceded} (${formatOvers(entry.ballsBowled)})`;
-}
-
-function topThree(entries, key) {
-  return [...entries]
-    .sort((left, right) => right[key] - left[key] || left.name.localeCompare(right.name))
-    .slice(0, 3);
-}
-
-function formatOvers(balls) {
-  const overs = Math.floor(balls / 6);
-  const remainder = balls % 6;
-  return remainder === 0 ? `${overs}` : `${overs}.${remainder}`;
-}
-
-function loadCareer() {
-  const fallback = {
-    titles: 0,
-    bestFinish: "Draft Room",
-    deepestMatch: 0,
-  };
-
-  const stored = window.localStorage.getItem(STATS_KEY);
-
-  if (!stored) {
-    return fallback;
-  }
-
-  try {
-    const parsed = JSON.parse(stored);
-
-    if (
-      typeof parsed?.titles !== "number" ||
-      typeof parsed?.bestFinish !== "string" ||
-      typeof parsed?.deepestMatch !== "number"
-    ) {
-      throw new Error("Invalid career shape");
-    }
-
-    return parsed;
-  } catch {
-    window.localStorage.removeItem(STATS_KEY);
-    return fallback;
-  }
-}
-
-function saveCareer() {
-  window.localStorage.setItem(STATS_KEY, JSON.stringify(career));
-}
-
-function escapeHtml(text) {
-  return text
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function updateCareer(nextState) {
-  if (nextState.phase !== "finished") {
-    return;
-  }
-
-  if (nextState.champion) {
-    career.titles += 1;
-    career.bestFinish = "Champions";
-    career.deepestMatch = TOURNAMENT_OPPONENTS.length;
-    saveCareer();
-    return;
-  }
-
-  const deepestMatch = nextState.results.length;
-  if (deepestMatch > career.deepestMatch) {
-    career.deepestMatch = deepestMatch;
-    career.bestFinish = getProgressLabel(nextState);
-    saveCareer();
-  }
-}
-
-function resetRun() {
-  state = createInitialState();
-  render();
-}
-
-function revealDraftSquad() {
-  if (state.phase !== "draft" || state.currentSquad) {
-    return;
-  }
-
-  state = rerollCandidates(state);
-  render();
-}
-
 function rosterMarkup() {
-  if (state.roster.length === 0) {
-    return `<p class="empty-copy">Your XI starts empty. Start the draft and build from World Cup history.</p>`;
+  if (!state.roster.length) {
+    return `<p class="empty-copy">Draft an XI from World Cup history. You will set the openers and run the innings over by over.</p>`;
   }
 
   const displayRoster = getDisplayRoster(state.roster, state.difficulty);
 
   return displayRoster
     .map((player) => {
-      const allRounder = isAllRounderPlayer(player);
       const ratingsMarkup = ratingsAreHidden()
         ? ""
         : `
-            <dl class="roster-stats">
-              <div><dt>Bat</dt><dd>${player.batting}</dd></div>
-              <div><dt>Bowl</dt><dd>${player.bowling}</dd></div>
-            </dl>
-          `;
+          <dl class="roster-stats">
+            <div><dt>Bat</dt><dd>${Math.round(player.batting)}</dd></div>
+            <div><dt>Bowl</dt><dd>${Math.round(player.bowling)}</dd></div>
+          </dl>
+        `;
 
       return `
-        <article class="roster-card ${allRounder ? "roster-card--allrounder" : ""}">
+        <article class="roster-card ${isAllRounderPlayer(player) ? "roster-card--allrounder" : ""}">
           <div class="roster-matrix">
             <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
             <p class="card-meta">${escapeHtml(player.team)} ${player.year}</p>
             ${playerPreferenceRowsMarkup(player)}
             ${ratingsMarkup}
           </div>
+          <p class="card-role">${escapeHtml(getPlayerRoleLabel(player))}</p>
         </article>
       `;
     })
@@ -248,7 +195,7 @@ function difficultyMarkup() {
         <div>
           <p class="eyebrow">Mode</p>
           <h2>Pick your difficulty</h2>
-          <p class="squad-note">Choose the ladder before you start drafting.</p>
+          <p class="squad-note">The easiest mode gives you prime ratings and bowling recommendations. Legend hides ratings.</p>
         </div>
       </div>
       <div class="difficulty-grid">
@@ -268,13 +215,26 @@ function difficultyMarkup() {
   `;
 }
 
-function draftPanelMarkup() {
-  if (state.phase !== "draft" || !state.currentSquad) {
-    return "";
+function draftBoardMarkup() {
+  if (!state.currentSquad) {
+    return `
+      <section class="surface-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Draft Board</p>
+            <h2>Build your XI</h2>
+          </div>
+        </div>
+        <p class="draft-instruction-lead">Spin a historical World Cup squad, lock one player in, then spin again.</p>
+        <p class="empty-copy">Every draft pool gives you a fresh country and year. Duplicate real-world players stay blocked across eras.</p>
+      </section>
+    `;
   }
 
+  const candidates = getDisplayRoster(state.currentCandidates, state.difficulty);
+
   return `
-    <section class="surface-card surface-card--pitch">
+    <section class="surface-card">
       <div class="section-heading">
         <div>
           <p class="eyebrow">Draft Board</p>
@@ -282,354 +242,57 @@ function draftPanelMarkup() {
           <p class="squad-note">${escapeHtml(state.currentSquad.note)}</p>
         </div>
       </div>
-      <div class="candidate-grid">${candidateMarkup()}</div>
-    </section>
-  `;
-}
-
-function opponentPanelMarkup() {
-  const opponent = getCurrentOpponent(state);
-  if (state.phase !== "tournament" || !opponent) {
-    return "";
-  }
-
-  const metrics = getOpponentMetrics(opponent);
-
-  return `
-    <section class="surface-card">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Next Opponent</p>
-          <h2>${escapeHtml(opponent.label)}</h2>
-          <p class="squad-note">${escapeHtml(opponent.note)}</p>
-        </div>
-      </div>
-      <div class="scout-list">
-        <div><span>Stage</span><strong>${escapeHtml(opponent.stage)}</strong></div>
-        <div><span>Weather</span><strong>${escapeHtml(opponent.conditions?.weather?.label || "--")}</strong></div>
-        <div><span>Surface</span><strong>${escapeHtml(opponent.conditions?.surface?.label || "--")}</strong></div>
-        <div><span>Outfield</span><strong>${escapeHtml(opponent.conditions?.outfield?.label || "--")}</strong></div>
-        <div><span>Batting</span><strong>${metrics.batting}</strong></div>
-        <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
-      </div>
-    </section>
-  `;
-}
-
-function tournamentTotals() {
-  return state.results.reduce(
-    (totals, match) => ({
-      runsScored: totals.runsScored + match.playerRuns,
-      wicketsLost: totals.wicketsLost + match.playerWickets,
-      runsConceded: totals.runsConceded + match.opponentRuns,
-      wicketsTaken: totals.wicketsTaken + match.opponentWickets,
-    }),
-    {
-      runsScored: 0,
-      wicketsLost: 0,
-      runsConceded: 0,
-      wicketsTaken: 0,
-    },
-  );
-}
-
-function tournamentLeaders() {
-  const runMap = new Map();
-  const wicketMap = new Map();
-
-  for (const match of state.results) {
-    for (const batter of match.playerBattingCard || []) {
-      const current = runMap.get(batter.id) || { name: batter.name, runs: 0 };
-      current.runs += batter.runs;
-      runMap.set(batter.id, current);
-    }
-
-    for (const bowler of match.playerBowlingCard || []) {
-      const current = wicketMap.get(bowler.id) || { name: bowler.name, wickets: 0 };
-      current.wickets += bowler.wickets;
-      wicketMap.set(bowler.id, current);
-    }
-  }
-
-  const topRunScorer = [...runMap.values()].sort(
-    (left, right) => right.runs - left.runs || left.name.localeCompare(right.name),
-  )[0];
-  const topWicketTaker = [...wicketMap.values()].sort(
-    (left, right) => right.wickets - left.wickets || left.name.localeCompare(right.name),
-  )[0];
-
-  return { topRunScorer, topWicketTaker };
-}
-
-function scorecardSummaryMarkup(match) {
-  const buildInningsMarkup = ({
-    teamLabel,
-    inningsLabel,
-    score,
-    balls,
-    batters,
-    bowlers,
-  }) => {
-    return `
-      <section class="innings-card">
-        <div class="innings-card__header">
-          <div class="innings-card__title">
-            <p class="innings-team">${escapeHtml(teamLabel)}</p>
-            <span class="innings-tag">${escapeHtml(inningsLabel)}</span>
-          </div>
-          <strong>${escapeHtml(`${score} (${formatOvers(balls)} Overs)`)}</strong>
-        </div>
-        <div class="innings-columns">
-          <div class="innings-column">
-            <div class="innings-card__rows">
-              ${batters
-                .map(
-                  (batter) => `
-                    <div class="innings-entry">
-                      <span>${escapeHtml(formatBatterName(batter))}</span>
-                      <strong>${escapeHtml(formatBattingEntry(batter))}</strong>
-                    </div>
-                  `,
-                )
-                .join("")}
-            </div>
-          </div>
-          <div class="innings-column">
-            <div class="innings-card__rows">
-              ${bowlers
-                .map(
-                  (bowler) => `
-                    <div class="innings-entry innings-entry--bowling">
-                      <span>${escapeHtml(cleanPlayerName(bowler.name))}</span>
-                      <strong>${escapeHtml(formatBowlingEntry(bowler))}</strong>
-                    </div>
-                  `,
-                )
-                .join("")}
-            </div>
-          </div>
-        </div>
-      </section>
-    `;
-  };
-
-  return `
-    <div class="scorecard-summary">
-      <h4>Scorecard summary</h4>
-      ${buildInningsMarkup({
-        teamLabel: match.battingFirst === "player" ? "You" : match.opponent.shortName,
-        inningsLabel: "1st Inn",
-        score: match.battingFirst === "player" ? match.playerScore : match.opponentScore,
-        balls: match.battingFirst === "player" ? match.playerBalls : match.opponentBalls,
-        batters: topThree(
-          match.battingFirst === "player" ? match.playerBattingCard || [] : match.opponentBattingCard || [],
-          "runs",
-        ),
-        bowlers: topThree(
-          match.battingFirst === "player" ? match.opponentBowlingCard || [] : match.playerBowlingCard || [],
-          "wickets",
-        ),
-      })}
-      ${buildInningsMarkup({
-        teamLabel: match.battingFirst === "player" ? match.opponent.shortName : "You",
-        inningsLabel: "2nd Inn",
-        score: match.battingFirst === "player" ? match.opponentScore : match.playerScore,
-        balls: match.battingFirst === "player" ? match.opponentBalls : match.playerBalls,
-        batters: topThree(
-          match.battingFirst === "player" ? match.opponentBattingCard || [] : match.playerBattingCard || [],
-          "runs",
-        ),
-        bowlers: topThree(
-          match.battingFirst === "player" ? match.playerBowlingCard || [] : match.opponentBowlingCard || [],
-          "wickets",
-        ),
-      })}
-    </div>
-  `;
-}
-
-function inningsOrderedScoreRows(match) {
-  if (match.battingFirst === "player") {
-    return [
-      { label: "You", score: match.playerScore },
-      { label: match.opponent.shortName, score: match.opponentScore },
-    ];
-  }
-
-  return [
-    { label: match.opponent.shortName, score: match.opponentScore },
-    { label: "You", score: match.playerScore },
-  ];
-}
-
-function candidateMarkup() {
-  if (state.phase !== "draft") {
-    return "";
-  }
-
-  if (!state.currentSquad) {
-    return "";
-  }
-
-  return state.candidateSet
-    .map((basePlayer) => {
-      const player = getDifficultyAdjustedPlayer(basePlayer, state.difficulty);
-      const allRounder = isAllRounderPlayer(player);
-      const ratingsMarkup = ratingsAreHidden()
-        ? ""
-        : `<p class="candidate-ratings">Bat ${player.batting} · Bowl ${player.bowling}</p>`;
-
-      return `
-        <button class="candidate-card ${allRounder ? "candidate-card--allrounder" : ""}" type="button" data-action="draft" data-player-id="${basePlayer.id}">
-          <div class="candidate-listing">
-            <div>
-              <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
-              ${playerPreferenceRowsMarkup(player)}
-              ${ratingsMarkup}
-            </div>
-            <div class="candidate-listing__meta">
-              <span class="candidate-role">${getPlayerRoleLabel(player)}</span>
-            </div>
-          </div>
-        </button>
-      `;
-    })
-    .join("");
-}
-
-function scheduleMarkup() {
-  return TOURNAMENT_OPPONENTS.map((opponent, index) => {
-    const completed = index < state.results.length;
-    const active =
-      state.currentOpponent &&
-      index === state.matchIndex &&
-      state.phase !== "draft" &&
-      !state.champion;
-    const result = state.results[index];
-    const label = result
-      ? result.opponent.label
-      : active
-        ? state.currentOpponent.label
-        : "Opponent TBD";
-    const outcome = result ? (result.won ? "W" : "L") : active ? "Live" : opponent.stage;
-
-    return `
-      <li class="schedule-item ${completed ? "schedule-item--done" : ""} ${active ? "schedule-item--active" : ""}">
-        <div>
-          <p class="schedule-stage">${escapeHtml(opponent.stage)}</p>
-          <strong>${escapeHtml(label)}</strong>
-        </div>
-        <span class="schedule-outcome">${escapeHtml(outcome)}</span>
-      </li>
-    `;
-  }).join("");
-}
-
-function resultMarkup() {
-  if (state.phase === "finished" && state.results.length > 0) {
-    const totals = tournamentTotals();
-    const leaders = tournamentLeaders();
-
-    return `
-      <article class="match-card match-card--summary">
-        <p class="eyebrow">Tournament Summary</p>
-        <h3>${state.champion ? "Champions" : "Campaign Over"}</h3>
-        <div class="summary-grid">
-          <div><span>Runs Scored</span><strong>${totals.runsScored}</strong></div>
-          <div><span>Wickets Lost</span><strong>${totals.wicketsLost}</strong></div>
-          <div><span>Runs Conceded</span><strong>${totals.runsConceded}</strong></div>
-          <div><span>Wickets Taken</span><strong>${totals.wicketsTaken}</strong></div>
-        </div>
-        <div class="summary-leaders">
-          <div>
-            <span>Top Run Scorer</span>
-            <strong>${leaders.topRunScorer ? `${escapeHtml(cleanPlayerName(leaders.topRunScorer.name))} · ${leaders.topRunScorer.runs}` : "--"}</strong>
-          </div>
-          <div>
-            <span>Top Wicket Taker</span>
-            <strong>${leaders.topWicketTaker ? `${escapeHtml(cleanPlayerName(leaders.topWicketTaker.name))} · ${leaders.topWicketTaker.wickets}` : "--"}</strong>
-          </div>
-        </div>
-        <p class="headline">${
-          state.champion
-            ? "The full run is complete. Your XI held up through every stage."
-            : "The tournament ended, but the full scorecard is below for the postmortem."
-        }</p>
-      </article>
-    `;
-  }
-
-  if (!state.latestMatch) {
-    return "";
-  }
-
-  const conditionsLabel = [
-    state.latestMatch.conditions?.weather?.label,
-    state.latestMatch.conditions?.surface?.label,
-    state.latestMatch.conditions?.outfield?.label ? `${state.latestMatch.conditions.outfield.label} outfield` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
-
-  return `
-    <article class="match-card ${state.latestMatch.won ? "match-card--win" : "match-card--loss"}">
-      <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
-      <p class="scorecard-conditions">Conditions: ${escapeHtml(conditionsLabel || "--")}</p>
-      <h3>${escapeHtml(state.latestMatch.opponent.label)}</h3>
-      <div class="scoreline">
-        ${inningsOrderedScoreRows(state.latestMatch)
-          .map(
-            (entry) => `
-              <div>
-                <span>${escapeHtml(entry.label)}</span>
-                <strong>${escapeHtml(entry.score)}</strong>
+      <div class="candidate-list">
+        ${candidates
+          .map((player) => `
+            <button
+              class="candidate-card ${isAllRounderPlayer(player) ? "candidate-card--allrounder" : ""}"
+              type="button"
+              data-action="draft"
+              data-player-id="${player.id}"
+            >
+              <div class="candidate-listing">
+                <div class="candidate-card__copy">
+                  <h3>${escapeHtml(cleanPlayerName(player.name))}</h3>
+                  ${playerPreferenceRowsMarkup(player)}
+                  ${ratingsAreHidden() ? "" : `<p class="candidate-team">${escapeHtml(formatRatings(player))}</p>`}
+                </div>
+                <div class="candidate-listing__meta">
+                  <span class="candidate-role">${escapeHtml(getPlayerRoleLabel(player))}</span>
+                </div>
               </div>
-            `,
-          )
+            </button>
+          `)
           .join("")}
       </div>
-      <p class="headline">${escapeHtml(state.latestMatch.headline)}</p>
-      <p class="performer">Standout: ${escapeHtml(cleanPlayerName(state.latestMatch.performer.name))}</p>
-      ${scorecardSummaryMarkup(state.latestMatch)}
-    </article>
+    </section>
   `;
 }
 
-function resultsHistoryMarkup() {
-  if (state.results.length === 0) {
-    return "";
-  }
+function squadSheetMarkup() {
+  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
+  const metrics = state.roster.length === 11 ? getTeamMetrics(displayRoster) : null;
 
   return `
     <section class="surface-card">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Scorebook</p>
-          <h2>Results</h2>
+          <p class="eyebrow">Squad Sheet</p>
+          <h2>${state.roster.length}/11 picked</h2>
         </div>
       </div>
-      <div class="results-list">
-        ${state.results
-          .map((match) => {
-            const scoreRows = inningsOrderedScoreRows(match);
-            return `
-              <article class="result-row">
-                <div>
-                  <p class="schedule-stage">${escapeHtml(match.stage)}</p>
-                  <strong>${escapeHtml(match.opponent.label)}</strong>
-                  <p class="candidate-team">${escapeHtml(match.headline)}</p>
-                </div>
-                <div class="result-scores">
-                  ${scoreRows
-                    .map(
-                      (entry) => `<span>${escapeHtml(entry.label)} ${escapeHtml(entry.score)}</span>`,
-                    )
-                    .join("")}
-                </div>
-              </article>
-            `;
-          })
-          .join("")}
+      ${
+        metrics
+          ? `
+            <div class="mini-metrics">
+              <span>Batting <strong>${Math.round(metrics.batting)}</strong></span>
+              <span>Bowling <strong>${Math.round(metrics.bowling)}</strong></span>
+            </div>
+          `
+          : ""
+      }
+      <div class="roster-list">
+        ${rosterMarkup()}
       </div>
     </section>
   `;
@@ -637,36 +300,57 @@ function resultsHistoryMarkup() {
 
 function actionMarkup() {
   if (state.phase === "draft") {
-    const draftLabel = state.roster.length === 0 ? "Start Draft" : "Next Draft";
-
+    const draftStarted = state.roster.length > 0 || state.usedSquadIds.length > 0 || Boolean(state.currentSquad);
     return `
       <div class="action-row">
-        <button class="action-button" type="button" data-action="reroll">${draftLabel}</button>
+        <button class="action-button" type="button" data-action="reroll">${draftStarted ? "Next Draft" : "Start Draft"}</button>
         <button class="action-button action-button--ghost" type="button" data-action="reset">New Run</button>
       </div>
     `;
   }
 
-  if (state.phase === "tournament") {
-    const opponent = getCurrentOpponent(state);
-    if (!opponent) {
-      const buttonLabel =
-        state.results.length === 0 && state.matchIndex === 0
-          ? "Start Tournament"
-          : "Proceed to next match";
+  if (state.phase === "ready") {
+    const nextLabel = state.matchIndex === 0 ? "Start Tournament" : `Proceed to ${escapeHtml(TOURNAMENT_OPPONENTS[state.matchIndex].stage)}`;
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="reveal-opponent">${nextLabel}</button>
+        <button class="action-button action-button--ghost" type="button" data-action="reset">Redraft XI</button>
+      </div>
+    `;
+  }
 
+  if (state.phase === "pregame") {
+    const context = getPregameContext(state);
+    const userBatsFirst = context ? userBatsFirstFromPregame(context.pregame) : false;
+    const ready = Boolean(context?.pregame.userDecision) && (!userBatsFirst || context?.pregame.openers.length === 2);
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="start-match" ${ready ? "" : "disabled"}>Start Match</button>
+        <button class="action-button action-button--ghost" type="button" data-action="reset">Redraft XI</button>
+      </div>
+    `;
+  }
+
+  if (state.phase === "live") {
+    const live = getLiveContext(state);
+    if (
+      live?.match.awaiting?.type === "choose-bowler" ||
+      live?.match.awaiting?.type === "choose-next-batter" ||
+      live?.match.awaiting?.type === "choose-openers"
+    ) {
       return `
         <div class="action-row">
-          <button class="action-button" type="button" data-action="reveal-opponent">${escapeHtml(buttonLabel)}</button>
-          <button class="action-button action-button--ghost" type="button" data-action="reset">Redraft XI</button>
+          <button class="action-button action-button--ghost" type="button" data-action="sim-innings">Sim Innings</button>
+          <button class="action-button action-button--ghost" type="button" data-action="sim-match">Sim Match</button>
         </div>
       `;
     }
 
     return `
       <div class="action-row">
-        <button class="action-button" type="button" data-action="simulate">Play match</button>
-        <button class="action-button action-button--ghost" type="button" data-action="reset">Redraft XI</button>
+        <button class="action-button" type="button" data-action="play-over">Play Over</button>
+        <button class="action-button action-button--ghost" type="button" data-action="sim-innings">Sim Innings</button>
+        <button class="action-button action-button--ghost" type="button" data-action="sim-match">Sim Match</button>
       </div>
     `;
   }
@@ -678,117 +362,505 @@ function actionMarkup() {
   `;
 }
 
-function statusCopy() {
-  if (state.phase === "draft") {
-    if (!state.currentSquad) {
-      const slotsLeft = 11 - state.roster.length;
-      if (state.roster.length === 0) {
-        const difficulty = DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty);
-        return `${difficulty?.label || "International"} mode selected. Press Start Draft to reveal your first country and year.`;
-      }
-
-      return `Pick made. ${slotsLeft} players left. Press Next Draft to reveal another country and year.`;
-    }
-
-    return "Pick one player to add to your XI.";
-  }
-
-  if (state.phase === "tournament") {
-    const opponent = getCurrentOpponent(state);
-    if (!opponent) {
-      if (state.results.length === 0 && state.matchIndex === 0) {
-        return "Your XI is set. Three group matches await, and you need 2 wins to qualify. Press Start Tournament when you're ready.";
-      }
-      return state.matchIndex < TOURNAMENT_OPPONENTS.length
-        ? "You are through. Press Proceed to next match when you're ready."
-        : "Tournament complete.";
-    }
-    return "Next opponent loaded. Check the conditions, then press Play match.";
-  }
-
-  if (state.champion) {
-    return "You went the distance and lifted the Cricket World Cup.";
-  }
-
-  return "The run is over. Rework the squad balance and go again.";
-}
-
-function teamSummaryMarkup(metrics) {
-  if (state.roster.length < 11) {
+function pregameSetupMarkup() {
+  const context = getPregameContext(state);
+  if (!context) {
     return "";
   }
 
+  const difficultyRoster = getDisplayRoster(state.roster, state.difficulty);
+  const opponentMetrics = getOpponentMetrics(state);
+  const tossDecided = Boolean(context.pregame.userDecision);
+  const userBatsFirst = tossDecided ? userBatsFirstFromPregame(context.pregame) : false;
+
   return `
-    <div class="scout-list scout-list--compact">
-      <div><span>Batting</span><strong>${metrics.batting}</strong></div>
-      <div><span>Bowling</span><strong>${metrics.bowling}</strong></div>
-    </div>
-  `;
-}
-
-function render() {
-  const displayRoster = getDisplayRoster(state.roster, state.difficulty);
-  const metrics = getTeamMetrics(displayRoster);
-  const showTournamentPanels = state.phase !== "draft" || state.results.length > 0;
-
-  appElement.innerHTML = `
-    <section class="shell">
-      <header class="hero">
-        <div class="hero__copy">
-          <p class="eyebrow eyebrow--live">ODI World Cup Draft Game</p>
-          <h1>400<span>-</span>0</h1>
-          <p class="hero__lede">Draw from iconic ICC Cricket World Cup squads, draft an all-time line-up, and survive against some of the best cricket teams the world has seen.</p>
-        </div>
-        <div class="career-board">
-          <div class="stat-tile">
-            <span>Titles</span>
-            <strong>${career.titles}</strong>
-          </div>
-          <div class="stat-tile">
-            <span>Best Finish</span>
-            <strong>${escapeHtml(career.bestFinish)}</strong>
-          </div>
-        </div>
-      </header>
-
-      <section class="status-panel">
-        <p>${escapeHtml(statusCopy())}</p>
-        ${actionMarkup()}
-      </section>
-
-      <section class="dashboard">
-        <div class="dashboard__main">
-          ${difficultyMarkup()}
-          ${draftPanelMarkup()}
-          ${opponentPanelMarkup()}
-          ${showTournamentPanels ? resultMarkup() : ""}
-          ${showTournamentPanels ? resultsHistoryMarkup() : ""}
-        </div>
-
-        <aside class="dashboard__side">
-          <section class="surface-card surface-card--sheet">
-            <div class="section-heading">
-              <div>
-                <p class="eyebrow">Squad Sheet</p>
-                <h2>${state.roster.length}/11 picked</h2>
-              </div>
-            </div>
-            ${teamSummaryMarkup(metrics)}
-            <div class="roster-list">${rosterMarkup()}</div>
-          </section>
-        </aside>
-      </section>
-
-      <footer class="small-print">
-        <p>Inspired by and with thanks to 82-0.com.</p>
-        <p>400-0 is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
-        <p>Ronel Khan, 2026.</p>
-      </footer>
+    <section class="match-card">
+      <p class="eyebrow">${escapeHtml(context.opponent.stage)}</p>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(context.conditions))}</p>
+      <h3>${escapeHtml(context.opponent.label)}</h3>
+      <p>${escapeHtml(context.opponent.note)}</p>
+      <div class="mini-metrics">
+        <span>Batting <strong>${Math.round(opponentMetrics.batting)}</strong></span>
+        <span>Bowling <strong>${Math.round(opponentMetrics.bowling)}</strong></span>
+      </div>
+      <div class="pregame-grid">
+        <article class="surface-card surface-card--inner">
+          <p class="eyebrow">Toss</p>
+          <h3>${context.pregame.tossWinner === "user" ? "You won the toss" : `${context.opponent.shortName} won the toss`}</h3>
+          <p>
+            ${
+              context.pregame.tossWinner === "user"
+                ? context.pregame.userDecision
+                  ? `You won the toss and decided to ${formatTossDecision(context.pregame.userDecision)}.`
+                  : "Pick whether to bat or field first."
+                : `${context.opponent.shortName} won the toss and decided to ${formatTossDecision(context.pregame.userDecision)}.`
+            }
+          </p>
+          ${
+            context.pregame.tossWinner === "user"
+              ? `
+                <div class="action-row">
+                  <button class="action-button ${context.pregame.userDecision === "bat" ? "action-button--active" : ""}" type="button" data-action="toss" data-choice="bat">Bat first</button>
+                  <button class="action-button ${context.pregame.userDecision === "bowl" ? "action-button--active" : ""}" type="button" data-action="toss" data-choice="bowl">Bowl first</button>
+                </div>
+              `
+              : ""
+          }
+        </article>
+        <article class="surface-card surface-card--inner">
+          <p class="eyebrow">Openers</p>
+          <h3>${!tossDecided ? "Choose the toss call first" : userBatsFirst ? "Select your pair" : "Await the chase"}</h3>
+          ${
+            !tossDecided
+              ? `<p>Once the toss decision is locked in, this panel will switch to the correct innings setup.</p>`
+              : userBatsFirst
+              ? `
+                <p>${context.pregame.openers.length}/2 locked in. These two will start your innings.</p>
+                <div class="selection-grid">
+                  ${difficultyRoster
+                    .map((player) => `
+                      <button
+                        class="selection-pill ${context.pregame.openers.includes(player.id) ? "selection-pill--active" : ""}"
+                        type="button"
+                        data-action="toggle-opener"
+                        data-player-id="${player.id}"
+                      >
+                        <span>
+                          <strong>${escapeHtml(cleanPlayerName(player.name))}</strong>
+                          <small>${escapeHtml(getPlayerRoleLabel(player))}${ratingsAreHidden() ? "" : ` · ${escapeHtml(formatRatings(player))}`}</small>
+                        </span>
+                        <strong>${escapeHtml(formatBattingHand(player) || "")} · ${escapeHtml(player.battingStyle || player.aggressionLevel || "Balanced")}</strong>
+                      </button>
+                    `)
+                    .join("")}
+                </div>
+              `
+              : `
+                <p>Because you are bowling first, your openers will be chosen at the innings break before the chase begins.</p>
+              `
+          }
+        </article>
+      </div>
     </section>
   `;
 }
 
-appElement.addEventListener("click", (event) => {
+function inningsCardMarkup(innings, label) {
+  const batters = topThree(
+    Object.values(innings.battingCards).filter((entry) => entry.balls > 0),
+    "runs",
+    "balls",
+  );
+  const bowlers = topThree(
+    Object.values(innings.bowlingCards).filter((entry) => entry.balls > 0),
+    "wickets",
+    "runsConceded",
+  );
+
+  return `
+    <article class="innings-card">
+      <div class="innings-card__header">
+        <div>
+          <span class="schedule-stage">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(innings.battingLabel)}</strong>
+        </div>
+        <div class="innings-card__score">${escapeHtml(formatScore(innings.score, innings.wickets))} <span>(${formatOvers(innings.balls)} overs)</span></div>
+      </div>
+      <div class="innings-columns">
+        <div class="innings-column">
+          ${batters
+            .map((entry) => `
+              <div class="innings-row">
+                <span>${escapeHtml(formatBatterName(entry))}</span>
+                <strong>${escapeHtml(formatBattingEntry(entry))}</strong>
+              </div>
+            `)
+            .join("")}
+        </div>
+        <div class="innings-column">
+          ${bowlers
+            .map((entry) => `
+              <div class="innings-row">
+                <span>${escapeHtml(cleanPlayerName(entry.name))}</span>
+                <strong>${escapeHtml(formatBowlingEntry(entry))}</strong>
+              </div>
+            `)
+            .join("")}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function overFeedMarkup(live) {
+  const innings = live.innings;
+  if (!innings.overs.length) {
+    return `<p class="empty-copy">No overs completed yet. Once the first over is done, the event feed will appear here.</p>`;
+  }
+
+  return [...innings.overs]
+    .slice(-6)
+    .reverse()
+    .map((over) => {
+      const bowler = innings.bowlingById.get(over.bowlerId);
+      const striker = innings.teamById.get(over.strikerId);
+      const nonStriker = innings.teamById.get(over.nonStrikerId);
+      return `
+        <article class="over-card">
+          <div class="over-card__headline">
+            <strong>Over ${over.overNumber}</strong>
+            <span>${escapeHtml(cleanPlayerName(bowler?.name || ""))} · ${escapeHtml(over.bowlerIntent)}</span>
+          </div>
+          <p class="over-events">${escapeHtml(over.events.join(" "))}</p>
+          <div class="over-card__meta">
+            <span>${escapeHtml(cleanPlayerName(striker?.name || ""))} / ${escapeHtml(cleanPlayerName(nonStriker?.name || ""))}</span>
+            <span>${escapeHtml(formatScore(over.score, over.wickets))}</span>
+            ${over.requiredRate ? `<span>Req RR ${round(over.requiredRate)}</span>` : `<span>RR ${round((over.score * 6) / Math.max((Number(over.overNumber) * 6), 1))}</span>`}
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function round(value) {
+  return Math.round(value * 100) / 100;
+}
+
+function bowlingChoiceMarkup(live) {
+  if (live.match.awaiting?.type !== "choose-bowler") {
+    return "";
+  }
+
+  const innings = live.innings;
+  const eligibleIds = [...getDisplayRoster(live.match.userTeam, state.difficulty)]
+    .filter((player) => player.bowling >= 40)
+    .filter((player) => (innings.bowlingCards[player.id]?.balls || 0) < 60)
+    .filter((player) => player.id !== innings.lastBowlerId)
+    .map((player) => player.id);
+  const byId = new Map(live.match.userTeam.map((player) => [player.id, player]));
+  const recommendation = getRecommendedBowler(state);
+
+  return `
+    <section class="surface-card surface-card--inner live-control-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Bowling Change</p>
+          <h2>Pick the over</h2>
+          <p class="squad-note">${recommendation ? `Recommended on County: ${cleanPlayerName(byId.get(recommendation)?.name || "")}.` : "Choose the bowler and the tone of the over."}</p>
+        </div>
+      </div>
+      <div class="bowling-choice-grid">
+        ${eligibleIds
+          .map((bowlerId) => {
+            const bowler = byId.get(bowlerId);
+            return `
+              <article class="choice-card ${recommendation === bowlerId ? "choice-card--recommended" : ""}">
+                <div class="choice-card__copy">
+                  <h3>${escapeHtml(cleanPlayerName(bowler.name))}</h3>
+                  <p>${escapeHtml(formatBowlingStyle(bowler))} · Bowl ${bowler.bowling}</p>
+                </div>
+                <div class="choice-card__actions">
+                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="attacking">Attack</button>
+                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="balanced">Balance</button>
+                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="defensive">Defend</button>
+                </div>
+              </article>
+            `;
+          })
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function nextBatterChoiceMarkup(live) {
+  if (live.match.awaiting?.type !== "choose-next-batter") {
+    return "";
+  }
+
+  const remainingIds = live.innings.remainingBatters;
+  return `
+    <section class="surface-card surface-card--inner live-control-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Wicket Break</p>
+          <h2>Choose the next batter</h2>
+          <p class="squad-note">This choice affects the rest of the over and the chase tempo straight away.</p>
+        </div>
+      </div>
+      <div class="selection-grid">
+        ${remainingIds
+          .map((playerId) => {
+            const player = live.innings.teamById.get(playerId);
+            return `
+              <button class="selection-pill selection-pill--full" type="button" data-action="choose-batter" data-player-id="${playerId}">
+                <span>
+                  <strong>${escapeHtml(cleanPlayerName(player.name))}</strong>
+                  <small>${ratingsAreHidden() ? "" : escapeHtml(formatRatings(player))}</small>
+                </span>
+                <strong>${escapeHtml(formatBattingHand(player) || "")} · ${escapeHtml(player.battingStyle || player.aggressionLevel || "Balanced")}</strong>
+              </button>
+            `;
+          })
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function inningsBreakOpenersMarkup(live) {
+  if (live.match.awaiting?.type !== "choose-openers") {
+    return "";
+  }
+
+  const openers = live.match.userBattingPlan.openers;
+  return `
+    <section class="surface-card surface-card--inner live-control-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Innings Break</p>
+          <h2>Choose your openers</h2>
+          <p class="squad-note">${openers.length}/2 locked in for the chase.</p>
+        </div>
+      </div>
+      <div class="selection-grid">
+        ${live.match.userTeam
+          .map((player) => `
+            <button
+              class="selection-pill ${openers.includes(player.id) ? "selection-pill--active" : ""}"
+              type="button"
+              data-action="toggle-opener"
+              data-player-id="${player.id}"
+            >
+              <span>
+                <strong>${escapeHtml(cleanPlayerName(player.name))}</strong>
+                <small>${escapeHtml(getPlayerRoleLabel(player))}${ratingsAreHidden() ? "" : ` · ${escapeHtml(formatRatings(player))}`}</small>
+              </span>
+              <strong>${escapeHtml(formatBattingHand(player) || "")} · ${escapeHtml(player.battingStyle || player.aggressionLevel || "Balanced")}</strong>
+            </button>
+          `)
+          .join("")}
+      </div>
+      <div class="action-row action-row--spaced">
+        <button class="action-button" type="button" data-action="confirm-openers" ${openers.length === 2 ? "" : "disabled"}>Start Chase</button>
+      </div>
+    </section>
+  `;
+}
+
+function liveMatchMarkup() {
+  const live = getLiveContext(state);
+  if (!live) {
+    return "";
+  }
+
+  const match = live.match;
+  const innings = live.innings;
+  const firstInnings = match.innings[0];
+  const secondInnings = match.innings[1];
+
+  return `
+    <section class="match-card">
+      <p class="eyebrow">${escapeHtml(match.stage)}</p>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(match.conditions))}</p>
+      <h3>${escapeHtml(match.opponent.label)}</h3>
+      <div class="live-scoreboard">
+        ${match.innings.map((entry, index) => `
+          <div class="scoreline ${index === match.currentInningsIndex ? "scoreline--active" : ""}">
+            <span>${escapeHtml(entry.battingLabel)}</span>
+            <strong>${escapeHtml(formatScore(entry.score, entry.wickets))}</strong>
+          </div>
+        `).join("")}
+      </div>
+      <div class="mini-metrics">
+        <span>Striker <strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></span>
+        <span>Non-striker <strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></span>
+        <span>Last Bowler <strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></span>
+        <span>Last Over <strong>${escapeHtml(live.match.latestOver ? live.match.latestOver.events.join(" ") : "No over yet")}</strong></span>
+        <span>Powerplay <strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></span>
+        ${live.requiredRate ? `<span>Req RR <strong>${round(live.requiredRate)}</strong></span>` : ""}
+      </div>
+      ${inningsBreakOpenersMarkup(live)}
+      ${bowlingChoiceMarkup(live)}
+      ${nextBatterChoiceMarkup(live)}
+      <div class="two-column-layout">
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Over Feed</p>
+              <h2>Latest overs</h2>
+            </div>
+          </div>
+          <div class="over-feed">
+            ${overFeedMarkup(live)}
+          </div>
+        </section>
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Scorecard</p>
+              <h2>Live summary</h2>
+            </div>
+          </div>
+          ${inningsCardMarkup(firstInnings, "1st Inn")}
+          ${secondInnings ? inningsCardMarkup(secondInnings, "2nd Inn") : ""}
+        </section>
+      </div>
+    </section>
+  `;
+}
+
+function latestResultMarkup() {
+  if (!state.latestMatch) {
+    return "";
+  }
+
+  return `
+    <section class="match-card">
+      <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
+      <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(state.latestMatch.conditions))}</p>
+      <h3>${escapeHtml(state.latestMatch.opponent)}</h3>
+      <p>${escapeHtml(state.latestMatch.summary)}</p>
+      <div class="live-scoreboard">
+        ${state.latestMatch.inningsOrderLines
+          .map((line) => `
+            <div class="scoreline">
+              <span>${escapeHtml(line.label)}</span>
+              <strong>${escapeHtml(line.score)}</strong>
+            </div>
+          `)
+          .join("")}
+      </div>
+      <p><strong>Standout:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.standout || ""))}</p>
+    </section>
+  `;
+}
+
+function resultsHistoryMarkup() {
+  if (!state.results.length) {
+    return "";
+  }
+
+  return `
+    <section class="surface-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Scorebook</p>
+          <h2>Results</h2>
+        </div>
+      </div>
+      <div class="schedule-list">
+        ${state.results
+          .map(
+            (result) => `
+              <article class="schedule-card">
+                <div>
+                  <p class="schedule-stage">${escapeHtml(result.stage)}</p>
+                  <h3>${escapeHtml(result.opponent)}</h3>
+                  <p>${escapeHtml(result.summary)}</p>
+                </div>
+                <div class="schedule-scorelines">
+                  ${result.inningsOrderLines
+                    .map((line) => `<span>${escapeHtml(line.label)} ${escapeHtml(line.score)}</span>`)
+                    .join("")}
+                </div>
+              </article>
+            `,
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function readyPanelMarkup() {
+  const opponent = getCurrentOpponent(state);
+  if (state.phase === "pregame" && opponent) {
+    return pregameSetupMarkup();
+  }
+  if (state.phase === "live") {
+    return liveMatchMarkup();
+  }
+  if (state.phase === "ready" || state.phase === "finished") {
+    return latestResultMarkup();
+  }
+  return "";
+}
+
+function heroMarkup() {
+  return `
+    <section class="hero">
+      <div class="hero__copy">
+        <p class="eyebrow eyebrow--live">Version 2</p>
+        <h1>400<span>-</span>0</h1>
+        <p class="hero__lede">
+          Draft an all-time XI, then step into a real ODI match engine with over-by-over control. Pick openers, react to wickets, manage bowlers, and ride the powerplays properly.
+        </p>
+      </div>
+      <div class="career-board">
+        <article class="stat-tile">
+          <span>Stage</span>
+          <strong>${escapeHtml(getProgressLabel(state))}</strong>
+        </article>
+        <article class="stat-tile">
+          <span>Record</span>
+          <strong>${state.wins}-${state.losses}</strong>
+        </article>
+        <article class="stat-tile">
+          <span>Mode</span>
+          <strong>${escapeHtml(currentDifficulty().label)}</strong>
+        </article>
+      </div>
+      <div class="status-panel">
+        <p>
+          ${
+            state.phase === "draft"
+              ? "Build the XI one World Cup squad at a time. Once the side is complete, you’ll set the toss, openers, and then run the match over by over."
+              : state.phase === "pregame"
+                ? "The opponent and conditions are set. Lock the toss call in, then choose openers only if you are batting first."
+                : state.phase === "live"
+                  ? "You are in the live match. Use manual over control or sim the rest when you want to move faster."
+                  : state.champion
+                    ? "You went the distance and lifted the Cricket World Cup."
+                    : state.eliminated
+                      ? "The run is over, but the scorebook is still there for the postmortem."
+                      : "The XI is ready. Step into the next match when you’re set."
+          }
+        </p>
+        ${actionMarkup()}
+      </div>
+    </section>
+  `;
+}
+
+function render() {
+  appElement.innerHTML = `
+    <div class="app">
+      <div class="shell">
+        ${heroMarkup()}
+        ${difficultyMarkup()}
+        <div class="layout-grid">
+          <div class="layout-grid__main">
+            ${state.phase === "draft" ? draftBoardMarkup() : ""}
+            ${readyPanelMarkup()}
+            ${resultsHistoryMarkup()}
+          </div>
+          <aside class="layout-grid__side">
+            ${squadSheetMarkup()}
+          </aside>
+        </div>
+        <footer class="small-print">
+          <p>Inspired by and with thanks to 82-0.com.</p>
+          <p>400-0 is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
+          <p>Ronel Khan, 2026.</p>
+        </footer>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener("click", (event) => {
   const target = event.target.closest("[data-action]");
   if (!target) {
     return;
@@ -796,14 +868,27 @@ appElement.addEventListener("click", (event) => {
 
   const action = target.dataset.action;
 
-  if (action === "draft") {
-    state = draftPlayer(state, target.dataset.playerId);
+  if (action === "difficulty") {
+    state = setDifficulty(state, target.dataset.difficulty);
+    render();
+    return;
+  }
+
+  if (action === "reset") {
+    state = createInitialState();
     render();
     return;
   }
 
   if (action === "reroll") {
-    revealDraftSquad();
+    state = rerollCandidates(state);
+    render();
+    return;
+  }
+
+  if (action === "draft") {
+    state = draftPlayer(state, target.dataset.playerId);
+    render();
     return;
   }
 
@@ -813,21 +898,60 @@ appElement.addEventListener("click", (event) => {
     return;
   }
 
-  if (action === "difficulty") {
-    state = setDifficulty(state, target.dataset.difficulty);
+  if (action === "toss") {
+    state = chooseTossDecision(state, target.dataset.choice);
+    if (target.dataset.choice === "bowl") {
+      state = startMatch(state);
+    }
     render();
     return;
   }
 
-  if (action === "simulate") {
+  if (action === "toggle-opener") {
+    state = toggleOpener(state, target.dataset.playerId);
+    render();
+    return;
+  }
+
+  if (action === "start-match") {
+    state = startMatch(state);
+    render();
+    return;
+  }
+
+  if (action === "confirm-openers") {
+    state = confirmChaseOpeners(state);
+    render();
+    return;
+  }
+
+  if (action === "choose-bowler") {
+    state = chooseBowler(state, target.dataset.playerId, target.dataset.intent);
+    render();
+    return;
+  }
+
+  if (action === "choose-batter") {
+    state = chooseNextBatter(state, target.dataset.playerId);
+    render();
+    return;
+  }
+
+  if (action === "play-over") {
+    state = playOver(state);
+    render();
+    return;
+  }
+
+  if (action === "sim-innings") {
+    state = simulateInnings(state);
+    render();
+    return;
+  }
+
+  if (action === "sim-match") {
     state = simulateMatch(state);
-    updateCareer(state);
     render();
-    return;
-  }
-
-  if (action === "reset") {
-    resetRun();
   }
 });
 

@@ -1330,6 +1330,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Chamara Silva": { role: "batsman", batting: 78, bowling: 18 },
   "Quinton de Kock": { role: "wicketkeeper", batting: 90, bowling: 0 },
   "Sarfaraz Ahmed": { role: "wicketkeeper", batting: 82, bowling: 0 },
+  "Shahid Afridi": { role: "batsman", batting: 84, bowling: 82 },
   "James Anderson": { role: "bowler", batting: 19, bowling: 91 },
   "Kevin Pietersen": { role: "batsman", batting: 94, bowling: 24 },
   "Graham Thorpe": { role: "batsman", batting: 88, bowling: 18 },
@@ -1382,6 +1383,49 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Mansoor Akhtar": { role: "batsman", batting: 73, bowling: 12 },
   "Mohsin Khan": { role: "batsman", batting: 82, bowling: 10 },
   "Carlisle Best": { role: "wicketkeeper", batting: 71, bowling: 0 },
+  "Andre Russell": { role: "batsman", batting: 82, bowling: 78, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Ashley Nurse": { role: "bowler", batting: 46, bowling: 72, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Carlos Brathwaite": { role: "batsman", batting: 64, bowling: 74, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Chris Gayle": { role: "batsman", batting: 89, bowling: 64, battingHand: "Left", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Corey Collymore": { role: "bowler", batting: 23, bowling: 76, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Daren Powell": { role: "bowler", batting: 24, bowling: 76, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Darren Bravo": { role: "batsman", batting: 82, bowling: 0, battingHand: "Left" },
+  "Darren Sammy": { role: "batsman", batting: 68, bowling: 72, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Denesh Ramdin": { role: "wicketkeeper", batting: 71, bowling: 0, battingHand: "Right" },
+  "Devendra Bishoo": { role: "bowler", batting: 22, bowling: 76, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Leg Break Googly" },
+  "Devon Smith": { role: "batsman", batting: 74, bowling: 0, battingHand: "Left" },
+  "Devon Thomas": { role: "wicketkeeper", batting: 63, bowling: 0, battingHand: "Right" },
+  "Dwayne Bravo": { role: "batsman", batting: 82, bowling: 80, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Dwayne Smith": { role: "batsman", batting: 78, bowling: 62, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium" },
+  "Evin Lewis": { role: "batsman", batting: 84, bowling: 0, battingHand: "Left" },
+  "Fabian Allen": { role: "bowler", batting: 64, bowling: 68, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Orthodox" },
+  "Ian Bradshaw": { role: "bowler", batting: 32, bowling: 74, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Fast Medium" },
+  "Jason Holder": { role: "bowler", batting: 70, bowling: 79, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Jermaine Lawson": { role: "bowler", batting: 18, bowling: 74, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Jerome Taylor": { role: "bowler", batting: 28, bowling: 80, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Johnson Charles": { role: "wicketkeeper", batting: 72, bowling: 0, battingHand: "Right" },
+  "Jonathan Carter": { role: "batsman", batting: 62, bowling: 18, battingHand: "Right" },
+  "Kemar Roach": { role: "bowler", batting: 20, bowling: 80, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Kieron Pollard": { role: "batsman", batting: 82, bowling: 72, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Kirk Edwards": { role: "batsman", batting: 72, bowling: 0, battingHand: "Right" },
+  "Lendl Simmons": { role: "batsman", batting: 78, bowling: 24, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium" },
+  "Marlon Samuels": { role: "batsman", batting: 82, bowling: 55, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Nikita Miller": { role: "bowler", batting: 24, bowling: 72, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Orthodox" },
+  "Nicholas Pooran": { role: "wicketkeeper", batting: 84, bowling: 0, battingHand: "Left" },
+  "Nixon McLean": { role: "bowler", batting: 18, bowling: 72, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Oshane Thomas": { role: "bowler", batting: 18, bowling: 78, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast" },
+  "Pedro Collins": { role: "bowler", batting: 18, bowling: 74, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Fast Medium" },
+  "Ramnaresh Sarwan": { role: "batsman", batting: 86, bowling: 18, battingHand: "Right" },
+  "Ravi Rampaul": { role: "bowler", batting: 22, bowling: 80, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Ricardo Powell": { role: "batsman", batting: 68, bowling: 28, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Shai Hope": { role: "wicketkeeper", batting: 90, bowling: 0, battingHand: "Right" },
+  "Shannon Gabriel": { role: "bowler", batting: 16, bowling: 78, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast" },
+  "Sheldon Cottrell": { role: "bowler", batting: 18, bowling: 78, battingHand: "Right", bowlingHand: "Left", bowlingStyle: "Fast Medium" },
+  "Shimron Hetmyer": { role: "batsman", batting: 82, bowling: 0, battingHand: "Left" },
+  "Shivnarine Chanderpaul": { role: "batsman", batting: 84, bowling: 18, battingHand: "Left" },
+  "Sulieman Benn": { role: "bowler", batting: 20, bowling: 74, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Orthodox" },
+  "Vasbert Drakes": { role: "bowler", batting: 28, bowling: 76, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Wavell Hinds": { role: "batsman", batting: 71, bowling: 46, battingHand: "Left", bowlingHand: "Right", bowlingStyle: "Off Break" },
   "Merv Hughes": { role: "bowler", batting: 16, bowling: 81 },
   "Richard Illingworth": { role: "bowler", batting: 58, bowling: 71 },
   "Vinod Kambli": { role: "batsman", batting: 82, bowling: 0 },
@@ -1495,6 +1539,8 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Moeen Ali": { role: "batsman", batting: 76, bowling: 64 },
   "Mohammed Shami": { role: "bowler", batting: 18, bowling: 90 },
   "Mohammed Siraj": { role: "bowler", batting: 16, bowling: 82 },
+  "Chris Martin": { role: "bowler", batting: 15, bowling: 78 },
+  "Darren Sammy": { role: "batsman", batting: 68, bowling: 72, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
   "Morne van Wyk": { role: "wicketkeeper", batting: 78, bowling: 0 },
   "Morné Morkel": { role: "bowler", batting: 22, bowling: 86 },
   "Nathan Bracken": { role: "bowler", batting: 26, bowling: 87 },
@@ -1554,6 +1600,7 @@ export const PLAYER_INTERVAL_SUMMARY = PLAYER_INTERVAL_ENRICHMENT_SUMMARY;
 
 const PLAYER_ID_OVERRIDES = {
   "pakistan-1983-rashid-khan": { role: "batsman", batting: 64, bowling: 18 },
+  "bangladesh-2003-mohammad-ashraful": { role: "batsman", batting: 77, bowling: 38 },
 };
 
 const RAW_PLAYER_POOL = [...BASE_PLAYER_POOL, ...EXTRA_PLAYERS, ...GENERATED_PLAYERS];
@@ -1792,27 +1839,42 @@ function getPlayerNameOverride(player) {
 function applyPlayerOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
   const override = getPlayerNameOverride(player);
+  const playerIdOverride = PLAYER_ID_OVERRIDES[player.id] || null;
   const intervalEnrichment = PLAYER_INTERVAL_ENRICHMENT_BY_ID[player.id] || {};
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
   const hasUsableEnrichmentRatings =
     (intervalEnrichment.batting || 0) > 0 || (intervalEnrichment.bowling || 0) > 0;
-  const role = hasUsableEnrichmentRatings ? intervalEnrichment.role || inferredRole : inferredRole;
+  const explicitRole = playerIdOverride?.role || override?.role || "";
+  const role = explicitRole || (hasUsableEnrichmentRatings ? intervalEnrichment.role || inferredRole : inferredRole);
   const merged = {
     ...player,
     name: normalizedName,
     ...(override || {}),
-    ...(PLAYER_ID_OVERRIDES[player.id] || {}),
+    ...(playerIdOverride || {}),
   };
+  const explicitBattingHand = playerIdOverride?.battingHand || override?.battingHand || "";
+  const explicitBowlingHand = playerIdOverride?.bowlingHand || override?.bowlingHand || "";
+  const explicitBowlingStyle = playerIdOverride?.bowlingStyle || override?.bowlingStyle || "";
+  const hasExplicitRatingOverride =
+    Boolean(
+      (override && ("batting" in override || "bowling" in override || "role" in override)) ||
+      (playerIdOverride && ("batting" in playerIdOverride || "bowling" in playerIdOverride || "role" in playerIdOverride)),
+    );
   const batting =
-    (intervalEnrichment.batting || 0) > 0 ? intervalEnrichment.batting : merged.batting;
+    hasExplicitRatingOverride ? merged.batting : (intervalEnrichment.batting || 0) > 0 ? intervalEnrichment.batting : merged.batting;
   const bowling =
-    (intervalEnrichment.bowling || 0) > 0 ? intervalEnrichment.bowling : merged.bowling;
+    hasExplicitRatingOverride ? merged.bowling : (intervalEnrichment.bowling || 0) > 0 ? intervalEnrichment.bowling : merged.bowling;
+  const safeBatting = role === "bowler" ? Math.max(15, batting || 0) : batting;
+  const safeBowling = role === "bowler" ? Math.max(60, bowling || 0) : bowling;
   const enriched = {
     ...merged,
     ...(intervalEnrichment || {}),
     role,
-    batting,
-    bowling,
+    batting: safeBatting,
+    bowling: safeBowling,
+    battingHand: explicitBattingHand || intervalEnrichment.battingHand || merged.battingHand || "",
+    bowlingHand: explicitBowlingHand || intervalEnrichment.bowlingHand || merged.bowlingHand || "",
+    bowlingStyle: explicitBowlingStyle || intervalEnrichment.bowlingStyle || merged.bowlingStyle || "",
   };
   const battingHand = inferBattingHand(enriched);
   const bowlingHand = inferBowlingHand(enriched);

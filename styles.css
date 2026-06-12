@@ -133,6 +133,13 @@ button {
   line-height: 1.5;
 }
 
+.draft-instruction-lead {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
 .career-board {
   display: grid;
   gap: 12px;
@@ -224,6 +231,255 @@ button {
     box-shadow 160ms ease;
 }
 
+.layout-grid {
+  display: grid;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.layout-grid__main,
+.layout-grid__side {
+  display: grid;
+  gap: 18px;
+}
+
+.surface-card--inner {
+  padding: 16px;
+}
+
+.pregame-grid,
+.two-column-layout {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.selection-grid,
+.bowling-choice-grid,
+.over-feed,
+.schedule-list {
+  display: grid;
+  gap: 12px;
+}
+
+.selection-pill,
+.choice-card,
+.innings-card,
+.over-card,
+.schedule-card {
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.selection-pill {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.selection-pill span,
+.selection-pill strong {
+  font-size: 0.9rem;
+}
+
+.selection-pill span {
+  display: grid;
+  gap: 3px;
+}
+
+.selection-pill span strong {
+  color: var(--text);
+}
+
+.selection-pill span small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  line-height: 1.25;
+}
+
+.selection-pill--full {
+  display: grid;
+  justify-content: stretch;
+}
+
+.selection-pill--active,
+.choice-card--recommended {
+  border-color: rgba(165, 118, 47, 0.48);
+  background: rgba(202, 165, 106, 0.16);
+}
+
+.mini-metrics {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.mini-metrics span {
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-metrics strong {
+  font-size: 1.05rem;
+  color: var(--grass-dark);
+}
+
+.choice-card {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.choice-card__copy h3,
+.innings-card__header strong,
+.schedule-card h3,
+.over-card__headline strong {
+  margin: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.choice-card__copy p,
+.over-card__headline span,
+.over-card__meta,
+.schedule-card p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+.choice-card__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.live-control-card {
+  margin-top: 12px;
+}
+
+.live-scoreboard {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.scoreline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.54);
+}
+
+.scoreline strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.5rem;
+  color: var(--grass-dark);
+}
+
+.scoreline--active {
+  border-color: rgba(165, 118, 47, 0.4);
+  background: rgba(202, 165, 106, 0.18);
+}
+
+.innings-card {
+  padding: 14px;
+}
+
+.innings-card__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: end;
+}
+
+.innings-card__score {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.5rem;
+  color: var(--grass-dark);
+}
+
+.innings-card__score span {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.innings-columns {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.innings-column {
+  display: grid;
+  gap: 8px;
+}
+
+.innings-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(17, 59, 34, 0.08);
+}
+
+.over-card {
+  padding: 12px 14px;
+}
+
+.over-card__headline,
+.over-card__meta,
+.schedule-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.over-events {
+  margin: 8px 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+.schedule-card {
+  padding: 16px;
+  align-items: start;
+}
+
+.schedule-scorelines {
+  display: grid;
+  gap: 8px;
+  text-align: right;
+  color: var(--muted);
+}
+
+@media (min-width: 960px) {
+  .layout-grid {
+    grid-template-columns: minmax(0, 1.9fr) minmax(320px, 0.95fr);
+    align-items: start;
+  }
+
+  .pregame-grid,
+  .two-column-layout,
+  .innings-columns,
+  .mini-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .action-button {
   min-height: 42px;
   padding: 0 16px;
@@ -238,6 +494,12 @@ button {
   border-color: rgba(17, 59, 34, 0.16);
   background: rgba(255, 255, 255, 0.55);
   color: var(--grass-dark);
+}
+
+.action-button--active {
+  border-color: rgba(143, 31, 33, 0.42);
+  background: linear-gradient(180deg, rgba(165, 45, 48, 0.96), rgba(120, 22, 25, 1));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .action-button:hover,
@@ -434,6 +696,7 @@ button {
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
+  align-self: flex-start;
 }
 
 .candidate-card h3,
@@ -441,6 +704,11 @@ button {
 .match-card h3 {
   margin: 0 0 3px;
   font-size: 1rem;
+}
+
+.candidate-card__copy {
+  min-width: 0;
+  flex: 1;
 }
 
 .candidate-team,
@@ -454,6 +722,8 @@ button {
 
 .candidate-team {
   font-size: 0.84rem;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .candidate-ratings {
@@ -528,6 +798,10 @@ button {
   border: 1px solid rgba(17, 59, 34, 0.1);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.48);
+}
+
+.action-row--spaced {
+  margin-top: 12px;
 }
 
 .roster-matrix {
