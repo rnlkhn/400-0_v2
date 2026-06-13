@@ -46762,6 +46762,7 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
     },
     overs: [],
     lastBowlerId: "",
+    lastWicket: null,
     teamById: byId,
     bowlingById,
     teamRoster: teamRoster.map((player) => player.id),
@@ -46782,6 +46783,7 @@ function cloneInnings(innings) {
       events: [...innings.currentOver.events],
     },
     overs: innings.overs.map((over) => ({ ...over, events: [...over.events] })),
+    lastWicket: innings.lastWicket ? { ...innings.lastWicket } : null,
   };
 }
 
@@ -47034,6 +47036,12 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
     battingCard.out = true;
     bowlingCard.wickets += 1;
     innings.wickets += 1;
+    innings.lastWicket = {
+      id: striker.id,
+      name: striker.name,
+      runs: battingCard.runs,
+      balls: battingCard.balls,
+    };
     return { event, wicket: true };
   }
 
@@ -47913,7 +47921,7 @@ function userBatsFirstFromPregame(pregame) {
 
 function getStatusMessage() {
   if (state.phase === "draft") {
-    return "Build the XI one World Cup squad at a time. Once the side is complete, you’ll set the toss, openers, and then run the match over by over.";
+    return "";
   }
 
   if (state.phase === "pregame") {
@@ -48309,7 +48317,7 @@ function actionMarkup() {
     const draftStarted = state.roster.length > 0 || state.usedSquadIds.length > 0 || Boolean(state.currentSquad);
     return `
       <div class="action-row">
-        <button class="action-button" type="button" data-action="reroll">${draftStarted ? "Next Draft" : "Start Draft"}</button>
+        <button class="action-button" type="button" data-action="reroll">${draftStarted ? "Next Pick" : "Start Draft"}</button>
         <button class="action-button action-button--ghost" type="button" data-action="reset">New Run</button>
       </div>
     `;
@@ -48339,11 +48347,17 @@ function actionMarkup() {
 
   if (state.phase === "live") {
     const live = getLiveContext(state);
-    if (
-      live?.match.awaiting?.type === "choose-bowler" ||
-      live?.match.awaiting?.type === "choose-next-batter" ||
-      live?.match.awaiting?.type === "choose-openers"
-    ) {
+    if (live?.match.awaiting?.type === "choose-openers") {
+      return `
+        <div class="action-row">
+          <button class="action-button" type="button" data-action="confirm-openers" ${live.match.userBattingPlan.openers.length === 2 ? "" : "disabled"}>Start Chase</button>
+          <button class="action-button action-button--ghost" type="button" data-action="sim-innings">Sim Innings</button>
+          <button class="action-button action-button--ghost" type="button" data-action="sim-match">Sim Match</button>
+        </div>
+      `;
+    }
+
+    if (live?.match.awaiting?.type === "choose-bowler" || live?.match.awaiting?.type === "choose-next-batter") {
       return `
         <div class="action-row">
           <button class="action-button action-button--ghost" type="button" data-action="sim-innings">Sim Innings</button>
@@ -48517,6 +48531,7 @@ function inningsCardMarkup(innings, label) {
 function currentInningsSnapshotMarkup(innings, label) {
   const activeIds = new Set([innings.strikerId, innings.nonStrikerId].filter(Boolean));
   const batters = [...Object.values(innings.battingCards).filter((entry) => activeIds.has(entry.id))]
+    .filter((entry) => !entry.out)
     .sort((left, right) => right.runs - left.runs || left.balls - right.balls)
     .slice(0, 2);
   const bowlers = [...Object.values(innings.bowlingCards).filter((entry) => entry.balls > 0)]
@@ -48779,9 +48794,6 @@ function inningsBreakOpenersMarkup(live) {
           `)
           .join("")}
       </div>
-      <div class="action-row action-row--spaced">
-        <button class="action-button" type="button" data-action="confirm-openers" ${openers.length === 2 ? "" : "disabled"}>Start Chase</button>
-      </div>
     </section>
   `;
 }
@@ -48798,6 +48810,7 @@ function liveMatchMarkup() {
   const secondInnings = match.innings[1];
   const lastOverText = live.match.latestOver ? live.match.latestOver.events.join(" ") : "Opening over pending";
   const inningsLabel = `${match.currentInningsIndex + 1}${match.currentInningsIndex === 0 ? "st" : "nd"} Inn`;
+  const lastWicket = innings.lastWicket;
 
   return `
     <section class="match-card">
@@ -48811,6 +48824,7 @@ function liveMatchMarkup() {
           <div><span>Non-striker</span><strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></div>
           <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
           <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
+          <div><span>Last Wicket</span><strong>${lastWicket ? `${escapeHtml(cleanPlayerName(lastWicket.name))} ${escapeHtml(formatBattingEntry(lastWicket))}` : "None"}</strong></div>
           <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
           <div><span>Over</span><strong>${escapeHtml(formatOvers(innings.balls))}</strong></div>
           <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
@@ -48958,7 +48972,10 @@ function tournamentSummaryMarkup() {
 function readyPanelMarkup() {
   const opponent = getCurrentOpponent(state);
   if (state.phase === "pregame" && opponent) {
-    return pregameSetupMarkup();
+    return `
+      ${pregameSetupMarkup()}
+      ${state.latestMatch ? latestResultMarkup() : ""}
+    `;
   }
   if (state.phase === "live") {
     return liveMatchMarkup();
@@ -48970,11 +48987,11 @@ function readyPanelMarkup() {
 }
 
 function heroMarkup() {
+  const draftPhase = state.phase === "draft";
   return `
     <section class="hero">
       <div class="hero__copy">
-        <p class="eyebrow eyebrow--live">Version 2</p>
-        <h1>400<span>-</span>0</h1>
+        <h1>400 Not Out</h1>
         <p class="hero__lede">
           Draft an all-time XI, then step into a real ODI match engine with over-by-over control. Pick openers, react to wickets, manage bowlers, and ride the powerplays properly.
         </p>
@@ -48993,10 +49010,16 @@ function heroMarkup() {
           <strong>${escapeHtml(currentDifficulty().label)}</strong>
         </article>
       </div>
-      <div class="status-panel">
-        <p>${escapeHtml(getStatusMessage())}</p>
-        ${actionMarkup()}
-      </div>
+      ${
+        draftPhase
+          ? `<div class="hero-actions">${actionMarkup()}</div>`
+          : `
+            <div class="status-panel">
+              <p>${escapeHtml(getStatusMessage())}</p>
+              ${actionMarkup()}
+            </div>
+          `
+      }
     </section>
   `;
 }
@@ -49023,7 +49046,7 @@ function render() {
         </div>
         <footer class="small-print">
           <p>Inspired by and with thanks to 82-0.com.</p>
-          <p>400-0 is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
+          <p>400 Not Out is an independent, fan-made game. It is not affiliated with, endorsed by, sponsored by, or associated with the ICC, any cricket board, club, competition, league, governing body, organisation, or with any game, publisher, or ratings provider. All team names, player names, ratings, and tournament-era data are used for informational and descriptive purposes only, and all trademarks and other intellectual property remain the property of their respective owners.</p>
           <p>Ronel Khan, 2026.</p>
         </footer>
       </div>

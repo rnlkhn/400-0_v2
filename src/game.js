@@ -740,6 +740,7 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
     },
     overs: [],
     lastBowlerId: "",
+    lastWicket: null,
     teamById: byId,
     bowlingById,
     teamRoster: teamRoster.map((player) => player.id),
@@ -760,6 +761,7 @@ function cloneInnings(innings) {
       events: [...innings.currentOver.events],
     },
     overs: innings.overs.map((over) => ({ ...over, events: [...over.events] })),
+    lastWicket: innings.lastWicket ? { ...innings.lastWicket } : null,
   };
 }
 
@@ -1012,6 +1014,12 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
     battingCard.out = true;
     bowlingCard.wickets += 1;
     innings.wickets += 1;
+    innings.lastWicket = {
+      id: striker.id,
+      name: striker.name,
+      runs: battingCard.runs,
+      balls: battingCard.balls,
+    };
     return { event, wicket: true };
   }
 
