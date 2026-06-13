@@ -257,7 +257,8 @@ button {
 .selection-grid,
 .bowling-choice-grid,
 .over-feed,
-.schedule-list {
+.schedule-list,
+.summary-list {
   display: grid;
   gap: 12px;
 }
@@ -365,6 +366,66 @@ button {
   margin-top: 12px;
 }
 
+.live-hero {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.live-hero__headline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  padding: 16px 18px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.6);
+  align-items: end;
+}
+
+.live-hero__headline .schedule-stage {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.live-hero__headline strong {
+  display: block;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: clamp(2rem, 8vw, 3.8rem);
+  color: var(--grass-dark);
+  line-height: 0.95;
+}
+
+.live-hero__headline p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.live-hero__overs {
+  text-align: right;
+}
+
+.live-hero__overs span,
+.live-hero__overs small {
+  display: block;
+  color: var(--muted);
+}
+
+.live-summary-grid {
+  margin: 0;
+}
+
+.live-summary-grid strong {
+  font-size: 1rem;
+}
+
+.live-hero__overs strong {
+  margin-top: 4px;
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
 .live-scoreboard {
   display: grid;
   gap: 10px;
@@ -395,6 +456,10 @@ button {
 
 .innings-card {
   padding: 14px;
+}
+
+.innings-card--full {
+  padding: 12px;
 }
 
 .innings-card__header {
@@ -440,11 +505,28 @@ button {
 
 .over-card__headline,
 .over-card__meta,
-.schedule-card {
+.schedule-card,
+.summary-row {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   align-items: center;
+}
+
+.summary-row {
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.12);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.summary-row span {
+  color: var(--text);
+}
+
+.summary-row strong {
+  font-family: "Bricolage Grotesque", sans-serif;
+  color: var(--grass-dark);
 }
 
 .over-events {
@@ -652,6 +734,11 @@ button {
   max-height: 54vh;
   overflow: auto;
   gap: 6px;
+}
+
+.roster-list--with-metrics {
+  margin-top: 8px;
+  gap: 8px;
 }
 
 .candidate-grid {
@@ -1090,6 +1177,10 @@ button {
   gap: 18px;
 }
 
+.innings-card--full .innings-columns {
+  margin-top: 10px;
+}
+
 .innings-entry {
   display: flex;
   align-items: center;
@@ -1161,8 +1252,51 @@ button {
   color: var(--grass-dark);
 }
 
+.summary-card {
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.summary-card__eyebrow {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.summary-card__headline {
+  display: block;
+  margin-top: 6px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--grass-dark);
+}
+
+.summary-card__substats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
 .surface-card--sheet {
   padding: 12px;
+}
+
+@media (max-width: 720px) {
+  .live-hero__headline,
+  .summary-grid,
+  .summary-leaders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .live-hero__overs {
+    text-align: left;
+  }
 }
 
 .surface-card--sheet .section-heading {

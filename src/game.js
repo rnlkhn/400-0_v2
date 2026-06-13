@@ -310,9 +310,12 @@ export function getTeamMetrics(roster) {
     return { batting: 0, bowling: 0 };
   }
 
+  const teamBattingAverage = roster.reduce((total, player) => total + player.batting, 0) / roster.length;
+  const teamBowlingAverage = roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
+
   return {
-    batting: round(getTopAverage(roster, "batting", 5)),
-    bowling: round(getTopAverage(roster, "bowling", 5)),
+    batting: round(getTopAverage(roster, "batting", 5) * 0.74 + teamBattingAverage * 0.26),
+    bowling: round(getTopAverage(roster, "bowling", 5) * 0.74 + teamBowlingAverage * 0.26),
   };
 }
 
@@ -704,6 +707,8 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
           name: player.name,
           runs: 0,
           balls: 0,
+          fours: 0,
+          sixes: 0,
           out: false,
           notOut: false,
         },
@@ -1006,6 +1011,11 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
 
   const runs = Number(event);
   battingCard.runs += runs;
+  if (runs === 4) {
+    battingCard.fours += 1;
+  } else if (runs === 6) {
+    battingCard.sixes += 1;
+  }
   bowlingCard.runsConceded += runs;
   innings.score += runs;
 
@@ -1038,6 +1048,82 @@ function isInningsComplete(innings) {
 function finalizeInnings(innings) {
   markNotOutBatters(innings);
   return innings;
+}
+
+function adjustLastScoringEvent(innings, delta) {
+  for (let overIndex = innings.overs.length - 1; overIndex >= 0; overIndex -= 1) {
+    const over = innings.overs[overIndex];
+    for (let eventIndex = over.events.length - 1; eventIndex >= 0; eventIndex -= 1) {
+      const event = over.events[eventIndex];
+      if (!/^\d+$/.test(event)) {
+        continue;
+      }
+
+      const value = Number(event);
+      if (delta > 0 && value < 6) {
+        over.events[eventIndex] = String(value + delta);
+        return true;
+      }
+
+      if (delta < 0 && value > 0) {
+        over.events[eventIndex] = String(value + delta);
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function awardDecisiveSingle(innings) {
+  const strikerCard = innings.battingCards[innings.strikerId];
+  const nonStrikerCard = innings.battingCards[innings.nonStrikerId];
+  const battingCard = strikerCard && !strikerCard.out ? strikerCard : nonStrikerCard;
+  const bowlingCard = innings.bowlingCards[innings.lastBowlerId];
+
+  innings.score += 1;
+  if (battingCard) {
+    battingCard.runs += 1;
+  }
+  if (bowlingCard) {
+    bowlingCard.runsConceded += 1;
+  }
+  adjustLastScoringEvent(innings, 1);
+}
+
+function turnTieIntoOneRunLoss(innings) {
+  const bowlingCard = innings.bowlingCards[innings.lastBowlerId];
+  const battingCard =
+    innings.battingCards[innings.strikerId] ||
+    innings.battingCards[innings.nonStrikerId] ||
+    Object.values(innings.battingCards).find((card) => card.runs > 0);
+
+  innings.score -= 1;
+  if (battingCard && battingCard.runs > 0) {
+    battingCard.runs -= 1;
+  }
+  if (bowlingCard && bowlingCard.runsConceded > 0) {
+    bowlingCard.runsConceded -= 1;
+  }
+  adjustLastScoringEvent(innings, -1);
+}
+
+function resolveLevelScore(match) {
+  if (match.innings.length < 2) {
+    return;
+  }
+
+  const [firstInnings, secondInnings] = match.innings;
+  if (!secondInnings.target || secondInnings.score !== firstInnings.score) {
+    return;
+  }
+
+  if (secondInnings.wickets < 10) {
+    awardDecisiveSingle(secondInnings);
+    return;
+  }
+
+  turnTieIntoOneRunLoss(secondInnings);
 }
 
 function buildScorecardSummary(innings) {
@@ -1129,6 +1215,7 @@ function moveToNextMatch(state, result) {
       results: [...state.results, result],
       champion,
       eliminated: !champion,
+      finishedView: "results",
     };
   }
 
@@ -1145,6 +1232,7 @@ function moveToNextMatch(state, result) {
     results: [...state.results, result],
     champion: false,
     eliminated: false,
+    finishedView: "results",
   };
 }
 
@@ -1167,6 +1255,7 @@ export function createInitialState(random = Math.random) {
     results: [],
     champion: false,
     eliminated: false,
+    finishedView: "results",
     randomSeed: random(),
   };
 }
@@ -1432,6 +1521,7 @@ function continueMatchAfterOver(match) {
       return match;
     }
 
+    resolveLevelScore(match);
     finalizeInnings(match.innings[1]);
     match.completed = true;
     match.result = buildResult(match);

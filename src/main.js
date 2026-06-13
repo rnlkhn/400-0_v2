@@ -76,7 +76,11 @@ function formatBattingHand(player) {
 }
 
 function formatBowlingStyle(player) {
-  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling < 40) {
+  if (player.role === "wicketkeeper") {
+    return "None";
+  }
+
+  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified") {
     return "None";
   }
 
@@ -135,6 +139,150 @@ function topThree(entries, key, secondaryKey) {
   return [...entries]
     .sort((left, right) => right[key] - left[key] || left[secondaryKey] - right[secondaryKey])
     .slice(0, 3);
+}
+
+function compareByBattingDesc(left, right) {
+  return (
+    right.batting - left.batting ||
+    right.bowling - left.bowling ||
+    cleanPlayerName(left.name).localeCompare(cleanPlayerName(right.name))
+  );
+}
+
+function compareByBowlingDesc(left, right) {
+  return (
+    right.bowling - left.bowling ||
+    right.batting - left.batting ||
+    cleanPlayerName(left.name).localeCompare(cleanPlayerName(right.name))
+  );
+}
+
+function buildDisplayRosterById(roster) {
+  return new Map(getDisplayRoster(roster, state.difficulty).map((player) => [player.id, player]));
+}
+
+function getLiveBattingEntries(innings) {
+  const activeIds = new Set([innings.strikerId, innings.nonStrikerId].filter(Boolean));
+
+  return innings.teamRoster
+    .map((playerId) => innings.battingCards[playerId])
+    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)));
+}
+
+function getLiveBowlingEntries(innings) {
+  return innings.bowlingRoster
+    .map((playerId) => innings.bowlingCards[playerId])
+    .filter((entry) => entry && entry.balls > 0)
+    .sort((left, right) => right.wickets - left.wickets || right.balls - left.balls || left.runsConceded - right.runsConceded);
+}
+
+function buildTournamentSummary(results) {
+  const overallBatting = new Map();
+  const overallBowling = new Map();
+
+  function upsertBatting(store, entry) {
+    const current = store.get(entry.name) || {
+      name: entry.name,
+      runs: 0,
+      balls: 0,
+      fours: 0,
+      sixes: 0,
+      innings: 0,
+      notOuts: 0,
+      best: 0,
+    };
+    current.runs += entry.runs;
+    current.balls += entry.balls;
+    current.fours += entry.fours || 0;
+    current.sixes += entry.sixes || 0;
+    current.innings += 1;
+    current.notOuts += entry.notOut ? 1 : 0;
+    current.best = Math.max(current.best, entry.runs);
+    store.set(entry.name, current);
+  }
+
+  function upsertBowling(store, entry) {
+    const current = store.get(entry.name) || {
+      name: entry.name,
+      wickets: 0,
+      runsConceded: 0,
+      balls: 0,
+      innings: 0,
+      bestWickets: 0,
+      bestRuns: Infinity,
+    };
+    current.wickets += entry.wickets;
+    current.runsConceded += entry.runsConceded;
+    current.balls += entry.balls;
+    current.innings += 1;
+    if (
+      entry.wickets > current.bestWickets ||
+      (entry.wickets === current.bestWickets && entry.runsConceded < current.bestRuns)
+    ) {
+      current.bestWickets = entry.wickets;
+      current.bestRuns = entry.runsConceded;
+    }
+    store.set(entry.name, current);
+  }
+
+  for (const result of results) {
+    for (const innings of result.innings || []) {
+      const battingEntries = Object.values(innings.battingCards || {}).filter((entry) => entry.balls > 0);
+      const bowlingEntries = Object.values(innings.bowlingCards || {}).filter((entry) => entry.balls > 0);
+
+      battingEntries.forEach((entry) => {
+        upsertBatting(overallBatting, entry);
+      });
+
+      bowlingEntries.forEach((entry) => {
+        upsertBowling(overallBowling, entry);
+      });
+    }
+  }
+
+  const sortBatting = (store) =>
+    [...store.values()]
+      .sort((left, right) => right.runs - left.runs || left.balls - right.balls)
+      .slice(0, 5);
+  const sortBowling = (store) =>
+    [...store.values()]
+      .sort((left, right) => right.wickets - left.wickets || left.runsConceded - right.runsConceded)
+      .slice(0, 5);
+
+  return {
+    overallBatting: sortBatting(overallBatting),
+    overallBowling: sortBowling(overallBowling),
+  };
+}
+
+function battingLineMarkup(entry) {
+  const strikeRate = entry.balls ? round((entry.runs * 100) / entry.balls) : 0;
+  return `
+    <article class="summary-card">
+      <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
+      <strong class="summary-card__headline">${entry.runs}</strong>
+      <div class="summary-card__substats">
+        <span>6s ${entry.sixes || 0}</span>
+        <span>4s ${entry.fours || 0}</span>
+        <span>SR ${strikeRate}</span>
+      </div>
+    </article>
+  `;
+}
+
+function bowlingLineMarkup(entry) {
+  const economy = entry.balls ? round((entry.runsConceded * 6) / entry.balls) : 0;
+  const strikeRate = entry.wickets ? round(entry.balls / entry.wickets) : "—";
+  return `
+    <article class="summary-card">
+      <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
+      <strong class="summary-card__headline">${entry.wickets}</strong>
+      <div class="summary-card__substats">
+        <span>Econ ${economy}</span>
+        <span>SR ${strikeRate}</span>
+      </div>
+    </article>
+  `;
 }
 
 function playerPreferenceRowsMarkup(player) {
@@ -291,7 +439,7 @@ function squadSheetMarkup() {
           `
           : ""
       }
-      <div class="roster-list">
+      <div class="roster-list ${metrics ? "roster-list--with-metrics" : ""}">
         ${rosterMarkup()}
       </div>
     </section>
@@ -355,9 +503,25 @@ function actionMarkup() {
     `;
   }
 
+  if (state.phase === "finished" && state.finishedView === "summary") {
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="reset">Start Another Tournament</button>
+      </div>
+    `;
+  }
+
+  if (state.phase === "finished") {
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="show-summary">Tournament Summary</button>
+      </div>
+    `;
+  }
+
   return `
     <div class="action-row">
-      <button class="action-button" type="button" data-action="reset">Start Another Run</button>
+      <button class="action-button" type="button" data-action="reset">Start Another Tournament</button>
     </div>
   `;
 }
@@ -524,7 +688,50 @@ function overFeedMarkup(live) {
 }
 
 function round(value) {
-  return Math.round(value * 100) / 100;
+  return Math.round(value);
+}
+
+function fullInningsCardMarkup(innings, label) {
+  const battingEntries = getLiveBattingEntries(innings);
+  const bowlingEntries = getLiveBowlingEntries(innings);
+
+  return `
+    <article class="innings-card innings-card--full">
+      <div class="innings-card__header">
+        <div class="innings-card__title">
+          <span class="schedule-stage">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(innings.battingLabel)}</strong>
+        </div>
+        <div class="innings-card__score">${escapeHtml(formatScore(innings.score, innings.wickets))} <span>(${formatOvers(innings.balls)} overs)</span></div>
+      </div>
+      <div class="innings-columns">
+        <div class="innings-column">
+          ${battingEntries.length
+            ? battingEntries
+                .map((entry) => `
+                  <div class="innings-entry">
+                    <span>${escapeHtml(formatBatterName(entry))}</span>
+                    <strong>${escapeHtml(formatBattingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No batting card yet.</p>`}
+        </div>
+        <div class="innings-column">
+          ${bowlingEntries.length
+            ? bowlingEntries
+                .map((entry) => `
+                  <div class="innings-entry innings-entry--bowling">
+                    <span>${escapeHtml(cleanPlayerName(entry.name))}</span>
+                    <strong>${escapeHtml(formatBowlingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No bowling card yet.</p>`}
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function bowlingChoiceMarkup(live) {
@@ -534,6 +741,7 @@ function bowlingChoiceMarkup(live) {
 
   const innings = live.innings;
   const eligibleIds = [...getDisplayRoster(live.match.userTeam, state.difficulty)]
+    .sort(compareByBowlingDesc)
     .filter((player) => player.bowling >= 40)
     .filter((player) => (innings.bowlingCards[player.id]?.balls || 0) < 60)
     .filter((player) => player.id !== innings.lastBowlerId)
@@ -579,7 +787,11 @@ function nextBatterChoiceMarkup(live) {
     return "";
   }
 
-  const remainingIds = live.innings.remainingBatters;
+  const displayById = buildDisplayRosterById(live.match.userTeam);
+  const remainingPlayers = live.innings.remainingBatters
+    .map((playerId) => displayById.get(playerId) || live.innings.teamById.get(playerId))
+    .filter(Boolean)
+    .sort(compareByBattingDesc);
   return `
     <section class="surface-card surface-card--inner live-control-card">
       <div class="section-heading">
@@ -590,9 +802,9 @@ function nextBatterChoiceMarkup(live) {
         </div>
       </div>
       <div class="selection-grid">
-        ${remainingIds
-          .map((playerId) => {
-            const player = live.innings.teamById.get(playerId);
+        ${remainingPlayers
+          .map((player) => {
+            const playerId = player.id;
             return `
               <button class="selection-pill selection-pill--full" type="button" data-action="choose-batter" data-player-id="${playerId}">
                 <span>
@@ -615,6 +827,7 @@ function inningsBreakOpenersMarkup(live) {
   }
 
   const openers = live.match.userBattingPlan.openers;
+  const sortedRoster = [...getDisplayRoster(live.match.userTeam, state.difficulty)].sort(compareByBattingDesc);
   return `
     <section class="surface-card surface-card--inner live-control-card">
       <div class="section-heading">
@@ -625,7 +838,7 @@ function inningsBreakOpenersMarkup(live) {
         </div>
       </div>
       <div class="selection-grid">
-        ${live.match.userTeam
+        ${sortedRoster
           .map((player) => `
             <button
               class="selection-pill ${openers.includes(player.id) ? "selection-pill--active" : ""}"
@@ -659,27 +872,42 @@ function liveMatchMarkup() {
   const innings = live.innings;
   const firstInnings = match.innings[0];
   const secondInnings = match.innings[1];
+  const completedOvers = formatOvers(innings.balls);
+  const lastOverText = live.match.latestOver ? live.match.latestOver.events.join(" ") : "Opening over pending";
+  const currentScoreLabel = innings.target ? `${innings.battingLabel} chasing ${innings.target}` : `${innings.battingLabel} batting first`;
+  const supportingScoreline = match.currentInningsIndex === 1 && firstInnings
+    ? `${firstInnings.battingLabel} ${formatScore(firstInnings.score, firstInnings.wickets)}`
+    : match.currentInningsIndex === 0 && secondInnings
+      ? `${secondInnings.battingLabel} ${formatScore(secondInnings.score, secondInnings.wickets)}`
+      : "";
 
   return `
     <section class="match-card">
       <p class="eyebrow">${escapeHtml(match.stage)}</p>
       <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(match.conditions))}</p>
       <h3>${escapeHtml(match.opponent.label)}</h3>
-      <div class="live-scoreboard">
-        ${match.innings.map((entry, index) => `
-          <div class="scoreline ${index === match.currentInningsIndex ? "scoreline--active" : ""}">
-            <span>${escapeHtml(entry.battingLabel)}</span>
-            <strong>${escapeHtml(formatScore(entry.score, entry.wickets))}</strong>
+      <div class="live-hero">
+        <div class="live-hero__headline">
+          <div>
+            <span class="schedule-stage">${escapeHtml(currentScoreLabel)}</span>
+            <strong>${escapeHtml(formatScore(innings.score, innings.wickets))}</strong>
+            ${supportingScoreline ? `<p>${escapeHtml(supportingScoreline)}</p>` : ""}
           </div>
-        `).join("")}
-      </div>
-      <div class="mini-metrics">
-        <span>Striker <strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></span>
-        <span>Non-striker <strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></span>
-        <span>Last Bowler <strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></span>
-        <span>Last Over <strong>${escapeHtml(live.match.latestOver ? live.match.latestOver.events.join(" ") : "No over yet")}</strong></span>
-        <span>Powerplay <strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></span>
-        ${live.requiredRate ? `<span>Req RR <strong>${round(live.requiredRate)}</strong></span>` : ""}
+          <div class="live-hero__overs">
+            <span>Overs</span>
+            <strong>${escapeHtml(completedOvers)}</strong>
+          </div>
+        </div>
+        <div class="summary-grid live-summary-grid">
+          <div><span>Striker</span><strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></div>
+          <div><span>Non-striker</span><strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></div>
+          <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
+          <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
+          <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
+          <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
+          ${live.requiredRate ? `<div><span>Required Rate</span><strong>${round(live.requiredRate)}</strong></div>` : ""}
+          ${innings.target ? `<div><span>Target</span><strong>${escapeHtml(String(innings.target))}</strong></div>` : ""}
+        </div>
       </div>
       ${inningsBreakOpenersMarkup(live)}
       ${bowlingChoiceMarkup(live)}
@@ -700,11 +928,11 @@ function liveMatchMarkup() {
           <div class="section-heading">
             <div>
               <p class="eyebrow">Scorecard</p>
-              <h2>Live summary</h2>
+              <h2>Live recap</h2>
             </div>
           </div>
-          ${inningsCardMarkup(firstInnings, "1st Inn")}
-          ${secondInnings ? inningsCardMarkup(secondInnings, "2nd Inn") : ""}
+          ${fullInningsCardMarkup(firstInnings, "1st Inn")}
+          ${secondInnings && secondInnings.balls > 0 ? fullInningsCardMarkup(secondInnings, "2nd Inn") : ""}
         </section>
       </div>
     </section>
@@ -733,6 +961,10 @@ function latestResultMarkup() {
           .join("")}
       </div>
       <p><strong>Standout:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.standout || ""))}</p>
+      <section class="scorecard-summary">
+        <h4>Scorecard</h4>
+        ${state.latestMatch.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
+      </section>
     </section>
   `;
 }
@@ -769,6 +1001,50 @@ function resultsHistoryMarkup() {
             `,
           )
           .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function tournamentSummaryMarkup() {
+  if (state.phase !== "finished" || state.finishedView !== "summary") {
+    return "";
+  }
+
+  const summary = buildTournamentSummary(state.results);
+
+  return `
+    <section class="surface-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Tournament Summary</p>
+          <h2>${state.champion ? "Campaign Review" : "Postmortem"}</h2>
+          <p class="squad-note">A full look at the tournament’s batting and bowling leaders.</p>
+        </div>
+      </div>
+      <div class="two-column-layout">
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Batting</p>
+              <h2>Top Batsmen</h2>
+            </div>
+          </div>
+          <div class="summary-list">
+            ${summary.overallBatting.map(battingLineMarkup).join("") || `<p class="empty-copy">No batting data yet.</p>`}
+          </div>
+        </section>
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Bowling</p>
+              <h2>Top Bowlers</h2>
+            </div>
+          </div>
+          <div class="summary-list">
+            ${summary.overallBowling.map(bowlingLineMarkup).join("") || `<p class="empty-copy">No bowling data yet.</p>`}
+          </div>
+        </section>
       </div>
     </section>
   `;
@@ -821,6 +1097,8 @@ function heroMarkup() {
                 ? "The opponent and conditions are set. Lock the toss call in, then choose openers only if you are batting first."
                 : state.phase === "live"
                   ? "You are in the live match. Use manual over control or sim the rest when you want to move faster."
+                  : state.phase === "finished" && state.finishedView === "summary"
+                    ? "The tournament is wrapped. Use the summary to review the standout batting and bowling performers before starting the next campaign."
                   : state.champion
                     ? "You went the distance and lifted the Cricket World Cup."
                     : state.eliminated
@@ -844,7 +1122,7 @@ function render() {
           <div class="layout-grid__main">
             ${state.phase === "draft" ? draftBoardMarkup() : ""}
             ${readyPanelMarkup()}
-            ${resultsHistoryMarkup()}
+            ${state.phase === "finished" && state.finishedView === "summary" ? tournamentSummaryMarkup() : resultsHistoryMarkup()}
           </div>
           <aside class="layout-grid__side">
             ${squadSheetMarkup()}
@@ -876,6 +1154,15 @@ document.addEventListener("click", (event) => {
 
   if (action === "reset") {
     state = createInitialState();
+    render();
+    return;
+  }
+
+  if (action === "show-summary") {
+    state = {
+      ...state,
+      finishedView: "summary",
+    };
     render();
     return;
   }

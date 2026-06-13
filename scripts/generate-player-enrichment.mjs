@@ -75,14 +75,39 @@ const NAME_ALIASES = new Map([
   ["m s dhoni", ["mahendra singh dhoni"]],
   ["matt prior", ["matthew prior"]],
   ["mohammed shami", ["mohammed shami ahmed"]],
+  ["imad wasim", ["syed imad wasim"]],
   ["ms dhoni", ["mahendra singh dhoni"]],
   ["nathan mitchell coulter nile", ["nathan coulter nile"]],
   ["rassie van der dussen", ["hendrik erasmus van der dussen"]],
+  ["rameez raja", ["ramiz raja"]],
+  ["ramiz raja", ["rameez raja"]],
   ["s sreesanth", ["sreesanth"]],
   ["tamim iqbal", ["tamim iqbal khan"]],
+  ["wajahatullah wasti", ["syed wajahatullah wasti"]],
+  ["yousuf youhana", ["mohammad yousuf"]],
+  ["mohammad yousuf", ["yousuf youhana"]],
   ["mushfiqur rahim", ["mohammad mushfiqur rahim"]],
   ["vernon philander", ["vernon darryl philander"]],
+  ["zaheer abbas", ["syed zaheer abbas kirmani"]],
 ]);
+
+const ROLE_PRIORS = {
+  batsman: { batting: 58, bowling: 18 },
+  wicketkeeper: { batting: 60, bowling: 0 },
+  bowler: { batting: 18, bowling: 62 },
+};
+
+const ROLE_BATTING_FLOOR = {
+  batsman: 50,
+  wicketkeeper: 50,
+  bowler: 15,
+};
+
+const ROLE_BOWLING_FLOOR = {
+  batsman: 0,
+  wicketkeeper: 0,
+  bowler: 60,
+};
 
 function readCsv(filePath) {
   const text = fs.readFileSync(filePath, "utf8").replace(/^\uFEFF/, "");
@@ -338,6 +363,25 @@ function average(values) {
   return values.reduce((sum, value) => sum + value, 0) / values.length;
 }
 
+function getRolePrior(role) {
+  return ROLE_PRIORS[role] || ROLE_PRIORS.batsman;
+}
+
+function inferPriorRole(player, aggregate) {
+  if (player.role === "wicketkeeper" || /\bwk\b/i.test(player.name)) {
+    return "wicketkeeper";
+  }
+
+  const bowlingWorkload = aggregate.ballsBowled >= 180 || aggregate.wickets >= 8;
+  const battingWorkload = aggregate.dismissals >= 8 || aggregate.runs >= 180;
+
+  if (player.role === "bowler" || (!battingWorkload && bowlingWorkload)) {
+    return "bowler";
+  }
+
+  return "batsman";
+}
+
 function computeIntervalBaselines(aggregates) {
   const buckets = new Map();
 
@@ -381,14 +425,20 @@ function computeIntervalBaselines(aggregates) {
   return baselines;
 }
 
-function deriveBattingRating(playerName, aggregate, baselines) {
-  if (aggregate.dismissals < 3 || aggregate.runs < 50) {
-    return 0;
-  }
-
+function deriveBattingRating(playerName, aggregate, baselines, priorRole) {
   const baseline = baselines.get(aggregate.interval);
+  const prior = getRolePrior(priorRole).batting;
+  if (aggregate.dismissals === 0 || aggregate.ballsFaced === 0 || aggregate.runs === 0) {
+    return priorRole === "bowler" ? prior : Math.max(50, prior);
+  }
   const averageWeight = aggregate.dismissals / (aggregate.dismissals + 12);
   const strikeRateWeight = aggregate.ballsFaced / (aggregate.ballsFaced + 600);
+  const reliability =
+    Math.min(
+      0.95,
+      (aggregate.dismissals / (aggregate.dismissals + 10)) * 0.65 +
+        (aggregate.ballsFaced / (aggregate.ballsFaced + 350)) * 0.35,
+    );
   const adjustedAverage =
     baseline.battingAverage +
     (aggregate.battingAverage - baseline.battingAverage) * averageWeight;
@@ -401,24 +451,43 @@ function deriveBattingRating(playerName, aggregate, baselines) {
     (adjustedAverage - baseline.battingAverage) * 1.75 +
     (adjustedStrikeRate - baseline.battingStrikeRate) * 0.16 +
     volumeBonus;
+  const posterior = prior + (raw - prior) * reliability;
   const normalizedName = normalizeName(playerName);
   const cap = BATTING_97.has(normalizedName)
     ? 97
     : BATTING_94.has(normalizedName)
       ? 94
       : 93;
+  let cappedPosterior = posterior;
 
-  return clamp(round(raw), 18, cap);
+  if (priorRole === "bowler") {
+    if (aggregate.dismissals < 8 || aggregate.runs < 80) {
+      cappedPosterior = Math.min(cappedPosterior, 28);
+    } else if (aggregate.dismissals < 18 || aggregate.runs < 220) {
+      cappedPosterior = Math.min(cappedPosterior, 42);
+    } else if (aggregate.dismissals < 35 || aggregate.runs < 450) {
+      cappedPosterior = Math.min(cappedPosterior, 58);
+    }
+  }
+
+  return clamp(round(cappedPosterior), ROLE_BATTING_FLOOR[priorRole] || 18, cap);
 }
 
-function deriveBowlingRating(playerName, aggregate, baselines) {
-  if (aggregate.wickets < 5 || aggregate.ballsBowled < 120) {
-    return 0;
+function deriveBowlingRating(playerName, aggregate, baselines, priorRole) {
+  const prior = getRolePrior(priorRole).bowling;
+  if (aggregate.ballsBowled === 0) {
+    return priorRole === "bowler" ? prior : 0;
   }
 
   const baseline = baselines.get(aggregate.interval);
   const wicketsWeight = aggregate.wickets / (aggregate.wickets + 10);
   const ballsWeight = aggregate.ballsBowled / (aggregate.ballsBowled + 500);
+  const reliability =
+    Math.min(
+      0.95,
+      (aggregate.wickets / (aggregate.wickets + 8)) * 0.55 +
+        (aggregate.ballsBowled / (aggregate.ballsBowled + 240)) * 0.45,
+    );
   const adjustedAverage =
     baseline.bowlingAverage +
     (aggregate.bowlingAverage - baseline.bowlingAverage) * wicketsWeight;
@@ -435,22 +504,65 @@ function deriveBowlingRating(playerName, aggregate, baselines) {
     (baseline.bowlingStrikeRate - adjustedStrikeRate) * 0.48 +
     (baseline.bowlingEconomy - adjustedEconomy) * 4.0 +
     volumeBonus;
+  const posterior = prior + (raw - prior) * reliability;
   const normalizedName = normalizeName(playerName);
   const cap = BOWLING_96.has(normalizedName) ? 96 : 93;
+  let cappedPosterior = posterior;
 
-  return clamp(round(raw), 18, cap);
+  if (priorRole !== "bowler") {
+    if (aggregate.ballsBowled < 180 || aggregate.wickets < 5) {
+      cappedPosterior = Math.min(cappedPosterior, 32);
+    } else if (aggregate.ballsBowled < 480 || aggregate.wickets < 12) {
+      cappedPosterior = Math.min(cappedPosterior, 45);
+    } else if (aggregate.ballsBowled < 900 || aggregate.wickets < 24) {
+      cappedPosterior = Math.min(cappedPosterior, 60);
+    } else if (aggregate.ballsBowled < 1500 || aggregate.wickets < 36) {
+      cappedPosterior = Math.min(cappedPosterior, 72);
+    }
+  }
+
+  return clamp(round(cappedPosterior), ROLE_BOWLING_FLOOR[priorRole] || 0, cap);
 }
 
-function inferRole(player, batting, bowling) {
+function inferRole(player, batting, bowling, aggregate) {
   if (player.role === "wicketkeeper" || /\bwk\b/i.test(player.name)) {
     return "wicketkeeper";
   }
 
-  if (bowling >= batting + 12 && bowling >= 55) {
+  const bowlingWorkload = aggregate.ballsBowled >= 180 || aggregate.wickets >= 8;
+
+  if (bowlingWorkload && bowling >= batting + 8 && bowling >= 55) {
     return "bowler";
   }
 
   return "batsman";
+}
+
+function enforcePosteriorFloors(role, batting, bowling) {
+  let safeBatting = batting;
+  let safeBowling = bowling;
+
+  if (role === "bowler") {
+    safeBatting = Math.max(15, safeBatting || 0);
+    safeBowling = Math.max(60, safeBowling || 0);
+  } else if (role === "wicketkeeper") {
+    safeBatting = Math.max(50, safeBatting || 0);
+    safeBowling = 0;
+  } else {
+    safeBatting = Math.max(50, safeBatting || 0);
+  }
+
+  if (safeBatting < 50 && safeBowling < 50) {
+    if (role === "bowler") {
+      safeBowling = 60;
+    } else if (safeBowling >= safeBatting) {
+      safeBowling = 50;
+    } else {
+      safeBatting = 50;
+    }
+  }
+
+  return { batting: safeBatting, bowling: safeBowling };
 }
 
 function applyModernPatch(player, enrichment) {
@@ -728,12 +840,15 @@ function buildEnrichment() {
           ),
         ) || null;
     }
-    const batting = deriveBattingRating(player.name, aggregate, baselines);
-    const bowling = deriveBowlingRating(player.name, aggregate, baselines);
+    const priorRole = inferPriorRole(player, aggregate);
+    const batting = deriveBattingRating(player.name, aggregate, baselines, priorRole);
+    const bowling = deriveBowlingRating(player.name, aggregate, baselines, priorRole);
+    const role = inferRole(player, batting, bowling, aggregate);
+    const safeRatings = enforcePosteriorFloors(role, batting, bowling);
     let enrichment = {
-      role: inferRole(player, batting, bowling),
-      batting,
-      bowling,
+      role,
+      batting: safeRatings.batting,
+      bowling: safeRatings.bowling,
       battingHand: aggregate.battingHand || profile?.battingHand || "",
       bowlingHand: aggregate.bowlingHand || profile?.bowlingHand || "",
       bowlingStyle:

@@ -6409,8 +6409,8 @@ const AUDITED_PLAYER_SUMMARY = {
 const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "kris-srikkanth": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6425,8 +6425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohinder-amarnath": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 48,
+    "batting": 63,
+    "bowling": 41,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -6441,8 +6441,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kapil-dev": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 80,
+    "batting": 70,
+    "bowling": 73,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -6457,8 +6457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ricky-ponting": {
     "role": "batsman",
-    "batting": 94,
-    "bowling": 0,
+    "batting": 91,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6474,7 +6474,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "michael-bevan": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 58,
+    "bowling": 51,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6489,8 +6489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "steve-waugh": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 66,
+    "batting": 80,
+    "bowling": 57,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6505,7 +6505,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "adam-gilchrist": {
     "role": "wicketkeeper",
-    "batting": 85,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6521,8 +6521,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shane-warne": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 92,
+    "batting": 42,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -6537,8 +6537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "glenn-mcgrath": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 95,
+    "batting": 28,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -6553,7 +6553,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "damien-fleming": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -6569,7 +6569,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "herschelle-gibbs": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6585,8 +6585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jacques-kallis": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 82,
+    "batting": 88,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6601,7 +6601,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jonty-rhodes": {
     "role": "batsman",
-    "batting": 86,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6617,7 +6617,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mark-boucher": {
     "role": "wicketkeeper",
-    "batting": 55,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6633,8 +6633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "lance-klusener": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 93,
+    "batting": 92,
+    "bowling": 87,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -6649,7 +6649,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shaun-pollock": {
     "role": "bowler",
-    "batting": 74,
+    "batting": 63,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -6665,7 +6665,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "allan-donald": {
     "role": "bowler",
-    "batting": 52,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -6681,8 +6681,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sachin-tendulkar": {
     "role": "batsman",
-    "batting": 97,
-    "bowling": 0,
+    "batting": 96,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6698,7 +6698,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "virender-sehwag": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 68,
+    "bowling": 53,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -6761,8 +6761,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zaheer-khan": {
     "role": "bowler",
-    "batting": 45,
-    "bowling": 86,
+    "batting": 33,
+    "bowling": 84,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -6777,8 +6777,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "harbhajan-singh": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 76,
+    "batting": 40,
+    "bowling": 75,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -6793,8 +6793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "david-warner": {
     "role": "batsman",
-    "batting": 84,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6809,8 +6809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "steve-smith": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 79,
+    "batting": 85,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6825,8 +6825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "glenn-maxwell": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 73,
+    "batting": 78,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6841,7 +6841,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "brad-haddin": {
     "role": "wicketkeeper",
-    "batting": 73,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6857,7 +6857,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mitchell-starc": {
     "role": "bowler",
-    "batting": 61,
+    "batting": 36,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -6873,8 +6873,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mitchell-johnson": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 93,
+    "batting": 37,
+    "bowling": 90,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -6888,12 +6888,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.79
   },
   "james-faulkner": {
-    "role": "batsman",
-    "batting": 86,
-    "bowling": 83,
+    "role": "bowler",
+    "batting": 58,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2012-2015",
@@ -6905,8 +6905,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kane-williamson": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 79,
+    "batting": 90,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6921,8 +6921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "martin-guptill": {
     "role": "batsman",
-    "batting": 87,
-    "bowling": 0,
+    "batting": 83,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6953,7 +6953,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "tom-latham": {
     "role": "wicketkeeper",
-    "batting": 74,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -6969,8 +6969,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jimmy-neesham": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 82,
+    "batting": 72,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -6985,8 +6985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "trent-boult": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 93,
+    "batting": 32,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7000,12 +7000,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.19
   },
   "tim-southee": {
-    "role": "batsman",
-    "batting": 55,
-    "bowling": 65,
+    "role": "bowler",
+    "batting": 39,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -7017,8 +7017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "lockie-ferguson": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 90,
+    "batting": 28,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7034,7 +7034,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "joe-root": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 53,
+    "bowling": 40,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7049,7 +7049,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jason-roy": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7066,7 +7066,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "ben-stokes": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 53,
+    "bowling": 48,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7081,7 +7081,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jos-buttler": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 91,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7097,7 +7097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "eoin-morgan": {
     "role": "batsman",
-    "batting": 92,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7113,8 +7113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "chris-woakes": {
     "role": "bowler",
-    "batting": 71,
-    "bowling": 86,
+    "batting": 55,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7129,8 +7129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jofra-archer": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 90,
+    "batting": 26,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7145,8 +7145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "adil-rashid": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 86,
+    "batting": 41,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7209,8 +7209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mustafizur-rahman": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 90,
+    "batting": 28,
+    "bowling": 88,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -7225,8 +7225,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammad-saifuddin": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 72,
+    "batting": 62,
+    "bowling": 60,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -7241,8 +7241,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "rohit-sharma": {
     "role": "batsman",
-    "batting": 94,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 22,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -7258,7 +7258,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "shubman-gill": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -7273,8 +7273,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shreyas-iyer": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 92,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7304,12 +7304,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "ravindra-jadeja": {
-    "role": "batsman",
-    "batting": 76,
-    "bowling": 71,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -7321,8 +7321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jasprit-bumrah": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 86,
+    "batting": 28,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7337,7 +7337,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammed-shami": {
     "role": "bowler",
-    "batting": 51,
+    "batting": 31,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -7353,7 +7353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "fakhar-zaman": {
     "role": "batsman",
-    "batting": 92,
+    "batting": 85,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -7369,8 +7369,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "saud-shakeel": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 25,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Slow",
@@ -7385,7 +7385,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammad-rizwan": {
     "role": "wicketkeeper",
-    "batting": 89,
+    "batting": 83,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -7401,8 +7401,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shadab-khan": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 53,
+    "batting": 63,
+    "bowling": 46,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -7417,8 +7417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "haris-rauf": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 85,
+    "batting": 28,
+    "bowling": 83,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -7433,7 +7433,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "rahmanullah-gurbaz": {
     "role": "wicketkeeper",
-    "batting": 79,
+    "batting": 75,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -7449,7 +7449,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ibrahim-zadran": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -7465,7 +7465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "hashmatullah-shahidi": {
     "role": "batsman",
-    "batting": 77,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -7481,8 +7481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammad-nabi": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 76,
+    "batting": 44,
+    "bowling": 74,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -7497,7 +7497,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mujeeb-ur-rahman": {
     "role": "bowler",
-    "batting": 51,
+    "batting": 35,
     "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -7513,8 +7513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "yashpal-sharma": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 25,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -7528,12 +7528,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.87
   },
   "balwinder-sandhu": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1979-1983",
@@ -7546,7 +7546,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "mark-waugh": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 60,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7561,8 +7561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shane-lee": {
     "role": "bowler",
-    "batting": 60,
-    "bowling": 76,
+    "batting": 41,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7577,8 +7577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "tom-moody": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 71,
+    "batting": 62,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7593,8 +7593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "paul-reiffel": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 71,
+    "batting": 38,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7609,8 +7609,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "gary-kirsten": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 20,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -7625,8 +7625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "daryll-cullinan": {
     "role": "batsman",
-    "batting": 91,
-    "bowling": 82,
+    "batting": 87,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7658,7 +7658,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "suresh-raina": {
     "role": "batsman",
     "batting": 90,
-    "bowling": 59,
+    "bowling": 47,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7673,8 +7673,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "yusuf-pathan": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 64,
+    "batting": 68,
+    "bowling": 57,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7689,8 +7689,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "munaf-patel": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 28,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7705,8 +7705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "aaron-finch": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 0,
+    "batting": 79,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7721,7 +7721,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "george-bailey": {
     "role": "batsman",
-    "batting": 89,
+    "batting": 85,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7737,8 +7737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "shane-watson": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 58,
+    "batting": 75,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -7753,8 +7753,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pat-cummins": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 90,
+    "batting": 25,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7769,7 +7769,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "henry-nicholls": {
     "role": "batsman",
-    "batting": 74,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7785,8 +7785,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "colin-de-grandhomme": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 60,
+    "batting": 64,
+    "bowling": 51,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -7801,8 +7801,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "matt-henry": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 86,
+    "batting": 36,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7833,8 +7833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "liam-plunkett": {
     "role": "bowler",
-    "batting": 60,
-    "bowling": 88,
+    "batting": 38,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7849,8 +7849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mark-wood": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 72,
+    "batting": 27,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -7865,7 +7865,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "litton-das": {
     "role": "wicketkeeper",
-    "batting": 67,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -7881,8 +7881,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "soumya-sarkar": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 77,
+    "batting": 66,
+    "bowling": 45,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -7897,8 +7897,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mehidy-hasan-miraz": {
     "role": "batsman",
-    "batting": 56,
-    "bowling": 64,
+    "batting": 57,
+    "bowling": 57,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -7929,8 +7929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ravichandran-ashwin": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 68,
+    "batting": 22,
+    "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -7945,8 +7945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kuldeep-yadav": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 86,
+    "batting": 32,
+    "bowling": 83,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Wrist Spin (Chinaman)",
@@ -7961,8 +7961,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammed-siraj": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 92,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -7977,7 +7977,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "imam-ul-haq": {
     "role": "batsman",
-    "batting": 87,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -7993,7 +7993,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "abdullah-shafique": {
     "role": "batsman",
-    "batting": 73,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -8008,9 +8008,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "mohammad-nawaz": {
-    "role": "bowler",
-    "batting": 56,
-    "bowling": 69,
+    "role": "batsman",
+    "batting": 57,
+    "bowling": 58,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -8024,9 +8024,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.03
   },
   "hasan-ali": {
-    "role": "batsman",
-    "batting": 59,
-    "bowling": 65,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 64,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -8041,8 +8041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "azmatullah-omarzai": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 56,
+    "batting": 70,
+    "bowling": 43,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -8057,7 +8057,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ikram-alikhil": {
     "role": "wicketkeeper",
-    "batting": 67,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -8073,8 +8073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "fazalhaq-farooqi": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 27,
+    "bowling": 79,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -8089,8 +8089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "alistair-campbell": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 81,
+    "batting": 75,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8105,8 +8105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "grant-flower": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 68,
+    "batting": 84,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8121,7 +8121,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "andy-flower": {
     "role": "wicketkeeper",
-    "batting": 84,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8137,8 +8137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "neil-johnson": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 76,
+    "batting": 79,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8153,8 +8153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "murray-goodwin": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8169,7 +8169,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "stuart-carlisle": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8185,8 +8185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "guy-whittall": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 76,
+    "batting": 67,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8201,8 +8201,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "heath-streak": {
     "role": "bowler",
-    "batting": 67,
-    "bowling": 83,
+    "batting": 55,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8217,8 +8217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "henry-olonga": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 85,
+    "batting": 26,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8233,8 +8233,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "eddo-brandes": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 78,
+    "batting": 40,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8249,8 +8249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "paul-strang": {
     "role": "bowler",
-    "batting": 67,
-    "bowling": 83,
+    "batting": 57,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8265,8 +8265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "steve-tikolo": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 76,
+    "batting": 66,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8297,8 +8297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ravindu-shah": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 0,
+    "batting": 61,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8313,8 +8313,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "brijal-patel": {
     "role": "batsman",
-    "batting": 60,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8329,8 +8329,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "hitesh-modi": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8345,8 +8345,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "maurice-odumbe": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 44,
+    "batting": 67,
+    "bowling": 36,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8360,12 +8360,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.92
   },
   "thomas-odoyo": {
-    "role": "batsman",
-    "batting": 68,
-    "bowling": 75,
+    "role": "bowler",
+    "batting": 54,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2000-2003",
@@ -8377,8 +8377,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "collins-obuya": {
     "role": "batsman",
-    "batting": 54,
-    "bowling": 62,
+    "batting": 56,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8392,12 +8392,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.04
   },
   "martin-suji": {
-    "role": "batsman",
-    "batting": 50,
-    "bowling": 59,
+    "role": "bowler",
+    "batting": 37,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2000-2003",
@@ -8408,12 +8408,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.09
   },
   "peter-ongondo": {
-    "role": "batsman",
-    "batting": 55,
-    "bowling": 38,
+    "role": "bowler",
+    "batting": 36,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2000-2003",
@@ -8425,8 +8425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "oliver-pitcher": {
     "role": "batsman",
-    "batting": 59,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8441,8 +8441,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "david-hemp": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 0,
+    "batting": 64,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8457,8 +8457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "lionel-cann": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8473,7 +8473,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "dean-minors": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8489,8 +8489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "malachi-jones": {
     "role": "batsman",
-    "batting": 56,
-    "bowling": 52,
+    "batting": 57,
+    "bowling": 37,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8505,8 +8505,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kevin-hurdle": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 75,
+    "batting": 32,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8521,8 +8521,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "stefan-kelly": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 18,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8537,8 +8537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "saleem-mukuddem": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 77,
+    "batting": 42,
+    "bowling": 73,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -8553,7 +8553,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ashish-bagai": {
     "role": "wicketkeeper",
-    "batting": 89,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -8568,12 +8568,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "john-davison": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 65,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2008-2011",
@@ -8585,7 +8585,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zubin-surkari": {
     "role": "batsman",
-    "batting": 55,
+    "batting": 56,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8601,8 +8601,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "jimmy-hansra": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 65,
+    "batting": 65,
+    "bowling": 41,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8617,7 +8617,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "nitish-kumar": {
     "role": "batsman",
-    "batting": 56,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8633,8 +8633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "hiral-patel": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 71,
+    "batting": 61,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -8649,8 +8649,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "harvir-baidwan": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 84,
+    "batting": 39,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8665,8 +8665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "henry-osinde": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -8681,7 +8681,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "william-porterfield": {
     "role": "batsman",
-    "batting": 74,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8697,8 +8697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "paul-stirling": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 66,
+    "batting": 82,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8713,7 +8713,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ed-joyce": {
     "role": "batsman",
-    "batting": 67,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8729,7 +8729,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "niall-obrien": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8745,8 +8745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kevin-obrien": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 85,
+    "batting": 74,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8761,8 +8761,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "alex-cusack": {
     "role": "bowler",
-    "batting": 66,
-    "bowling": 88,
+    "batting": 52,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8777,8 +8777,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "john-mooney": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 91,
+    "batting": 51,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8793,8 +8793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "george-dockrell": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 84,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8809,8 +8809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "boyd-rankin": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 26,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8825,8 +8825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "trent-johnston": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 91,
+    "batting": 42,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -8841,8 +8841,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kyle-coetzer": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8857,8 +8857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "calum-macleod": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 72,
+    "batting": 64,
+    "bowling": 42,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -8872,12 +8872,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.74
   },
   "richie-berrington": {
-    "role": "bowler",
-    "batting": 67,
-    "bowling": 80,
+    "role": "batsman",
+    "batting": 64,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -8889,8 +8889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "iain-wardlaw": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 27,
+    "bowling": 80,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -8904,12 +8904,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.61
   },
   "alasdair-evans": {
-    "role": "batsman",
-    "batting": 64,
-    "bowling": 75,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -8920,12 +8920,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.52
   },
   "safyaan-sharif": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 71,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -8937,8 +8937,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "khurram-khan": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 68,
+    "batting": 72,
+    "bowling": 40,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -8953,7 +8953,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "swapnil-patil": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8969,7 +8969,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "andri-berenger": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -8985,8 +8985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "rohan-mustafa": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 75,
+    "batting": 28,
+    "bowling": 68,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -9001,8 +9001,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "mohammad-tauqir": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 69,
+    "batting": 25,
+    "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -9016,8 +9016,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.12
   },
   "amjad-javed": {
-    "role": "batsman",
-    "batting": 67,
+    "role": "bowler",
+    "batting": 28,
     "bowling": 63,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -9032,9 +9032,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.27
   },
   "nasir-aziz": {
-    "role": "batsman",
-    "batting": 65,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -9049,8 +9049,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "manjula-guruge": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 18,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9065,8 +9065,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kamran-shahzad": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 78,
+    "batting": 24,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9081,8 +9081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sohail-khan-uae": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 79,
+    "batting": 26,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9097,7 +9097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "deon-kotze": {
     "role": "wicketkeeper",
-    "batting": 62,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9113,8 +9113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "gerrie-snyman": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 65,
+    "batting": 25,
+    "bowling": 64,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9129,8 +9129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sarel-burger": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9145,8 +9145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "louis-burger": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 63,
+    "batting": 28,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9160,12 +9160,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.4
   },
   "bjorn-kotze": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2000-2003",
@@ -9177,7 +9177,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "melt-van-schoor": {
     "role": "wicketkeeper",
-    "batting": 61,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -9193,7 +9193,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scott-edwards": {
     "role": "wicketkeeper",
-    "batting": 85,
+    "batting": 79,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9209,8 +9209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "vikramjit-singh": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 76,
+    "batting": 66,
+    "bowling": 45,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -9224,9 +9224,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6
   },
   "bas-de-leede": {
-    "role": "bowler",
-    "batting": 63,
-    "bowling": 75,
+    "role": "batsman",
+    "batting": 62,
+    "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9241,8 +9241,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "colin-ackermann": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 56,
+    "batting": 64,
+    "bowling": 41,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9257,7 +9257,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sybrand-engelbrecht": {
     "role": "batsman",
-    "batting": 72,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9272,12 +9272,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "logan-van-beek": {
-    "role": "bowler",
-    "batting": 60,
-    "bowling": 72,
+    "role": "batsman",
+    "batting": 59,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -9288,12 +9288,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.57
   },
   "roelof-van-der-merwe": {
-    "role": "batsman",
-    "batting": 53,
-    "bowling": 60,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -9304,9 +9304,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.45
   },
   "aryan-dutt": {
-    "role": "batsman",
-    "batting": 45,
-    "bowling": 56,
+    "role": "bowler",
+    "batting": 34,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -9321,8 +9321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "paul-van-meekeren": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 69,
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9337,7 +9337,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-allan-lamb": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 83,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9353,7 +9353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-graeme-fowler": {
     "role": "batsman",
-    "batting": 86,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -9369,7 +9369,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-ian-gould": {
     "role": "wicketkeeper",
-    "batting": 56,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9385,8 +9385,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-norman-cowans": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 68,
+    "batting": 23,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9401,8 +9401,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-paul-allott": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 25,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9417,8 +9417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1983-trevor-jesty": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 0,
+    "batting": 60,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9432,12 +9432,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.17
   },
   "new-zealand-1983-john-bracewell": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 25,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "1979-1983",
@@ -9449,8 +9449,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1983-martin-crowe": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 75,
+    "batting": 67,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9465,8 +9465,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1983-abdul-qadir": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 27,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9481,8 +9481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1983-ijaz-faqih": {
     "role": "batsman",
-    "batting": 53,
-    "bowling": 22,
+    "batting": 55,
+    "bowling": 20,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -9498,7 +9498,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "pakistan-1983-mansoor-akhtar": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 27,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -9513,8 +9513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1983-mohsin-khan": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9528,9 +9528,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 2.5
   },
   "pakistan-1983-mudassar-nazar": {
-    "role": "bowler",
-    "batting": 65,
-    "bowling": 80,
+    "role": "batsman",
+    "batting": 64,
+    "bowling": 70,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -9545,8 +9545,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1983-rashid-khan": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 59,
+    "batting": 22,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9560,9 +9560,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.38
   },
   "pakistan-1983-shahid-mahboob": {
-    "role": "batsman",
-    "batting": 68,
-    "bowling": 54,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9576,9 +9576,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.8
   },
   "pakistan-1983-tahir-naqqash": {
-    "role": "batsman",
-    "batting": 58,
-    "bowling": 27,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -9593,7 +9593,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1983-wasim-bari": {
     "role": "wicketkeeper",
-    "batting": 61,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -9607,10 +9607,26 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingStrikeRate": 0,
     "bowlingEconomy": 0
   },
+  "pakistan-1983-zaheer-abbas": {
+    "role": "batsman",
+    "batting": 93,
+    "bowling": 32,
+    "battingHand": "Right",
+    "bowlingHand": "Right",
+    "bowlingStyle": "Off Break",
+    "aggressionLevel": "Balanced",
+    "battingStyle": "Balanced",
+    "interval": "1979-1983",
+    "battingAverage": 54.35,
+    "battingStrikeRate": 85.75,
+    "bowlingAverage": 31.25,
+    "bowlingStrikeRate": 40,
+    "bowlingEconomy": 4.69
+  },
   "sri-lanka-1983-arjuna-ranatunga": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 32,
+    "batting": 62,
+    "bowling": 26,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -9625,8 +9641,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-ashantha-de-mel": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 84,
+    "batting": 39,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9641,8 +9657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-athula-samarasekera": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9657,7 +9673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-brendon-kuruppu": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9673,8 +9689,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-granville-de-silva": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9689,7 +9705,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-guy-de-alwis": {
     "role": "wicketkeeper",
-    "batting": 74,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9704,12 +9720,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "sri-lanka-1983-rumesh-ratnayake": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 68,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1979-1983",
@@ -9721,8 +9737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-sidath-wettimuny": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 25,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -9737,7 +9753,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1983-vinothen-john": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 25,
     "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
@@ -9753,8 +9769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1983-gus-logie": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9769,7 +9785,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1983-jeff-dujon": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9785,8 +9801,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1983-joel-garner": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 86,
+    "batting": 34,
+    "bowling": 83,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -9801,8 +9817,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1983-wayne-daniel": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 78,
+    "batting": 18,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9817,8 +9833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1983-winston-davis": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 76,
+    "batting": 18,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9833,7 +9849,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-andrew-pycroft": {
     "role": "batsman",
-    "batting": 57,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9849,7 +9865,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-david-houghton": {
     "role": "batsman",
-    "batting": 68,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9864,12 +9880,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "zimbabwe-1983-duncan-fletcher": {
-    "role": "batsman",
-    "batting": 76,
-    "bowling": 77,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1979-1983",
@@ -9881,7 +9897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-gerald-peckover": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9897,7 +9913,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-grant-paterson": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9912,12 +9928,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "zimbabwe-1983-iain-butchart": {
-    "role": "batsman",
-    "batting": 63,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1979-1983",
@@ -9929,7 +9945,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-jack-heron": {
     "role": "batsman",
-    "batting": 55,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9945,8 +9961,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-kevin-curran": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 62,
+    "batting": 64,
+    "bowling": 38,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -9961,8 +9977,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-peter-rawson": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 78,
+    "batting": 26,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -9977,7 +9993,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1983-robin-brown": {
     "role": "batsman",
-    "batting": 64,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -9993,8 +10009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-bruce-reid": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 28,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10009,8 +10025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-craig-mcdermott": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 77,
+    "batting": 37,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10025,8 +10041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-david-boon": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 0,
+    "batting": 82,
+    "bowling": 21,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10041,8 +10057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-dean-jones": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 87,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10057,8 +10073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-geoff-marsh": {
     "role": "batsman",
-    "batting": 84,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10073,8 +10089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-peter-taylor": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 72,
+    "batting": 28,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10089,8 +10105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-simon-o-donnell": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 76,
+    "batting": 51,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10105,8 +10121,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-steve-waugh": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 82,
+    "batting": 78,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10120,12 +10136,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.46
   },
   "australia-1987-tim-may": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 23,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Aggressive",
     "battingStyle": "Very Aggressive",
     "interval": "1984-1987",
@@ -10137,8 +10153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-1987-tom-moody": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10153,8 +10169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-allan-lamb": {
     "role": "batsman",
-    "batting": 90,
-    "bowling": 0,
+    "batting": 85,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10169,8 +10185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-chris-broad": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 79,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10185,8 +10201,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-derek-pringle": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 53,
+    "batting": 60,
+    "bowling": 40,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10201,8 +10217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-gladstone-small": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 56,
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10217,8 +10233,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-neil-foster": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 77,
+    "batting": 37,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10233,7 +10249,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-paul-downton": {
     "role": "wicketkeeper",
-    "batting": 58,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10249,7 +10265,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1987-tim-robinson": {
     "role": "batsman",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10265,7 +10281,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-chandrakant-pandit": {
     "role": "wicketkeeper",
-    "batting": 63,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10281,8 +10297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-chetan-sharma": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 80,
+    "batting": 41,
+    "bowling": 78,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -10297,8 +10313,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-kapil-dev": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 86,
+    "batting": 76,
+    "bowling": 81,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -10329,8 +10345,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-laxman-sivaramakrishnan": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 23,
+    "bowling": 68,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -10345,8 +10361,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-maninder-singh": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 27,
+    "bowling": 79,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -10360,8 +10376,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 3.82
   },
   "india-1987-manoj-prabhakar": {
-    "role": "batsman",
-    "batting": 66,
+    "role": "bowler",
+    "batting": 40,
     "bowling": 62,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -10377,8 +10393,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-mohammad-azharuddin": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 71,
+    "batting": 78,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -10393,8 +10409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1987-ravi-shastri": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 80,
+    "batting": 76,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10409,7 +10425,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-andrew-jones": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10425,8 +10441,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-danny-morrison": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10441,8 +10457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-dipak-patel": {
     "role": "batsman",
-    "batting": 59,
-    "bowling": 60,
+    "batting": 58,
+    "bowling": 37,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10457,8 +10473,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-john-bracewell": {
     "role": "batsman",
-    "batting": 57,
-    "bowling": 56,
+    "batting": 58,
+    "bowling": 48,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10473,8 +10489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-ken-rutherford": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 0,
+    "batting": 67,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10489,8 +10505,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-martin-crowe": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 79,
+    "batting": 78,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10505,8 +10521,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-stephen-boock": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 71,
+    "batting": 22,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10521,8 +10537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1987-willie-watson": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 74,
+    "batting": 23,
+    "bowling": 69,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10537,7 +10553,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-abdul-qadir": {
     "role": "bowler",
-    "batting": 60,
+    "batting": 46,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -10553,7 +10569,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-ijaz-ahmed": {
     "role": "batsman",
-    "batting": 61,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -10570,7 +10586,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "pakistan-1987-mansoor-akhtar": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 25,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -10585,8 +10601,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-manzoor-elahi": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 59,
+    "batting": 66,
+    "bowling": 49,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -10601,8 +10617,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-mudassar-nazar": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 78,
+    "batting": 66,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -10617,8 +10633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-saleem-malik": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 0,
+    "batting": 72,
+    "bowling": 23,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Slow Medium",
@@ -10633,7 +10649,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-saleem-yousuf": {
     "role": "wicketkeeper",
-    "batting": 62,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -10649,8 +10665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-shoaib-mohammad": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 72,
+    "batting": 61,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -10665,8 +10681,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1987-wasim-akram": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 92,
+    "batting": 40,
+    "bowling": 89,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -10681,8 +10697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-aravinda-de-silva": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 29,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10697,8 +10713,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-arjuna-ranatunga": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 81,
+    "batting": 76,
+    "bowling": 69,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -10713,8 +10729,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-asanka-gurusinha": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 0,
+    "batting": 67,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10730,7 +10746,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-1987-ashantha-de-mel": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 40,
+    "bowling": 36,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10745,7 +10761,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-brendon-kuruppu": {
     "role": "wicketkeeper",
-    "batting": 54,
+    "batting": 56,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10761,8 +10777,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-ravi-ratnayeke": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 70,
+    "batting": 44,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10777,7 +10793,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-roshan-mahanama": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10792,12 +10808,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "sri-lanka-1987-rumesh-ratnayake": {
-    "role": "batsman",
-    "batting": 59,
+    "role": "bowler",
+    "batting": 41,
     "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "1984-1987",
@@ -10809,8 +10825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1987-sridharan-jeganathan": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -10824,12 +10840,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.24
   },
   "sri-lanka-1987-vinothen-john": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 45,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1984-1987",
@@ -10841,8 +10857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-carl-hooper": {
     "role": "bowler",
-    "batting": 67,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10857,7 +10873,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-carlisle-best": {
     "role": "wicketkeeper",
-    "batting": 0,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10873,8 +10889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-courtney-walsh": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 90,
+    "batting": 28,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10889,8 +10905,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-eldine-baptiste": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 68,
+    "batting": 59,
+    "bowling": 57,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10905,8 +10921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-gus-logie": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 0,
+    "batting": 81,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10921,7 +10937,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-jeff-dujon": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -10937,8 +10953,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-richie-richardson": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10953,8 +10969,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-roger-harper": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 68,
+    "batting": 60,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -10969,8 +10985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1987-winston-benjamin": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -10985,7 +11001,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-andrew-pycroft": {
     "role": "batsman",
-    "batting": 71,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11001,8 +11017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-babu-meman": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11017,7 +11033,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-david-houghton": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11032,12 +11048,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "zimbabwe-1987-eddo-brandes": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 21,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Aggressive",
     "battingStyle": "Very Aggressive",
     "interval": "1984-1987",
@@ -11049,7 +11065,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-grant-paterson": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11064,12 +11080,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "zimbabwe-1987-iain-butchart": {
-    "role": "batsman",
-    "batting": 64,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1984-1987",
@@ -11081,7 +11097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-kevin-arnott": {
     "role": "batsman",
-    "batting": 69,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11097,8 +11113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-kevin-curran": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11112,12 +11128,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.77
   },
   "zimbabwe-1987-malcolm-jarvis": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 18,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "1984-1987",
@@ -11128,12 +11144,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.35
   },
   "zimbabwe-1987-peter-rawson": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "1984-1987",
@@ -11145,7 +11161,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-1987-robin-brown": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11161,8 +11177,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-enamul-haque": {
     "role": "batsman",
-    "batting": 55,
-    "bowling": 57,
+    "batting": 57,
+    "bowling": 43,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -11177,7 +11193,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-faruk-ahmed": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -11192,9 +11208,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "bangladesh-1999-khaled-mahmud": {
-    "role": "bowler",
-    "batting": 56,
-    "bowling": 75,
+    "role": "batsman",
+    "batting": 57,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -11209,7 +11225,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-khaled-mashud": {
     "role": "wicketkeeper",
-    "batting": 54,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -11225,7 +11241,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-mehrab-hossain": {
     "role": "batsman",
-    "batting": 73,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -11241,8 +11257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-minhajul-abedin": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 72,
+    "batting": 60,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11256,9 +11272,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.37
   },
   "bangladesh-1999-mohammad-rafique": {
-    "role": "batsman",
-    "batting": 58,
-    "bowling": 58,
+    "role": "bowler",
+    "batting": 40,
+    "bowling": 60,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -11273,8 +11289,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-1999-shafiuddin-ahmed": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 76,
+    "batting": 27,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -11289,8 +11305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-adam-hollioake": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 79,
+    "batting": 66,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11305,8 +11321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-alan-mullally": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 87,
+    "batting": 28,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11321,7 +11337,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-alec-stewart": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11337,8 +11353,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-andrew-flintoff": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 76,
+    "batting": 28,
+    "bowling": 69,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -11353,8 +11369,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-angus-fraser": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11369,8 +11385,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-darren-gough": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 93,
+    "batting": 39,
+    "bowling": 92,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -11385,8 +11401,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-graeme-hick": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 69,
+    "batting": 84,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11401,8 +11417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-graham-thorpe": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 88,
+    "bowling": 31,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11416,12 +11432,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.85
   },
   "england-1999-ian-austin": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -11433,8 +11449,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-mark-ealham": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 82,
+    "batting": 46,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11449,7 +11465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-nasser-hussain": {
     "role": "batsman",
-    "batting": 74,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -11465,7 +11481,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-1999-neil-fairbrother": {
     "role": "batsman",
-    "batting": 83,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11480,12 +11496,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "england-1999-robert-croft": {
-    "role": "batsman",
-    "batting": 57,
-    "bowling": 68,
+    "role": "bowler",
+    "batting": 43,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -11497,8 +11513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-ajay-jadeja": {
     "role": "batsman",
-    "batting": 91,
-    "bowling": 54,
+    "batting": 88,
+    "bowling": 42,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11513,8 +11529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-ajit-agarkar": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 90,
+    "batting": 40,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11529,7 +11545,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-amay-khurasiya": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11545,8 +11561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-anil-kumble": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 90,
+    "batting": 41,
+    "bowling": 89,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -11561,8 +11577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-javagal-srinath": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 82,
+    "batting": 46,
+    "bowling": 81,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -11577,8 +11593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-mohammad-azharuddin": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 0,
+    "batting": 89,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -11609,8 +11625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-nikhil-chopra": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 89,
+    "batting": 42,
+    "bowling": 85,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -11625,8 +11641,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-rahul-dravid": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 86,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11641,8 +11657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-robin-singh": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 67,
+    "batting": 72,
+    "bowling": 62,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -11658,7 +11674,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "india-1999-sachin-tendulkar": {
     "role": "batsman",
     "batting": 97,
-    "bowling": 59,
+    "bowling": 54,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11674,7 +11690,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "india-1999-sourav-ganguly": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 72,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11689,8 +11705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-1999-venkatesh-prasad": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 82,
+    "batting": 36,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11704,12 +11720,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.61
   },
   "kenya-1999-aasif-karim": {
-    "role": "batsman",
-    "batting": 55,
-    "bowling": 60,
+    "role": "bowler",
+    "batting": 40,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -11721,7 +11737,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-dipak-chudasama": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11737,8 +11753,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-hitesh-modi": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11753,8 +11769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-jimmy-kamande": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11769,7 +11785,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-kennedy-otieno": {
     "role": "wicketkeeper",
-    "batting": 71,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11784,12 +11800,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "kenya-1999-martin-suji": {
-    "role": "batsman",
-    "batting": 53,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "1996-1999",
@@ -11801,8 +11817,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-maurice-odumbe": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 68,
+    "batting": 66,
+    "bowling": 58,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11817,8 +11833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-mohammad-sheikh": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 79,
+    "batting": 28,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -11833,8 +11849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-ravindu-shah": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11849,8 +11865,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-1999-steve-tikolo": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 72,
+    "batting": 73,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11864,12 +11880,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.06
   },
   "kenya-1999-thomas-odoyo": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 69,
+    "role": "bowler",
+    "batting": 48,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -11881,7 +11897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-adam-parore": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -11897,8 +11913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-carl-bulfin": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11913,8 +11929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-chris-cairns": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 75,
+    "batting": 73,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11929,8 +11945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-chris-harris": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 74,
+    "batting": 82,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11944,9 +11960,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.17
   },
   "new-zealand-1999-craig-mcmillan": {
-    "role": "bowler",
-    "batting": 67,
-    "bowling": 79,
+    "role": "batsman",
+    "batting": 65,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -11960,12 +11976,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.04
   },
   "new-zealand-1999-daniel-vettori": {
-    "role": "batsman",
-    "batting": 53,
+    "role": "bowler",
+    "batting": 39,
     "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "1996-1999",
@@ -11977,8 +11993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-dion-nash": {
     "role": "batsman",
-    "batting": 59,
-    "bowling": 59,
+    "batting": 58,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -11993,8 +12009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-gavin-larsen": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 89,
+    "batting": 38,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12009,8 +12025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-matthew-hart": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12025,8 +12041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-nathan-astle": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 78,
+    "batting": 81,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12041,8 +12057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-roger-twose": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12057,8 +12073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-simon-doull": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 70,
+    "batting": 34,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12073,8 +12089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-1999-stephen-fleming": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12089,8 +12105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-abdul-razzaq": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 86,
+    "batting": 62,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -12105,8 +12121,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-ijaz-ahmed": {
     "role": "batsman",
-    "batting": 91,
-    "bowling": 0,
+    "batting": 89,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -12121,8 +12137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-inzamam-ul-haq": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 0,
+    "batting": 86,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -12137,8 +12153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-mushtaq-ahmed": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 78,
+    "batting": 33,
+    "bowling": 76,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -12154,7 +12170,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "pakistan-1999-saeed-anwar": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 31,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -12169,8 +12185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-saleem-malik": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 76,
+    "batting": 78,
+    "bowling": 66,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Slow Medium",
@@ -12185,7 +12201,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-saqlain-mushtaq": {
     "role": "bowler",
-    "batting": 51,
+    "batting": 43,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -12201,8 +12217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-1999-shoaib-akhtar": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 92,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -12215,10 +12231,26 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingStrikeRate": 29,
     "bowlingEconomy": 4.41
   },
+  "pakistan-1999-wajahatullah-wasti": {
+    "role": "batsman",
+    "batting": 63,
+    "bowling": 31,
+    "battingHand": "Right",
+    "bowlingHand": "Right",
+    "bowlingStyle": "Off Break",
+    "aggressionLevel": "Very Cautious",
+    "battingStyle": "Very Cautious",
+    "interval": "1996-1999",
+    "battingAverage": 25.46,
+    "battingStrikeRate": 49.48,
+    "bowlingAverage": 13.33,
+    "bowlingStrikeRate": 10.33,
+    "bowlingEconomy": 7.74
+  },
   "pakistan-1999-wasim-akram": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 91,
+    "batting": 54,
+    "bowling": 90,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -12231,9 +12263,25 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingStrikeRate": 39.34,
     "bowlingEconomy": 4
   },
+  "pakistan-1999-yousuf-youhana": {
+    "role": "batsman",
+    "batting": 85,
+    "bowling": 0,
+    "battingHand": "Right",
+    "bowlingHand": "Right",
+    "bowlingStyle": "Off Break",
+    "aggressionLevel": "Balanced",
+    "battingStyle": "Balanced",
+    "interval": "1996-1999",
+    "battingAverage": 47.68,
+    "battingStrikeRate": 73.98,
+    "bowlingAverage": 0,
+    "bowlingStrikeRate": 0,
+    "bowlingEconomy": 0
+  },
   "scotland-1999-alec-davies": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12248,12 +12296,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "scotland-1999-asim-butt": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "1996-1999",
@@ -12265,7 +12313,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-bruce-patterson": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12281,7 +12329,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-gavin-hamilton": {
     "role": "wicketkeeper",
-    "batting": 79,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12297,7 +12345,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-george-salmond": {
     "role": "batsman",
-    "batting": 59,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12313,7 +12361,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-greig-williamson": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12329,8 +12377,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-ian-stanger": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12346,7 +12394,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "scotland-1999-james-brinkley": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12361,8 +12409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-john-blain": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 89,
+    "batting": 27,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12377,7 +12425,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-1999-michael-allingham": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12394,7 +12442,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-1999-aravinda-de-silva": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 70,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12409,8 +12457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-arjuna-ranatunga": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 70,
+    "batting": 84,
+    "bowling": 40,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -12425,8 +12473,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-chaminda-vaas": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 87,
+    "batting": 43,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12441,8 +12489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-chandika-hathurusingha": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 57,
+    "bowling": 31,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12457,7 +12505,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-hashan-tillakaratne": {
     "role": "wicketkeeper",
-    "batting": 74,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12473,8 +12521,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-mahela-jayawardene": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 45,
+    "batting": 66,
+    "bowling": 33,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12489,8 +12537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-marvan-atapattu": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 0,
+    "batting": 79,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12505,8 +12553,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-muttiah-muralitharan": {
     "role": "bowler",
-    "batting": 44,
-    "bowling": 93,
+    "batting": 34,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12521,7 +12569,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-romesh-kaluwitharana": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12537,7 +12585,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-roshan-mahanama": {
     "role": "batsman",
-    "batting": 72,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12553,8 +12601,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-ruwan-kalpage": {
     "role": "batsman",
-    "batting": 56,
-    "bowling": 46,
+    "batting": 57,
+    "bowling": 35,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12569,8 +12617,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-sanath-jayasuriya": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 74,
+    "batting": 85,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12585,8 +12633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-1999-upul-chandana": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 86,
+    "batting": 49,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12601,8 +12649,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-brian-lara": {
     "role": "batsman",
-    "batting": 95,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12617,8 +12665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-courtney-walsh": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 86,
+    "batting": 28,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12633,8 +12681,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-curtly-ambrose": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 92,
+    "batting": 39,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12649,8 +12697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-jimmy-adams": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 76,
+    "batting": 72,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12665,8 +12713,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-keith-arthurton": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 84,
+    "batting": 42,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12680,12 +12728,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.08
   },
   "west-indies-1999-nehemiah-perry": {
-    "role": "batsman",
-    "batting": 66,
-    "bowling": 76,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -12697,8 +12745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-ricardo-powell": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 24,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -12713,7 +12761,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-ridley-jacobs": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12728,12 +12776,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "west-indies-1999-sherwin-campbell": {
-    "role": "bowler",
-    "batting": 68,
-    "bowling": 87,
+    "role": "batsman",
+    "batting": 66,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "1996-1999",
@@ -12745,8 +12793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-shivnarine-chanderpaul": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 79,
+    "batting": 83,
+    "bowling": 58,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -12761,8 +12809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-1999-stuart-williams": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 73,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12777,7 +12825,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-adam-gilchrist": {
     "role": "wicketkeeper",
-    "batting": 89,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -12793,8 +12841,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-andrew-symonds": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 76,
+    "batting": 76,
+    "bowling": 69,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -12809,8 +12857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-andy-bichel": {
     "role": "bowler",
-    "batting": 67,
-    "bowling": 88,
+    "batting": 42,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12825,8 +12873,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-brad-hogg": {
     "role": "bowler",
-    "batting": 66,
-    "bowling": 81,
+    "batting": 41,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12841,7 +12889,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-brett-lee": {
     "role": "bowler",
-    "batting": 57,
+    "batting": 43,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -12858,7 +12906,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2003-damien-martyn": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 50,
+    "bowling": 37,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12873,8 +12921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-darren-lehmann": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 93,
+    "batting": 90,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12889,7 +12937,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-glenn-mcgrath": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 96,
     "battingHand": "",
     "bowlingHand": "",
@@ -12905,8 +12953,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-ian-harvey": {
     "role": "bowler",
-    "batting": 63,
-    "bowling": 90,
+    "batting": 49,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12921,7 +12969,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-jason-gillespie": {
     "role": "bowler",
-    "batting": 57,
+    "batting": 33,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -12938,7 +12986,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2003-matthew-hayden": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12954,7 +13002,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2003-michael-bevan": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -12969,8 +13017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-nathan-bracken": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 18,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -12985,8 +13033,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2003-nathan-hauritz": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 80,
+    "batting": 23,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13002,7 +13050,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2003-ricky-ponting": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 0,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13017,8 +13065,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2003-alok-kapali": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 57,
+    "batting": 65,
+    "bowling": 43,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -13033,8 +13081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2003-ehsanul-haque": {
     "role": "batsman",
-    "batting": 57,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -13050,7 +13098,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "bangladesh-2003-khaled-mahmud": {
     "role": "batsman",
     "batting": 56,
-    "bowling": 46,
+    "bowling": 40,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -13080,9 +13128,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "bangladesh-2003-mohammad-ashraful": {
-    "role": "bowler",
-    "batting": 55,
-    "bowling": 73,
+    "role": "batsman",
+    "batting": 56,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -13096,9 +13144,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.04
   },
   "bangladesh-2003-mohammad-rafique": {
-    "role": "batsman",
-    "batting": 54,
-    "bowling": 51,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 60,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -13112,9 +13160,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.59
   },
   "bangladesh-2003-talha-jubair": {
-    "role": "bowler",
-    "batting": 0,
-    "bowling": 76,
+    "role": "batsman",
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -13129,7 +13177,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-abdool-samad": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13145,7 +13193,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-ashish-bagai": {
     "role": "wicketkeeper",
-    "batting": 59,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -13161,8 +13209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-ashish-patel": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -13176,9 +13224,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 7.3
   },
   "canada-2003-austin-codrington": {
-    "role": "bowler",
-    "batting": 0,
-    "bowling": 85,
+    "role": "batsman",
+    "batting": 57,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -13193,8 +13241,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-barry-seebaran": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13209,8 +13257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-davis-joseph": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 18,
+    "bowling": 67,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -13225,7 +13273,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-desmond-chumney": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13241,7 +13289,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-ian-billcliff": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13257,8 +13305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-ishwar-maraj": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 21,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -13272,12 +13320,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.89
   },
   "canada-2003-john-davison": {
-    "role": "bowler",
-    "batting": 76,
-    "bowling": 92,
+    "role": "batsman",
+    "batting": 65,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2000-2003",
@@ -13289,8 +13337,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-nicholas-de-groot": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 57,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13305,8 +13353,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-nicholas-ifill": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 24,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -13321,8 +13369,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2003-sanjayan-thuraisingam": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -13337,7 +13385,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-alec-stewart": {
     "role": "wicketkeeper",
-    "batting": 83,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13369,8 +13417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-andy-caddick": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 88,
+    "batting": 39,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13385,8 +13433,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-craig-white": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 93,
+    "batting": 45,
+    "bowling": 89,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -13400,12 +13448,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.37
   },
   "england-2003-ian-blackwell": {
-    "role": "bowler",
-    "batting": 62,
-    "bowling": 79,
+    "role": "batsman",
+    "batting": 60,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2000-2003",
@@ -13417,7 +13465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-james-anderson": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -13433,7 +13481,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-marcus-trescothick": {
     "role": "wicketkeeper",
-    "batting": 90,
+    "batting": 86,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13449,8 +13497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-matthew-hoggard": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 85,
+    "batting": 25,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13465,8 +13513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-michael-vaughan": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 75,
+    "batting": 67,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13481,7 +13529,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-nasser-hussain": {
     "role": "batsman",
-    "batting": 78,
+    "batting": 75,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -13497,8 +13545,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-paul-collingwood": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 67,
+    "batting": 75,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13513,8 +13561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2003-steve-harmison": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 64,
+    "batting": 21,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13529,8 +13577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-ajit-agarkar": {
     "role": "bowler",
-    "batting": 63,
-    "bowling": 88,
+    "batting": 51,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13545,8 +13593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-anil-kumble": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 76,
+    "batting": 41,
+    "bowling": 75,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -13561,8 +13609,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-ashish-nehra": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 75,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Medium Fast",
@@ -13577,8 +13625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-dinesh-mongia": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 75,
+    "batting": 70,
+    "bowling": 45,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -13593,8 +13641,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-harbhajan-singh": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 87,
+    "batting": 41,
+    "bowling": 85,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -13609,8 +13657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-javagal-srinath": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 90,
+    "batting": 35,
+    "bowling": 88,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -13625,7 +13673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-mohammad-kaif": {
     "role": "batsman",
-    "batting": 77,
+    "batting": 73,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -13657,8 +13705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-rahul-dravid": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13674,7 +13722,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "india-2003-sachin-tendulkar": {
     "role": "batsman",
     "batting": 97,
-    "bowling": 58,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13689,8 +13737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-sanjay-bangar": {
     "role": "batsman",
-    "batting": 60,
-    "bowling": 59,
+    "batting": 59,
+    "bowling": 39,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13706,7 +13754,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "india-2003-sourav-ganguly": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 79,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13721,8 +13769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-virender-sehwag": {
     "role": "batsman",
-    "batting": 87,
-    "bowling": 68,
+    "batting": 84,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -13753,7 +13801,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2003-zaheer-khan": {
     "role": "bowler",
-    "batting": 53,
+    "batting": 41,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Left",
@@ -13769,7 +13817,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2003-bas-zuiderent": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 56,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13785,8 +13833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2003-daan-van-bunge": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 0,
+    "batting": 60,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13800,9 +13848,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 7.08
   },
   "netherlands-2003-edgar-schiferli": {
-    "role": "batsman",
-    "batting": 57,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 33,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -13816,9 +13864,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.45
   },
   "netherlands-2003-jacob-jan-esmeijer": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 64,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -13833,7 +13881,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2003-jeroen-smits": {
     "role": "wicketkeeper",
-    "batting": 63,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -13849,7 +13897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2003-nick-statham": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13864,12 +13912,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "netherlands-2003-roland-lefebvre": {
-    "role": "batsman",
-    "batting": 67,
-    "bowling": 73,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2000-2003",
@@ -13881,8 +13929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2003-victor-grandia": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13897,8 +13945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-andre-adams": {
     "role": "bowler",
-    "batting": 65,
-    "bowling": 92,
+    "batting": 42,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13913,7 +13961,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-brendon-mccullum": {
     "role": "wicketkeeper",
-    "batting": 57,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -13929,8 +13977,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-chris-cairns": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 81,
+    "batting": 78,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13945,8 +13993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-chris-harris": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 62,
+    "batting": 70,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -13961,8 +14009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-craig-mcmillan": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 76,
+    "batting": 72,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -13977,8 +14025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-daniel-vettori": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 74,
+    "batting": 41,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -13993,8 +14041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-daryl-tuffey": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 87,
+    "batting": 35,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14009,8 +14057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-jacob-oram": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 82,
+    "batting": 48,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14025,8 +14073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-kyle-mills": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 88,
+    "batting": 36,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14041,7 +14089,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-lou-vincent": {
     "role": "wicketkeeper",
-    "batting": 63,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -14057,8 +14105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-nathan-astle": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 67,
+    "batting": 82,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14073,8 +14121,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-scott-styris": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 82,
+    "batting": 69,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14089,7 +14137,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-shane-bond": {
     "role": "bowler",
-    "batting": 62,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -14105,7 +14153,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2003-stephen-fleming": {
     "role": "batsman",
-    "batting": 77,
+    "batting": 75,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14121,8 +14169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-abdul-razzaq": {
     "role": "bowler",
-    "batting": 78,
-    "bowling": 91,
+    "batting": 76,
+    "bowling": 87,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -14137,8 +14185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-inzamam-ul-haq": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 86,
+    "bowling": 24,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -14153,7 +14201,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-mohammad-sami": {
     "role": "bowler",
-    "batting": 62,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -14169,7 +14217,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-rashid-latif": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -14185,8 +14233,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-saeed-anwar": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 0,
+    "batting": 82,
+    "bowling": 24,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -14201,8 +14249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-saleem-elahi": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -14217,8 +14265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-saqlain-mushtaq": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 89,
+    "batting": 38,
+    "bowling": 87,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -14233,7 +14281,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-shoaib-akhtar": {
     "role": "bowler",
-    "batting": 53,
+    "batting": 38,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -14249,8 +14297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-taufeeq-umar": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 64,
+    "bowling": 26,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -14265,8 +14313,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2003-wasim-akram": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 96,
+    "batting": 53,
+    "bowling": 94,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -14279,9 +14327,25 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingStrikeRate": 35.29,
     "bowlingEconomy": 4.14
   },
+  "pakistan-2003-yousuf-youhana": {
+    "role": "batsman",
+    "batting": 93,
+    "bowling": 0,
+    "battingHand": "Right",
+    "bowlingHand": "Right",
+    "bowlingStyle": "Off Break",
+    "aggressionLevel": "Balanced",
+    "battingStyle": "Balanced",
+    "interval": "2000-2003",
+    "battingAverage": 41.95,
+    "battingStrikeRate": 73.66,
+    "bowlingAverage": 0,
+    "bowlingStrikeRate": 0,
+    "bowlingEconomy": 0
+  },
   "south-africa-2003-allan-donald": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -14297,8 +14361,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-andrew-hall": {
     "role": "bowler",
-    "batting": 66,
-    "bowling": 79,
+    "batting": 52,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14313,7 +14377,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-boeta-dippenaar": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14329,8 +14393,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-charl-langeveldt": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 21,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14345,7 +14409,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-gary-kirsten": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -14361,8 +14425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-graeme-smith": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14377,7 +14441,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-herschelle-gibbs": {
     "role": "batsman",
-    "batting": 91,
+    "batting": 88,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14394,7 +14458,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "south-africa-2003-jacques-kallis": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 83,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14409,8 +14473,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-jonty-rhodes": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14425,8 +14489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-lance-klusener": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 80,
+    "batting": 86,
+    "bowling": 75,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -14441,7 +14505,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-makhaya-ntini": {
     "role": "bowler",
-    "batting": 52,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -14457,7 +14521,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-mark-boucher": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14473,8 +14537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-monde-zondeki": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -14488,12 +14552,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.07
   },
   "south-africa-2003-robin-peterson": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 50,
+    "role": "bowler",
+    "batting": 27,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2000-2003",
@@ -14505,7 +14569,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2003-shaun-pollock": {
     "role": "bowler",
-    "batting": 63,
+    "batting": 53,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -14521,8 +14585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-aravinda-de-silva": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 68,
+    "batting": 73,
+    "bowling": 55,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14537,7 +14601,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-avishka-gunawardene": {
     "role": "batsman",
-    "batting": 78,
+    "batting": 73,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14553,7 +14617,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-chaminda-vaas": {
     "role": "bowler",
-    "batting": 56,
+    "batting": 49,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -14569,8 +14633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-dilhara-fernando": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 89,
+    "batting": 33,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14585,7 +14649,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-hashan-tillakaratne": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14601,8 +14665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-jehan-mubarak": {
     "role": "batsman",
-    "batting": 56,
-    "bowling": 0,
+    "batting": 57,
+    "bowling": 21,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -14617,7 +14681,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-kumar-sangakkara": {
     "role": "wicketkeeper",
-    "batting": 74,
+    "batting": 73,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14633,8 +14697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-mahela-jayawardene": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 0,
+    "batting": 78,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14649,7 +14713,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-marvan-atapattu": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 92,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14665,7 +14729,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-muttiah-muralitharan": {
     "role": "bowler",
-    "batting": 45,
+    "batting": 35,
     "bowling": 96,
     "battingHand": "",
     "bowlingHand": "",
@@ -14681,8 +14745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-prabath-nissanka": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 80,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14697,8 +14761,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-pulasthi-gunaratne": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 79,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14713,8 +14777,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-russel-arnold": {
     "role": "batsman",
-    "batting": 84,
-    "bowling": 60,
+    "batting": 81,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14729,8 +14793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2003-sanath-jayasuriya": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 65,
+    "batting": 89,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14745,8 +14809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-brian-lara": {
     "role": "batsman",
-    "batting": 96,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14761,8 +14825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-carl-hooper": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 55,
+    "batting": 77,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14778,7 +14842,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "west-indies-2003-chris-gayle": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 91,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14793,8 +14857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-corey-collymore": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14809,8 +14873,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-jermaine-lawson": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 86,
+    "batting": 21,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14825,8 +14889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-marlon-samuels": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 73,
+    "batting": 76,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14840,12 +14904,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.96
   },
   "west-indies-2003-nixon-mclean": {
-    "role": "batsman",
-    "batting": 59,
-    "bowling": 69,
+    "role": "bowler",
+    "batting": 38,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2000-2003",
@@ -14857,8 +14921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-pedro-collins": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 27,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -14873,8 +14937,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-ramnaresh-sarwan": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 88,
+    "bowling": 29,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14888,9 +14952,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.51
   },
   "west-indies-2003-ricardo-powell": {
-    "role": "bowler",
-    "batting": 70,
-    "bowling": 86,
+    "role": "batsman",
+    "batting": 68,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -14905,7 +14969,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-ridley-jacobs": {
     "role": "wicketkeeper",
-    "batting": 69,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -14921,8 +14985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-shivnarine-chanderpaul": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 19,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -14937,7 +15001,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-vasbert-drakes": {
     "role": "bowler",
-    "batting": 53,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -14953,8 +15017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2003-wavell-hinds": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 88,
+    "batting": 75,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14969,8 +15033,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-alistair-campbell": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -14985,8 +15049,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-andy-blignaut": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 65,
+    "batting": 63,
+    "bowling": 57,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15001,7 +15065,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-andy-flower": {
     "role": "wicketkeeper",
-    "batting": 90,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15017,8 +15081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-brian-murphy": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 69,
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15033,7 +15097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-craig-wishart": {
     "role": "batsman",
-    "batting": 71,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15049,8 +15113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-dion-ebrahim": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 0,
+    "batting": 60,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15065,8 +15129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-douglas-hondo": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 79,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15081,8 +15145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-grant-flower": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 67,
+    "batting": 80,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15097,8 +15161,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-guy-whittall": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 31,
+    "batting": 62,
+    "bowling": 28,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15112,12 +15176,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.34
   },
   "zimbabwe-2003-heath-streak": {
-    "role": "batsman",
-    "batting": 77,
-    "bowling": 83,
+    "role": "bowler",
+    "batting": 67,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2000-2003",
@@ -15129,8 +15193,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-henry-olonga": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15145,8 +15209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-sean-ervine": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 63,
+    "batting": 62,
+    "bowling": 54,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15161,8 +15225,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-stuart-matsikenyeri": {
     "role": "batsman",
-    "batting": 55,
-    "bowling": 0,
+    "batting": 57,
+    "bowling": 24,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -15177,7 +15241,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-tatenda-taibu": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -15193,8 +15257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2003-travis-friend": {
     "role": "batsman",
-    "batting": 60,
-    "bowling": 55,
+    "batting": 59,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15209,7 +15273,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-adam-gilchrist": {
     "role": "wicketkeeper",
-    "batting": 92,
+    "batting": 89,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15226,7 +15290,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2007-andrew-symonds": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 61,
+    "bowling": 57,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -15241,7 +15305,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-brad-haddin": {
     "role": "wicketkeeper",
-    "batting": 76,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15257,8 +15321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-brad-hodge": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15273,7 +15337,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-brad-hogg": {
     "role": "bowler",
-    "batting": 62,
+    "batting": 47,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -15289,7 +15353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-glenn-mcgrath": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 96,
     "battingHand": "",
     "bowlingHand": "",
@@ -15322,7 +15386,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2007-michael-clarke": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 65,
+    "bowling": 56,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15338,7 +15402,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2007-michael-hussey": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 27,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15353,8 +15417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-mitchell-johnson": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15369,8 +15433,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-nathan-bracken": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 93,
+    "batting": 36,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15401,8 +15465,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-shane-watson": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 76,
+    "batting": 72,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15417,8 +15481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-shaun-tait": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 91,
+    "batting": 21,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15433,8 +15497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2007-stuart-clark": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 80,
+    "batting": 28,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15449,7 +15513,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2007-abdur-razzak": {
     "role": "bowler",
-    "batting": 56,
+    "batting": 40,
     "bowling": 93,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -15465,8 +15529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2007-farhad-reza": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 38,
+    "batting": 62,
+    "bowling": 29,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -15481,8 +15545,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2007-mohammad-ashraful": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 0,
+    "batting": 67,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -15497,8 +15561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2007-mohammad-rafique": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 81,
+    "batting": 45,
+    "bowling": 79,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -15545,8 +15609,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2007-syed-rasel": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 90,
+    "batting": 28,
+    "bowling": 86,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Medium Fast",
@@ -15577,8 +15641,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-abdool-samad": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 70,
+    "batting": 66,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15593,8 +15657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-anderson-cummins": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 57,
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15609,7 +15673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-ashish-bagai": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -15625,8 +15689,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-austin-codrington": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -15641,7 +15705,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-desmond-chumney": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15657,8 +15721,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-george-codrington": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 71,
+    "batting": 60,
+    "bowling": 56,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15673,8 +15737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-henry-osinde": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -15689,7 +15753,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-ian-billcliff": {
     "role": "batsman",
-    "batting": 78,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15705,8 +15769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-john-davison": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 78,
+    "batting": 66,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15721,8 +15785,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-kevin-sandher": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15738,7 +15802,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "canada-2007-qaiser-ali": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 0,
+    "bowling": 27,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -15753,8 +15817,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "canada-2007-sunil-dhaniram": {
     "role": "bowler",
-    "batting": 65,
-    "bowling": 89,
+    "batting": 49,
+    "bowling": 84,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -15768,9 +15832,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.13
   },
   "canada-2007-umar-bhatti": {
-    "role": "bowler",
+    "role": "batsman",
     "batting": 58,
-    "bowling": 70,
+    "bowling": 56,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Medium",
@@ -15801,8 +15865,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-andrew-strauss": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 0,
+    "batting": 76,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15817,7 +15881,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-ed-joyce": {
     "role": "batsman",
-    "batting": 69,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15833,8 +15897,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-ian-bell": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 81,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15849,8 +15913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-james-anderson": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 80,
+    "batting": 28,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15865,8 +15929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-jamie-dalrymple": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 57,
+    "batting": 60,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15881,8 +15945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-jon-lewis": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 83,
+    "batting": 28,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15898,7 +15962,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "england-2007-kevin-pietersen": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15912,12 +15976,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.3
   },
   "england-2007-liam-plunkett": {
-    "role": "batsman",
-    "batting": 64,
-    "bowling": 74,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -15929,8 +15993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-michael-vaughan": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 62,
+    "batting": 69,
+    "bowling": 43,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15945,8 +16009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-monty-panesar": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 64,
+    "batting": 28,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -15961,8 +16025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-paul-collingwood": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 65,
+    "batting": 80,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -15977,7 +16041,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-paul-nixon": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -15993,8 +16057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-ravi-bopara": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16009,8 +16073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-sajid-mahmood": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 67,
+    "batting": 32,
+    "bowling": 66,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -16025,8 +16089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2007-stuart-broad": {
     "role": "bowler",
-    "batting": 67,
-    "bowling": 80,
+    "batting": 28,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16041,8 +16105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-ajit-agarkar": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 88,
+    "batting": 40,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16057,8 +16121,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-anil-kumble": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 55,
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -16073,7 +16137,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-dinesh-karthik": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16088,8 +16152,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "india-2007-harbhajan-singh": {
-    "role": "batsman",
-    "batting": 59,
+    "role": "bowler",
+    "batting": 46,
     "bowling": 62,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -16105,8 +16169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-irfan-pathan": {
     "role": "bowler",
-    "batting": 68,
-    "bowling": 87,
+    "batting": 59,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16121,7 +16185,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-m-s-dhoni": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 92,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -16137,8 +16201,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-munaf-patel": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 28,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16153,7 +16217,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-rahul-dravid": {
     "role": "batsman",
-    "batting": 91,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16169,7 +16233,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-robin-uthappa": {
     "role": "wicketkeeper",
-    "batting": 76,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16185,8 +16249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-s-sreesanth": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16201,8 +16265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-sachin-tendulkar": {
     "role": "batsman",
-    "batting": 94,
-    "bowling": 73,
+    "batting": 91,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16217,8 +16281,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-sourav-ganguly": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 42,
+    "batting": 78,
+    "bowling": 35,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16233,8 +16297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2007-virender-sehwag": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 65,
+    "batting": 76,
+    "bowling": 58,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -16264,8 +16328,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.3
   },
   "india-2007-zaheer-khan": {
-    "role": "batsman",
-    "batting": 58,
+    "role": "bowler",
+    "batting": 43,
     "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Left",
@@ -16281,8 +16345,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-andre-botha": {
     "role": "bowler",
-    "batting": 60,
-    "bowling": 92,
+    "batting": 42,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16296,12 +16360,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.36
   },
   "ireland-2007-andrew-white": {
-    "role": "batsman",
-    "batting": 58,
+    "role": "bowler",
+    "batting": 40,
     "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -16313,8 +16377,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-boyd-rankin": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 22,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16329,8 +16393,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-dave-langford-smith": {
     "role": "bowler",
-    "batting": 61,
-    "bowling": 74,
+    "batting": 34,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16345,7 +16409,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-eoin-morgan": {
     "role": "batsman",
-    "batting": 74,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16361,7 +16425,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-jeremy-bray": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16376,12 +16440,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "ireland-2007-john-mooney": {
-    "role": "batsman",
-    "batting": 67,
-    "bowling": 58,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -16393,8 +16457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-kevin-o-brien": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 62,
+    "batting": 68,
+    "bowling": 44,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16409,7 +16473,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-niall-o-brien": {
     "role": "wicketkeeper",
-    "batting": 65,
+    "batting": 64,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16425,7 +16489,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-peter-gillespie": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16440,12 +16504,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "ireland-2007-trent-johnston": {
-    "role": "batsman",
-    "batting": 67,
-    "bowling": 43,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2004-2007",
@@ -16457,7 +16521,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2007-william-porterfield": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16473,8 +16537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-collins-obuya": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16489,7 +16553,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-david-obuya": {
     "role": "wicketkeeper",
-    "batting": 67,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16505,8 +16569,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-hiren-varaiya": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 26,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16521,8 +16585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-jimmy-kamande": {
     "role": "batsman",
-    "batting": 55,
-    "bowling": 65,
+    "batting": 56,
+    "bowling": 55,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16537,7 +16601,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-malhar-patel": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16552,12 +16616,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "kenya-2007-nehemiah-odhiambo": {
-    "role": "batsman",
-    "batting": 55,
-    "bowling": 66,
+    "role": "bowler",
+    "batting": 37,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -16569,7 +16633,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-peter-ongondo": {
     "role": "bowler",
-    "batting": 50,
+    "batting": 37,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -16585,7 +16649,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-ravindu-shah": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16601,8 +16665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-steve-tikolo": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 88,
+    "batting": 78,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16617,8 +16681,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-tanmay-mishra": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 18,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -16633,8 +16697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2007-thomas-odoyo": {
     "role": "bowler",
-    "batting": 76,
-    "bowling": 93,
+    "batting": 58,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16649,8 +16713,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-alexei-kervezee": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16665,8 +16729,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-daan-van-bunge": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 73,
+    "batting": 61,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16681,8 +16745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-edgar-schiferli": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 23,
+    "bowling": 74,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -16697,7 +16761,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-eric-szwarczynski": {
     "role": "batsman",
-    "batting": 67,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16713,7 +16777,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-jeroen-smits": {
     "role": "wicketkeeper",
-    "batting": 61,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -16729,8 +16793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-mark-jonkman": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 24,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16745,8 +16809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-mohammad-kashif": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 76,
+    "batting": 23,
+    "bowling": 69,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -16761,8 +16825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-peter-borren": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 63,
+    "batting": 60,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16777,8 +16841,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2007-ryan-ten-doeschate": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 93,
+    "batting": 79,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -16793,7 +16857,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-brendon-mccullum": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16809,8 +16873,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-chris-martin": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 67,
+    "batting": 18,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16825,8 +16889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-craig-mcmillan": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 66,
+    "batting": 77,
+    "bowling": 48,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -16857,8 +16921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-daryl-tuffey": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 59,
+    "batting": 23,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16873,7 +16937,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-hamish-marshall": {
     "role": "batsman",
-    "batting": 67,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -16888,12 +16952,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "new-zealand-2007-jacob-oram": {
-    "role": "batsman",
-    "batting": 76,
-    "bowling": 83,
+    "role": "bowler",
+    "batting": 63,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -16905,8 +16969,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-james-franklin": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 75,
+    "batting": 64,
+    "bowling": 67,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -16921,8 +16985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-jeetan-patel": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16937,7 +17001,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-lou-vincent": {
     "role": "wicketkeeper",
-    "batting": 82,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -16952,12 +17016,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 7.33
   },
   "new-zealand-2007-mark-gillespie": {
-    "role": "batsman",
-    "batting": 60,
-    "bowling": 59,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -16969,8 +17033,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-michael-mason": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 25,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -16985,7 +17049,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-peter-fulton": {
     "role": "batsman",
-    "batting": 84,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17001,8 +17065,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-ross-taylor": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 72,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17017,8 +17081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-scott-styris": {
     "role": "batsman",
-    "batting": 91,
-    "bowling": 73,
+    "batting": 86,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17033,7 +17097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-shane-bond": {
     "role": "bowler",
-    "batting": 57,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -17049,7 +17113,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2007-stephen-fleming": {
     "role": "batsman",
-    "batting": 86,
+    "batting": 83,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17065,8 +17129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-imran-nazir": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 20,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -17081,7 +17145,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-inzamam-ul-haq": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 89,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Left",
@@ -17097,7 +17161,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-kamran-akmal": {
     "role": "wicketkeeper",
-    "batting": 67,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -17114,7 +17178,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "pakistan-2007-mohammad-hafeez": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 61,
+    "bowling": 49,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -17129,8 +17193,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-mohammad-sami": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 73,
+    "batting": 37,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -17145,8 +17209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-mohammad-yousuf": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 91,
+    "bowling": 22,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -17161,8 +17225,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-rana-naved-ul-hasan": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 87,
+    "batting": 42,
+    "bowling": 85,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -17177,8 +17241,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-shoaib-malik": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 76,
+    "batting": 83,
+    "bowling": 70,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -17193,8 +17257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2007-umar-gul": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 74,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -17225,8 +17289,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-craig-wright": {
     "role": "bowler",
-    "batting": 60,
-    "bowling": 89,
+    "batting": 39,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17242,7 +17306,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "scotland-2007-dougie-brown": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 65,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17257,7 +17321,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-fraser-watts": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17273,7 +17337,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-gavin-hamilton": {
     "role": "wicketkeeper",
-    "batting": 71,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17288,12 +17352,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 11
   },
   "scotland-2007-glenn-rogers": {
-    "role": "batsman",
-    "batting": 63,
-    "bowling": 56,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2004-2007",
@@ -17304,12 +17368,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.92
   },
   "scotland-2007-john-blain": {
-    "role": "batsman",
-    "batting": 60,
-    "bowling": 65,
+    "role": "bowler",
+    "batting": 39,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2004-2007",
@@ -17321,7 +17385,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-navdeep-poonia": {
     "role": "batsman",
-    "batting": 56,
+    "batting": 57,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17337,7 +17401,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-neil-mccallum": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17353,8 +17417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-paul-hoffmann": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 73,
+    "batting": 32,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17368,12 +17432,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.48
   },
   "scotland-2007-ross-lyons": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 51,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2004-2007",
@@ -17385,8 +17449,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "scotland-2007-ryan-watson": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 68,
+    "batting": 72,
+    "bowling": 41,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17401,7 +17465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-ab-de-villiers": {
     "role": "batsman",
-    "batting": 87,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -17417,8 +17481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-andr-nel": {
     "role": "bowler",
-    "batting": 61,
-    "bowling": 83,
+    "batting": 28,
+    "bowling": 82,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -17433,8 +17497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-andrew-hall": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 93,
+    "batting": 43,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17449,8 +17513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-ashwell-prince": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 73,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17465,8 +17529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-charl-langeveldt": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 28,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17481,8 +17545,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-graeme-smith": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 54,
+    "batting": 91,
+    "bowling": 44,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17497,7 +17561,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-herschelle-gibbs": {
     "role": "batsman",
-    "batting": 90,
+    "batting": 86,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17514,7 +17578,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "south-africa-2007-jacques-kallis": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 75,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17529,8 +17593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-justin-kemp": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 68,
+    "batting": 77,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17545,7 +17609,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-loots-bosman": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17561,8 +17625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-makhaya-ntini": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 93,
+    "batting": 34,
+    "bowling": 91,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -17577,7 +17641,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-mark-boucher": {
     "role": "wicketkeeper",
-    "batting": 84,
+    "batting": 80,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17592,12 +17656,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "south-africa-2007-robin-peterson": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 51,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -17609,8 +17673,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2007-roger-telemachus": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 25,
+    "bowling": 69,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -17624,12 +17688,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.92
   },
   "south-africa-2007-shaun-pollock": {
-    "role": "batsman",
-    "batting": 75,
-    "bowling": 86,
+    "role": "bowler",
+    "batting": 63,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -17641,8 +17705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-chaminda-vaas": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 90,
+    "batting": 43,
+    "bowling": 88,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17657,8 +17721,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-dilhara-fernando": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 81,
+    "batting": 34,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17673,8 +17737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-farveez-maharoof": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 93,
+    "batting": 52,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17689,7 +17753,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-kumar-sangakkara": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17705,8 +17769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-mahela-jayawardene": {
     "role": "batsman",
-    "batting": 87,
-    "bowling": 0,
+    "batting": 84,
+    "bowling": 21,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17721,7 +17785,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-marvan-atapattu": {
     "role": "batsman",
-    "batting": 85,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17737,8 +17801,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-muttiah-muralitharan": {
     "role": "bowler",
-    "batting": 46,
-    "bowling": 95,
+    "batting": 33,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17752,12 +17816,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.03
   },
   "sri-lanka-2007-nuwan-kulasekara": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 47,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2004-2007",
@@ -17769,8 +17833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-russel-arnold": {
     "role": "batsman",
-    "batting": 79,
-    "bowling": 71,
+    "batting": 74,
+    "bowling": 40,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17785,8 +17849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-sanath-jayasuriya": {
     "role": "batsman",
-    "batting": 87,
-    "bowling": 68,
+    "batting": 84,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17801,8 +17865,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-tillakaratne-dilshan": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 58,
+    "batting": 75,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17817,7 +17881,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2007-upul-tharanga": {
     "role": "batsman",
-    "batting": 79,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17833,7 +17897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-brian-lara": {
     "role": "batsman",
-    "batting": 81,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17849,8 +17913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-chris-gayle": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 71,
+    "batting": 86,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -17865,7 +17929,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-corey-collymore": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 28,
     "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
@@ -17881,8 +17945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-daren-powell": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 84,
+    "batting": 28,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17897,7 +17961,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-denesh-ramdin": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -17913,7 +17977,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-devon-smith": {
     "role": "batsman",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -17929,11 +17993,11 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-dwayne-bravo": {
     "role": "bowler",
-    "batting": 69,
-    "bowling": 82,
+    "batting": 67,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2004-2007",
@@ -17944,12 +18008,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.27
   },
   "west-indies-2007-dwayne-smith": {
-    "role": "bowler",
-    "batting": 56,
-    "bowling": 69,
+    "role": "batsman",
+    "batting": 57,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2004-2007",
@@ -17961,8 +18025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-ian-bradshaw": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 83,
+    "batting": 40,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17977,8 +18041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-jerome-taylor": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -17993,8 +18057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-kieron-pollard": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18008,9 +18072,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.67
   },
   "west-indies-2007-lendl-simmons": {
-    "role": "wicketkeeper",
-    "batting": 61,
-    "bowling": 0,
+    "role": "batsman",
+    "batting": 59,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18025,8 +18089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-marlon-samuels": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 45,
+    "batting": 67,
+    "bowling": 39,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18041,8 +18105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2007-ramnaresh-sarwan": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 78,
+    "batting": 91,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18058,7 +18122,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "west-indies-2007-shivnarine-chanderpaul": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 19,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -18073,8 +18137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-anthony-ireland": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18089,8 +18153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-brendan-taylor": {
     "role": "wicketkeeper",
-    "batting": 72,
-    "bowling": 80,
+    "batting": 70,
+    "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18105,8 +18169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-elton-chigumbura": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 62,
+    "batting": 66,
+    "bowling": 53,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -18121,7 +18185,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-friday-kasteni": {
     "role": "wicketkeeper",
-    "batting": 0,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -18137,8 +18201,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-gary-brent": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 82,
+    "batting": 38,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18153,8 +18217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-justice-chibhabha": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 57,
+    "batting": 64,
+    "bowling": 39,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18169,8 +18233,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-keith-dabengwa": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 66,
+    "batting": 61,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18185,8 +18249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-prosper-utseya": {
     "role": "batsman",
-    "batting": 47,
-    "bowling": 42,
+    "batting": 50,
+    "bowling": 39,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -18201,8 +18265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-sean-williams": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 54,
+    "batting": 64,
+    "bowling": 38,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18217,8 +18281,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-stuart-matsikenyeri": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 54,
+    "batting": 64,
+    "bowling": 42,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -18233,8 +18297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-tawanda-mupariwa": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 86,
+    "batting": 37,
+    "bowling": 82,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -18249,7 +18313,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-terry-duffin": {
     "role": "batsman",
-    "batting": 64,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18265,8 +18329,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2007-vusi-sibanda": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 0,
+    "batting": 65,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18281,7 +18345,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-brad-haddin": {
     "role": "wicketkeeper",
-    "batting": 76,
+    "batting": 73,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18297,8 +18361,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-brett-lee": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 93,
+    "batting": 37,
+    "bowling": 92,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -18313,7 +18377,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-callum-ferguson": {
     "role": "batsman",
-    "batting": 83,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18329,8 +18393,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-cameron-white": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 88,
+    "batting": 79,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18345,8 +18409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-david-hussey": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 75,
+    "batting": 71,
+    "bowling": 55,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18361,7 +18425,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-jason-krejza": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 22,
     "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
@@ -18376,12 +18440,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.67
   },
   "australia-2011-john-hastings": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 57,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2008-2011",
@@ -18393,8 +18457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-michael-clarke": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 65,
+    "batting": 92,
+    "bowling": 52,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18410,7 +18474,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2011-michael-hussey": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 0,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18425,8 +18489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-mitchell-johnson": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 91,
+    "batting": 48,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18441,7 +18505,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-ricky-ponting": {
     "role": "batsman",
-    "batting": 84,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18458,7 +18522,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "australia-2011-shane-watson": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 90,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18473,8 +18537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-shaun-tait": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 90,
+    "batting": 21,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18489,8 +18553,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-steve-smith": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 73,
+    "batting": 61,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18505,7 +18569,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2011-tim-paine": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18521,8 +18585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2011-abdur-razzak": {
     "role": "bowler",
-    "batting": 50,
-    "bowling": 79,
+    "batting": 41,
+    "bowling": 78,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -18537,7 +18601,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2011-imrul-kayes": {
     "role": "batsman",
-    "batting": 69,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -18553,8 +18617,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2011-mohammad-ashraful": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 67,
+    "batting": 61,
+    "bowling": 43,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -18585,7 +18649,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2011-raqibul-hasan": {
     "role": "batsman",
-    "batting": 68,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -18601,8 +18665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2011-shafiul-islam": {
     "role": "bowler",
-    "batting": 46,
-    "bowling": 72,
+    "batting": 33,
+    "bowling": 70,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -18648,12 +18712,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 13
   },
   "england-2011-adil-rashid": {
-    "role": "batsman",
-    "batting": 64,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 27,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2008-2011",
@@ -18665,7 +18729,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-andrew-strauss": {
     "role": "batsman",
-    "batting": 90,
+    "batting": 85,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18681,8 +18745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-chris-tremlett": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 69,
+    "batting": 26,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18697,7 +18761,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-eoin-morgan": {
     "role": "batsman",
-    "batting": 88,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18713,8 +18777,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-graeme-swann": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 93,
+    "batting": 41,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18729,7 +18793,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-ian-bell": {
     "role": "batsman",
-    "batting": 73,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18745,8 +18809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-jade-dernbach": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 64,
+    "batting": 25,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18761,8 +18825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-james-anderson": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 77,
+    "batting": 33,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18776,12 +18840,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.14
   },
   "england-2011-james-tredwell": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 25,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2008-2011",
@@ -18793,8 +18857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-jonathan-trott": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 92,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18809,8 +18873,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-luke-wright": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 47,
+    "batting": 62,
+    "bowling": 39,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18825,7 +18889,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-matt-prior": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18841,8 +18905,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-paul-collingwood": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 75,
+    "batting": 79,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18857,8 +18921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2011-ravi-bopara": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 67,
+    "batting": 69,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18872,12 +18936,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.38
   },
   "england-2011-tim-bresnan": {
-    "role": "batsman",
-    "batting": 62,
-    "bowling": 69,
+    "role": "bowler",
+    "batting": 50,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2008-2011",
@@ -18889,7 +18953,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-alex-obanda": {
     "role": "batsman",
-    "batting": 70,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18905,8 +18969,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-collins-obuya": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 73,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18937,8 +19001,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-elijah-otieno": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 60,
+    "batting": 28,
+    "bowling": 61,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -18954,7 +19018,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "kenya-2011-jimmy-kamande": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 58,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -18969,7 +19033,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-maurice-ouma": {
     "role": "wicketkeeper",
-    "batting": 57,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -18985,8 +19049,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-nehemiah-odhiambo": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 75,
+    "batting": 40,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19000,12 +19064,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.74
   },
   "kenya-2011-peter-ongondo": {
-    "role": "batsman",
-    "batting": 48,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 32,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2008-2011",
@@ -19018,7 +19082,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "kenya-2011-seren-waters": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 0,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19033,8 +19097,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-shem-ngoche": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 65,
+    "batting": 27,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19049,8 +19113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-steve-tikolo": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 65,
+    "batting": 61,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19065,7 +19129,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-tanmay-mishra": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -19081,8 +19145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "kenya-2011-thomas-odoyo": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 88,
+    "batting": 46,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19097,8 +19161,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-alexei-kervezee": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 0,
+    "batting": 62,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19129,7 +19193,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-bas-zuiderent": {
     "role": "batsman",
-    "batting": 68,
+    "batting": 64,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19145,8 +19209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-berend-westdijk": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19161,8 +19225,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-bernard-loots": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 63,
+    "batting": 25,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19176,12 +19240,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.15
   },
   "netherlands-2011-bradley-kruger": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2008-2011",
@@ -19193,7 +19257,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-eric-szwarczynski": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19209,8 +19273,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-mudassar-bukhari": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 84,
+    "batting": 41,
+    "bowling": 80,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -19224,12 +19288,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.37
   },
   "netherlands-2011-peter-borren": {
-    "role": "bowler",
-    "batting": 60,
-    "bowling": 79,
+    "role": "batsman",
+    "batting": 59,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2008-2011",
@@ -19241,8 +19305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-pieter-seelaar": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 75,
+    "batting": 33,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19257,8 +19321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-ryan-ten-doeschate": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 85,
+    "batting": 91,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19273,8 +19337,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-tom-cooper": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 74,
+    "batting": 82,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19289,7 +19353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-tom-de-grooth": {
     "role": "batsman",
-    "batting": 51,
+    "batting": 53,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19305,7 +19369,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "netherlands-2011-wesley-barresi": {
     "role": "wicketkeeper",
-    "batting": 67,
+    "batting": 64,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -19321,7 +19385,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-brendon-mccullum": {
     "role": "wicketkeeper",
-    "batting": 81,
+    "batting": 79,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19353,8 +19417,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-hamish-bennett": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 91,
+    "batting": 24,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19369,8 +19433,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-jacob-oram": {
     "role": "bowler",
-    "batting": 70,
-    "bowling": 93,
+    "batting": 53,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19385,8 +19449,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-james-franklin": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 48,
+    "batting": 69,
+    "bowling": 37,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -19401,7 +19465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-jamie-how": {
     "role": "batsman",
-    "batting": 62,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19417,8 +19481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-jesse-ryder": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 65,
+    "batting": 76,
+    "bowling": 44,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19433,8 +19497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-kane-williamson": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19449,8 +19513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-kyle-mills": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 91,
+    "batting": 47,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19465,8 +19529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-luke-woodcock": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19481,8 +19545,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-martin-guptill": {
     "role": "batsman",
-    "batting": 84,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 30,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19496,12 +19560,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.89
   },
   "new-zealand-2011-nathan-mccullum": {
-    "role": "batsman",
-    "batting": 62,
-    "bowling": 56,
+    "role": "bowler",
+    "batting": 47,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2008-2011",
@@ -19513,8 +19577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-ross-taylor": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 0,
+    "batting": 84,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19529,8 +19593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-scott-styris": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 60,
+    "batting": 70,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19545,8 +19609,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2011-tim-southee": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 81,
+    "batting": 35,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19561,8 +19625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-abdul-razzaq": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 66,
+    "batting": 66,
+    "bowling": 55,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -19576,9 +19640,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.75
   },
   "pakistan-2011-abdur-rehman": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 47,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 60,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -19593,8 +19657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-ahmed-shehzad": {
     "role": "batsman",
-    "batting": 66,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -19609,7 +19673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-asad-shafiq": {
     "role": "batsman",
-    "batting": 72,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -19625,7 +19689,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-kamran-akmal": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -19641,8 +19705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-mohammad-hafeez": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 83,
+    "batting": 77,
+    "bowling": 73,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -19657,8 +19721,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-saeed-ajmal": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 93,
+    "batting": 35,
+    "bowling": 90,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -19673,8 +19737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-shoaib-akhtar": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 66,
+    "batting": 28,
+    "bowling": 65,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -19689,7 +19753,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-umar-akmal": {
     "role": "wicketkeeper",
-    "batting": 86,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -19705,8 +19769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-umar-gul": {
     "role": "bowler",
-    "batting": 46,
-    "bowling": 92,
+    "batting": 36,
+    "bowling": 89,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -19721,8 +19785,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2011-wahab-riaz": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 93,
+    "batting": 32,
+    "bowling": 87,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -19753,7 +19817,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-colin-ingram": {
     "role": "batsman",
-    "batting": 79,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19769,8 +19833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-dale-steyn": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 87,
+    "batting": 34,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19785,8 +19849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-francois-du-plessis": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19801,7 +19865,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-graeme-smith": {
     "role": "batsman",
-    "batting": 82,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19833,8 +19897,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-imran-tahir": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 18,
+    "bowling": 86,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -19849,8 +19913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-jacques-kallis": {
     "role": "batsman",
-    "batting": 94,
-    "bowling": 76,
+    "batting": 91,
+    "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -19865,8 +19929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-johan-botha": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 72,
+    "batting": 45,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -19881,8 +19945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-jp-duminy": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 70,
+    "batting": 91,
+    "bowling": 57,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -19897,8 +19961,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-lonwabo-tsotsobe": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 23,
+    "bowling": 91,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19913,8 +19977,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-morn-morkel": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 90,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -19929,7 +19993,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-morne-van-wyk": {
     "role": "wicketkeeper",
-    "batting": 64,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -19945,8 +20009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-robin-peterson": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 85,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19961,8 +20025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2011-wayne-parnell": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 79,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -19977,7 +20041,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-ajantha-mendis": {
     "role": "bowler",
-    "batting": 49,
+    "batting": 33,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -19993,8 +20057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-angelo-mathews": {
     "role": "batsman",
-    "batting": 77,
-    "bowling": 79,
+    "batting": 73,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20009,8 +20073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-chamara-kapugedera": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 28,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20025,8 +20089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-dilhara-fernando": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 72,
+    "batting": 28,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20041,7 +20105,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-kumar-sangakkara": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20057,7 +20121,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-mahela-jayawardene": {
     "role": "batsman",
-    "batting": 81,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20073,8 +20137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-muttiah-muralitharan": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 91,
+    "batting": 36,
+    "bowling": 88,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20089,8 +20153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-nuwan-kulasekara": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 83,
+    "batting": 47,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20105,8 +20169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-rangana-herath": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 25,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20121,8 +20185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-thilan-samaraweera": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 0,
+    "batting": 70,
+    "bowling": 24,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20137,8 +20201,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-thisara-perera": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 92,
+    "batting": 39,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20153,8 +20217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-tillakaratne-dilshan": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 64,
+    "batting": 88,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20169,7 +20233,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2011-upul-tharanga": {
     "role": "batsman",
-    "batting": 85,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20185,8 +20249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-andre-russell": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 81,
+    "batting": 66,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20201,8 +20265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-chris-gayle": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 40,
+    "batting": 83,
+    "bowling": 34,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20217,7 +20281,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-darren-bravo": {
     "role": "batsman",
-    "batting": 73,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20233,8 +20297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-devendra-bishoo": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 90,
+    "batting": 26,
+    "bowling": 82,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -20249,8 +20313,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-devon-smith": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 0,
+    "batting": 68,
+    "bowling": 20,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20265,7 +20329,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-devon-thomas": {
     "role": "wicketkeeper",
-    "batting": 57,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20281,8 +20345,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-kemar-roach": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 89,
+    "batting": 35,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20297,8 +20361,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-kieron-pollard": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 73,
+    "batting": 65,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20313,7 +20377,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-kirk-edwards": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20328,12 +20392,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "west-indies-2011-nikita-miller": {
-    "role": "batsman",
-    "batting": 61,
+    "role": "bowler",
+    "batting": 41,
     "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2008-2011",
@@ -20345,8 +20409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-ramnaresh-sarwan": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20361,8 +20425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-ravi-rampaul": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 86,
+    "batting": 37,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20377,8 +20441,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-shivnarine-chanderpaul": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 92,
+    "bowling": 20,
     "battingHand": "Left",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -20393,8 +20457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2011-sulieman-benn": {
     "role": "bowler",
-    "batting": 49,
-    "bowling": 77,
+    "batting": 33,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20409,7 +20473,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-brendan-taylor": {
     "role": "wicketkeeper",
-    "batting": 91,
+    "batting": 86,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20425,7 +20489,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-charles-coventry": {
     "role": "wicketkeeper",
-    "batting": 69,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20441,8 +20505,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-chris-mpofu": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 69,
+    "batting": 28,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20457,7 +20521,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-craig-ervine": {
     "role": "batsman",
-    "batting": 73,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20473,8 +20537,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-elton-chigumbura": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 65,
+    "batting": 63,
+    "bowling": 59,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -20489,8 +20553,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-graeme-cremer": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 82,
+    "batting": 42,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20505,8 +20569,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-prosper-utseya": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 61,
+    "batting": 62,
+    "bowling": 57,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -20521,8 +20585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-ray-price": {
     "role": "bowler",
-    "batting": 43,
-    "bowling": 85,
+    "batting": 35,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20553,8 +20617,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-shingirai-masakadza": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 27,
+    "bowling": 66,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20569,7 +20633,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-tatenda-taibu": {
     "role": "wicketkeeper",
-    "batting": 76,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -20585,8 +20649,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-tinashe-panyangara": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 21,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -20601,8 +20665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2011-vusi-sibanda": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 0,
+    "batting": 61,
+    "bowling": 18,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20617,8 +20681,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-aftab-alam": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 88,
+    "batting": 26,
+    "bowling": 78,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -20633,8 +20697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-asghar-afghan": {
     "role": "batsman",
-    "batting": 60,
-    "bowling": 0,
+    "batting": 59,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20649,8 +20713,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-dawlat-zadran": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 81,
+    "batting": 38,
+    "bowling": 79,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -20664,9 +20728,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.38
   },
   "afghanistan-2015-gulbadin-naib": {
-    "role": "bowler",
-    "batting": 59,
-    "bowling": 73,
+    "role": "batsman",
+    "batting": 58,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -20681,8 +20745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-hamid-hassan": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 90,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -20697,8 +20761,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-mohammad-nabi": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 69,
+    "batting": 67,
+    "bowling": 61,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -20714,7 +20778,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "afghanistan-2015-najibullah-zadran": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 21,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -20729,8 +20793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-nasir-jamal": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 61,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -20745,8 +20809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-shapoor-zadran": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 68,
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -20761,8 +20825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2015-usman-ghani": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 64,
+    "bowling": 25,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -20777,8 +20841,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-arafat-sunny": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 89,
+    "batting": 28,
+    "bowling": 83,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -20793,7 +20857,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-imrul-kayes": {
     "role": "batsman",
-    "batting": 62,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -20808,9 +20872,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "bangladesh-2015-mominul-haque": {
-    "role": "bowler",
-    "batting": 62,
-    "bowling": 83,
+    "role": "batsman",
+    "batting": 61,
+    "bowling": 45,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -20841,8 +20905,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-shafiul-islam": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 66,
+    "batting": 25,
+    "bowling": 64,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -20873,8 +20937,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-soumya-sarkar": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 22,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -20889,8 +20953,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-taijul-islam": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -20921,8 +20985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2015-taskin-ahmed": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 86,
+    "batting": 24,
+    "bowling": 79,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -20937,7 +21001,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-alex-hales": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -20953,8 +21017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-chris-jordan": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 81,
+    "batting": 34,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20969,8 +21033,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-chris-woakes": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 73,
+    "batting": 44,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -20985,7 +21049,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-eoin-morgan": {
     "role": "batsman",
-    "batting": 82,
+    "batting": 79,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21001,7 +21065,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-gary-ballance": {
     "role": "batsman",
-    "batting": 60,
+    "batting": 59,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21017,7 +21081,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-ian-bell": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 88,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21033,8 +21097,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-james-anderson": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21049,7 +21113,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-james-taylor": {
     "role": "batsman",
-    "batting": 85,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21065,8 +21129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-james-tredwell": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 91,
+    "batting": 34,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21081,8 +21145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-joe-root": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 37,
+    "batting": 84,
+    "bowling": 31,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21097,7 +21161,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-jos-buttler": {
     "role": "wicketkeeper",
-    "batting": 82,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21113,8 +21177,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-moeen-ali": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 72,
+    "batting": 68,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21129,8 +21193,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-ravi-bopara": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 74,
+    "batting": 71,
+    "bowling": 62,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21145,8 +21209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2015-steven-finn": {
     "role": "bowler",
-    "batting": 45,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21160,12 +21224,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.06
   },
   "england-2015-stuart-broad": {
-    "role": "batsman",
-    "batting": 56,
+    "role": "bowler",
+    "batting": 33,
     "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -21177,7 +21241,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-ajinkya-rahane": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21193,8 +21257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-ambati-rayudu": {
     "role": "batsman",
-    "batting": 90,
-    "bowling": 0,
+    "batting": 78,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21209,8 +21273,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-axar-patel": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 84,
+    "batting": 32,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21225,8 +21289,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-bhuvneshwar-kumar": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 72,
+    "batting": 35,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21241,8 +21305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-mohammed-shami": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 93,
+    "batting": 33,
+    "bowling": 91,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -21257,8 +21321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-mohit-sharma": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 27,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21289,8 +21353,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-ravichandran-ashwin": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 78,
+    "batting": 43,
+    "bowling": 77,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -21304,12 +21368,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.86
   },
   "india-2015-ravindra-jadeja": {
-    "role": "batsman",
-    "batting": 75,
-    "bowling": 79,
+    "role": "bowler",
+    "batting": 58,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -21321,8 +21385,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-rohit-sharma": {
     "role": "batsman",
-    "batting": 92,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 29,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -21337,7 +21401,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-shikhar-dhawan": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -21352,12 +21416,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "india-2015-stuart-binny": {
-    "role": "bowler",
-    "batting": 68,
-    "bowling": 92,
+    "role": "batsman",
+    "batting": 62,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2012-2015",
@@ -21369,8 +21433,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-suresh-raina": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 52,
+    "batting": 79,
+    "bowling": 44,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21385,8 +21449,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2015-umesh-yadav": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21417,8 +21481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-alex-cusack": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 87,
+    "batting": 33,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21433,8 +21497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-andrew-balbirnie": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 0,
+    "batting": 62,
+    "bowling": 29,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -21449,8 +21513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-craig-young": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 23,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21465,7 +21529,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-ed-joyce": {
     "role": "batsman",
-    "batting": 83,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21480,12 +21544,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "ireland-2015-george-dockrell": {
-    "role": "bowler",
+    "role": "batsman",
     "batting": 57,
-    "bowling": 76,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2012-2015",
@@ -21497,8 +21561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-john-mooney": {
     "role": "batsman",
-    "batting": 61,
-    "bowling": 61,
+    "batting": 60,
+    "bowling": 48,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21513,8 +21577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-kevin-o-brien": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 72,
+    "batting": 66,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21529,8 +21593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-max-sorensen": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 78,
+    "batting": 28,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21545,7 +21609,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-niall-o-brien": {
     "role": "wicketkeeper",
-    "batting": 78,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21561,8 +21625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-paul-stirling": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 56,
+    "batting": 63,
+    "bowling": 44,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21577,7 +21641,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-peter-chase": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21592,12 +21656,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "ireland-2015-stuart-thompson": {
-    "role": "bowler",
-    "batting": 62,
-    "bowling": 87,
+    "role": "batsman",
+    "batting": 60,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2012-2015",
@@ -21609,7 +21673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "ireland-2015-william-porterfield": {
     "role": "batsman",
-    "batting": 65,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21625,7 +21689,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-brendon-mccullum": {
     "role": "wicketkeeper",
-    "batting": 80,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21641,8 +21705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-corey-anderson": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 89,
+    "batting": 74,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21673,8 +21737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-grant-elliott": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 76,
+    "batting": 75,
+    "bowling": 58,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21690,7 +21754,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "new-zealand-2015-kane-williamson": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 77,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21705,8 +21769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-kyle-mills": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 83,
+    "batting": 37,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21721,7 +21785,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-luke-ronchi": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -21737,8 +21801,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-martin-guptill": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 90,
+    "bowling": 21,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -21753,8 +21817,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-matt-henry": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 27,
+    "bowling": 87,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21769,8 +21833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-mitchell-mcclenaghan": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 86,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21784,12 +21848,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.9
   },
   "new-zealand-2015-nathan-mccullum": {
-    "role": "batsman",
-    "batting": 60,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 48,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2012-2015",
@@ -21817,8 +21881,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-tim-southee": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 79,
+    "batting": 37,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21833,7 +21897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-tom-latham": {
     "role": "wicketkeeper",
-    "batting": 72,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -21849,8 +21913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2015-trent-boult": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -21865,8 +21929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-ahmed-shehzad": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 29,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -21880,9 +21944,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 7.2
   },
   "pakistan-2015-ehsan-adil": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 26,
+    "bowling": 63,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -21897,8 +21961,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-haris-sohail": {
     "role": "batsman",
-    "batting": 83,
-    "bowling": 60,
+    "batting": 75,
+    "bowling": 43,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -21913,7 +21977,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-nasir-jamshed": {
     "role": "batsman",
-    "batting": 70,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -21929,8 +21993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-rahat-ali": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 76,
+    "batting": 24,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -21945,7 +22009,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-sarfaraz-ahmed": {
     "role": "wicketkeeper",
-    "batting": 76,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -21961,8 +22025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-sohaib-maqsood": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 26,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -21977,8 +22041,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-sohail-khan": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 79,
+    "batting": 26,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -21993,7 +22057,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-umar-akmal": {
     "role": "wicketkeeper",
-    "batting": 72,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -22009,8 +22073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2015-wahab-riaz": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 75,
+    "batting": 43,
+    "bowling": 74,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -22024,9 +22088,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.6
   },
   "pakistan-2015-yasir-shah": {
-    "role": "batsman",
-    "batting": 60,
-    "bowling": 70,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 68,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -22041,8 +22105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-aaron-phangiso": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 65,
+    "batting": 28,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22058,7 +22122,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "south-africa-2015-ab-de-villiers": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 82,
+    "bowling": 45,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -22073,8 +22137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-dale-steyn": {
     "role": "bowler",
-    "batting": 44,
-    "bowling": 93,
+    "batting": 33,
+    "bowling": 92,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22089,7 +22153,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-david-miller": {
     "role": "batsman",
-    "batting": 81,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22105,8 +22169,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-faf-du-plessis": {
     "role": "batsman",
-    "batting": 88,
-    "bowling": 0,
+    "batting": 84,
+    "bowling": 26,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22121,8 +22185,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-farhaan-behardien": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 62,
+    "batting": 67,
+    "bowling": 48,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22153,8 +22217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-imran-tahir": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 90,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -22169,8 +22233,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-jp-duminy": {
     "role": "batsman",
-    "batting": 80,
-    "bowling": 59,
+    "batting": 77,
+    "bowling": 52,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -22185,8 +22249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-kyle-abbott": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 72,
+    "batting": 28,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22201,7 +22265,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-morn-morkel": {
     "role": "bowler",
-    "batting": 50,
+    "batting": 32,
     "bowling": 93,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -22217,7 +22281,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-quinton-de-kock": {
     "role": "wicketkeeper",
-    "batting": 86,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -22233,8 +22297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-rilee-rossouw": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 72,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22249,8 +22313,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-vernon-philander": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 89,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22265,8 +22329,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2015-wayne-parnell": {
     "role": "bowler",
-    "batting": 65,
-    "bowling": 83,
+    "batting": 41,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22281,8 +22345,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-angelo-mathews": {
     "role": "batsman",
-    "batting": 91,
-    "bowling": 72,
+    "batting": 87,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22297,8 +22361,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-dushmantha-chameera": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 23,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22329,7 +22393,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-kusal-perera": {
     "role": "wicketkeeper",
-    "batting": 69,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22345,8 +22409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-lahiru-thirimanne": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 0,
+    "batting": 76,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22361,8 +22425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-mahela-jayawardene": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 0,
+    "batting": 74,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22377,7 +22441,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-nuwan-kulasekara": {
     "role": "bowler",
-    "batting": 51,
+    "batting": 43,
     "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
@@ -22393,8 +22457,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-sachithra-senanayake": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 76,
+    "batting": 38,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22409,8 +22473,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-seekkuge-prasanna": {
     "role": "batsman",
-    "batting": 51,
-    "bowling": 44,
+    "batting": 54,
+    "bowling": 36,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -22425,8 +22489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-suranga-lakmal": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22441,11 +22505,11 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-tharindu-kaushal": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 50,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2012-2015",
@@ -22457,8 +22521,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-thisara-perera": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 74,
+    "batting": 49,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22474,7 +22538,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-2015-tillakaratne-dilshan": {
     "role": "batsman",
     "batting": 93,
-    "bowling": 54,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22489,7 +22553,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2015-upul-tharanga": {
     "role": "batsman",
-    "batting": 67,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22505,8 +22569,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-andre-russell": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 77,
+    "batting": 66,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22521,8 +22585,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-chris-gayle": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 71,
+    "batting": 68,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22537,7 +22601,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-denesh-ramdin": {
     "role": "wicketkeeper",
-    "batting": 74,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -22553,8 +22617,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-dwayne-smith": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 67,
+    "batting": 61,
+    "bowling": 39,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22569,8 +22633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-jason-holder": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 78,
+    "batting": 42,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22585,8 +22649,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-jerome-taylor": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 82,
+    "batting": 28,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22601,7 +22665,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-johnson-charles": {
     "role": "wicketkeeper",
-    "batting": 70,
+    "batting": 68,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -22618,7 +22682,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "west-indies-2015-jonathan-carter": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22633,8 +22697,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-kemar-roach": {
     "role": "bowler",
-    "batting": 63,
-    "bowling": 82,
+    "batting": 28,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22648,9 +22712,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.14
   },
   "west-indies-2015-lendl-simmons": {
-    "role": "wicketkeeper",
-    "batting": 68,
-    "bowling": 0,
+    "role": "batsman",
+    "batting": 66,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22665,8 +22729,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-marlon-samuels": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 43,
+    "batting": 82,
+    "bowling": 37,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22681,8 +22745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-nikita-miller": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 84,
+    "batting": 22,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22697,11 +22761,11 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2015-sheldon-cottrell": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 50,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2012-2015",
@@ -22712,12 +22776,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 8.23
   },
   "west-indies-2015-sulieman-benn": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 41,
+    "role": "bowler",
+    "batting": 24,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2012-2015",
@@ -22729,7 +22793,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-brendan-taylor": {
     "role": "wicketkeeper",
-    "batting": 78,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22745,7 +22809,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-craig-ervine": {
     "role": "batsman",
-    "batting": 82,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22761,8 +22825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-elton-chigumbura": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 50,
+    "batting": 73,
+    "bowling": 40,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22777,8 +22841,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-hamilton-masakadza": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 51,
+    "batting": 68,
+    "bowling": 39,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -22793,8 +22857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-prosper-utseya": {
     "role": "batsman",
-    "batting": 55,
-    "bowling": 56,
+    "batting": 56,
+    "bowling": 49,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -22809,7 +22873,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-regis-chakabva": {
     "role": "wicketkeeper",
-    "batting": 49,
+    "batting": 53,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -22825,8 +22889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-sean-williams": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 46,
+    "batting": 77,
+    "bowling": 41,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22842,7 +22906,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "zimbabwe-2015-solomon-mire": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 66,
+    "bowling": 38,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22857,7 +22921,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-stuart-matsikenyeri": {
     "role": "batsman",
-    "batting": 0,
+    "batting": 58,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -22873,8 +22937,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-tafadzwa-kamungozi": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 56,
+    "batting": 27,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22888,9 +22952,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.07
   },
   "zimbabwe-2015-tawanda-mupariwa": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 23,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22905,8 +22969,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "zimbabwe-2015-tendai-chatara": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 75,
+    "batting": 33,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -22920,9 +22984,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.2
   },
   "zimbabwe-2015-tinashe-panyangara": {
-    "role": "batsman",
-    "batting": 44,
-    "bowling": 49,
+    "role": "bowler",
+    "batting": 33,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22937,8 +23001,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-aftab-alam": {
     "role": "bowler",
-    "batting": 62,
-    "bowling": 93,
+    "batting": 27,
+    "bowling": 85,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -22953,8 +23017,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-asghar-afghan": {
     "role": "batsman",
-    "batting": 62,
-    "bowling": 0,
+    "batting": 61,
+    "bowling": 22,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -22969,8 +23033,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-dawlat-zadran": {
     "role": "bowler",
-    "batting": 61,
-    "bowling": 84,
+    "batting": 42,
+    "bowling": 82,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast Medium",
@@ -22985,8 +23049,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-gulbadin-naib": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 79,
+    "batting": 51,
+    "bowling": 77,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -23001,8 +23065,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-hamid-hassan": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 26,
+    "bowling": 66,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -23017,8 +23081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-hashmatullah-shahidi": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 0,
+    "batting": 69,
+    "bowling": 19,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -23033,7 +23097,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-hazratullah-zazai": {
     "role": "batsman",
-    "batting": 61,
+    "batting": 60,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Left",
@@ -23049,8 +23113,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-mohammad-nabi": {
     "role": "bowler",
-    "batting": 63,
-    "bowling": 86,
+    "batting": 56,
+    "bowling": 84,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -23065,7 +23129,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-mohammad-shahzad": {
     "role": "wicketkeeper",
-    "batting": 0,
+    "batting": 61,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -23081,7 +23145,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-mujeeb-ur-rahman": {
     "role": "bowler",
-    "batting": 48,
+    "batting": 28,
     "bowling": 93,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -23097,7 +23161,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-najibullah-zadran": {
     "role": "batsman",
-    "batting": 78,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -23113,7 +23177,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "afghanistan-2019-noor-ali-zadran": {
     "role": "batsman",
-    "batting": 51,
+    "batting": 53,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -23130,7 +23194,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "afghanistan-2019-samiullah-shinwari": {
     "role": "batsman",
     "batting": 57,
-    "bowling": 0,
+    "bowling": 26,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -23145,8 +23209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-aaron-finch": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 85,
+    "bowling": 29,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23161,8 +23225,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-adam-zampa": {
     "role": "bowler",
-    "batting": 45,
-    "bowling": 72,
+    "batting": 31,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -23177,7 +23241,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-alex-carey": {
     "role": "wicketkeeper",
-    "batting": 81,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23209,8 +23273,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-glenn-maxwell": {
     "role": "batsman",
-    "batting": 73,
-    "bowling": 18,
+    "batting": 70,
+    "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23225,8 +23289,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-jason-behrendorff": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 77,
+    "batting": 23,
+    "bowling": 72,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23241,8 +23305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-jhye-richardson": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 86,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23257,8 +23321,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-kane-richardson": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 27,
+    "bowling": 77,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23273,8 +23337,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-marcus-stoinis": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 61,
+    "batting": 72,
+    "bowling": 53,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23289,7 +23353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-mitchell-starc": {
     "role": "bowler",
-    "batting": 46,
+    "batting": 34,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -23304,12 +23368,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.18
   },
   "australia-2019-nathan-lyon": {
-    "role": "batsman",
-    "batting": 63,
-    "bowling": 45,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2016-2019",
@@ -23321,8 +23385,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-nathan-mitchell-coulter-nile": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 78,
+    "batting": 36,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23337,8 +23401,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-pat-cummins": {
     "role": "bowler",
-    "batting": 46,
-    "bowling": 87,
+    "batting": 35,
+    "bowling": 84,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23353,7 +23417,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-shaun-marsh": {
     "role": "batsman",
-    "batting": 84,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23369,8 +23433,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-steve-smith": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 84,
+    "bowling": 25,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23385,7 +23449,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2019-usman-khawaja": {
     "role": "batsman",
-    "batting": 88,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23401,8 +23465,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-bhuvneshwar-kumar": {
     "role": "bowler",
-    "batting": 58,
-    "bowling": 78,
+    "batting": 42,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23417,7 +23481,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-dinesh-karthik": {
     "role": "wicketkeeper",
-    "batting": 75,
+    "batting": 69,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23433,8 +23497,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-hardik-pandya": {
     "role": "batsman",
-    "batting": 72,
-    "bowling": 64,
+    "batting": 68,
+    "bowling": 59,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23449,7 +23513,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-jasprit-bumrah": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 27,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -23465,8 +23529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-kedar-jadhav": {
     "role": "batsman",
-    "batting": 90,
-    "bowling": 69,
+    "batting": 79,
+    "bowling": 58,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23481,7 +23545,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-kl-rahul": {
     "role": "batsman",
-    "batting": 82,
+    "batting": 75,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -23497,8 +23561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-kuldeep-yadav": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 93,
+    "batting": 33,
+    "bowling": 91,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Wrist Spin (Chinaman)",
@@ -23513,8 +23577,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-mohammed-shami": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 92,
+    "batting": 28,
+    "bowling": 88,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -23529,7 +23593,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-ms-dhoni": {
     "role": "wicketkeeper",
-    "batting": 89,
+    "batting": 84,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -23544,12 +23608,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "india-2019-ravindra-jadeja": {
-    "role": "batsman",
-    "batting": 66,
-    "bowling": 53,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -23561,7 +23625,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-rishabh-pant": {
     "role": "wicketkeeper",
-    "batting": 66,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23578,7 +23642,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "india-2019-rohit-sharma": {
     "role": "batsman",
     "batting": 94,
-    "bowling": 0,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -23593,7 +23657,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-shikhar-dhawan": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -23609,8 +23673,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-vijay-shankar": {
     "role": "batsman",
-    "batting": 69,
-    "bowling": 0,
+    "batting": 62,
+    "bowling": 32,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -23641,8 +23705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "india-2019-yuzvendra-chahal": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 91,
+    "batting": 28,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23657,7 +23721,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-abid-ali": {
     "role": "batsman",
-    "batting": 75,
+    "batting": 63,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "",
@@ -23673,8 +23737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-asif-ali": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 0,
+    "batting": 63,
+    "bowling": 19,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -23688,9 +23752,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 10.8
   },
   "pakistan-2019-faheem-ashraf": {
-    "role": "bowler",
-    "batting": 52,
-    "bowling": 71,
+    "role": "batsman",
+    "batting": 55,
+    "bowling": 57,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -23705,8 +23769,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-fakhar-zaman": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 87,
+    "bowling": 27,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -23721,8 +23785,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-haris-sohail": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 0,
+    "batting": 78,
+    "bowling": 30,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -23737,8 +23801,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-hasan-ali": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 85,
+    "batting": 38,
+    "bowling": 83,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -23751,9 +23815,25 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingStrikeRate": 31.07,
     "bowlingEconomy": 5.61
   },
+  "pakistan-2019-imad-wasim": {
+    "role": "batsman",
+    "batting": 76,
+    "bowling": 46,
+    "battingHand": "Left",
+    "bowlingHand": "Left",
+    "bowlingStyle": "Orthodox",
+    "aggressionLevel": "Aggressive",
+    "battingStyle": "Aggressive",
+    "interval": "2016-2019",
+    "battingAverage": 41.71,
+    "battingStrikeRate": 110.89,
+    "bowlingAverage": 48.77,
+    "bowlingStrikeRate": 60.06,
+    "bowlingEconomy": 4.87
+  },
   "pakistan-2019-imam-ul-haq": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -23769,8 +23849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-mohammad-amir": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 79,
+    "batting": 37,
+    "bowling": 77,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -23785,8 +23865,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-mohammad-hafeez": {
     "role": "batsman",
-    "batting": 78,
-    "bowling": 18,
+    "batting": 74,
+    "bowling": 16,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -23801,8 +23881,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-mohammad-hasnain": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 56,
+    "batting": 24,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -23817,7 +23897,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-sarfaraz-ahmed": {
     "role": "wicketkeeper",
-    "batting": 81,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -23833,8 +23913,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-shadab-khan": {
     "role": "bowler",
-    "batting": 63,
-    "bowling": 84,
+    "batting": 61,
+    "bowling": 76,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -23849,8 +23929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "pakistan-2019-shoaib-malik": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 34,
+    "batting": 73,
+    "bowling": 28,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -23864,9 +23944,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.23
   },
   "pakistan-2019-wahab-riaz": {
-    "role": "batsman",
-    "batting": 52,
-    "bowling": 48,
+    "role": "bowler",
+    "batting": 34,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -23881,8 +23961,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-aiden-markram": {
     "role": "batsman",
-    "batting": 67,
-    "bowling": 0,
+    "batting": 64,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -23897,8 +23977,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-andile-phehlukwayo": {
     "role": "bowler",
-    "batting": 71,
-    "bowling": 84,
+    "batting": 42,
+    "bowling": 81,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23913,8 +23993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-anrich-nortje": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 89,
+    "batting": 21,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23928,12 +24008,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.76
   },
   "south-africa-2019-chris-morris": {
-    "role": "batsman",
-    "batting": 62,
-    "bowling": 71,
+    "role": "bowler",
+    "batting": 45,
+    "bowling": 70,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -23945,8 +24025,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-dale-steyn": {
     "role": "bowler",
-    "batting": 64,
-    "bowling": 86,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -23961,7 +24041,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-david-miller": {
     "role": "batsman",
-    "batting": 90,
+    "batting": 82,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -23977,8 +24057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-dwaine-pretorius": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 85,
+    "batting": 34,
+    "bowling": 80,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -24009,7 +24089,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-hashim-amla": {
     "role": "batsman",
-    "batting": 87,
+    "batting": 83,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24025,8 +24105,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-imran-tahir": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 90,
+    "batting": 28,
+    "bowling": 88,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -24041,8 +24121,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-jp-duminy": {
     "role": "batsman",
-    "batting": 71,
-    "bowling": 46,
+    "batting": 69,
+    "bowling": 38,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -24057,8 +24137,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-kagiso-rabada": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 86,
+    "batting": 37,
+    "bowling": 84,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -24073,8 +24153,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-lungi-ngidi": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 93,
+    "batting": 27,
+    "bowling": 88,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -24105,7 +24185,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-rassie-van-der-dussen": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -24121,7 +24201,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2019-tabraiz-shamsi": {
     "role": "bowler",
-    "batting": 0,
+    "batting": 18,
     "bowling": 64,
     "battingHand": "Right",
     "bowlingHand": "Left",
@@ -24137,8 +24217,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-angelo-mathews": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 82,
+    "batting": 91,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24153,7 +24233,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-avishka-fernando": {
     "role": "batsman",
-    "batting": 69,
+    "batting": 64,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24169,8 +24249,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-dhananjaya-de-silva": {
     "role": "batsman",
-    "batting": 63,
-    "bowling": 65,
+    "batting": 62,
+    "bowling": 54,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24185,8 +24265,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-dimuth-karunaratne": {
     "role": "batsman",
-    "batting": 75,
-    "bowling": 0,
+    "batting": 67,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24202,7 +24282,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-2019-isuru-udana": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 64,
+    "bowling": 48,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24217,8 +24297,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-jeevan-mendis": {
     "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "batting": 58,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24232,12 +24312,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.9
   },
   "sri-lanka-2019-jeffrey-vandersay": {
-    "role": "batsman",
-    "batting": 54,
-    "bowling": 65,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 64,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Cautious",
     "battingStyle": "Very Cautious",
     "interval": "2016-2019",
@@ -24249,7 +24329,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-kusal-mendis": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24265,7 +24345,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-kusal-perera": {
     "role": "wicketkeeper",
-    "batting": 77,
+    "batting": 74,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24281,7 +24361,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-lahiru-thirimanne": {
     "role": "batsman",
-    "batting": 71,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24298,7 +24378,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-2019-milinda-siriwardana": {
     "role": "batsman",
     "batting": 58,
-    "bowling": 0,
+    "bowling": 17,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24313,8 +24393,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-nuwan-pradeep": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24329,8 +24409,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-suranga-lakmal": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 75,
+    "batting": 36,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24345,8 +24425,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2019-thisara-perera": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 74,
+    "batting": 62,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24360,12 +24440,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.09
   },
   "west-indies-2019-andre-russell": {
-    "role": "bowler",
-    "batting": 0,
-    "bowling": 80,
+    "role": "batsman",
+    "batting": 58,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -24376,12 +24456,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.82
   },
   "west-indies-2019-ashley-nurse": {
-    "role": "batsman",
-    "batting": 57,
-    "bowling": 59,
+    "role": "bowler",
+    "batting": 45,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -24393,8 +24473,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-carlos-brathwaite": {
     "role": "batsman",
-    "batting": 55,
-    "bowling": 63,
+    "batting": 56,
+    "bowling": 56,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24409,8 +24489,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-chris-gayle": {
     "role": "batsman",
-    "batting": 87,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24425,7 +24505,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-darren-bravo": {
     "role": "batsman",
-    "batting": 63,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24441,7 +24521,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-evin-lewis": {
     "role": "batsman",
-    "batting": 72,
+    "batting": 70,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -24456,12 +24536,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "west-indies-2019-fabian-allen": {
-    "role": "batsman",
-    "batting": 56,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2016-2019",
@@ -24472,12 +24552,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6
   },
   "west-indies-2019-jason-holder": {
-    "role": "batsman",
-    "batting": 66,
+    "role": "bowler",
+    "batting": 58,
     "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2016-2019",
@@ -24489,8 +24569,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-kemar-roach": {
     "role": "bowler",
-    "batting": 55,
-    "bowling": 69,
+    "batting": 28,
+    "bowling": 68,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24505,7 +24585,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-nicholas-pooran": {
     "role": "wicketkeeper",
-    "batting": 91,
+    "batting": 79,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "Right",
@@ -24521,8 +24601,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-oshane-thomas": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 74,
+    "batting": 27,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24553,8 +24633,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-shannon-gabriel": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 71,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24569,8 +24649,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "west-indies-2019-sheldon-cottrell": {
     "role": "bowler",
-    "batting": 54,
-    "bowling": 79,
+    "batting": 28,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24585,8 +24665,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-adam-zampa": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 93,
+    "batting": 36,
+    "bowling": 91,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break Googly",
@@ -24601,7 +24681,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-alex-carey": {
     "role": "wicketkeeper",
-    "batting": 69,
+    "batting": 67,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24616,12 +24696,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "australia-2023-ashton-agar": {
-    "role": "batsman",
-    "batting": 67,
+    "role": "bowler",
+    "batting": 28,
     "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -24633,8 +24713,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-cameron-green": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 63,
+    "batting": 65,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24649,7 +24729,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-david-warner": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24665,8 +24745,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-glenn-maxwell": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 60,
+    "batting": 83,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24681,8 +24761,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-josh-hazlewood": {
     "role": "bowler",
-    "batting": 61,
-    "bowling": 83,
+    "batting": 28,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24713,8 +24793,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-marcus-stoinis": {
     "role": "batsman",
-    "batting": 57,
-    "bowling": 64,
+    "batting": 58,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24729,8 +24809,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-marnus-labuschagne": {
     "role": "batsman",
-    "batting": 82,
-    "bowling": 0,
+    "batting": 77,
+    "bowling": 27,
     "battingHand": "Right",
     "bowlingHand": "",
     "bowlingStyle": "Leg Break",
@@ -24745,8 +24825,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-mitchell-marsh": {
     "role": "batsman",
-    "batting": 81,
-    "bowling": 69,
+    "batting": 76,
+    "bowling": 50,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24761,7 +24841,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-mitchell-starc": {
     "role": "bowler",
-    "batting": 50,
+    "batting": 37,
     "bowling": 93,
     "battingHand": "",
     "bowlingHand": "",
@@ -24777,8 +24857,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-pat-cummins": {
     "role": "bowler",
-    "batting": 59,
-    "bowling": 75,
+    "batting": 40,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -24792,12 +24872,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.57
   },
   "australia-2023-sean-abbott": {
-    "role": "batsman",
-    "batting": 60,
-    "bowling": 68,
+    "role": "bowler",
+    "batting": 38,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -24809,8 +24889,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-steve-smith": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 88,
+    "bowling": 19,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24825,8 +24905,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "australia-2023-travis-head": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 65,
+    "batting": 88,
+    "bowling": 41,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -24841,8 +24921,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-hasan-mahmud": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 75,
+    "batting": 28,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -24857,7 +24937,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-litton-das": {
     "role": "wicketkeeper",
-    "batting": 79,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -24873,8 +24953,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-mahedi-hasan": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 76,
+    "batting": 34,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -24905,8 +24985,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-mustafizur-rahman": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 74,
+    "batting": 32,
+    "bowling": 73,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast Medium",
@@ -24921,8 +25001,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-najmul-hossain-shanto": {
     "role": "batsman",
-    "batting": 74,
-    "bowling": 0,
+    "batting": 71,
+    "bowling": 26,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Off Break",
@@ -24936,9 +25016,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.63
   },
   "bangladesh-2023-nasum-ahmed": {
-    "role": "batsman",
-    "batting": 63,
-    "bowling": 58,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -24969,8 +25049,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-tanzim-hasan-sakib": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 81,
+    "batting": 22,
+    "bowling": 71,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -24985,8 +25065,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "bangladesh-2023-taskin-ahmed": {
     "role": "bowler",
-    "batting": 47,
-    "bowling": 78,
+    "batting": 34,
+    "bowling": 76,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -25001,8 +25081,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-adil-rashid": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 74,
+    "batting": 39,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25017,8 +25097,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-ben-stokes": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 0,
+    "batting": 76,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25032,12 +25112,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.75
   },
   "england-2023-brydon-carse": {
-    "role": "batsman",
-    "batting": 68,
-    "bowling": 69,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -25049,8 +25129,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-chris-woakes": {
     "role": "bowler",
-    "batting": 60,
-    "bowling": 82,
+    "batting": 42,
+    "bowling": 78,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25065,8 +25145,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-david-willey": {
     "role": "bowler",
-    "batting": 72,
-    "bowling": 92,
+    "batting": 42,
+    "bowling": 88,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25081,8 +25161,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-dawid-malan": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 92,
+    "bowling": 23,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25096,12 +25176,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 6.8
   },
   "england-2023-gus-atkinson": {
-    "role": "batsman",
-    "batting": 61,
-    "bowling": 71,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Very Aggressive",
     "battingStyle": "Very Aggressive",
     "interval": "2020-2023",
@@ -25113,7 +25193,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-harry-brook": {
     "role": "batsman",
-    "batting": 69,
+    "batting": 64,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25129,8 +25209,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-joe-root": {
     "role": "batsman",
-    "batting": 68,
-    "bowling": 66,
+    "batting": 65,
+    "bowling": 38,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25145,7 +25225,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-jonny-bairstow": {
     "role": "batsman",
-    "batting": 76,
+    "batting": 72,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25161,7 +25241,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-jos-buttler": {
     "role": "wicketkeeper",
-    "batting": 80,
+    "batting": 76,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25177,8 +25257,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-liam-livingstone": {
     "role": "batsman",
-    "batting": 70,
-    "bowling": 76,
+    "batting": 66,
+    "bowling": 58,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25192,12 +25272,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.54
   },
   "england-2023-mark-wood": {
-    "role": "batsman",
-    "batting": 65,
+    "role": "bowler",
+    "batting": 28,
     "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -25210,7 +25290,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "england-2023-moeen-ali": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 55,
+    "bowling": 48,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25225,8 +25305,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "england-2023-reece-topley": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 85,
+    "batting": 25,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25240,12 +25320,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.47
   },
   "england-2023-sam-curran": {
-    "role": "batsman",
-    "batting": 64,
+    "role": "bowler",
+    "batting": 47,
     "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -25257,8 +25337,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-daryl-mitchell": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 87,
+    "batting": 91,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25273,7 +25353,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-devon-conway": {
     "role": "batsman",
-    "batting": 89,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25289,8 +25369,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-glenn-phillips": {
     "role": "batsman",
-    "batting": 76,
-    "bowling": 66,
+    "batting": 71,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25305,8 +25385,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-ish-sodhi": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 72,
+    "batting": 34,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25321,8 +25401,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-james-neesham": {
     "role": "batsman",
-    "batting": 60,
-    "bowling": 41,
+    "batting": 59,
+    "bowling": 33,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25337,7 +25417,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-kane-williamson": {
     "role": "batsman",
-    "batting": 88,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25352,12 +25432,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "new-zealand-2023-kyle-jamieson": {
-    "role": "batsman",
-    "batting": 63,
-    "bowling": 69,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -25368,12 +25448,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.08
   },
   "new-zealand-2023-lockie-ferguson": {
-    "role": "batsman",
-    "batting": 50,
-    "bowling": 56,
+    "role": "bowler",
+    "batting": 28,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2020-2023",
@@ -25385,7 +25465,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-mark-chapman": {
     "role": "batsman",
-    "batting": 66,
+    "batting": 62,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25401,8 +25481,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-matt-henry": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 86,
+    "batting": 28,
+    "bowling": 83,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25416,12 +25496,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 4.9
   },
   "new-zealand-2023-mitchell-santner": {
-    "role": "batsman",
-    "batting": 69,
+    "role": "bowler",
+    "batting": 42,
     "bowling": 65,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -25433,8 +25513,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-rachin-ravindra": {
     "role": "batsman",
-    "batting": 84,
-    "bowling": 55,
+    "batting": 75,
+    "bowling": 45,
     "battingHand": "Left",
     "bowlingHand": "Left",
     "bowlingStyle": "Orthodox",
@@ -25449,8 +25529,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-tim-southee": {
     "role": "bowler",
-    "batting": 51,
-    "bowling": 77,
+    "batting": 28,
+    "bowling": 74,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25465,7 +25545,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-tom-latham": {
     "role": "wicketkeeper",
-    "batting": 86,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25481,8 +25561,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-trent-boult": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 93,
+    "batting": 28,
+    "bowling": 89,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25497,7 +25577,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "new-zealand-2023-will-young": {
     "role": "batsman",
-    "batting": 88,
+    "batting": 81,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25513,8 +25593,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-aiden-markram": {
     "role": "batsman",
-    "batting": 89,
-    "bowling": 56,
+    "batting": 82,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25528,12 +25608,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.53
   },
   "south-africa-2023-andile-phehlukwayo": {
-    "role": "batsman",
-    "batting": 58,
-    "bowling": 68,
+    "role": "bowler",
+    "batting": 41,
+    "bowling": 67,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Balanced",
     "battingStyle": "Balanced",
     "interval": "2020-2023",
@@ -25545,8 +25625,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-anrich-nortje": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 78,
+    "batting": 27,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25561,7 +25641,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-david-miller": {
     "role": "batsman",
-    "batting": 93,
+    "batting": 89,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25577,8 +25657,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-gerald-coetzee": {
     "role": "bowler",
-    "batting": 53,
-    "bowling": 88,
+    "batting": 28,
+    "bowling": 82,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -25593,7 +25673,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-heinrich-klaasen": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 87,
     "bowling": 0,
     "battingHand": "Right",
     "bowlingHand": "Right",
@@ -25609,8 +25689,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-kagiso-rabada": {
     "role": "bowler",
-    "batting": 56,
-    "bowling": 80,
+    "batting": 32,
+    "bowling": 77,
     "battingHand": "Left",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -25625,8 +25705,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-keshav-maharaj": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 78,
+    "batting": 37,
+    "bowling": 76,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25641,8 +25721,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-lizaad-williams": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 64,
+    "batting": 21,
+    "bowling": 63,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25657,8 +25737,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-lungi-ngidi": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 73,
+    "batting": 28,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Fast",
@@ -25672,9 +25752,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 5.88
   },
   "south-africa-2023-marco-jansen": {
-    "role": "batsman",
-    "batting": 71,
-    "bowling": 74,
+    "role": "bowler",
+    "batting": 42,
+    "bowling": 72,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Fast",
@@ -25689,7 +25769,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-quinton-de-kock": {
     "role": "wicketkeeper",
-    "batting": 93,
+    "batting": 90,
     "bowling": 0,
     "battingHand": "Left",
     "bowlingHand": "",
@@ -25705,8 +25785,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-rassie-van-der-dussen": {
     "role": "batsman",
-    "batting": 93,
-    "bowling": 0,
+    "batting": 87,
+    "bowling": 22,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Leg Break",
@@ -25721,7 +25801,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-reeza-hendricks": {
     "role": "batsman",
-    "batting": 70,
+    "batting": 66,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25737,8 +25817,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-sisanda-magala": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 83,
+    "batting": 25,
+    "bowling": 75,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25753,8 +25833,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-tabraiz-shamsi": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 82,
+    "batting": 27,
+    "bowling": 80,
     "battingHand": "Right",
     "bowlingHand": "Left",
     "bowlingStyle": "Wrist Spin (Chinaman)",
@@ -25769,8 +25849,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "south-africa-2023-temba-bavuma": {
     "role": "batsman",
-    "batting": 86,
-    "bowling": 0,
+    "batting": 80,
+    "bowling": 21,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -25784,12 +25864,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 3.57
   },
   "sri-lanka-2023-angelo-mathews": {
-    "role": "bowler",
-    "batting": 51,
-    "bowling": 90,
+    "role": "batsman",
+    "batting": 55,
+    "bowling": 45,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "Unspecified",
+    "bowlingStyle": "",
     "aggressionLevel": "Cautious",
     "battingStyle": "Cautious",
     "interval": "2020-2023",
@@ -25801,8 +25881,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-chamika-karunaratne": {
     "role": "batsman",
-    "batting": 64,
-    "bowling": 75,
+    "batting": 62,
+    "bowling": 60,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium Fast",
@@ -25817,8 +25897,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-charith-asalanka": {
     "role": "batsman",
-    "batting": 85,
-    "bowling": 81,
+    "batting": 80,
+    "bowling": 32,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25834,7 +25914,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   "sri-lanka-2023-dasun-shanaka": {
     "role": "batsman",
     "batting": 59,
-    "bowling": 62,
+    "bowling": 49,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25849,8 +25929,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-dhananjaya-de-silva": {
     "role": "batsman",
-    "batting": 65,
-    "bowling": 55,
+    "batting": 64,
+    "bowling": 47,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "",
@@ -25865,8 +25945,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-dilshan-madushanka": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 87,
+    "batting": 25,
+    "bowling": 82,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25881,7 +25961,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-dimuth-karunaratne": {
     "role": "batsman",
-    "batting": 77,
+    "batting": 71,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25896,12 +25976,12 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
     "bowlingEconomy": 0
   },
   "sri-lanka-2023-dushan-hemantha": {
-    "role": "batsman",
-    "batting": 0,
-    "bowling": 0,
+    "role": "bowler",
+    "batting": 25,
+    "bowling": 60,
     "battingHand": "",
     "bowlingHand": "",
-    "bowlingStyle": "",
+    "bowlingStyle": "Unspecified",
     "aggressionLevel": "Aggressive",
     "battingStyle": "Aggressive",
     "interval": "2020-2023",
@@ -25913,8 +25993,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-dushmantha-chameera": {
     "role": "bowler",
-    "batting": 48,
-    "bowling": 75,
+    "batting": 34,
+    "bowling": 73,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25929,8 +26009,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-kasun-rajitha": {
     "role": "bowler",
-    "batting": 52,
-    "bowling": 71,
+    "batting": 33,
+    "bowling": 69,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25945,7 +26025,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-kusal-mendis": {
     "role": "wicketkeeper",
-    "batting": 81,
+    "batting": 77,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25961,7 +26041,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-kusal-perera": {
     "role": "wicketkeeper",
-    "batting": 68,
+    "batting": 65,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -25977,8 +26057,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-lahiru-kumara": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 85,
+    "batting": 28,
+    "bowling": 79,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -25993,8 +26073,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-maheesh-theekshana": {
     "role": "bowler",
-    "batting": 57,
-    "bowling": 82,
+    "batting": 39,
+    "bowling": 80,
     "battingHand": "",
     "bowlingHand": "",
     "bowlingStyle": "Unspecified",
@@ -26009,8 +26089,8 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-matheesha-pathirana": {
     "role": "bowler",
-    "batting": 0,
-    "bowling": 70,
+    "batting": 27,
+    "bowling": 68,
     "battingHand": "Right",
     "bowlingHand": "Right",
     "bowlingStyle": "Medium",
@@ -26025,7 +26105,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-pathum-nissanka": {
     "role": "batsman",
-    "batting": 83,
+    "batting": 79,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -26041,7 +26121,7 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
   },
   "sri-lanka-2023-sadeera-samarawickrama": {
     "role": "wicketkeeper",
-    "batting": 86,
+    "batting": 78,
     "bowling": 0,
     "battingHand": "",
     "bowlingHand": "",
@@ -26058,9 +26138,9 @@ const PLAYER_INTERVAL_ENRICHMENT_BY_ID = {
 };
 
 const PLAYER_INTERVAL_ENRICHMENT_SUMMARY = {
-  "generatedAt": "2026-06-10T09:12:28.024Z",
-  "matchedPlayers": 1228,
-  "unmatchedPlayers": 575,
+  "generatedAt": "2026-06-13T13:02:29.305Z",
+  "matchedPlayers": 1233,
+  "unmatchedPlayers": 570,
   "totalPlayers": 1803
 };
 
@@ -45129,20 +45209,59 @@ const DRAFT_SQUADS = [...BASE_DRAFT_SQUADS, ...GENERATED_DRAFT_SQUADS].sort(
 
 const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Sachin Tendulkar": { role: "batsman", batting: 96, bowling: 43 },
-  "Ricky Ponting": { role: "batsman", batting: 95, bowling: 8 },
+  "Ricky Ponting": { role: "batsman", batting: 94, bowling: 8 },
+  "Virat Kohli": { role: "batsman", batting: 94, bowling: 10 },
   "Brian Lara": { role: "batsman", batting: 97, bowling: 10 },
   "Shane Warne": { role: "bowler", batting: 34, bowling: 95 },
-  "Muttiah Muralitharan": { role: "bowler", batting: 24, bowling: 95 },
+  "Muttiah Muralitharan": { role: "bowler", batting: 24, bowling: 96 },
   "Glenn McGrath": { role: "bowler", batting: 18, bowling: 95 },
   "Jacques Kallis": { role: "batsman", batting: 93, bowling: 84 },
   "Allan Donald": { role: "bowler", batting: 18, bowling: 93 },
   "Anil Kumble": { role: "bowler", batting: 28, bowling: 92 },
   "Rahul Dravid": { role: "batsman", batting: 92, bowling: 8 },
   "AB de Villiers": { role: "batsman", batting: 95, bowling: 39 },
+  "Babar Azam": { role: "batsman", batting: 92, bowling: 10 },
+  "Curtly Ambrose": { role: "bowler", batting: 18, bowling: 94 },
+  "Dale Steyn": { role: "bowler", batting: 22, bowling: 92 },
+  "Daniel Vettori": { role: "bowler", batting: 58, bowling: 89 },
   "Eoin Morgan": { role: "batsman", batting: 88, bowling: 0 },
+  "Hashim Amla": { role: "batsman", batting: 94, bowling: 0 },
+  "Inzamam-ul-Haq": { role: "batsman", batting: 89, bowling: 10 },
+  "Jasprit Bumrah": { role: "bowler", batting: 20, bowling: 93 },
   "KL Rahul": { role: "batsman", batting: 90, bowling: 0 },
   "Jonny Bairstow": { role: "batsman", batting: 90, bowling: 0 },
+  "Joe Root": { role: "batsman", batting: 92, bowling: 22 },
+  "Kane Williamson": { role: "batsman", batting: 92, bowling: 22 },
+  "Kumar Sangakkara": { role: "wicketkeeper", batting: 94, bowling: 0 },
+  "Mitchell Starc": { role: "bowler", batting: 28, bowling: 92 },
+  "Rohit Sharma": { role: "batsman", batting: 93, bowling: 18 },
+  "Sanath Jayasuriya": { role: "batsman", batting: 92, bowling: 74 },
+  "Shaun Pollock": { role: "bowler", batting: 65, bowling: 89 },
   "Younis Khan": { role: "batsman", batting: 84, bowling: 0 },
+  "Wasim Akram": { role: "bowler", batting: 54, bowling: 94 },
+  "Waqar Younis": { role: "bowler", batting: 24, bowling: 93 },
+  "Zaheer Abbas": { role: "batsman", batting: 92, bowling: 24, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Yousuf Youhana": { role: "batsman", batting: 88, bowling: 18, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Mohammad Yousuf": { role: "batsman", batting: 90, bowling: 12, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Rameez Raja": { role: "batsman", batting: 84, bowling: 12, battingHand: "Right" },
+  "Ramiz Raja": { role: "batsman", batting: 84, bowling: 12, battingHand: "Right" },
+  "Aaqib Javed": { role: "bowler", batting: 22, bowling: 82, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Tahir Naqqash": { role: "bowler", batting: 24, bowling: 68, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Saleem Yousuf": { role: "wicketkeeper", batting: 61, bowling: 0, battingHand: "Right" },
+  "Wajahatullah Wasti": { role: "batsman", batting: 68, bowling: 18, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Wasim Raja": { role: "batsman", batting: 76, bowling: 58, battingHand: "Left", bowlingHand: "Right", bowlingStyle: "Medium" },
+  "Azhar Mahmood": { role: "batsman", batting: 72, bowling: 74, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium" },
+  "Abdul Razzaq": { role: "batsman", batting: 77, bowling: 76, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Mohammad Hafeez": { role: "batsman", batting: 82, bowling: 68, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Shoaib Malik": { role: "batsman", batting: 83, bowling: 58, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Off Break" },
+  "Umar Gul": { role: "bowler", batting: 24, bowling: 82, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Fast Medium" },
+  "Wahab Riaz": { role: "bowler", batting: 30, bowling: 80, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Fast" },
+  "Yasir Shah": { role: "bowler", batting: 20, bowling: 78, battingHand: "Right", bowlingStyle: "Leg Break Googly" },
+  "Imad Wasim": { role: "batsman", batting: 76, bowling: 68, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Orthodox" },
+  "Shadab Khan": { role: "batsman", batting: 72, bowling: 74, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Leg Break" },
+  "Mohammad Amir": { role: "bowler", batting: 32, bowling: 82, battingHand: "Left", bowlingHand: "Left", bowlingStyle: "Fast Medium" },
+  "Hasan Ali": { role: "bowler", batting: 38, bowling: 80, battingHand: "Right", bowlingHand: "Right", bowlingStyle: "Medium Fast" },
+  "Faheem Ashraf": { role: "batsman", batting: 60, bowling: 65, battingHand: "Left", bowlingHand: "Right", bowlingStyle: "Medium" },
   "Javed Miandad": { role: "batsman", batting: 89, bowling: 28 },
   "Saleem Malik": { role: "batsman", batting: 84, bowling: 22 },
   "Boeta Dippenaar": { role: "batsman", batting: 78, bowling: 0 },
@@ -45159,7 +45278,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Alec Davies": { role: "wicketkeeper", batting: 48, bowling: 0 },
   "Melt van Schoor": { role: "wicketkeeper", batting: 46, bowling: 0 },
   "Andre van Schoor": { role: "wicketkeeper", batting: 42, bowling: 0 },
-  "Kumar Sangakkara": { role: "wicketkeeper", batting: 95, bowling: 0 },
+  "Kumar Sangakkara": { role: "wicketkeeper", batting: 94, bowling: 0 },
   "Mahela Jayawardene": { role: "batsman", batting: 93, bowling: 18 },
   "Lasith Malinga": { role: "bowler", batting: 22, bowling: 95 },
   "Marvan Atapattu": { role: "batsman", batting: 88, bowling: 12 },
@@ -45301,8 +45420,8 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Colin de Grandhomme": { role: "batsman", batting: 69, bowling: 72 },
   "Corey Anderson": { role: "batsman", batting: 74, bowling: 68 },
   "Craig McMillan": { role: "batsman", batting: 76, bowling: 46 },
-  "Dale Steyn": { role: "bowler", batting: 22, bowling: 90 },
-  "Daniel Vettori": { role: "bowler", batting: 58, bowling: 87 },
+  "Dale Steyn": { role: "bowler", batting: 22, bowling: 92 },
+  "Daniel Vettori": { role: "bowler", batting: 58, bowling: 89 },
   "Daryl Mitchell": { role: "batsman", batting: 84, bowling: 44 },
   "Daryl Tuffey": { role: "bowler", batting: 18, bowling: 74 },
   "David Miller": { role: "batsman", batting: 87, bowling: 0 },
@@ -45377,7 +45496,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Mitchell Johnson": { role: "bowler", batting: 35, bowling: 90 },
   "Mitchell Marsh": { role: "batsman", batting: 84, bowling: 56 },
   "Mitchell Santner": { role: "bowler", batting: 71, bowling: 76 },
-  "Mitchell Starc": { role: "bowler", batting: 28, bowling: 93 },
+  "Mitchell Starc": { role: "bowler", batting: 28, bowling: 92 },
   "Moeen Ali": { role: "batsman", batting: 76, bowling: 64 },
   "Mohammed Shami": { role: "bowler", batting: 18, bowling: 90 },
   "Mohammed Siraj": { role: "bowler", batting: 16, bowling: 82 },
@@ -45401,7 +45520,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Rilee Rossouw": { role: "batsman", batting: 82, bowling: 0 },
   "Rishabh Pant": { role: "wicketkeeper", batting: 81, bowling: 0 },
   "Robin Peterson": { role: "bowler", batting: 60, bowling: 70 },
-  "Rohit Sharma": { role: "batsman", batting: 95, bowling: 18 },
+  "Rohit Sharma": { role: "batsman", batting: 93, bowling: 18 },
   "Ross Taylor": { role: "batsman", batting: 91, bowling: 0 },
   "Sam Curran": { role: "bowler", batting: 68, bowling: 74 },
   "Scott Styris": { role: "batsman", batting: 77, bowling: 68 },
@@ -45411,7 +45530,7 @@ const MANUAL_PLAYER_NAME_OVERRIDES = {
   "Shikhar Dhawan": { role: "batsman", batting: 91, bowling: 0 },
   "Shreyas Iyer": { role: "batsman", batting: 90, bowling: 0 },
   "Shubman Gill": { role: "batsman", batting: 93, bowling: 0 },
-  "Shaun Pollock": { role: "bowler", batting: 65, bowling: 88 },
+  "Shaun Pollock": { role: "bowler", batting: 65, bowling: 89 },
   "Shaun Tait": { role: "bowler", batting: 14, bowling: 82 },
   "Steve Smith": { role: "batsman", batting: 91, bowling: 20 },
   "Steven Finn": { role: "bowler", batting: 14, bowling: 78 },
@@ -45589,7 +45708,11 @@ const BOWLING_STYLE_OVERRIDES = new Map(
 );
 
 function hasMeaningfulBowling(player) {
-  return (player.bowling || 0) >= 40;
+  if (player.role === "wicketkeeper") {
+    return false;
+  }
+
+  return (player.bowling || 0) >= 10;
 }
 
 function inferBattingHand(player) {
@@ -45617,7 +45740,7 @@ function inferBowlingHand(player) {
 }
 
 function inferBowlingStyle(player, role, bowlingHand) {
-  if (!hasMeaningfulBowling(player)) {
+  if (role === "wicketkeeper" || !hasMeaningfulBowling(player)) {
     return "";
   }
 
@@ -45634,6 +45757,10 @@ function inferBowlingStyle(player, role, bowlingHand) {
   const bowlingLead = (player.bowling || 0) - (player.batting || 0) >= 15 || role === "bowler";
   const economy = player.bowlingEconomy || 0;
   const strikeRate = player.bowlingStrikeRate || 0;
+
+  if ((player.bowling || 0) < 40) {
+    return "Medium";
+  }
 
   if (bowlingHand === "Left") {
     if (bowlingLead && (player.bowling || 0) >= 75) {
@@ -45673,47 +45800,64 @@ function getPlayerNameOverride(player) {
     : AUDITED_PLAYER_NAME_OVERRIDES[normalizedName];
 
   return {
-    ...(auditedOverride || {}),
-    ...(MANUAL_PLAYER_NAME_OVERRIDES[normalizedName] || {}),
+    auditedOverride: auditedOverride || null,
+    manualOverride: MANUAL_PLAYER_NAME_OVERRIDES[normalizedName] || null,
   };
 }
 
 function applyPlayerOverride(player) {
   const normalizedName = normalizePlayerName(player.name);
-  const override = getPlayerNameOverride(player);
+  const { auditedOverride, manualOverride } = getPlayerNameOverride(player);
   const playerIdOverride = PLAYER_ID_OVERRIDES[player.id] || null;
   const intervalEnrichment = PLAYER_INTERVAL_ENRICHMENT_BY_ID[player.id] || {};
   const inferredRole = hasWicketkeeperFlag(player.name) ? "wicketkeeper" : player.role;
   const hasUsableEnrichmentRatings =
     (intervalEnrichment.batting || 0) > 0 || (intervalEnrichment.bowling || 0) > 0;
-  const explicitRole = playerIdOverride?.role || override?.role || "";
+  const explicitRole = playerIdOverride?.role || manualOverride?.role || "";
   const role = explicitRole || (hasUsableEnrichmentRatings ? intervalEnrichment.role || inferredRole : inferredRole);
   const merged = {
     ...player,
     name: normalizedName,
-    ...(override || {}),
+    ...(auditedOverride || {}),
+    ...(manualOverride || {}),
     ...(playerIdOverride || {}),
   };
-  const explicitBattingHand = playerIdOverride?.battingHand || override?.battingHand || "";
-  const explicitBowlingHand = playerIdOverride?.bowlingHand || override?.bowlingHand || "";
-  const explicitBowlingStyle = playerIdOverride?.bowlingStyle || override?.bowlingStyle || "";
+  const explicitBattingHand = playerIdOverride?.battingHand || manualOverride?.battingHand || "";
+  const explicitBowlingHand = playerIdOverride?.bowlingHand || manualOverride?.bowlingHand || "";
+  const explicitBowlingStyle = playerIdOverride?.bowlingStyle || manualOverride?.bowlingStyle || "";
   const hasExplicitRatingOverride =
     Boolean(
-      (override && ("batting" in override || "bowling" in override || "role" in override)) ||
+      (manualOverride && ("batting" in manualOverride || "bowling" in manualOverride || "role" in manualOverride)) ||
       (playerIdOverride && ("batting" in playerIdOverride || "bowling" in playerIdOverride || "role" in playerIdOverride)),
     );
   const batting =
     hasExplicitRatingOverride ? merged.batting : (intervalEnrichment.batting || 0) > 0 ? intervalEnrichment.batting : merged.batting;
   const bowling =
     hasExplicitRatingOverride ? merged.bowling : (intervalEnrichment.bowling || 0) > 0 ? intervalEnrichment.bowling : merged.bowling;
-  const safeBatting = role === "bowler" ? Math.max(15, batting || 0) : batting;
-  const safeBowling = role === "bowler" ? Math.max(60, bowling || 0) : bowling;
+  let safeBatting = batting || 0;
+  let safeBowling = bowling || 0;
+
+  if (role === "bowler") {
+    safeBatting = Math.max(15, safeBatting);
+    safeBowling = Math.max(60, safeBowling);
+  } else if (role === "wicketkeeper") {
+    safeBatting = Math.max(50, safeBatting);
+    safeBowling = 0;
+  } else if (safeBatting < 50 && safeBowling < 50) {
+    safeBatting = 50;
+  }
+
+  if (role !== "wicketkeeper") {
+    safeBowling = Math.max(10, safeBowling);
+  }
+
   const enriched = {
     ...merged,
     ...(intervalEnrichment || {}),
     role,
     batting: safeBatting,
     bowling: safeBowling,
+    ratingLocked: hasExplicitRatingOverride,
     battingHand: explicitBattingHand || intervalEnrichment.battingHand || merged.battingHand || "",
     bowlingHand: explicitBowlingHand || intervalEnrichment.bowlingHand || merged.bowlingHand || "",
     bowlingStyle: explicitBowlingStyle || intervalEnrichment.bowlingStyle || merged.bowlingStyle || "",
@@ -45732,7 +45876,89 @@ function applyPlayerOverride(player) {
   };
 }
 
-const PLAYER_POOL = RAW_PLAYER_POOL.map(applyPlayerOverride);
+function getTopAverage(roster, skill, count) {
+  const selected = [...roster]
+    .sort((left, right) => right[skill] - left[skill] || right.batting + right.bowling - (left.batting + left.bowling))
+    .slice(0, Math.min(count, roster.length));
+
+  return selected.reduce((total, player) => total + player[skill], 0) / selected.length;
+}
+
+function calibratePlayerPoolBySquad(playerPool) {
+  const squadsById = new Map();
+
+  for (const player of playerPool) {
+    if (!squadsById.has(player.squadId)) {
+      squadsById.set(player.squadId, []);
+    }
+    squadsById.get(player.squadId).push(player);
+  }
+
+  const squadMetrics = [...squadsById.entries()].map(([squadId, roster]) => ({
+    squadId,
+    year: roster[0]?.year,
+    batting: getTopAverage(roster, "batting", 5),
+    bowling: getTopAverage(roster, "bowling", 5),
+  }));
+
+  const yearBuckets = new Map();
+  for (const metric of squadMetrics) {
+    if (!yearBuckets.has(metric.year)) {
+      yearBuckets.set(metric.year, []);
+    }
+    yearBuckets.get(metric.year).push(metric);
+  }
+
+  const yearMeans = new Map(
+    [...yearBuckets.entries()].map(([year, entries]) => [
+      year,
+      {
+        batting: entries.reduce((total, entry) => total + entry.batting, 0) / entries.length,
+        bowling: entries.reduce((total, entry) => total + entry.bowling, 0) / entries.length,
+      },
+    ]),
+  );
+
+  const squadTargets = new Map(
+    squadMetrics.map((metric) => {
+      const yearMean = yearMeans.get(metric.year);
+      const battingTarget = yearMean.batting + (metric.batting - yearMean.batting) * 0.78;
+      const bowlingTarget = yearMean.bowling + (metric.bowling - yearMean.bowling) * 0.78;
+      return [
+        metric.squadId,
+        {
+          battingFactor: metric.batting > 0 ? battingTarget / metric.batting : 1,
+          bowlingFactor: metric.bowling > 0 ? bowlingTarget / metric.bowling : 1,
+        },
+      ];
+    }),
+  );
+
+  return playerPool.map((player) => {
+    const factors = squadTargets.get(player.squadId) || { battingFactor: 1, bowlingFactor: 1 };
+    let batting = player.ratingLocked ? player.batting : player.batting * factors.battingFactor;
+    let bowling = player.ratingLocked ? player.bowling : player.bowling * factors.bowlingFactor;
+
+    if (player.role === "bowler") {
+      batting = Math.max(15, batting);
+      bowling = Math.max(60, bowling);
+    } else if (player.role === "wicketkeeper") {
+      batting = Math.max(50, batting);
+      bowling = 0;
+    } else {
+      batting = Math.max(batting, bowling < 50 ? 50 : batting);
+      bowling = Math.max(10, bowling);
+    }
+
+    return {
+      ...player,
+      batting: Math.round(batting),
+      bowling: Math.round(bowling),
+    };
+  });
+}
+
+const PLAYER_POOL = calibratePlayerPoolBySquad(RAW_PLAYER_POOL.map(applyPlayerOverride));
 
 const TOURNAMENT_OPPONENTS = [
   {
@@ -46100,9 +46326,12 @@ function getTeamMetrics(roster) {
     return { batting: 0, bowling: 0 };
   }
 
+  const teamBattingAverage = roster.reduce((total, player) => total + player.batting, 0) / roster.length;
+  const teamBowlingAverage = roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
+
   return {
-    batting: round(getTopAverage(roster, "batting", 5)),
-    bowling: round(getTopAverage(roster, "bowling", 5)),
+    batting: round(getTopAverage(roster, "batting", 5) * 0.74 + teamBattingAverage * 0.26),
+    bowling: round(getTopAverage(roster, "bowling", 5) * 0.74 + teamBowlingAverage * 0.26),
   };
 }
 
@@ -46494,6 +46723,8 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
           name: player.name,
           runs: 0,
           balls: 0,
+          fours: 0,
+          sixes: 0,
           out: false,
           notOut: false,
         },
@@ -46796,6 +47027,11 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
 
   const runs = Number(event);
   battingCard.runs += runs;
+  if (runs === 4) {
+    battingCard.fours += 1;
+  } else if (runs === 6) {
+    battingCard.sixes += 1;
+  }
   bowlingCard.runsConceded += runs;
   innings.score += runs;
 
@@ -46828,6 +47064,82 @@ function isInningsComplete(innings) {
 function finalizeInnings(innings) {
   markNotOutBatters(innings);
   return innings;
+}
+
+function adjustLastScoringEvent(innings, delta) {
+  for (let overIndex = innings.overs.length - 1; overIndex >= 0; overIndex -= 1) {
+    const over = innings.overs[overIndex];
+    for (let eventIndex = over.events.length - 1; eventIndex >= 0; eventIndex -= 1) {
+      const event = over.events[eventIndex];
+      if (!/^\d+$/.test(event)) {
+        continue;
+      }
+
+      const value = Number(event);
+      if (delta > 0 && value < 6) {
+        over.events[eventIndex] = String(value + delta);
+        return true;
+      }
+
+      if (delta < 0 && value > 0) {
+        over.events[eventIndex] = String(value + delta);
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function awardDecisiveSingle(innings) {
+  const strikerCard = innings.battingCards[innings.strikerId];
+  const nonStrikerCard = innings.battingCards[innings.nonStrikerId];
+  const battingCard = strikerCard && !strikerCard.out ? strikerCard : nonStrikerCard;
+  const bowlingCard = innings.bowlingCards[innings.lastBowlerId];
+
+  innings.score += 1;
+  if (battingCard) {
+    battingCard.runs += 1;
+  }
+  if (bowlingCard) {
+    bowlingCard.runsConceded += 1;
+  }
+  adjustLastScoringEvent(innings, 1);
+}
+
+function turnTieIntoOneRunLoss(innings) {
+  const bowlingCard = innings.bowlingCards[innings.lastBowlerId];
+  const battingCard =
+    innings.battingCards[innings.strikerId] ||
+    innings.battingCards[innings.nonStrikerId] ||
+    Object.values(innings.battingCards).find((card) => card.runs > 0);
+
+  innings.score -= 1;
+  if (battingCard && battingCard.runs > 0) {
+    battingCard.runs -= 1;
+  }
+  if (bowlingCard && bowlingCard.runsConceded > 0) {
+    bowlingCard.runsConceded -= 1;
+  }
+  adjustLastScoringEvent(innings, -1);
+}
+
+function resolveLevelScore(match) {
+  if (match.innings.length < 2) {
+    return;
+  }
+
+  const [firstInnings, secondInnings] = match.innings;
+  if (!secondInnings.target || secondInnings.score !== firstInnings.score) {
+    return;
+  }
+
+  if (secondInnings.wickets < 10) {
+    awardDecisiveSingle(secondInnings);
+    return;
+  }
+
+  turnTieIntoOneRunLoss(secondInnings);
 }
 
 function buildScorecardSummary(innings) {
@@ -46919,6 +47231,7 @@ function moveToNextMatch(state, result) {
       results: [...state.results, result],
       champion,
       eliminated: !champion,
+      finishedView: "results",
     };
   }
 
@@ -46935,6 +47248,7 @@ function moveToNextMatch(state, result) {
     results: [...state.results, result],
     champion: false,
     eliminated: false,
+    finishedView: "results",
   };
 }
 
@@ -46957,6 +47271,7 @@ function createInitialState(random = Math.random) {
     results: [],
     champion: false,
     eliminated: false,
+    finishedView: "results",
     randomSeed: random(),
   };
 }
@@ -47222,6 +47537,7 @@ function continueMatchAfterOver(match) {
       return match;
     }
 
+    resolveLevelScore(match);
     finalizeInnings(match.innings[1]);
     match.completed = true;
     match.result = buildResult(match);
@@ -47543,7 +47859,11 @@ function formatBattingHand(player) {
 }
 
 function formatBowlingStyle(player) {
-  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified" || player.bowling < 40) {
+  if (player.role === "wicketkeeper") {
+    return "None";
+  }
+
+  if (!player.bowlingStyle || player.bowlingStyle === "Unspecified") {
     return "None";
   }
 
@@ -47602,6 +47922,150 @@ function topThree(entries, key, secondaryKey) {
   return [...entries]
     .sort((left, right) => right[key] - left[key] || left[secondaryKey] - right[secondaryKey])
     .slice(0, 3);
+}
+
+function compareByBattingDesc(left, right) {
+  return (
+    right.batting - left.batting ||
+    right.bowling - left.bowling ||
+    cleanPlayerName(left.name).localeCompare(cleanPlayerName(right.name))
+  );
+}
+
+function compareByBowlingDesc(left, right) {
+  return (
+    right.bowling - left.bowling ||
+    right.batting - left.batting ||
+    cleanPlayerName(left.name).localeCompare(cleanPlayerName(right.name))
+  );
+}
+
+function buildDisplayRosterById(roster) {
+  return new Map(getDisplayRoster(roster, state.difficulty).map((player) => [player.id, player]));
+}
+
+function getLiveBattingEntries(innings) {
+  const activeIds = new Set([innings.strikerId, innings.nonStrikerId].filter(Boolean));
+
+  return innings.teamRoster
+    .map((playerId) => innings.battingCards[playerId])
+    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)));
+}
+
+function getLiveBowlingEntries(innings) {
+  return innings.bowlingRoster
+    .map((playerId) => innings.bowlingCards[playerId])
+    .filter((entry) => entry && entry.balls > 0)
+    .sort((left, right) => right.wickets - left.wickets || right.balls - left.balls || left.runsConceded - right.runsConceded);
+}
+
+function buildTournamentSummary(results) {
+  const overallBatting = new Map();
+  const overallBowling = new Map();
+
+  function upsertBatting(store, entry) {
+    const current = store.get(entry.name) || {
+      name: entry.name,
+      runs: 0,
+      balls: 0,
+      fours: 0,
+      sixes: 0,
+      innings: 0,
+      notOuts: 0,
+      best: 0,
+    };
+    current.runs += entry.runs;
+    current.balls += entry.balls;
+    current.fours += entry.fours || 0;
+    current.sixes += entry.sixes || 0;
+    current.innings += 1;
+    current.notOuts += entry.notOut ? 1 : 0;
+    current.best = Math.max(current.best, entry.runs);
+    store.set(entry.name, current);
+  }
+
+  function upsertBowling(store, entry) {
+    const current = store.get(entry.name) || {
+      name: entry.name,
+      wickets: 0,
+      runsConceded: 0,
+      balls: 0,
+      innings: 0,
+      bestWickets: 0,
+      bestRuns: Infinity,
+    };
+    current.wickets += entry.wickets;
+    current.runsConceded += entry.runsConceded;
+    current.balls += entry.balls;
+    current.innings += 1;
+    if (
+      entry.wickets > current.bestWickets ||
+      (entry.wickets === current.bestWickets && entry.runsConceded < current.bestRuns)
+    ) {
+      current.bestWickets = entry.wickets;
+      current.bestRuns = entry.runsConceded;
+    }
+    store.set(entry.name, current);
+  }
+
+  for (const result of results) {
+    for (const innings of result.innings || []) {
+      const battingEntries = Object.values(innings.battingCards || {}).filter((entry) => entry.balls > 0);
+      const bowlingEntries = Object.values(innings.bowlingCards || {}).filter((entry) => entry.balls > 0);
+
+      battingEntries.forEach((entry) => {
+        upsertBatting(overallBatting, entry);
+      });
+
+      bowlingEntries.forEach((entry) => {
+        upsertBowling(overallBowling, entry);
+      });
+    }
+  }
+
+  const sortBatting = (store) =>
+    [...store.values()]
+      .sort((left, right) => right.runs - left.runs || left.balls - right.balls)
+      .slice(0, 5);
+  const sortBowling = (store) =>
+    [...store.values()]
+      .sort((left, right) => right.wickets - left.wickets || left.runsConceded - right.runsConceded)
+      .slice(0, 5);
+
+  return {
+    overallBatting: sortBatting(overallBatting),
+    overallBowling: sortBowling(overallBowling),
+  };
+}
+
+function battingLineMarkup(entry) {
+  const strikeRate = entry.balls ? round((entry.runs * 100) / entry.balls) : 0;
+  return `
+    <article class="summary-card">
+      <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
+      <strong class="summary-card__headline">${entry.runs}</strong>
+      <div class="summary-card__substats">
+        <span>6s ${entry.sixes || 0}</span>
+        <span>4s ${entry.fours || 0}</span>
+        <span>SR ${strikeRate}</span>
+      </div>
+    </article>
+  `;
+}
+
+function bowlingLineMarkup(entry) {
+  const economy = entry.balls ? round((entry.runsConceded * 6) / entry.balls) : 0;
+  const strikeRate = entry.wickets ? round(entry.balls / entry.wickets) : "—";
+  return `
+    <article class="summary-card">
+      <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
+      <strong class="summary-card__headline">${entry.wickets}</strong>
+      <div class="summary-card__substats">
+        <span>Econ ${economy}</span>
+        <span>SR ${strikeRate}</span>
+      </div>
+    </article>
+  `;
 }
 
 function playerPreferenceRowsMarkup(player) {
@@ -47758,7 +48222,7 @@ function squadSheetMarkup() {
           `
           : ""
       }
-      <div class="roster-list">
+      <div class="roster-list ${metrics ? "roster-list--with-metrics" : ""}">
         ${rosterMarkup()}
       </div>
     </section>
@@ -47822,9 +48286,25 @@ function actionMarkup() {
     `;
   }
 
+  if (state.phase === "finished" && state.finishedView === "summary") {
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="reset">Start Another Tournament</button>
+      </div>
+    `;
+  }
+
+  if (state.phase === "finished") {
+    return `
+      <div class="action-row">
+        <button class="action-button" type="button" data-action="show-summary">Tournament Summary</button>
+      </div>
+    `;
+  }
+
   return `
     <div class="action-row">
-      <button class="action-button" type="button" data-action="reset">Start Another Run</button>
+      <button class="action-button" type="button" data-action="reset">Start Another Tournament</button>
     </div>
   `;
 }
@@ -47991,7 +48471,50 @@ function overFeedMarkup(live) {
 }
 
 function round(value) {
-  return Math.round(value * 100) / 100;
+  return Math.round(value);
+}
+
+function fullInningsCardMarkup(innings, label) {
+  const battingEntries = getLiveBattingEntries(innings);
+  const bowlingEntries = getLiveBowlingEntries(innings);
+
+  return `
+    <article class="innings-card innings-card--full">
+      <div class="innings-card__header">
+        <div class="innings-card__title">
+          <span class="schedule-stage">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(innings.battingLabel)}</strong>
+        </div>
+        <div class="innings-card__score">${escapeHtml(formatScore(innings.score, innings.wickets))} <span>(${formatOvers(innings.balls)} overs)</span></div>
+      </div>
+      <div class="innings-columns">
+        <div class="innings-column">
+          ${battingEntries.length
+            ? battingEntries
+                .map((entry) => `
+                  <div class="innings-entry">
+                    <span>${escapeHtml(formatBatterName(entry))}</span>
+                    <strong>${escapeHtml(formatBattingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No batting card yet.</p>`}
+        </div>
+        <div class="innings-column">
+          ${bowlingEntries.length
+            ? bowlingEntries
+                .map((entry) => `
+                  <div class="innings-entry innings-entry--bowling">
+                    <span>${escapeHtml(cleanPlayerName(entry.name))}</span>
+                    <strong>${escapeHtml(formatBowlingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No bowling card yet.</p>`}
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 function bowlingChoiceMarkup(live) {
@@ -48001,6 +48524,7 @@ function bowlingChoiceMarkup(live) {
 
   const innings = live.innings;
   const eligibleIds = [...getDisplayRoster(live.match.userTeam, state.difficulty)]
+    .sort(compareByBowlingDesc)
     .filter((player) => player.bowling >= 40)
     .filter((player) => (innings.bowlingCards[player.id]?.balls || 0) < 60)
     .filter((player) => player.id !== innings.lastBowlerId)
@@ -48046,7 +48570,11 @@ function nextBatterChoiceMarkup(live) {
     return "";
   }
 
-  const remainingIds = live.innings.remainingBatters;
+  const displayById = buildDisplayRosterById(live.match.userTeam);
+  const remainingPlayers = live.innings.remainingBatters
+    .map((playerId) => displayById.get(playerId) || live.innings.teamById.get(playerId))
+    .filter(Boolean)
+    .sort(compareByBattingDesc);
   return `
     <section class="surface-card surface-card--inner live-control-card">
       <div class="section-heading">
@@ -48057,9 +48585,9 @@ function nextBatterChoiceMarkup(live) {
         </div>
       </div>
       <div class="selection-grid">
-        ${remainingIds
-          .map((playerId) => {
-            const player = live.innings.teamById.get(playerId);
+        ${remainingPlayers
+          .map((player) => {
+            const playerId = player.id;
             return `
               <button class="selection-pill selection-pill--full" type="button" data-action="choose-batter" data-player-id="${playerId}">
                 <span>
@@ -48082,6 +48610,7 @@ function inningsBreakOpenersMarkup(live) {
   }
 
   const openers = live.match.userBattingPlan.openers;
+  const sortedRoster = [...getDisplayRoster(live.match.userTeam, state.difficulty)].sort(compareByBattingDesc);
   return `
     <section class="surface-card surface-card--inner live-control-card">
       <div class="section-heading">
@@ -48092,7 +48621,7 @@ function inningsBreakOpenersMarkup(live) {
         </div>
       </div>
       <div class="selection-grid">
-        ${live.match.userTeam
+        ${sortedRoster
           .map((player) => `
             <button
               class="selection-pill ${openers.includes(player.id) ? "selection-pill--active" : ""}"
@@ -48126,27 +48655,42 @@ function liveMatchMarkup() {
   const innings = live.innings;
   const firstInnings = match.innings[0];
   const secondInnings = match.innings[1];
+  const completedOvers = formatOvers(innings.balls);
+  const lastOverText = live.match.latestOver ? live.match.latestOver.events.join(" ") : "Opening over pending";
+  const currentScoreLabel = innings.target ? `${innings.battingLabel} chasing ${innings.target}` : `${innings.battingLabel} batting first`;
+  const supportingScoreline = match.currentInningsIndex === 1 && firstInnings
+    ? `${firstInnings.battingLabel} ${formatScore(firstInnings.score, firstInnings.wickets)}`
+    : match.currentInningsIndex === 0 && secondInnings
+      ? `${secondInnings.battingLabel} ${formatScore(secondInnings.score, secondInnings.wickets)}`
+      : "";
 
   return `
     <section class="match-card">
       <p class="eyebrow">${escapeHtml(match.stage)}</p>
       <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(match.conditions))}</p>
       <h3>${escapeHtml(match.opponent.label)}</h3>
-      <div class="live-scoreboard">
-        ${match.innings.map((entry, index) => `
-          <div class="scoreline ${index === match.currentInningsIndex ? "scoreline--active" : ""}">
-            <span>${escapeHtml(entry.battingLabel)}</span>
-            <strong>${escapeHtml(formatScore(entry.score, entry.wickets))}</strong>
+      <div class="live-hero">
+        <div class="live-hero__headline">
+          <div>
+            <span class="schedule-stage">${escapeHtml(currentScoreLabel)}</span>
+            <strong>${escapeHtml(formatScore(innings.score, innings.wickets))}</strong>
+            ${supportingScoreline ? `<p>${escapeHtml(supportingScoreline)}</p>` : ""}
           </div>
-        `).join("")}
-      </div>
-      <div class="mini-metrics">
-        <span>Striker <strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></span>
-        <span>Non-striker <strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></span>
-        <span>Last Bowler <strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></span>
-        <span>Last Over <strong>${escapeHtml(live.match.latestOver ? live.match.latestOver.events.join(" ") : "No over yet")}</strong></span>
-        <span>Powerplay <strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></span>
-        ${live.requiredRate ? `<span>Req RR <strong>${round(live.requiredRate)}</strong></span>` : ""}
+          <div class="live-hero__overs">
+            <span>Overs</span>
+            <strong>${escapeHtml(completedOvers)}</strong>
+          </div>
+        </div>
+        <div class="summary-grid live-summary-grid">
+          <div><span>Striker</span><strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></div>
+          <div><span>Non-striker</span><strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></div>
+          <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
+          <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
+          <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
+          <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
+          ${live.requiredRate ? `<div><span>Required Rate</span><strong>${round(live.requiredRate)}</strong></div>` : ""}
+          ${innings.target ? `<div><span>Target</span><strong>${escapeHtml(String(innings.target))}</strong></div>` : ""}
+        </div>
       </div>
       ${inningsBreakOpenersMarkup(live)}
       ${bowlingChoiceMarkup(live)}
@@ -48167,11 +48711,11 @@ function liveMatchMarkup() {
           <div class="section-heading">
             <div>
               <p class="eyebrow">Scorecard</p>
-              <h2>Live summary</h2>
+              <h2>Live recap</h2>
             </div>
           </div>
-          ${inningsCardMarkup(firstInnings, "1st Inn")}
-          ${secondInnings ? inningsCardMarkup(secondInnings, "2nd Inn") : ""}
+          ${fullInningsCardMarkup(firstInnings, "1st Inn")}
+          ${secondInnings && secondInnings.balls > 0 ? fullInningsCardMarkup(secondInnings, "2nd Inn") : ""}
         </section>
       </div>
     </section>
@@ -48200,6 +48744,10 @@ function latestResultMarkup() {
           .join("")}
       </div>
       <p><strong>Standout:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.standout || ""))}</p>
+      <section class="scorecard-summary">
+        <h4>Scorecard</h4>
+        ${state.latestMatch.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
+      </section>
     </section>
   `;
 }
@@ -48236,6 +48784,50 @@ function resultsHistoryMarkup() {
             `,
           )
           .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function tournamentSummaryMarkup() {
+  if (state.phase !== "finished" || state.finishedView !== "summary") {
+    return "";
+  }
+
+  const summary = buildTournamentSummary(state.results);
+
+  return `
+    <section class="surface-card">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Tournament Summary</p>
+          <h2>${state.champion ? "Campaign Review" : "Postmortem"}</h2>
+          <p class="squad-note">A full look at the tournament’s batting and bowling leaders.</p>
+        </div>
+      </div>
+      <div class="two-column-layout">
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Batting</p>
+              <h2>Top Batsmen</h2>
+            </div>
+          </div>
+          <div class="summary-list">
+            ${summary.overallBatting.map(battingLineMarkup).join("") || `<p class="empty-copy">No batting data yet.</p>`}
+          </div>
+        </section>
+        <section class="surface-card surface-card--inner">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Bowling</p>
+              <h2>Top Bowlers</h2>
+            </div>
+          </div>
+          <div class="summary-list">
+            ${summary.overallBowling.map(bowlingLineMarkup).join("") || `<p class="empty-copy">No bowling data yet.</p>`}
+          </div>
+        </section>
       </div>
     </section>
   `;
@@ -48288,6 +48880,8 @@ function heroMarkup() {
                 ? "The opponent and conditions are set. Lock the toss call in, then choose openers only if you are batting first."
                 : state.phase === "live"
                   ? "You are in the live match. Use manual over control or sim the rest when you want to move faster."
+                  : state.phase === "finished" && state.finishedView === "summary"
+                    ? "The tournament is wrapped. Use the summary to review the standout batting and bowling performers before starting the next campaign."
                   : state.champion
                     ? "You went the distance and lifted the Cricket World Cup."
                     : state.eliminated
@@ -48311,7 +48905,7 @@ function render() {
           <div class="layout-grid__main">
             ${state.phase === "draft" ? draftBoardMarkup() : ""}
             ${readyPanelMarkup()}
-            ${resultsHistoryMarkup()}
+            ${state.phase === "finished" && state.finishedView === "summary" ? tournamentSummaryMarkup() : resultsHistoryMarkup()}
           </div>
           <aside class="layout-grid__side">
             ${squadSheetMarkup()}
@@ -48343,6 +48937,15 @@ document.addEventListener("click", (event) => {
 
   if (action === "reset") {
     state = createInitialState();
+    render();
+    return;
+  }
+
+  if (action === "show-summary") {
+    state = {
+      ...state,
+      finishedView: "summary",
+    };
     render();
     return;
   }
