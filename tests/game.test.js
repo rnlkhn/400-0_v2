@@ -8,6 +8,7 @@ import {
   confirmChaseOpeners,
   createInitialState,
   draftPlayer,
+  getDifficultyAdjustedPlayer,
   getLiveContext,
   getOpponentMetrics,
   getPregameContext,
@@ -167,4 +168,21 @@ test("bowling specialists have a batting floor and Ashraful 2003 keeps the custo
   const ashraful2003 = PLAYER_POOL.find((player) => player.id === "bangladesh-2003-mohammad-ashraful");
   assert.ok(ashraful2003);
   assert.equal(ashraful2003.batting, 77);
+});
+
+test("county mode uses each player's prime batting and bowling ratings independently", () => {
+  const deSilvaEntries = PLAYER_POOL.filter((player) => player.name === "Aravinda de Silva");
+  assert.ok(deSilvaEntries.length > 1);
+
+  const sampleEntry = deSilvaEntries.find(
+    (player) =>
+      player.batting < Math.max(...deSilvaEntries.map((entry) => entry.batting)) ||
+      player.bowling < Math.max(...deSilvaEntries.map((entry) => entry.bowling)),
+  );
+  assert.ok(sampleEntry);
+
+  const adjusted = getDifficultyAdjustedPlayer(sampleEntry, "county");
+
+  assert.equal(adjusted.batting, Math.max(...deSilvaEntries.map((entry) => entry.batting)));
+  assert.equal(adjusted.bowling, Math.max(...deSilvaEntries.map((entry) => entry.bowling)));
 });

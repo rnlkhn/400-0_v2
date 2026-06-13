@@ -428,18 +428,7 @@ function difficultyMarkup() {
 
 function draftBoardMarkup() {
   if (!state.currentSquad) {
-    return `
-      <section class="surface-card">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Draft Board</p>
-            <h2>Build your XI</h2>
-          </div>
-        </div>
-        <p class="draft-instruction-lead">Spin a historical World Cup squad, lock one player in, then spin again.</p>
-        <p class="empty-copy">Every draft pool gives you a fresh country and year. Duplicate real-world players stay blocked across eras.</p>
-      </section>
-    `;
+    return "";
   }
 
   const candidates = [...getDisplayRoster(state.currentCandidates, state.difficulty)].sort(compareDraftCandidates);
@@ -1077,9 +1066,10 @@ function latestResultMarkup() {
   `;
 }
 
-function resultsHistoryMarkup() {
-  const historicalResults =
-    state.latestMatch && state.results.length > 1
+function resultsHistoryMarkup(includeLatest = false) {
+  const historicalResults = includeLatest
+    ? state.results
+    : state.latestMatch && state.results.length > 1
       ? state.results.slice(0, -1)
       : state.latestMatch && state.results.length === 1
         ? []
@@ -1177,7 +1167,7 @@ function readyPanelMarkup() {
   if (state.phase === "live") {
     return liveMatchMarkup();
   }
-  if (state.phase === "ready" || state.phase === "finished") {
+  if (state.phase === "ready" || (state.phase === "finished" && state.finishedView !== "summary")) {
     return latestResultMarkup();
   }
   return "";
@@ -1235,7 +1225,11 @@ function render() {
           <div class="layout-grid__main">
             ${state.phase === "draft" ? draftBoardMarkup() : ""}
             ${readyPanelMarkup()}
-            ${state.phase === "finished" && state.finishedView === "summary" ? tournamentSummaryMarkup() : resultsHistoryMarkup()}
+            ${
+              state.phase === "finished" && state.finishedView === "summary"
+                ? `${tournamentSummaryMarkup()}${resultsHistoryMarkup(true)}`
+                : resultsHistoryMarkup()
+            }
           </div>
           <aside class="layout-grid__side">
             ${squadSheetMarkup()}
