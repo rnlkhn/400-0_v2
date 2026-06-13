@@ -32,7 +32,7 @@ const STRIPPABLE_NAME_FLAGS = new Set([
   "wk",
 ]);
 
-const PLAYER_NAME_ALIASES = new Map([
+const DATA_PLAYER_NAME_ALIASES = new Map([
   ["Yousuf Youhana", "Mohammad Yousuf"],
 ]);
 
@@ -56,7 +56,7 @@ function normalizePlayerName(name) {
     .replace(/\s+/g, " ")
     .trim();
 
-  return PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
+  return DATA_PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
 }
 
 function hasWicketkeeperFlag(name) {

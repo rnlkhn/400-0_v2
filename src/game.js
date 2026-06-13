@@ -184,7 +184,7 @@ const POWERPLAY_END = 10;
 const DEATH_OVERS_START = 40;
 const ROSTER_SIZE = 11;
 
-const PLAYER_NAME_ALIASES = new Map([
+const GAME_PLAYER_NAME_ALIASES = new Map([
   ["Yousuf Youhana", "Mohammad Yousuf"],
 ]);
 
@@ -230,7 +230,7 @@ function normalizeName(name) {
     .replace(/\s+/g, " ")
     .trim();
 
-  return PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
+  return GAME_PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
 }
 
 function getPlayerIdentity(player) {
