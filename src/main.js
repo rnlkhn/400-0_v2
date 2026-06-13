@@ -30,6 +30,7 @@ import {
 
 const appElement = document.querySelector("#app");
 let state = createInitialState();
+let selectedBowlerId = null;
 
 function currentDifficulty() {
   return DIFFICULTY_LEVELS.find((level) => level.id === state.difficulty) || DIFFICULTY_LEVELS[1];
@@ -113,6 +114,41 @@ function formatTossDecision(decision) {
 
 function userBatsFirstFromPregame(pregame) {
   return pregame.tossWinner === "user" ? pregame.userDecision === "bat" : pregame.userDecision === "bowl";
+}
+
+function getStatusMessage() {
+  if (state.phase === "draft") {
+    return "Build the XI one World Cup squad at a time. Once the side is complete, you’ll set the toss, openers, and then run the match over by over.";
+  }
+
+  if (state.phase === "pregame") {
+    const context = getPregameContext(state);
+    if (!context?.pregame.userDecision) {
+      return "The opponent and conditions are set. Lock the toss call in, then choose openers only if you are batting first.";
+    }
+
+    return userBatsFirstFromPregame(context.pregame)
+      ? "The toss is settled. Pick your two openers, then start the innings."
+      : "The toss is settled. Because you are bowling first, the match can begin straight away.";
+  }
+
+  if (state.phase === "live") {
+    return "You are in the live match. Use manual over control or sim the rest when you want to move faster.";
+  }
+
+  if (state.phase === "finished" && state.finishedView === "summary") {
+    return "The tournament is wrapped. Use the summary to review the standout batting and bowling performers before starting the next campaign.";
+  }
+
+  if (state.champion) {
+    return "You went the distance and lifted the Cricket World Cup.";
+  }
+
+  if (state.eliminated) {
+    return "The run is over, but the scorebook is still there for the postmortem.";
+  }
+
+  return "The XI is ready. Step into the next match when you’re set.";
 }
 
 function formatRatings(player) {
@@ -561,7 +597,7 @@ function pregameSetupMarkup() {
             }
           </p>
           ${
-            context.pregame.tossWinner === "user"
+            context.pregame.tossWinner === "user" && !context.pregame.userDecision
               ? `
                 <div class="action-row">
                   <button class="action-button ${context.pregame.userDecision === "bat" ? "action-button--active" : ""}" type="button" data-action="toss" data-choice="bat">Bat first</button>
@@ -691,6 +727,17 @@ function round(value) {
   return Math.round(value);
 }
 
+function resultScorecardDetailsMarkup(result) {
+  return `
+    <details class="scorecard-details">
+      <summary>View scorecard</summary>
+      <div class="scorecard-details__body">
+        ${result.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
+      </div>
+    </details>
+  `;
+}
+
 function fullInningsCardMarkup(innings, label) {
   const battingEntries = getLiveBattingEntries(innings);
   const bowlingEntries = getLiveBowlingEntries(innings);
@@ -762,16 +809,23 @@ function bowlingChoiceMarkup(live) {
         ${eligibleIds
           .map((bowlerId) => {
             const bowler = byId.get(bowlerId);
+            const isSelected = selectedBowlerId === bowlerId;
             return `
-              <article class="choice-card ${recommendation === bowlerId ? "choice-card--recommended" : ""}">
+              <article class="choice-card ${recommendation === bowlerId ? "choice-card--recommended" : ""} ${isSelected ? "choice-card--selected" : ""}">
                 <div class="choice-card__copy">
                   <h3>${escapeHtml(cleanPlayerName(bowler.name))}</h3>
-                  <p>${escapeHtml(formatBowlingStyle(bowler))} · Bowl ${bowler.bowling}</p>
+                  <p>${escapeHtml(formatBowlingStyle(bowler))} · Bowl ${Math.round(bowler.bowling)}</p>
                 </div>
                 <div class="choice-card__actions">
-                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="attacking">Attack</button>
-                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="balanced">Balance</button>
-                  <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="defensive">Defend</button>
+                  ${
+                    isSelected
+                      ? `
+                        <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="attacking">Attack</button>
+                        <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="balanced">Balance</button>
+                        <button class="selection-pill" type="button" data-action="choose-bowler" data-player-id="${bowlerId}" data-intent="defensive">Defend</button>
+                      `
+                      : `<button class="selection-pill selection-pill--full" type="button" data-action="prime-bowler" data-player-id="${bowlerId}">Use this bowler</button>`
+                  }
                 </div>
               </article>
             `;
@@ -970,7 +1024,14 @@ function latestResultMarkup() {
 }
 
 function resultsHistoryMarkup() {
-  if (!state.results.length) {
+  const historicalResults =
+    state.latestMatch && state.results.length > 1
+      ? state.results.slice(0, -1)
+      : state.latestMatch && state.results.length === 1
+        ? []
+        : state.results;
+
+  if (!historicalResults.length) {
     return "";
   }
 
@@ -983,7 +1044,7 @@ function resultsHistoryMarkup() {
         </div>
       </div>
       <div class="schedule-list">
-        ${state.results
+        ${historicalResults
           .map(
             (result) => `
               <article class="schedule-card">
@@ -997,6 +1058,7 @@ function resultsHistoryMarkup() {
                     .map((line) => `<span>${escapeHtml(line.label)} ${escapeHtml(line.score)}</span>`)
                     .join("")}
                 </div>
+                ${resultScorecardDetailsMarkup(result)}
               </article>
             `,
           )
@@ -1089,23 +1151,7 @@ function heroMarkup() {
         </article>
       </div>
       <div class="status-panel">
-        <p>
-          ${
-            state.phase === "draft"
-              ? "Build the XI one World Cup squad at a time. Once the side is complete, you’ll set the toss, openers, and then run the match over by over."
-              : state.phase === "pregame"
-                ? "The opponent and conditions are set. Lock the toss call in, then choose openers only if you are batting first."
-                : state.phase === "live"
-                  ? "You are in the live match. Use manual over control or sim the rest when you want to move faster."
-                  : state.phase === "finished" && state.finishedView === "summary"
-                    ? "The tournament is wrapped. Use the summary to review the standout batting and bowling performers before starting the next campaign."
-                  : state.champion
-                    ? "You went the distance and lifted the Cricket World Cup."
-                    : state.eliminated
-                      ? "The run is over, but the scorebook is still there for the postmortem."
-                      : "The XI is ready. Step into the next match when you’re set."
-          }
-        </p>
+        <p>${escapeHtml(getStatusMessage())}</p>
         ${actionMarkup()}
       </div>
     </section>
@@ -1113,6 +1159,10 @@ function heroMarkup() {
 }
 
 function render() {
+  if (state.phase !== "live" || getLiveContext(state)?.match.awaiting?.type !== "choose-bowler") {
+    selectedBowlerId = null;
+  }
+
   appElement.innerHTML = `
     <div class="app">
       <div class="shell">
@@ -1212,7 +1262,14 @@ document.addEventListener("click", (event) => {
     return;
   }
 
+  if (action === "prime-bowler") {
+    selectedBowlerId = target.dataset.playerId;
+    render();
+    return;
+  }
+
   if (action === "choose-bowler") {
+    selectedBowlerId = null;
     state = chooseBowler(state, target.dataset.playerId, target.dataset.intent);
     render();
     return;

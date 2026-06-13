@@ -362,6 +362,11 @@ button {
   flex-wrap: wrap;
 }
 
+.choice-card__actions .selection-pill--full {
+  width: 100%;
+  justify-content: center;
+}
+
 .live-control-card {
   margin-top: 12px;
 }
@@ -376,7 +381,7 @@ button {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
-  padding: 16px 18px;
+  padding: 14px 16px;
   border: 1px solid rgba(17, 59, 34, 0.12);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.6);
@@ -391,7 +396,7 @@ button {
 .live-hero__headline strong {
   display: block;
   font-family: "Bricolage Grotesque", sans-serif;
-  font-size: clamp(2rem, 8vw, 3.8rem);
+  font-size: clamp(1.85rem, 7vw, 3.1rem);
   color: var(--grass-dark);
   line-height: 0.95;
 }
@@ -422,7 +427,7 @@ button {
 
 .live-hero__overs strong {
   margin-top: 4px;
-  font-size: 1.35rem;
+  font-size: 1.05rem;
   line-height: 1;
 }
 
@@ -499,6 +504,29 @@ button {
   border-top: 1px solid rgba(17, 59, 34, 0.08);
 }
 
+.scorecard-details {
+  margin-top: 12px;
+  border-top: 1px solid rgba(17, 59, 34, 0.08);
+  padding-top: 12px;
+}
+
+.scorecard-details summary {
+  cursor: pointer;
+  color: var(--grass-dark);
+  font-weight: 700;
+  list-style: none;
+}
+
+.scorecard-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.scorecard-details__body {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
 .over-card {
   padding: 12px 14px;
 }
@@ -518,6 +546,11 @@ button {
   border: 1px solid rgba(17, 59, 34, 0.12);
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.5);
+}
+
+.choice-card--selected {
+  border-color: rgba(165, 118, 47, 0.52);
+  box-shadow: 0 0 0 1px rgba(165, 118, 47, 0.12);
 }
 
 .summary-row span {
