@@ -184,6 +184,10 @@ const POWERPLAY_END = 10;
 const DEATH_OVERS_START = 40;
 const ROSTER_SIZE = 11;
 
+const PLAYER_NAME_ALIASES = new Map([
+  ["Yousuf Youhana", "Mohammad Yousuf"],
+]);
+
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -212,7 +216,7 @@ function weightedChoice(entries, random) {
 }
 
 function normalizeName(name) {
-  return name
+  const cleaned = name
     .replace(/\(([^)]+)\)/g, (match, contents) => {
       const tokens = contents
         .toLowerCase()
@@ -225,6 +229,8 @@ function normalizeName(name) {
     })
     .replace(/\s+/g, " ")
     .trim();
+
+  return PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
 }
 
 function getPlayerIdentity(player) {

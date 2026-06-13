@@ -177,6 +177,33 @@ function topThree(entries, key, secondaryKey) {
     .slice(0, 3);
 }
 
+function compareDraftCandidates(left, right) {
+  const leftRank = getDraftRoleRank(left);
+  const rightRank = getDraftRoleRank(right);
+  if (leftRank !== rightRank) {
+    return leftRank - rightRank;
+  }
+
+  if (leftRank === 3) {
+    return right.bowling - left.bowling || right.batting - left.batting;
+  }
+
+  return right.batting - left.batting || right.bowling - left.bowling;
+}
+
+function getDraftRoleRank(player) {
+  if (player.role === "batsman") {
+    return 0;
+  }
+  if (player.role === "wicketkeeper") {
+    return 1;
+  }
+  if (isAllRounderPlayer(player)) {
+    return 2;
+  }
+  return 3;
+}
+
 function compareByBattingDesc(left, right) {
   return (
     right.batting - left.batting ||
@@ -202,7 +229,8 @@ function getLiveBattingEntries(innings) {
 
   return innings.teamRoster
     .map((playerId) => innings.battingCards[playerId])
-    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)));
+    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)))
+    .sort((left, right) => right.runs - left.runs || left.balls - right.balls);
 }
 
 function getLiveBowlingEntries(innings) {
@@ -415,7 +443,7 @@ function draftBoardMarkup() {
     `;
   }
 
-  const candidates = getDisplayRoster(state.currentCandidates, state.difficulty);
+  const candidates = [...getDisplayRoster(state.currentCandidates, state.difficulty)].sort(compareDraftCandidates);
 
   return `
     <section class="surface-card">
@@ -692,6 +720,53 @@ function inningsCardMarkup(innings, label) {
   `;
 }
 
+function currentInningsSnapshotMarkup(innings, label) {
+  const batters = [...Object.values(innings.battingCards).filter((entry) => entry.balls > 0)]
+    .sort((left, right) => right.runs - left.runs || left.balls - right.balls)
+    .slice(0, 2);
+  const bowlers = [...Object.values(innings.bowlingCards).filter((entry) => entry.balls > 0)]
+    .sort((left, right) => right.wickets - left.wickets || left.runsConceded - right.runsConceded)
+    .slice(0, 2);
+
+  return `
+    <article class="innings-card innings-card--snapshot">
+      <div class="innings-card__header">
+        <div>
+          <span class="schedule-stage">${escapeHtml(label)}</span>
+          <strong>${escapeHtml(innings.battingLabel)}</strong>
+        </div>
+        <div class="innings-card__score">${escapeHtml(formatScore(innings.score, innings.wickets))} <span>(${formatOvers(innings.balls)} overs)</span></div>
+      </div>
+      <div class="innings-columns">
+        <div class="innings-column">
+          ${batters.length
+            ? batters
+                .map((entry) => `
+                  <div class="innings-row">
+                    <span>${escapeHtml(formatBatterName(entry))}</span>
+                    <strong>${escapeHtml(formatBattingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No batting card yet.</p>`}
+        </div>
+        <div class="innings-column">
+          ${bowlers.length
+            ? bowlers
+                .map((entry) => `
+                  <div class="innings-row">
+                    <span>${escapeHtml(cleanPlayerName(entry.name))}</span>
+                    <strong>${escapeHtml(formatBowlingEntry(entry))}</strong>
+                  </div>
+                `)
+                .join("")
+            : `<p class="empty-copy">No bowling card yet.</p>`}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
 function overFeedMarkup(live) {
   const innings = live.innings;
   if (!innings.overs.length) {
@@ -926,14 +1001,8 @@ function liveMatchMarkup() {
   const innings = live.innings;
   const firstInnings = match.innings[0];
   const secondInnings = match.innings[1];
-  const completedOvers = formatOvers(innings.balls);
   const lastOverText = live.match.latestOver ? live.match.latestOver.events.join(" ") : "Opening over pending";
-  const currentScoreLabel = innings.target ? `${innings.battingLabel} chasing ${innings.target}` : `${innings.battingLabel} batting first`;
-  const supportingScoreline = match.currentInningsIndex === 1 && firstInnings
-    ? `${firstInnings.battingLabel} ${formatScore(firstInnings.score, firstInnings.wickets)}`
-    : match.currentInningsIndex === 0 && secondInnings
-      ? `${secondInnings.battingLabel} ${formatScore(secondInnings.score, secondInnings.wickets)}`
-      : "";
+  const inningsLabel = `${match.currentInningsIndex + 1}${match.currentInningsIndex === 0 ? "st" : "nd"} Inn`;
 
   return `
     <section class="match-card">
@@ -941,23 +1010,14 @@ function liveMatchMarkup() {
       <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(match.conditions))}</p>
       <h3>${escapeHtml(match.opponent.label)}</h3>
       <div class="live-hero">
-        <div class="live-hero__headline">
-          <div>
-            <span class="schedule-stage">${escapeHtml(currentScoreLabel)}</span>
-            <strong>${escapeHtml(formatScore(innings.score, innings.wickets))}</strong>
-            ${supportingScoreline ? `<p>${escapeHtml(supportingScoreline)}</p>` : ""}
-          </div>
-          <div class="live-hero__overs">
-            <span>Overs</span>
-            <strong>${escapeHtml(completedOvers)}</strong>
-          </div>
-        </div>
+        ${currentInningsSnapshotMarkup(innings, inningsLabel)}
         <div class="summary-grid live-summary-grid">
           <div><span>Striker</span><strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></div>
           <div><span>Non-striker</span><strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></div>
           <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
           <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
           <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
+          <div><span>Over</span><strong>${escapeHtml(formatOvers(innings.balls))}</strong></div>
           <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
           ${live.requiredRate ? `<div><span>Required Rate</span><strong>${round(live.requiredRate)}</strong></div>` : ""}
           ${innings.target ? `<div><span>Target</span><strong>${escapeHtml(String(innings.target))}</strong></div>` : ""}
@@ -966,29 +1026,17 @@ function liveMatchMarkup() {
       ${inningsBreakOpenersMarkup(live)}
       ${bowlingChoiceMarkup(live)}
       ${nextBatterChoiceMarkup(live)}
-      <div class="two-column-layout">
-        <section class="surface-card surface-card--inner">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Over Feed</p>
-              <h2>Latest overs</h2>
-            </div>
+      <section class="surface-card surface-card--inner">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Over Feed</p>
+            <h2>Latest overs</h2>
           </div>
-          <div class="over-feed">
-            ${overFeedMarkup(live)}
-          </div>
-        </section>
-        <section class="surface-card surface-card--inner">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Scorecard</p>
-              <h2>Live recap</h2>
-            </div>
-          </div>
-          ${fullInningsCardMarkup(firstInnings, "1st Inn")}
-          ${secondInnings && secondInnings.balls > 0 ? fullInningsCardMarkup(secondInnings, "2nd Inn") : ""}
-        </section>
-      </div>
+        </div>
+        <div class="over-feed">
+          ${overFeedMarkup(live)}
+        </div>
+      </section>
     </section>
   `;
 }

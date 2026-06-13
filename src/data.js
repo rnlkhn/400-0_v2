@@ -32,6 +32,10 @@ const STRIPPABLE_NAME_FLAGS = new Set([
   "wk",
 ]);
 
+const PLAYER_NAME_ALIASES = new Map([
+  ["Yousuf Youhana", "Mohammad Yousuf"],
+]);
+
 function parseNameFlags(value) {
   return value
     .toLowerCase()
@@ -47,10 +51,12 @@ function hasOnlyMetadataFlags(value) {
 }
 
 function normalizePlayerName(name) {
-  return name
+  const cleaned = name
     .replace(/\(([^)]+)\)/g, (match, contents) => (hasOnlyMetadataFlags(contents) ? "" : match))
     .replace(/\s+/g, " ")
     .trim();
+
+  return PLAYER_NAME_ALIASES.get(cleaned) || cleaned;
 }
 
 function hasWicketkeeperFlag(name) {
