@@ -229,8 +229,7 @@ function getLiveBattingEntries(innings) {
 
   return innings.teamRoster
     .map((playerId) => innings.battingCards[playerId])
-    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)))
-    .sort((left, right) => right.runs - left.runs || left.balls - right.balls);
+    .filter((entry) => entry && (entry.balls > 0 || entry.out || activeIds.has(entry.id)));
 }
 
 function getLiveBowlingEntries(innings) {
@@ -596,7 +595,7 @@ function pregameSetupMarkup() {
     return "";
   }
 
-  const difficultyRoster = getDisplayRoster(state.roster, state.difficulty);
+  const difficultyRoster = [...getDisplayRoster(state.roster, state.difficulty)].sort(compareByBattingDesc);
   const opponentMetrics = getOpponentMetrics(state);
   const tossDecided = Boolean(context.pregame.userDecision);
   const userBatsFirst = tossDecided ? userBatsFirstFromPregame(context.pregame) : false;
@@ -721,7 +720,8 @@ function inningsCardMarkup(innings, label) {
 }
 
 function currentInningsSnapshotMarkup(innings, label) {
-  const batters = [...Object.values(innings.battingCards).filter((entry) => entry.balls > 0)]
+  const activeIds = new Set([innings.strikerId, innings.nonStrikerId].filter(Boolean));
+  const batters = [...Object.values(innings.battingCards).filter((entry) => activeIds.has(entry.id))]
     .sort((left, right) => right.runs - left.runs || left.balls - right.balls)
     .slice(0, 2);
   const bowlers = [...Object.values(innings.bowlingCards).filter((entry) => entry.balls > 0)]
