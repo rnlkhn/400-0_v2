@@ -325,6 +325,7 @@ function battingLineMarkup(entry) {
       <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
       <strong class="summary-card__headline">${entry.runs}</strong>
       <div class="summary-card__substats">
+        <span>Balls ${entry.balls || 0}</span>
         <span>6s ${entry.sixes || 0}</span>
         <span>4s ${entry.fours || 0}</span>
         <span>SR ${strikeRate}</span>
@@ -341,6 +342,7 @@ function bowlingLineMarkup(entry) {
       <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(entry.name))}</span>
       <strong class="summary-card__headline">${entry.wickets}</strong>
       <div class="summary-card__substats">
+        <span>Overs ${formatOvers(entry.balls || 0)}</span>
         <span>Econ ${economy}</span>
         <span>SR ${strikeRate}</span>
       </div>
@@ -1042,7 +1044,7 @@ function latestResultMarkup() {
   }
 
   return `
-    <section class="match-card">
+    <section class="match-card ${state.latestMatch.winner === "user" ? "match-card--win" : "match-card--loss"}">
       <p class="eyebrow">${escapeHtml(state.latestMatch.stage)}</p>
       <p class="scorecard-conditions">Conditions: ${escapeHtml(formatConditions(state.latestMatch.conditions))}</p>
       <h3>${escapeHtml(state.latestMatch.opponent)}</h3>
@@ -1091,7 +1093,7 @@ function resultsHistoryMarkup(includeLatest = false) {
         ${historicalResults
           .map(
             (result) => `
-              <article class="schedule-card">
+              <article class="schedule-card ${result.winner === "user" ? "schedule-card--win" : "schedule-card--loss"}">
                 <div>
                   <p class="schedule-stage">${escapeHtml(result.stage)}</p>
                   <h3>${escapeHtml(result.opponent)}</h3>

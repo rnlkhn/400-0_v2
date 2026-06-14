@@ -579,6 +579,16 @@ button {
   align-items: start;
 }
 
+.schedule-card--win {
+  border-color: rgba(29, 90, 51, 0.18);
+  background: rgba(242, 249, 239, 0.9);
+}
+
+.schedule-card--loss {
+  border-color: rgba(143, 31, 33, 0.18);
+  background: rgba(252, 244, 242, 0.9);
+}
+
 .schedule-scorelines {
   display: grid;
   gap: 8px;
