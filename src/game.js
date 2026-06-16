@@ -24,6 +24,7 @@ export const DIFFICULTY_LEVELS = [
     usePrimeRatings: true,
     hideRatings: false,
     recommendBowler: true,
+    rerolls: 3,
   },
   {
     id: "international",
@@ -32,6 +33,7 @@ export const DIFFICULTY_LEVELS = [
     usePrimeRatings: false,
     hideRatings: false,
     recommendBowler: false,
+    rerolls: 1,
   },
   {
     id: "legend",
@@ -40,6 +42,7 @@ export const DIFFICULTY_LEVELS = [
     usePrimeRatings: false,
     hideRatings: true,
     recommendBowler: false,
+    rerolls: 0,
   },
 ];
 
@@ -273,6 +276,10 @@ function getDifficultyProfile(difficultyId) {
   return DIFFICULTY_BY_ID.get(difficultyId) || DIFFICULTY_LEVELS[1];
 }
 
+export function getRerollAllowance(difficultyId) {
+  return getDifficultyProfile(difficultyId).rerolls ?? 0;
+}
+
 export function getDifficultyAdjustedPlayer(player, difficultyId) {
   if (!player) {
     return player;
@@ -316,12 +323,9 @@ export function getTeamMetrics(roster) {
     return { batting: 0, bowling: 0 };
   }
 
-  const teamBattingAverage = roster.reduce((total, player) => total + player.batting, 0) / roster.length;
-  const teamBowlingAverage = roster.reduce((total, player) => total + player.bowling, 0) / roster.length;
-
   return {
-    batting: round(getTopAverage(roster, "batting", 5) * 0.74 + teamBattingAverage * 0.26),
-    bowling: round(getTopAverage(roster, "bowling", 5) * 0.74 + teamBowlingAverage * 0.26),
+    batting: round(getTopAverage(roster, "batting", 5)),
+    bowling: round(getTopAverage(roster, "bowling", 5)),
   };
 }
 
@@ -403,6 +407,45 @@ function buildConditions(opponent, random) {
     surface: SURFACE_OPTIONS[surfaceId],
     outfield: OUTFIELD_OPTIONS[outfieldId],
   };
+}
+
+function buildOpponentCard(squad, difficultyId) {
+  const roster = selectBestXI(getDisplayRoster(getOpponentRoster(squad.id), difficultyId));
+  const metrics = getTeamMetrics(roster);
+  return {
+    id: squad.id,
+    label: squad.label,
+    shortName: squad.team || squad.country || squad.label.split(" ").slice(0, -1).join(" "),
+    note: squad.note,
+    batting: metrics.batting,
+    bowling: metrics.bowling,
+    overall: round((metrics.batting + metrics.bowling) / 2),
+  };
+}
+
+function chooseOpponentForStage(state, stageBlueprint, random) {
+  const availableSquads = DRAFT_SQUADS.filter((squad) => !state.usedOpponentIds.includes(squad.id));
+  const evaluated = availableSquads.map((squad) => buildOpponentCard(squad, state.difficulty));
+
+  if (!evaluated.length) {
+    return null;
+  }
+
+  const shortlist = [...evaluated]
+    .sort((left, right) => {
+      const leftDistance = Math.abs(left.overall - stageBlueprint.overall);
+      const rightDistance = Math.abs(right.overall - stageBlueprint.overall);
+      return leftDistance - rightDistance || right.overall - left.overall;
+    })
+    .slice(0, Math.max(8, Math.ceil(evaluated.length * 0.18)));
+
+  return weightedChoice(
+    shortlist.map((candidate, index) => {
+      const distance = Math.max(1, Math.abs(candidate.overall - stageBlueprint.overall));
+      return [candidate, Math.max(1, 18 - distance - index * 0.35)];
+    }),
+    random,
+  );
 }
 
 function getAggressionProfile(player) {
@@ -535,6 +578,99 @@ function getCurrentRunRate(innings) {
     return 0;
   }
   return (innings.score * 6) / innings.balls;
+}
+
+function getSettlingTarget(player) {
+  switch (player.aggressionLevel) {
+    case "Very Aggressive":
+      return 10;
+    case "Aggressive":
+      return 14;
+    case "Cautious":
+      return 22;
+    case "Very Cautious":
+      return 28;
+    default:
+      return 18;
+  }
+}
+
+function getBatterSettledLevel(player, battingCard) {
+  if (!player || !battingCard || battingCard.balls <= 0) {
+    return 0;
+  }
+
+  const settlingTarget = getSettlingTarget(player);
+  const boundaryBoost = battingCard.fours * 0.9 + battingCard.sixes * 1.4;
+  const runBoost = battingCard.runs / 14;
+  const aggressionBoost = player.aggressionLevel === "Very Aggressive" ? 1.4 : player.aggressionLevel === "Aggressive" ? 0.8 : 0;
+  const progress = (battingCard.balls + boundaryBoost + runBoost + aggressionBoost) / settlingTarget;
+  return clamp(round(progress * 99), 0, 99);
+}
+
+function getActiveBatters(innings) {
+  return [innings.strikerId, innings.nonStrikerId]
+    .filter(Boolean)
+    .map((playerId) => {
+      const player = innings.teamById.get(playerId);
+      const card = innings.battingCards[playerId];
+      return player && card ? { player, card } : null;
+    })
+    .filter(Boolean);
+}
+
+function getCurrentPartnershipRuns(innings) {
+  return innings.score - innings.lastWicketScore;
+}
+
+function getCurrentPartnershipBalls(innings) {
+  return innings.balls - innings.lastWicketBall;
+}
+
+function getTopOrderDamage(innings, count = 4) {
+  const topOrderIds = innings.teamRoster.slice(0, count);
+  return topOrderIds.reduce((total, playerId) => total + (innings.battingCards[playerId]?.out ? 1 : 0), 0);
+}
+
+function getRecentWicketCount(innings, windowBalls = 18) {
+  return innings.recentWickets.filter((ballNumber) => innings.balls - ballNumber <= windowBalls).length;
+}
+
+function getTeamConfidence(innings) {
+  const activeBatters = getActiveBatters(innings);
+  const settledAverage = activeBatters.length
+    ? activeBatters.reduce((total, batter) => total + getBatterSettledLevel(batter.player, batter.card), 0) / activeBatters.length
+    : 0;
+  const partnershipRuns = getCurrentPartnershipRuns(innings);
+  const partnershipBalls = getCurrentPartnershipBalls(innings);
+  const topOrderDamage = getTopOrderDamage(innings);
+  const recentWickets = getRecentWicketCount(innings);
+  const currentRate = getCurrentRunRate(innings);
+  const requiredRate = innings.target ? getRequiredRunRate(innings) : null;
+  const activeQuality = activeBatters.length
+    ? activeBatters.reduce((total, batter) => total + batter.player.batting, 0) / activeBatters.length
+    : 0;
+  const chaseControl = innings.target
+    ? clamp(12 - Math.max((requiredRate || 0) - currentRate, 0) * 4.6, -14, 12)
+    : clamp((currentRate - 4.9) * 2.6, -8, 10);
+  const collapseExposure = innings.wickets >= 6 ? 8 : innings.wickets >= 4 ? 4 : 0;
+
+  return clamp(
+    round(
+      44 +
+        settledAverage * 0.2 +
+        Math.max(activeQuality - 70, 0) * 0.16 +
+        Math.min(partnershipRuns * 0.62, 16) +
+        Math.min(partnershipBalls * 0.16, 7) +
+        chaseControl -
+        innings.wickets * 3.8 -
+        topOrderDamage * 5.6 -
+        recentWickets * 6.5 -
+        collapseExposure,
+    ),
+    0,
+    99,
+  );
 }
 
 function getChasePressure(innings, wicketSlotsLeft) {
@@ -741,6 +877,9 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
     overs: [],
     lastBowlerId: "",
     lastWicket: null,
+    lastWicketScore: 0,
+    lastWicketBall: 0,
+    recentWickets: [],
     teamById: byId,
     bowlingById,
     teamRoster: teamRoster.map((player) => player.id),
@@ -762,6 +901,7 @@ function cloneInnings(innings) {
     },
     overs: innings.overs.map((over) => ({ ...over, events: [...over.events] })),
     lastWicket: innings.lastWicket ? { ...innings.lastWicket } : null,
+    recentWickets: [...innings.recentWickets],
   };
 }
 
@@ -915,13 +1055,65 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
   const battingConditions = getBattingConditionsAdvantage(innings.conditions, overIndex);
   const wicketsLeft = 10 - innings.wickets;
   const chasePressure = getChasePressure(innings, wicketsLeft);
+  const settledLevel = getBatterSettledLevel(striker, battingCard);
+  const settledFactor = settledLevel / 99;
+  const teamConfidence = getTeamConfidence(innings);
+  const confidenceFactor = (teamConfidence - 50) / 100;
+  const battingPosition = innings.teamRoster.indexOf(striker.id);
+  const isTopOrder = battingPosition >= 0 && battingPosition <= 3;
+  const sightingFactor = battingCard.balls < 12 ? (12 - battingCard.balls) / 12 : 0;
+  const recentWickets = getRecentWicketCount(innings);
   const batterStrength = striker.batting;
   const bowlerStrength = bowler.bowling;
   const battingEdge = (batterStrength - bowlerStrength) * 0.0007;
-  const earlyNewBall = overIndex < POWERPLAY_END ? 0.008 : 0;
-  const deathFactor = overIndex >= DEATH_OVERS_START ? 0.009 : 0;
+  const earlyNewBall = overIndex < POWERPLAY_END ? 0.006 : 0;
+  const deathFactor = overIndex >= DEATH_OVERS_START ? 0.008 : 0;
+  const qualityShield = clamp((batterStrength - 70) * 0.00042, -0.005, 0.014);
+  const topOrderShield = isTopOrder ? clamp(0.006 + Math.max(batterStrength - 80, 0) * 0.00018, 0.006, 0.015) : 0;
+  const lowerOrderRisk = batterStrength < 45 ? 0.018 : batterStrength < 55 ? 0.012 : batterStrength < 70 ? 0.004 : 0;
+  let earlyWicketMod = 0;
+  let earlyBoundaryMod = 0;
+  let earlyRotateMod = 0;
+
+  switch (striker.aggressionLevel) {
+    case "Very Aggressive":
+      earlyWicketMod = sightingFactor * 0.012;
+      earlyBoundaryMod = sightingFactor * 0.032;
+      earlyRotateMod = sightingFactor * -0.016;
+      break;
+    case "Aggressive":
+      earlyWicketMod = sightingFactor * 0.006;
+      earlyBoundaryMod = sightingFactor * 0.018;
+      earlyRotateMod = sightingFactor * -0.008;
+      break;
+    case "Cautious":
+      earlyWicketMod = sightingFactor * -0.008;
+      earlyBoundaryMod = sightingFactor * -0.014;
+      earlyRotateMod = sightingFactor * 0.02;
+      break;
+    case "Very Cautious":
+      earlyWicketMod = sightingFactor * -0.011;
+      earlyBoundaryMod = sightingFactor * -0.02;
+      earlyRotateMod = sightingFactor * 0.028;
+      break;
+    default:
+      earlyWicketMod = sightingFactor * -0.002;
+      earlyBoundaryMod = sightingFactor * -0.004;
+      earlyRotateMod = sightingFactor * 0.008;
+      break;
+  }
+
+  const newBatterRisk =
+    (1 - settledFactor)
+    * (striker.aggressionLevel === "Very Aggressive" ? 0.013 : striker.aggressionLevel === "Aggressive" ? 0.009 : 0.0065)
+    * clamp(1.12 - Math.max(batterStrength - 70, 0) * 0.01, 0.58, 1.08);
+  const collapseRisk = recentWickets >= 2 && innings.wickets >= 3 && teamConfidence < 42
+    ? clamp((42 - teamConfidence) * 0.0008, 0, 0.02)
+    : 0;
+  const anchorShield = batterStrength >= 92 ? 0.007 : batterStrength >= 84 ? 0.004 : batterStrength <= 50 ? -0.003 : 0;
+  const lowerOrderSlowdown = batterStrength < 55 && innings.wickets >= 5 ? 0.02 : 0;
   const wicketChance = clamp(
-    0.026 +
+    0.024 +
       intent.wicket +
       aggression.wicket +
       bowlingConditions +
@@ -930,24 +1122,37 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       battingConditions +
       deathFactor +
       chasePressure * 0.008 -
-      battingEdge,
-    0.012,
-    0.19,
+      battingEdge +
+      newBatterRisk +
+      collapseRisk -
+      settledFactor * 0.019 -
+      confidenceFactor * 0.018 -
+      qualityShield -
+      topOrderShield -
+      lowerOrderRisk -
+      anchorShield +
+      earlyWicketMod,
+    0.008,
+    0.165,
   );
 
   const dotChance = clamp(
-    0.29 +
+    0.292 +
       intent.dot +
       (bowlerStrength - batterStrength) * 0.0008 +
       bowlingConditions * 0.8 -
       battingConditions * 0.45 -
-      chasePressure * 0.03,
-    0.08,
-    0.5,
+      chasePressure * 0.03 +
+      (1 - settledFactor) * 0.032 +
+      lowerOrderSlowdown -
+      qualityShield * 1.4 +
+      earlyRotateMod * -0.35,
+    0.12,
+    0.52,
   );
 
   const fourChance = clamp(
-    0.075 +
+    0.046 +
       aggression.boundary +
       battingConditions +
       innings.conditions.outfield.boundary +
@@ -955,41 +1160,57 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       bowlingConditions * 0.65 -
       matchup * 0.18 +
       intent.boundary +
-      (overIndex < POWERPLAY_END ? 0.018 : 0) +
-      chasePressure * 0.018,
+      (overIndex < POWERPLAY_END ? 0.012 : 0) +
+      chasePressure * 0.012 +
+      settledFactor * 0.014 +
+      confidenceFactor * 0.005 -
+      lowerOrderSlowdown +
+      qualityShield * 0.55 +
+      earlyBoundaryMod,
     0.02,
-    0.3,
+    0.22,
   );
 
   const sixChance = clamp(
-    0.014 +
+    0.005 +
       aggression.six +
       battingEdge * 1.2 -
       bowlingConditions * 0.25 +
-      (overIndex >= DEATH_OVERS_START ? 0.016 : 0) +
-      chasePressure * 0.012,
+      (overIndex >= DEATH_OVERS_START ? 0.012 : 0) +
+      chasePressure * 0.008 +
+      settledFactor * 0.005 +
+      confidenceFactor * 0.003 -
+      lowerOrderSlowdown * 0.6 +
+      earlyBoundaryMod * 0.65,
     0.002,
-    0.14,
+    0.08,
   );
 
   const doubleChance = clamp(
-    0.07 +
+    0.054 +
       innings.conditions.outfield.double +
       aggression.rotate * 0.35 -
       intent.single * 0.12 +
-      (overIndex >= DEATH_OVERS_START ? 0.006 : 0),
-    0.02,
-    0.16,
+      (overIndex >= DEATH_OVERS_START ? 0.006 : 0) +
+      settledFactor * 0.008 +
+      earlyRotateMod * 0.38 +
+      qualityShield * 0.32,
+    0.015,
+    0.12,
   );
 
   const singleChance = clamp(
-    0.31 +
+    0.238 +
       aggression.rotate +
       intent.single -
-      chasePressure * 0.01 -
-      (overIndex >= DEATH_OVERS_START ? 0.008 : 0),
-    0.14,
-    0.45,
+      chasePressure * 0.006 -
+      (overIndex >= DEATH_OVERS_START ? 0.008 : 0) +
+      settledFactor * 0.018 +
+      (teamConfidence < 35 ? 0.01 : 0) +
+      earlyRotateMod +
+      qualityShield * 0.32,
+    0.12,
+    0.38,
   );
 
   const threeChance = clamp(0.01 + (innings.conditions.outfield.id === "heavy" ? 0.002 : 0), 0.002, 0.02);
@@ -1020,6 +1241,10 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       runs: battingCard.runs,
       balls: battingCard.balls,
     };
+    innings.lastWicketScore = innings.score;
+    innings.lastWicketBall = innings.balls;
+    innings.recentWickets.push(innings.balls);
+    innings.recentWickets = innings.recentWickets.filter((ballNumber) => innings.balls - ballNumber <= 36);
     return { event, wicket: true };
   }
 
@@ -1164,7 +1389,7 @@ function buildResult(match) {
   const winner = userWon ? "user" : "opponent";
   const marginRuns = Math.abs(firstInnings.score - secondInnings.score);
   const wicketsInHand = 10 - secondInnings.wickets;
-  const opponentName = match.opponent.shortName;
+  const opponentName = match.opponent.shortName || match.opponent.country || match.opponent.label;
   const outcomeCopy = winner === "user"
     ? secondWon
       ? `The chase stayed under control and you beat ${opponentName} by ${wicketsInHand} ${wicketsInHand === 1 ? "wicket" : "wickets"}.`
@@ -1183,6 +1408,7 @@ function buildResult(match) {
   const standout = buildScorecardSummary(standoutInnings).batting[0] || buildScorecardSummary(standoutInnings).bowling[0];
 
   return {
+    opponentId: match.opponent.id,
     stage: match.stage,
     opponent: match.opponent.label,
     conditions: match.conditions,
@@ -1227,6 +1453,7 @@ function moveToNextMatch(state, result) {
       currentConditions: null,
       latestMatch: result,
       results: [...state.results, result],
+      usedOpponentIds: result.opponentId ? [...state.usedOpponentIds, result.opponentId] : state.usedOpponentIds,
       champion,
       eliminated: !champion,
       finishedView: "results",
@@ -1244,6 +1471,7 @@ function moveToNextMatch(state, result) {
     currentConditions: null,
     latestMatch: result,
     results: [...state.results, result],
+    usedOpponentIds: result.opponentId ? [...state.usedOpponentIds, result.opponentId] : state.usedOpponentIds,
     champion: false,
     eliminated: false,
     finishedView: "results",
@@ -1251,13 +1479,16 @@ function moveToNextMatch(state, result) {
 }
 
 export function createInitialState(random = Math.random) {
+  const defaultDifficulty = DIFFICULTY_LEVELS[1].id;
   return {
     phase: PHASES.draft,
-    difficulty: DIFFICULTY_LEVELS[1].id,
+    difficulty: defaultDifficulty,
     roster: [],
     currentSquad: null,
     currentCandidates: [],
     usedSquadIds: [],
+    usedOpponentIds: [],
+    rerollsRemaining: getRerollAllowance(defaultDifficulty),
     matchIndex: 0,
     wins: 0,
     losses: 0,
@@ -1282,6 +1513,7 @@ export function setDifficulty(state, difficultyId) {
   return {
     ...state,
     difficulty: difficultyId,
+    rerollsRemaining: getRerollAllowance(difficultyId),
   };
 }
 
@@ -1305,7 +1537,16 @@ export function rerollCandidates(state, random = Math.random) {
     return state;
   }
 
-  const squad = availableSquads[Math.floor(random() * availableSquads.length)];
+  const isTrueReroll = Boolean(state.currentSquad);
+  if (isTrueReroll && state.rerollsRemaining <= 0) {
+    return state;
+  }
+
+  const eligibleSquads = isTrueReroll
+    ? availableSquads.filter((squad) => squad.id !== state.currentSquad.id)
+    : availableSquads;
+  const squadPool = eligibleSquads.length ? eligibleSquads : availableSquads;
+  const squad = squadPool[Math.floor(random() * squadPool.length)];
   const draftedIdentities = new Set(state.roster.map((player) => getPlayerIdentity(player)));
   const candidates = PLAYER_POOL.filter(
     (player) => player.squadId === squad.id && !draftedIdentities.has(getPlayerIdentity(player)),
@@ -1316,6 +1557,7 @@ export function rerollCandidates(state, random = Math.random) {
     currentSquad: squad,
     currentCandidates: candidates,
     usedSquadIds: state.usedSquadIds.includes(squad.id) ? state.usedSquadIds : [...state.usedSquadIds, squad.id],
+    rerollsRemaining: isTrueReroll ? Math.max(0, state.rerollsRemaining - 1) : state.rerollsRemaining,
   };
 }
 
@@ -1349,6 +1591,12 @@ export function getOpponentMetrics(state) {
   if (!state.currentOpponent) {
     return { batting: 0, bowling: 0 };
   }
+  if (state.currentOpponent.batting && state.currentOpponent.bowling) {
+    return {
+      batting: state.currentOpponent.batting,
+      bowling: state.currentOpponent.bowling,
+    };
+  }
   const roster = selectBestXI(getDisplayRoster(getOpponentRoster(state.currentOpponent.id), state.difficulty));
   return getTeamMetrics(roster);
 }
@@ -1374,7 +1622,11 @@ export function revealNextOpponent(state, random = Math.random) {
     return state;
   }
 
-  const opponent = TOURNAMENT_OPPONENTS[state.matchIndex];
+  const stageBlueprint = TOURNAMENT_OPPONENTS[state.matchIndex];
+  const opponent = chooseOpponentForStage(state, stageBlueprint, random);
+  if (!opponent) {
+    return state;
+  }
   const conditions = buildConditions(opponent, random);
   const tossWinner = random() < 0.5 ? "user" : "opponent";
   const opponentDecision = (() => {
@@ -1385,7 +1637,11 @@ export function revealNextOpponent(state, random = Math.random) {
   return {
     ...state,
     phase: PHASES.pregame,
-    currentOpponent: opponent,
+    currentOpponent: {
+      ...opponent,
+      stage: stageBlueprint.stage,
+      pressure: stageBlueprint.pressure,
+    },
     currentConditions: conditions,
     pregame: {
       tossWinner,
@@ -1751,6 +2007,9 @@ export function simulateInnings(state, random = Math.random) {
 export function simulateMatch(state, random = Math.random) {
   if (state.phase === PHASES.pregame) {
     const started = startMatch(state, random);
+    if (started.phase === PHASES.pregame) {
+      return started;
+    }
     return simulateMatch(started, random);
   }
 
@@ -1792,6 +2051,11 @@ export function getLiveContext(state) {
     requiredRate: getRequiredRunRate(innings),
     currentRate: getCurrentRunRate(innings),
     recommendation: recommendedBowlerFromState(state),
+    settledStriker: getBatterSettledLevel(striker, innings.battingCards[innings.strikerId]),
+    settledNonStriker: getBatterSettledLevel(nonStriker, innings.battingCards[innings.nonStrikerId]),
+    teamConfidence: getTeamConfidence(innings),
+    partnershipRuns: getCurrentPartnershipRuns(innings),
+    partnershipBalls: getCurrentPartnershipBalls(innings),
   };
 }
 

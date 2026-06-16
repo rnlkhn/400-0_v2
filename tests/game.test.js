@@ -58,6 +58,16 @@ function prepareLiveMatch({ difficulty = "international", tossRandom = 0.2, user
   return state;
 }
 
+function pregameNeedsUserOpeners(pregame) {
+  if (!pregame) {
+    return false;
+  }
+
+  return pregame.pregame.tossWinner === "user"
+    ? pregame.pregame.userDecision === "bat"
+    : pregame.pregame.userDecision === "bowl";
+}
+
 test("drafting eleven players moves the run into the ready phase", () => {
   const state = buildCompletedXI();
   assert.equal(state.phase, "ready");
@@ -114,7 +124,10 @@ test("playing an over when batting first records over-by-over output", () => {
 });
 
 test("choosing a bowler advances a defending over and preserves ODI caps", () => {
-  let state = prepareLiveMatch({ tossRandom: 0.8, userChoice: "bat" });
+  let state = buildCompletedXI();
+  state = revealNextOpponent(state, constantRandom(0.2));
+  state = chooseTossDecision(state, "bowl");
+  state = startMatch(state, constantRandom(0.35));
   let live = getLiveContext(state);
   const eligibleBowler = state.currentMatch.userTeam.find((player) => player.bowling >= 40 && player.id !== live.innings.lastBowlerId);
 
@@ -161,6 +174,16 @@ test("simulating the full match produces a result and updates the run state", ()
   assert.ok(state.latestMatch.summary.length > 0);
 });
 
+test("simulateMatch does not recurse forever when pregame is unresolved", () => {
+  let state = buildCompletedXI();
+  state = revealNextOpponent(state, constantRandom(0.8));
+
+  const simulated = simulateMatch(state, constantRandom(0.35));
+
+  assert.equal(simulated.phase, "pregame");
+  assert.ok(getPregameContext(simulated));
+});
+
 test("bowling specialists have a batting floor and Ashraful 2003 keeps the custom batting rating", () => {
   const pureBowlers = PLAYER_POOL.filter((player) => player.role === "bowler");
   assert.ok(pureBowlers.every((player) => player.batting >= 15));
@@ -185,4 +208,79 @@ test("county mode uses each player's prime batting and bowling ratings independe
 
   assert.equal(adjusted.batting, Math.max(...deSilvaEntries.map((entry) => entry.batting)));
   assert.equal(adjusted.bowling, Math.max(...deSilvaEntries.map((entry) => entry.bowling)));
+});
+
+test("difficulty reroll allowances follow the mode rules", () => {
+  const county = setDifficulty(createInitialState(constantRandom(0.25)), "county");
+  const international = setDifficulty(createInitialState(constantRandom(0.25)), "international");
+  const legend = setDifficulty(createInitialState(constantRandom(0.25)), "legend");
+
+  assert.equal(county.rerollsRemaining, 3);
+  assert.equal(international.rerollsRemaining, 1);
+  assert.equal(legend.rerollsRemaining, 0);
+});
+
+test("completed matches remain in results as the tournament advances", () => {
+  const random = constantRandom(0.41);
+  let state = buildCompletedXI();
+
+  state = revealNextOpponent(state, random);
+  let pregame = getPregameContext(state);
+  if (pregame?.pregame.tossWinner === "user") {
+    state = chooseTossDecision(state, "bat");
+  }
+  pregame = getPregameContext(state);
+  if (pregameNeedsUserOpeners(pregame)) {
+    state = toggleOpener(state, state.roster[0].id);
+    state = toggleOpener(state, state.roster[1].id);
+  }
+  state = startMatch(state, random);
+  state = simulateMatch(state, random);
+
+  assert.equal(state.results.length, 1);
+  assert.equal(state.results[0].stage, "Group Stage Match 1");
+
+  state = revealNextOpponent(state, random);
+  pregame = getPregameContext(state);
+  if (pregame?.pregame.tossWinner === "user") {
+    state = chooseTossDecision(state, "bat");
+  }
+  pregame = getPregameContext(state);
+  if (pregameNeedsUserOpeners(pregame)) {
+    state = toggleOpener(state, state.roster[0].id);
+    state = toggleOpener(state, state.roster[1].id);
+  }
+  state = startMatch(state, random);
+  state = simulateMatch(state, random);
+
+  assert.equal(state.results.length, 2);
+  assert.equal(state.results[0].stage, "Group Stage Match 1");
+  assert.equal(state.results[1].stage, "Group Stage Match 2");
+});
+
+test("opponents do not repeat within a single run", () => {
+  const random = constantRandom(0.33);
+  let state = buildCompletedXI();
+  const seenOpponentIds = new Set();
+
+  for (let index = 0; index < 3; index += 1) {
+    state = revealNextOpponent(state, random);
+    assert.ok(state.currentOpponent);
+    assert.equal(seenOpponentIds.has(state.currentOpponent.id), false);
+    seenOpponentIds.add(state.currentOpponent.id);
+
+    let pregame = getPregameContext(state);
+    if (pregame?.pregame.tossWinner === "user") {
+      state = chooseTossDecision(state, "bat");
+    }
+    pregame = getPregameContext(state);
+    if (pregameNeedsUserOpeners(pregame)) {
+      state = toggleOpener(state, state.roster[0].id);
+      state = toggleOpener(state, state.roster[1].id);
+    }
+    state = startMatch(state, random);
+    state = simulateMatch(state, random);
+  }
+
+  assert.equal(seenOpponentIds.size, 3);
 });

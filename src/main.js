@@ -171,6 +171,10 @@ function formatBowlingEntry(entry) {
   return `${entry.wickets}/${entry.runsConceded} (${formatOvers(entry.balls)})`;
 }
 
+function formatSettled(level) {
+  return `${Math.round(level || 0)}`;
+}
+
 function topThree(entries, key, secondaryKey) {
   return [...entries]
     .sort((left, right) => right[key] - left[key] || left[secondaryKey] - right[secondaryKey])
@@ -503,9 +507,11 @@ function squadSheetMarkup() {
 function actionMarkup() {
   if (state.phase === "draft") {
     const draftStarted = state.roster.length > 0 || state.usedSquadIds.length > 0 || Boolean(state.currentSquad);
+    const canRerollCurrent = Boolean(state.currentSquad) && state.rerollsRemaining > 0;
     return `
       <div class="action-row">
-        <button class="action-button" type="button" data-action="reroll">${draftStarted ? "Next Pick" : "Start Draft"}</button>
+        ${state.currentSquad ? "" : `<button class="action-button" type="button" data-action="reroll">${draftStarted ? "Next Pick" : "Start Draft"}</button>`}
+        ${canRerollCurrent ? `<button class="action-button action-button--ghost" type="button" data-action="reroll-current">Re-roll (${state.rerollsRemaining})</button>` : ""}
         <button class="action-button action-button--ghost" type="button" data-action="reset">New Run</button>
       </div>
     `;
@@ -1008,8 +1014,16 @@ function liveMatchMarkup() {
       <div class="live-hero">
         ${currentInningsSnapshotMarkup(innings, inningsLabel)}
         <div class="summary-grid live-summary-grid">
-          <div><span>Striker</span><strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong></div>
-          <div><span>Non-striker</span><strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong></div>
+          <div>
+            <span>Striker</span>
+            <strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong>
+            <small>Settled ${escapeHtml(formatSettled(live.settledStriker))}</small>
+          </div>
+          <div>
+            <span>Non-striker</span>
+            <strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong>
+            <small>Settled ${escapeHtml(formatSettled(live.settledNonStriker))}</small>
+          </div>
           <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
           <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
           <div><span>Last Wicket</span><strong>${lastWicket ? `${escapeHtml(cleanPlayerName(lastWicket.name))} ${escapeHtml(formatBattingEntry(lastWicket))}` : "None"}</strong></div>
@@ -1018,6 +1032,12 @@ function liveMatchMarkup() {
           <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
           ${live.requiredRate ? `<div><span>Required Rate</span><strong>${round(live.requiredRate)}</strong></div>` : ""}
           ${innings.target ? `<div><span>Target</span><strong>${escapeHtml(String(innings.target))}</strong></div>` : ""}
+          <div><span>Partnership</span><strong>${escapeHtml(String(live.partnershipRuns))} (${escapeHtml(String(live.partnershipBalls))})</strong></div>
+          <div class="confidence-meter">
+            <span>Team Confidence</span>
+            <strong>${escapeHtml(String(live.teamConfidence))}</strong>
+            <div class="confidence-meter__track"><div class="confidence-meter__fill" style="width:${Math.max(0, Math.min(99, live.teamConfidence))}%"></div></div>
+          </div>
         </div>
       </div>
       ${inningsBreakOpenersMarkup(live)}
@@ -1069,13 +1089,7 @@ function latestResultMarkup() {
 }
 
 function resultsHistoryMarkup(includeLatest = false) {
-  const historicalResults = includeLatest
-    ? state.results
-    : state.latestMatch && state.results.length > 1
-      ? state.results.slice(0, -1)
-      : state.latestMatch && state.results.length === 1
-        ? []
-        : state.results;
+  const historicalResults = [...state.results].reverse();
 
   if (!historicalResults.length) {
     return "";
@@ -1094,7 +1108,7 @@ function resultsHistoryMarkup(includeLatest = false) {
           .map(
             (result) => `
               <article class="schedule-card ${result.winner === "user" ? "schedule-card--win" : "schedule-card--loss"}">
-                <div>
+                <div class="schedule-card__summary">
                   <p class="schedule-stage">${escapeHtml(result.stage)}</p>
                   <h3>${escapeHtml(result.opponent)}</h3>
                   <p>${escapeHtml(result.summary)}</p>
@@ -1161,16 +1175,10 @@ function tournamentSummaryMarkup() {
 function readyPanelMarkup() {
   const opponent = getCurrentOpponent(state);
   if (state.phase === "pregame" && opponent) {
-    return `
-      ${pregameSetupMarkup()}
-      ${state.latestMatch ? latestResultMarkup() : ""}
-    `;
+    return pregameSetupMarkup();
   }
   if (state.phase === "live") {
     return liveMatchMarkup();
-  }
-  if (state.phase === "ready" || (state.phase === "finished" && state.finishedView !== "summary")) {
-    return latestResultMarkup();
   }
   return "";
 }
@@ -1277,6 +1285,12 @@ document.addEventListener("click", (event) => {
   }
 
   if (action === "reroll") {
+    state = rerollCandidates(state);
+    render();
+    return;
+  }
+
+  if (action === "reroll-current") {
     state = rerollCandidates(state);
     render();
     return;
