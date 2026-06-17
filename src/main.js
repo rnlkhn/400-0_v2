@@ -794,7 +794,7 @@ function overFeedMarkup(live) {
           <div class="over-card__meta">
             <span>${escapeHtml(cleanPlayerName(striker?.name || ""))} / ${escapeHtml(cleanPlayerName(nonStriker?.name || ""))}</span>
             <span>${escapeHtml(formatScore(over.score, over.wickets))}</span>
-            ${over.requiredRate ? `<span>Req RR ${round(over.requiredRate)}</span>` : `<span>RR ${round((over.score * 6) / Math.max((Number(over.overNumber) * 6), 1))}</span>`}
+            ${over.requiredRate ? `<span>Req RR ${formatRate(over.requiredRate)}</span>` : `<span>RR ${formatRate((over.score * 6) / Math.max((Number(over.overNumber) * 6), 1))}</span>`}
           </div>
         </article>
       `;
@@ -804,6 +804,10 @@ function overFeedMarkup(live) {
 
 function round(value) {
   return Math.round(value);
+}
+
+function formatRate(value) {
+  return Number.isFinite(value) ? value.toFixed(2) : "0.00";
 }
 
 function resultScorecardDetailsMarkup(result) {
@@ -1029,8 +1033,8 @@ function liveMatchMarkup() {
           <div><span>Last Wicket</span><strong>${lastWicket ? `${escapeHtml(cleanPlayerName(lastWicket.name))} ${escapeHtml(formatBattingEntry(lastWicket))}` : "None"}</strong></div>
           <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
           <div><span>Over</span><strong>${escapeHtml(formatOvers(innings.balls))}</strong></div>
-          <div><span>Run Rate</span><strong>${round(live.currentRate)}</strong></div>
-          ${live.requiredRate ? `<div><span>Required Rate</span><strong>${round(live.requiredRate)}</strong></div>` : ""}
+          <div><span>Run Rate</span><strong>${formatRate(live.currentRate)}</strong></div>
+          ${live.requiredRate ? `<div><span>Required Rate</span><strong>${formatRate(live.requiredRate)}</strong></div>` : ""}
           ${innings.target ? `<div><span>Target</span><strong>${escapeHtml(String(innings.target))}</strong></div>` : ""}
           <div><span>Partnership</span><strong>${escapeHtml(String(live.partnershipRuns))} (${escapeHtml(String(live.partnershipBalls))})</strong></div>
           <div class="confidence-meter">

@@ -123,6 +123,28 @@ test("playing an over when batting first records over-by-over output", () => {
   assert.ok(live.match.innings[0].score >= 0);
 });
 
+test("first-innings batting confidence opens at the default baseline", () => {
+  const state = prepareLiveMatch({ tossRandom: 0.2, userChoice: "bat" });
+  const live = getLiveContext(state);
+
+  assert.equal(live.teamConfidence, 40);
+});
+
+test("chasing after a 350-plus first innings starts from the lower confidence baseline", () => {
+  let state = prepareLiveMatch({ tossRandom: 0.2, userChoice: "bat" });
+  const firstInnings = state.currentMatch.innings[0];
+  firstInnings.score = 360;
+  firstInnings.balls = 300;
+  firstInnings.wickets = 3;
+
+  state = simulateInnings(state, constantRandom(0.45));
+  const live = getLiveContext(state);
+
+  assert.ok(live);
+  assert.equal(live.match.currentInningsIndex, 1);
+  assert.equal(live.teamConfidence, 20);
+});
+
 test("choosing a bowler advances a defending over and preserves ODI caps", () => {
   let state = buildCompletedXI();
   state = revealNextOpponent(state, constantRandom(0.2));

@@ -580,6 +580,14 @@ function getCurrentRunRate(innings) {
   return (innings.score * 6) / innings.balls;
 }
 
+function getNextBatterQuality(innings) {
+  const nextBatterId = innings.remainingBatters[0];
+  if (!nextBatterId) {
+    return 38;
+  }
+  return innings.teamById.get(nextBatterId)?.batting || 38;
+}
+
 function getSettlingTarget(player) {
   switch (player.aggressionLevel) {
     case "Very Aggressive":
@@ -636,7 +644,37 @@ function getRecentWicketCount(innings, windowBalls = 18) {
   return innings.recentWickets.filter((ballNumber) => innings.balls - ballNumber <= windowBalls).length;
 }
 
-function getTeamConfidence(innings) {
+function didPreviousInningsCollapse(previousInnings) {
+  if (!previousInnings || previousInnings.wickets < 7 || previousInnings.wicketFalls.length < 4) {
+    return false;
+  }
+
+  const lastFour = previousInnings.wicketFalls.slice(-4);
+  const lastFourRuns = lastFour[lastFour.length - 1].score - lastFour[0].score;
+  const lastFourBalls = lastFour[lastFour.length - 1].balls - lastFour[0].balls;
+  const lastFive = previousInnings.wicketFalls.length >= 5 ? previousInnings.wicketFalls.slice(-5) : null;
+  const lastFiveRuns = lastFive ? lastFive[lastFive.length - 1].score - lastFive[0].score : Number.POSITIVE_INFINITY;
+
+  return lastFourRuns <= 35 || lastFourBalls <= 30 || lastFiveRuns <= 50;
+}
+
+function getInitialConfidenceBase(previousInnings) {
+  if (!previousInnings) {
+    return 40;
+  }
+
+  if (previousInnings.score > 350) {
+    return 20;
+  }
+
+  if (didPreviousInningsCollapse(previousInnings)) {
+    return 55;
+  }
+
+  return 40;
+}
+
+function getConfidenceTarget(innings) {
   const activeBatters = getActiveBatters(innings);
   const settledAverage = activeBatters.length
     ? activeBatters.reduce((total, batter) => total + getBatterSettledLevel(batter.player, batter.card), 0) / activeBatters.length
@@ -650,24 +688,58 @@ function getTeamConfidence(innings) {
   const activeQuality = activeBatters.length
     ? activeBatters.reduce((total, batter) => total + batter.player.batting, 0) / activeBatters.length
     : 0;
+  const activeRuns = activeBatters.reduce((total, batter) => total + batter.card.runs, 0);
+  const nextBatterQuality = getNextBatterQuality(innings);
   const chaseControl = innings.target
-    ? clamp(12 - Math.max((requiredRate || 0) - currentRate, 0) * 4.6, -14, 12)
-    : clamp((currentRate - 4.9) * 2.6, -8, 10);
-  const collapseExposure = innings.wickets >= 6 ? 8 : innings.wickets >= 4 ? 4 : 0;
+    ? clamp(10 - Math.max((requiredRate || 0) - currentRate, 0) * 4.2, -16, 10)
+    : clamp((currentRate - 5.05) * 2.2, -7, 9);
+  const collapseExposure = innings.wickets >= 6 ? 12 : innings.wickets >= 4 ? 6 : 0;
 
   return clamp(
     round(
-      44 +
-        settledAverage * 0.2 +
-        Math.max(activeQuality - 70, 0) * 0.16 +
-        Math.min(partnershipRuns * 0.62, 16) +
-        Math.min(partnershipBalls * 0.16, 7) +
+      innings.confidenceBase +
+        settledAverage * 0.11 +
+        Math.max(activeQuality - 72, 0) * 0.11 +
+        Math.max(nextBatterQuality - 68, 0) * 0.08 +
+        Math.min(activeRuns * 0.035, 12) +
+        Math.min(partnershipRuns * 0.18, 14) +
+        Math.min(partnershipBalls * 0.055, 6) +
         chaseControl -
-        innings.wickets * 3.8 -
-        topOrderDamage * 5.6 -
-        recentWickets * 6.5 -
+        innings.wickets * 4.8 -
+        topOrderDamage * 6.6 -
+        recentWickets * 7.8 -
         collapseExposure,
     ),
+    0,
+    99,
+  );
+}
+
+function getTeamConfidence(innings) {
+  return clamp(round(innings.teamConfidence ?? innings.confidenceBase ?? 40), 0, 99);
+}
+
+function updateTeamConfidence(innings, event) {
+  const target = getConfidenceTarget(innings);
+  const current = innings.teamConfidence ?? innings.confidenceBase ?? 40;
+  const delta = target - current;
+  const riseCap = event === "6"
+    ? 1.8
+    : event === "4"
+      ? 1.4
+      : event === "3"
+        ? 1.1
+        : event === "2"
+          ? 0.85
+          : event === "1"
+            ? 0.6
+            : event === "0"
+              ? 0.45
+              : 0;
+  const fallCap = event === "W" ? 6.5 : 1.2;
+
+  innings.teamConfidence = clamp(
+    round(current + clamp(delta, -fallCap, riseCap)),
     0,
     99,
   );
@@ -880,6 +952,9 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
     lastWicketScore: 0,
     lastWicketBall: 0,
     recentWickets: [],
+    wicketFalls: [],
+    confidenceBase: 40,
+    teamConfidence: 40,
     teamById: byId,
     bowlingById,
     teamRoster: teamRoster.map((player) => player.id),
@@ -902,6 +977,7 @@ function cloneInnings(innings) {
     overs: innings.overs.map((over) => ({ ...over, events: [...over.events] })),
     lastWicket: innings.lastWicket ? { ...innings.lastWicket } : null,
     recentWickets: [...innings.recentWickets],
+    wicketFalls: innings.wicketFalls.map((fall) => ({ ...fall })),
   };
 }
 
@@ -926,6 +1002,8 @@ function createMatch(state, tossWinner, userDecision, userOpeners, random) {
     conditions,
     target: null,
   });
+  firstInnings.confidenceBase = 40;
+  firstInnings.teamConfidence = 40;
 
   return {
     opponent,
@@ -971,8 +1049,7 @@ function cloneMatch(match) {
 
 function createSecondInnings(match, target) {
   const secondBattingSide = match.userBattingFirst ? "opponent" : "user";
-
-  return createEmptyInnings({
+  const secondInnings = createEmptyInnings({
     battingSide: secondBattingSide,
     battingLabel: secondBattingSide === "user" ? "You" : match.opponent.shortName,
     bowlingSide: secondBattingSide === "user" ? "opponent" : "user",
@@ -983,6 +1060,9 @@ function createSecondInnings(match, target) {
     conditions: match.conditions,
     target,
   });
+  secondInnings.confidenceBase = getInitialConfidenceBase(match.innings[0]);
+  secondInnings.teamConfidence = secondInnings.confidenceBase;
+  return secondInnings;
 }
 
 function startSecondInnings(match, target) {
@@ -1245,6 +1325,14 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
     innings.lastWicketBall = innings.balls;
     innings.recentWickets.push(innings.balls);
     innings.recentWickets = innings.recentWickets.filter((ballNumber) => innings.balls - ballNumber <= 36);
+    innings.wicketFalls.push({
+      score: innings.score,
+      balls: innings.balls,
+      batterId: striker.id,
+      batterName: striker.name,
+      batterRating: striker.batting,
+    });
+    updateTeamConfidence(innings, event);
     return { event, wicket: true };
   }
 
@@ -1261,6 +1349,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
   if (runs % 2 === 1) {
     [innings.strikerId, innings.nonStrikerId] = [innings.nonStrikerId, innings.strikerId];
   }
+
+  updateTeamConfidence(innings, event);
 
   return { event, wicket: false, runs };
 }
