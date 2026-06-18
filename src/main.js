@@ -175,6 +175,10 @@ function formatSettled(level) {
   return `${Math.round(level || 0)}`;
 }
 
+function formatLiveState(level) {
+  return `${Math.round(level || 0)}`;
+}
+
 function topThree(entries, key, secondaryKey) {
   return [...entries]
     .sort((left, right) => right[key] - left[key] || left[secondaryKey] - right[secondaryKey])
@@ -1021,14 +1025,18 @@ function liveMatchMarkup() {
           <div>
             <span>Striker</span>
             <strong>${escapeHtml(cleanPlayerName(live.striker?.name || ""))}</strong>
-            <small>Settled ${escapeHtml(formatSettled(live.settledStriker))}</small>
+            <small>Settled ${escapeHtml(formatSettled(live.settledStriker))} · Confidence ${escapeHtml(formatLiveState(live.confidenceStriker))}</small>
           </div>
           <div>
             <span>Non-striker</span>
             <strong>${escapeHtml(cleanPlayerName(live.nonStriker?.name || ""))}</strong>
-            <small>Settled ${escapeHtml(formatSettled(live.settledNonStriker))}</small>
+            <small>Settled ${escapeHtml(formatSettled(live.settledNonStriker))} · Confidence ${escapeHtml(formatLiveState(live.confidenceNonStriker))}</small>
           </div>
-          <div><span>Last Bowler</span><strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong></div>
+          <div>
+            <span>Last Bowler</span>
+            <strong>${escapeHtml(cleanPlayerName(live.match.latestOver ? live.innings.bowlingById.get(live.match.latestOver.bowlerId)?.name || "" : "Opening over pending"))}</strong>
+            ${live.lastBowlerRhythm !== null ? `<small>Rhythm ${escapeHtml(formatLiveState(live.lastBowlerRhythm))}</small>` : ""}
+          </div>
           <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
           <div><span>Last Wicket</span><strong>${lastWicket ? `${escapeHtml(cleanPlayerName(lastWicket.name))} ${escapeHtml(formatBattingEntry(lastWicket))}` : "None"}</strong></div>
           <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>

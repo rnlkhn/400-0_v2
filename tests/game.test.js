@@ -153,6 +153,8 @@ test("playing an over when batting first records over-by-over output", () => {
   assert.equal(live.match.innings[0].overs.length, 1);
   assert.equal(live.match.innings[0].overs[0].events.length, 6);
   assert.ok(live.match.innings[0].score >= 0);
+  assert.equal(typeof live.confidenceStriker, "number");
+  assert.equal(typeof live.confidenceNonStriker, "number");
 });
 
 test("first-innings batting confidence opens at the default baseline", () => {
@@ -251,6 +253,7 @@ test("choosing a bowler advances a defending over and preserves ODI caps", () =>
     .filter(Boolean);
   const delivered = allCards.some((card) => card.balls > 0 && card.balls <= 6);
   assert.ok(delivered);
+  assert.equal(typeof live.lastBowlerRhythm, "number");
 });
 
 test("simulating the remainder of an innings reaches the innings break or match finish", () => {
