@@ -656,6 +656,17 @@ function getRecentWicketCount(innings, windowBalls = 18) {
   return innings.recentWickets.filter((ballNumber) => innings.balls - ballNumber <= windowBalls).length;
 }
 
+function getRecentOverRunRate(innings, count = 3) {
+  const recentOvers = innings.overs.slice(-count);
+
+  if (!recentOvers.length) {
+    return getCurrentRunRate(innings);
+  }
+
+  const runs = recentOvers.reduce((total, over) => total + over.events.reduce((overTotal, event) => overTotal + (/^\d+$/.test(event) ? Number(event) : 0), 0), 0);
+  return (runs * 6) / (recentOvers.length * 6);
+}
+
 function didPreviousInningsCollapse(previousInnings) {
   if (!previousInnings || previousInnings.wickets < 7 || previousInnings.wicketFalls.length < 4) {
     return false;
@@ -697,29 +708,33 @@ function getConfidenceTarget(innings) {
   const recentWickets = getRecentWicketCount(innings);
   const currentRate = getCurrentRunRate(innings);
   const requiredRate = innings.target ? getRequiredRunRate(innings) : null;
+  const recentOverRunRate = getRecentOverRunRate(innings, 3);
   const activeQuality = activeBatters.length
     ? activeBatters.reduce((total, batter) => total + batter.player.batting, 0) / activeBatters.length
     : 0;
   const activeRuns = activeBatters.reduce((total, batter) => total + batter.card.runs, 0);
   const nextBatterQuality = getNextBatterQuality(innings);
+  const scoringBaseline = innings.target ? Math.max(requiredRate || 0, 5.2) : 5.2;
+  const scoringMomentum = clamp((recentOverRunRate - scoringBaseline) * 1.6, -6, 9);
   const chaseControl = innings.target
-    ? clamp(10 - Math.max((requiredRate || 0) - currentRate, 0) * 4.2, -16, 10)
-    : clamp((currentRate - 5.05) * 2.2, -7, 9);
-  const collapseExposure = innings.wickets >= 6 ? 12 : innings.wickets >= 4 ? 6 : 0;
+    ? clamp(10 - Math.max((requiredRate || 0) - currentRate, 0) * 2.6 + Math.min((10 - innings.wickets) * 0.35, 3), -10, 12)
+    : clamp((currentRate - 4.8) * 1.8, -5, 8);
+  const collapseExposure = innings.wickets >= 8 ? 10 : innings.wickets >= 6 ? 6 : innings.wickets >= 4 ? 3 : 0;
 
   return clamp(
     round(
       innings.confidenceBase +
-        settledAverage * 0.11 +
-        Math.max(activeQuality - 72, 0) * 0.11 +
-        Math.max(nextBatterQuality - 68, 0) * 0.08 +
-        Math.min(activeRuns * 0.035, 12) +
-        Math.min(partnershipRuns * 0.18, 14) +
-        Math.min(partnershipBalls * 0.055, 6) +
+        settledAverage * 0.13 +
+        Math.max(activeQuality - 70, 0) * 0.18 +
+        Math.max(nextBatterQuality - 66, 0) * 0.09 +
+        Math.min(activeRuns * 0.05, 14) +
+        Math.min(partnershipRuns * 0.14, 12) +
+        Math.min(partnershipBalls * 0.035, 5) +
+        scoringMomentum +
         chaseControl -
-        innings.wickets * 4.8 -
-        topOrderDamage * 6.6 -
-        recentWickets * 7.8 -
+        innings.wickets * 2.6 -
+        topOrderDamage * 2.4 -
+        recentWickets * 4.2 -
         collapseExposure,
     ),
     0,
@@ -735,20 +750,45 @@ function updateTeamConfidence(innings, event) {
   const target = getConfidenceTarget(innings);
   const current = innings.teamConfidence ?? innings.confidenceBase ?? 40;
   const delta = target - current;
+  const requiredRate = innings.target ? getRequiredRunRate(innings) : 0;
+  const currentRate = getCurrentRunRate(innings);
+  const pressureGap = Math.max((requiredRate || 0) - currentRate, 0);
+  const nextBatterQuality = getNextBatterQuality(innings);
+  const wicketsInHand = Math.max(10 - innings.wickets, 0);
+  const partnershipRuns = getCurrentPartnershipRuns(innings);
+  const wicketShockBuffer = event === "W"
+    ? clamp(
+      Math.max(nextBatterQuality - 62, 0) * 0.06 +
+        wicketsInHand * 0.09 +
+        Math.min(partnershipRuns, 36) * 0.025,
+      0,
+      2.4,
+    )
+    : 0;
   const riseCap = event === "6"
-    ? 1.8
+    ? 1.35
     : event === "4"
-      ? 1.4
+      ? 1.05
       : event === "3"
-        ? 1.1
+        ? 0.9
         : event === "2"
-          ? 0.85
+          ? 0.7
           : event === "1"
-            ? 0.6
+            ? 0.45
             : event === "0"
-              ? 0.45
+              ? pressureGap >= 2.5
+                ? 0.12
+                : 0.22
               : 0;
-  const fallCap = event === "W" ? 6.5 : 1.2;
+  const fallCap = event === "W"
+    ? clamp(4.2 - wicketShockBuffer, 1.6, 4.2)
+    : event === "0"
+      ? pressureGap >= 3
+        ? 0.45
+        : pressureGap >= 1.5
+          ? 0.25
+          : 0.12
+      : 0.9;
 
   innings.teamConfidence = clamp(
     round(current + clamp(delta, -fallCap, riseCap)),
@@ -1118,28 +1158,40 @@ function applyOverConfidenceAdjustment(innings, overSummary) {
   const maiden = overRuns === 0;
   const requiredRate = getRequiredRunRate(innings);
   const currentRate = getCurrentRunRate(innings);
+  const pressureGap = innings.target ? (requiredRate || 0) - currentRate : 0;
   let adjustment = 0;
 
   if (maiden) {
-    adjustment -= 2;
+    adjustment -= 1;
     if (innings.target) {
-      if ((requiredRate || 0) >= 9.5) {
+      if ((requiredRate || 0) >= 10.5) {
         adjustment -= 2;
-      } else if ((requiredRate || 0) >= 7) {
+      } else if ((requiredRate || 0) >= 8.5) {
         adjustment -= 1;
       }
     }
   }
 
   if (innings.target) {
-    const pressureGap = (requiredRate || 0) - currentRate;
-    if (pressureGap >= 3) {
-      adjustment -= 2;
-    } else if (pressureGap >= 1.5) {
+    if (pressureGap >= 4) {
       adjustment -= 1;
+    } else if (pressureGap >= 2.25) {
+      adjustment -= 1;
+    } else if (pressureGap <= -4) {
+      adjustment += 2;
     } else if (pressureGap <= -2.5) {
       adjustment += 1;
     }
+  }
+
+  if (overRuns >= 10) {
+    adjustment += 1;
+  }
+
+  if (overRuns >= 12) {
+    adjustment += 1;
+  } else if (overRuns <= 2 && !maiden && innings.target && (requiredRate || 0) >= 7.5) {
+    adjustment -= 1;
   }
 
   if (adjustment !== 0) {
@@ -2289,4 +2341,8 @@ export function getPregameContext(state) {
     conditions: state.currentConditions,
     pregame: state.pregame,
   };
+}
+
+export function getConfidenceTargetPreview(innings) {
+  return getConfidenceTarget(innings);
 }

@@ -9,6 +9,7 @@ import {
   createInitialState,
   draftPlayer,
   getDifficultyAdjustedPlayer,
+  getConfidenceTargetPreview,
   getLiveContext,
   getOpponentMetrics,
   getPregameContext,
@@ -174,6 +175,63 @@ test("chasing after a 350-plus first innings starts from the lower confidence ba
   assert.ok(live);
   assert.equal(live.match.currentInningsIndex, 1);
   assert.equal(live.teamConfidence, 20);
+});
+
+test("confidence target stays healthy in a composed chase even after a recent wicket", () => {
+  const state = prepareLiveMatch({ tossRandom: 0.2, userChoice: "bat" });
+  const innings = state.currentMatch.innings[0];
+
+  innings.target = 306;
+  innings.score = 290;
+  innings.wickets = 2;
+  innings.balls = 40 * 6;
+  innings.strikerId = state.roster[0].id;
+  innings.nonStrikerId = state.roster[1].id;
+  innings.recentWickets = [234];
+  innings.lastWicketScore = 269;
+  innings.lastWicketBall = 222;
+  innings.overs = [
+    { events: ["1", "0", "1", "4", "1", "1"] },
+    { events: ["1", "1", "0", "1", "4", "2"] },
+    { events: ["1", "6", "1", "1", "1", "1"] },
+  ];
+
+  const first = state.roster[0];
+  const second = state.roster[1];
+  const third = state.roster[2];
+
+  innings.battingCards[first.id] = {
+    id: first.id,
+    name: first.name,
+    runs: 123,
+    balls: 112,
+    fours: 11,
+    sixes: 2,
+    out: false,
+    notOut: true,
+  };
+  innings.battingCards[second.id] = {
+    id: second.id,
+    name: second.name,
+    runs: 10,
+    balls: 8,
+    fours: 1,
+    sixes: 1,
+    out: false,
+    notOut: true,
+  };
+  innings.battingCards[third.id] = {
+    id: third.id,
+    name: third.name,
+    runs: 30,
+    balls: 32,
+    fours: 3,
+    sixes: 0,
+    out: true,
+    notOut: false,
+  };
+
+  assert.ok(getConfidenceTargetPreview(innings) >= 65);
 });
 
 test("choosing a bowler advances a defending over and preserves ODI caps", () => {
