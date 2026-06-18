@@ -12,6 +12,7 @@ import {
   getConfidenceTargetPreview,
   getLiveContext,
   getOpponentMetrics,
+  getPlayerOfTheTournament,
   getPregameContext,
   getRecommendedBowler,
   playOver,
@@ -286,7 +287,16 @@ test("simulating the full match produces a result and updates the run state", ()
   assert.ok(["ready", "finished"].includes(state.phase));
   assert.equal(state.results.length, 1);
   assert.ok(state.latestMatch.summary.length > 0);
+  assert.ok(state.latestMatch.playerOfTheMatch);
   assert.ok(state.latestMatch.manOfTheMatch);
+});
+
+test("player of the tournament can be derived from completed results", () => {
+  const state = simulateMatch(prepareLiveMatch({ tossRandom: 0.2, userChoice: "bat" }), constantRandom(0.51));
+  const player = getPlayerOfTheTournament(state.results);
+
+  assert.ok(player);
+  assert.ok(player.name);
 });
 
 test("simulateMatch does not recurse forever when pregame is unresolved", () => {

@@ -13,6 +13,7 @@ import {
   getDisplayRoster,
   getLiveContext,
   getOpponentMetrics,
+  getPlayerOfTheTournament,
   getPregameContext,
   getProgressLabel,
   getRecommendedBowler,
@@ -250,6 +251,7 @@ function getLiveBowlingEntries(innings) {
 function buildTournamentSummary(results) {
   const overallBatting = new Map();
   const overallBowling = new Map();
+  const playerOfTheTournament = getPlayerOfTheTournament(results);
 
   function upsertBatting(store, entry) {
     const current = store.get(entry.name) || {
@@ -323,6 +325,7 @@ function buildTournamentSummary(results) {
   return {
     overallBatting: sortBatting(overallBatting),
     overallBowling: sortBowling(overallBowling),
+    playerOfTheTournament,
   };
 }
 
@@ -819,6 +822,7 @@ function resultScorecardDetailsMarkup(result) {
     <details class="scorecard-details">
       <summary>View scorecard</summary>
       <div class="scorecard-details__body">
+        <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</p>
         ${result.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
       </div>
     </details>
@@ -1091,7 +1095,7 @@ function latestResultMarkup() {
           `)
           .join("")}
       </div>
-      <p><strong>Man of the Match:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.manOfTheMatch || ""))}</p>
+      <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.playerOfTheMatch || state.latestMatch.manOfTheMatch || ""))}</p>
       <section class="scorecard-summary">
         <h4>Scorecard</h4>
         ${state.latestMatch.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
@@ -1156,6 +1160,28 @@ function tournamentSummaryMarkup() {
           <p class="squad-note">A full look at the tournament’s batting and bowling leaders.</p>
         </div>
       </div>
+      <section class="surface-card surface-card--inner summary-award-card">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Award</p>
+            <h2>Player of the Tournament</h2>
+          </div>
+        </div>
+        <div class="summary-list">
+          ${
+            summary.playerOfTheTournament
+              ? `<article class="summary-card">
+                  <span class="summary-card__eyebrow">${escapeHtml(cleanPlayerName(summary.playerOfTheTournament.name))}</span>
+                  <strong class="summary-card__headline">POTT</strong>
+                  <div class="summary-card__substats">
+                    <span>Score ${escapeHtml(String(round(summary.playerOfTheTournament.score)))}</span>
+                    <span>Awards ${escapeHtml(String(summary.playerOfTheTournament.awards || 0))}</span>
+                  </div>
+                </article>`
+              : `<p class="empty-copy">No completed matches yet.</p>`
+          }
+        </div>
+      </section>
       <div class="two-column-layout">
         <section class="surface-card surface-card--inner">
           <div class="section-heading">

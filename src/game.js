@@ -648,6 +648,21 @@ function getInitialBowlerRhythm(player) {
   return 40;
 }
 
+function getBatterConfidenceModifiers(player) {
+  switch (player?.aggressionLevel) {
+    case "Very Aggressive":
+      return { rise: 1.14, fall: 1.18 };
+    case "Aggressive":
+      return { rise: 1.08, fall: 1.08 };
+    case "Cautious":
+      return { rise: 0.92, fall: 0.9 };
+    case "Very Cautious":
+      return { rise: 0.84, fall: 0.82 };
+    default:
+      return { rise: 1, fall: 1 };
+  }
+}
+
 function getBatterSettledLevel(player, battingCard) {
   if (!player || !battingCard || battingCard.balls <= 0) {
     return 0;
@@ -774,18 +789,18 @@ function getConfidenceTarget(innings) {
   return clamp(
     round(
       innings.confidenceBase +
-        settledAverage * 0.13 +
-        (batterConfidenceAverage - 40) * 0.45 +
-        Math.max(activeQuality - 70, 0) * 0.18 +
-        Math.max(nextBatterQuality - 66, 0) * 0.09 +
-        Math.min(activeRuns * 0.05, 14) +
-        Math.min(partnershipRuns * 0.14, 12) +
-        Math.min(partnershipBalls * 0.035, 5) +
+        settledAverage * 0.1 +
+        (batterConfidenceAverage - 40) * 0.34 +
+        Math.max(activeQuality - 70, 0) * 0.14 +
+        Math.max(nextBatterQuality - 66, 0) * 0.06 +
+        Math.min(activeRuns * 0.035, 10) +
+        Math.min(partnershipRuns * 0.1, 9) +
+        Math.min(partnershipBalls * 0.024, 4) +
         scoringMomentum +
         chaseControl -
-        innings.wickets * 2.6 -
-        topOrderDamage * 2.4 -
-        recentWickets * 4.2 -
+        innings.wickets * 2.1 -
+        topOrderDamage * 1.8 -
+        recentWickets * 3.1 -
         collapseExposure,
     ),
     0,
@@ -817,29 +832,29 @@ function updateTeamConfidence(innings, event) {
     )
     : 0;
   const riseCap = event === "6"
-    ? 1.35
+    ? 0.95
     : event === "4"
-      ? 1.05
+      ? 0.72
       : event === "3"
-        ? 0.9
+        ? 0.62
         : event === "2"
-          ? 0.7
+          ? 0.45
           : event === "1"
-            ? 0.45
+            ? 0.28
             : event === "0"
               ? pressureGap >= 2.5
-                ? 0.12
-                : 0.22
+                ? 0.08
+                : 0.14
               : 0;
   const fallCap = event === "W"
     ? clamp(4.2 - wicketShockBuffer, 1.6, 4.2)
     : event === "0"
       ? pressureGap >= 3
-        ? 0.45
+        ? 0.3
         : pressureGap >= 1.5
-          ? 0.25
-          : 0.12
-      : 0.9;
+          ? 0.18
+          : 0.08
+      : 0.55;
 
   innings.teamConfidence = clamp(
     round(current + clamp(delta, -fallCap, riseCap)),
@@ -863,50 +878,54 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
   const bowlerRhythm = getBowlerRhythmLevel(bowler, bowlingCard);
   const teamConfidence = getTeamConfidence(innings);
   const current = getBatterConfidenceLevel(batter, battingCard, innings);
+  const confidenceModifiers = getBatterConfidenceModifiers(batter);
   const requiredRate = innings.target ? getRequiredRunRate(innings) : null;
   const pressureGap = innings.target ? Math.max((requiredRate || 0) - getCurrentRunRate(innings), 0) : 0;
   const qualityEdge = clamp((batter.batting - (bowler?.bowling || 70)) * 0.03, -6, 6);
   const partnershipLift = clamp(getCurrentPartnershipRuns(innings) * 0.04, 0, 6);
   const target =
     getInitialBatterConfidence(batter) +
-    settledFactor * 26 +
-    (teamConfidence - 40) * 0.22 +
+    settledFactor * 20 +
+    (teamConfidence - 40) * 0.14 +
     qualityEdge +
     partnershipLift -
-    clamp((bowlerRhythm - 50) * 0.18, -4, 7) -
-    clamp(pressureGap * 1.6, 0, 8);
+    clamp((bowlerRhythm - 50) * 0.15, -3, 6) -
+    clamp(pressureGap * 1.25, 0, 6);
 
   let riseCap = 0.75;
   let fallCap = 1.2;
 
   switch (event) {
     case "6":
-      riseCap = 2.4;
+      riseCap = 1.9;
       break;
     case "4":
-      riseCap = 1.8;
+      riseCap = 1.35;
       break;
     case "3":
-      riseCap = 1.2;
+      riseCap = 0.95;
       break;
     case "2":
-      riseCap = 0.9;
+      riseCap = 0.72;
       break;
     case "1":
-      riseCap = 0.55;
-      fallCap = 0.45;
+      riseCap = 0.42;
+      fallCap = 0.32;
       break;
     case "0":
       riseCap = 0.1;
-      fallCap = pressureGap >= 2 ? 0.7 : 0.35;
+      fallCap = pressureGap >= 2 ? 0.5 : 0.24;
       break;
     case "W":
       riseCap = 0;
-      fallCap = clamp(5.5 + pressureGap * 0.5 - Math.max(batter.batting - 80, 0) * 0.05, 3.5, 6.5);
+      fallCap = clamp(4.8 + pressureGap * 0.45 - Math.max(batter.batting - 80, 0) * 0.045, 3, 5.8);
       break;
     default:
       break;
   }
+
+  riseCap *= confidenceModifiers.rise;
+  fallCap *= confidenceModifiers.fall;
 
   battingCard.confidence = clamp(round(current + clamp(target - current, -fallCap, riseCap)), 0, 99);
 }
@@ -925,7 +944,7 @@ function updateBowlerRhythm(innings, bowlerId, event) {
   const controlBoost = clamp((6.2 - recentEconomy) * 2.2, -6, 8);
   const target =
     getInitialBowlerRhythm(bowler) +
-    Math.max(bowler.bowling - 75, 0) * 0.22 +
+    Math.max(bowler.bowling - 75, 0) * 0.18 +
     clamp(conditionsEdge, -4, 8) +
     controlBoost;
 
@@ -934,27 +953,27 @@ function updateBowlerRhythm(innings, bowlerId, event) {
 
   switch (event) {
     case "W":
-      riseCap = 2.8;
+      riseCap = 2.1;
       break;
     case "0":
-      riseCap = 1.2;
+      riseCap = 0.75;
       fallCap = 0.25;
       break;
     case "1":
-      riseCap = 0.45;
+      riseCap = 0.3;
       fallCap = 0.25;
       break;
     case "2":
       riseCap = 0.25;
-      fallCap = 0.4;
+      fallCap = 0.32;
       break;
     case "4":
       riseCap = 0.1;
-      fallCap = 1.35;
+      fallCap = current >= 72 ? 0.9 : 1.15;
       break;
     case "6":
       riseCap = 0;
-      fallCap = 2.2;
+      fallCap = current >= 72 ? 1.35 : 1.75;
       break;
     default:
       break;
@@ -1330,36 +1349,36 @@ function applyOverConfidenceAdjustment(innings, overSummary) {
   let adjustment = 0;
 
   if (maiden) {
-    adjustment -= 1;
+    adjustment -= 0.6;
     if (innings.target) {
       if ((requiredRate || 0) >= 10.5) {
-        adjustment -= 2;
+        adjustment -= 1.4;
       } else if ((requiredRate || 0) >= 8.5) {
-        adjustment -= 1;
+        adjustment -= 0.8;
       }
     }
   }
 
   if (innings.target) {
     if (pressureGap >= 4) {
-      adjustment -= 1;
+      adjustment -= 0.75;
     } else if (pressureGap >= 2.25) {
-      adjustment -= 1;
+      adjustment -= 0.45;
     } else if (pressureGap <= -4) {
-      adjustment += 2;
+      adjustment += 1.2;
     } else if (pressureGap <= -2.5) {
-      adjustment += 1;
+      adjustment += 0.75;
     }
   }
 
-  if (overRuns >= 10) {
+  if (overRuns >= 8) {
     adjustment += 1;
   }
 
   if (overRuns >= 12) {
-    adjustment += 1;
+    adjustment += 0.8;
   } else if (overRuns <= 2 && !maiden && innings.target && (requiredRate || 0) >= 7.5) {
-    adjustment -= 1;
+    adjustment -= 0.6;
   }
 
   if (adjustment !== 0) {
@@ -1374,11 +1393,11 @@ function applyActiveBatterConfidenceAtOverEnd(innings, overSummary) {
 
   let adjustment = 0;
   if (overRuns >= 12) {
-    adjustment = 2;
+    adjustment = 1;
   } else if (overRuns >= 8) {
     adjustment = 1;
   } else if (overRuns === 0) {
-    adjustment = pressureGap >= 2 ? -1 : 0;
+    adjustment = pressureGap >= 2 ? -1 : -0.5;
   }
 
   if (!adjustment) {
@@ -1837,7 +1856,7 @@ function scoreBowlingPerformance(card, innings) {
   );
 }
 
-function pickManOfTheMatch(match) {
+function pickMatchPlayer(match) {
   const performances = new Map();
 
   function upsert(player, side, add) {
@@ -1873,6 +1892,66 @@ function pickManOfTheMatch(match) {
     .sort((left, right) => right.score - left.score || normalizeName(left.name).localeCompare(normalizeName(right.name)))[0] || null;
 }
 
+function pickTournamentPlayer(results) {
+  const performances = new Map();
+
+  function upsert(player, add) {
+    const current = performances.get(player.id) || {
+      id: player.id,
+      name: player.name,
+      score: 0,
+      awards: 0,
+    };
+    current.score += add;
+    performances.set(player.id, current);
+  }
+
+  for (const result of results) {
+    for (const innings of result.innings || []) {
+      for (const [playerId, card] of Object.entries(innings.battingCards || {})) {
+        if (card.balls <= 0) {
+          continue;
+        }
+        const player = innings.teamById.get(playerId);
+        if (player) {
+          upsert(player, scoreBattingPerformance(card, innings));
+        }
+      }
+
+      for (const [playerId, card] of Object.entries(innings.bowlingCards || {})) {
+        if (card.balls <= 0) {
+          continue;
+        }
+        const player = innings.bowlingById.get(playerId);
+        if (player) {
+          upsert(player, scoreBowlingPerformance(card, innings));
+        }
+      }
+    }
+
+    const awardName = result.playerOfTheMatch || result.manOfTheMatch;
+    if (!awardName) {
+      continue;
+    }
+
+    for (const performance of performances.values()) {
+      if (normalizeName(performance.name) === normalizeName(awardName)) {
+        performance.score += 14;
+        performance.awards += 1;
+        break;
+      }
+    }
+  }
+
+  return [...performances.values()]
+    .sort(
+      (left, right) =>
+        right.score - left.score ||
+        right.awards - left.awards ||
+        normalizeName(left.name).localeCompare(normalizeName(right.name)),
+    )[0] || null;
+}
+
 function buildResult(match) {
   const [firstInnings, secondInnings] = match.innings;
   const firstScore = buildCurrentScoreline(firstInnings);
@@ -1894,7 +1973,7 @@ function buildResult(match) {
       ? `${opponentName} chased it with ${wicketsInHand} ${wicketsInHand === 1 ? "wicket" : "wickets"} in hand.`
       : `${opponentName} defended well and beat you by ${marginRuns} ${marginRuns === 1 ? "run" : "runs"}.`;
 
-  const manOfTheMatch = pickManOfTheMatch(match);
+  const playerOfTheMatch = pickMatchPlayer(match);
 
   return {
     opponentId: match.opponent.id,
@@ -1905,7 +1984,8 @@ function buildResult(match) {
     userWon,
     winner,
     summary: outcomeCopy,
-    manOfTheMatch: manOfTheMatch?.name || "",
+    playerOfTheMatch: playerOfTheMatch?.name || "",
+    manOfTheMatch: playerOfTheMatch?.name || "",
     userScore: match.userBattingFirst ? firstScore : secondScore,
     opponentScore: match.userBattingFirst ? secondScore : firstScore,
     inningsOrderLines: [
@@ -2568,4 +2648,8 @@ export function getPregameContext(state) {
 
 export function getConfidenceTargetPreview(innings) {
   return getConfidenceTarget(innings);
+}
+
+export function getPlayerOfTheTournament(results) {
+  return pickTournamentPlayer(results);
 }
