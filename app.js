@@ -46631,14 +46631,14 @@ function getNextBatterQuality(innings) {
 
 function getSettlingTarget(player) {
   switch (player.aggressionLevel) {
-    case "Very Aggressive":
-      return 10;
-    case "Aggressive":
-      return 14;
-    case "Cautious":
-      return 22;
     case "Very Cautious":
-      return 28;
+      return 10;
+    case "Cautious":
+      return 13;
+    case "Aggressive":
+      return 20;
+    case "Very Aggressive":
+      return 22;
     default:
       return 18;
   }
@@ -46710,6 +46710,19 @@ function getBowlerRhythmLevel(player, bowlingCard) {
     return 40;
   }
   return clamp(round(bowlingCard.rhythm ?? getInitialBowlerRhythm(player)), 0, 99);
+}
+
+function getBowlerRhythmWithSpellGap(player, bowlingCard, innings) {
+  const baseRhythm = getBowlerRhythmLevel(player, bowlingCard);
+  if (!innings || !bowlingCard || bowlingCard.lastOverBowled == null) {
+    return baseRhythm;
+  }
+
+  const currentOverNumber = Math.floor(innings.balls / 6) + 1;
+  const oversSinceSpell = Math.max(currentOverNumber - bowlingCard.lastOverBowled - 1, 0);
+  const gapPenalty = oversSinceSpell <= 2 ? 0 : Math.min((oversSinceSpell - 2) * 2, 12);
+
+  return clamp(round(baseRhythm - gapPenalty), 0, 99);
 }
 
 function getActiveBatters(innings) {
@@ -46897,7 +46910,7 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
 
   const settled = getBatterSettledLevel(batter, battingCard);
   const settledFactor = settled / 99;
-  const bowlerRhythm = getBowlerRhythmLevel(bowler, bowlingCard);
+  const bowlerRhythm = getBowlerRhythmWithSpellGap(bowler, bowlingCard, innings);
   const teamConfidence = getTeamConfidence(innings);
   const current = getBatterConfidenceLevel(batter, battingCard, innings);
   const confidenceModifiers = getBatterConfidenceModifiers(batter);
@@ -46905,6 +46918,26 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
   const pressureGap = innings.target ? Math.max((requiredRate || 0) - getCurrentRunRate(innings), 0) : 0;
   const qualityEdge = clamp((batter.batting - (bowler?.bowling || 70)) * 0.03, -6, 6);
   const partnershipLift = clamp(getCurrentPartnershipRuns(innings) * 0.04, 0, 6);
+  const battingPosition = innings.teamRoster.indexOf(batter.id);
+  const lowerOrderBatter = battingPosition >= 6 || batter.batting < 68;
+  const topOrderDamage = getTopOrderDamage(innings);
+  const collapseMode = lowerOrderBatter && (topOrderDamage >= 2 || innings.wickets >= 4);
+  const lowerOrderStability = collapseMode
+    ? batter.aggressionLevel === "Very Cautious"
+      ? 3.4
+      : batter.aggressionLevel === "Cautious"
+        ? 2.6
+        : batter.aggressionLevel === "Balanced"
+          ? 1.2
+          : 0
+    : 0;
+  const lowerOrderPanic = collapseMode
+    ? batter.aggressionLevel === "Very Aggressive"
+      ? 2.8
+      : batter.aggressionLevel === "Aggressive"
+        ? 1.8
+        : 0.4
+    : 0;
   const target =
     getInitialBatterConfidence(batter) +
     settledFactor * 20 +
@@ -46912,7 +46945,9 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
     qualityEdge +
     partnershipLift -
     clamp((bowlerRhythm - 50) * 0.15, -3, 6) -
-    clamp(pressureGap * 1.25, 0, 6);
+    clamp(pressureGap * 1.25, 0, 6) +
+    lowerOrderStability -
+    lowerOrderPanic;
 
   let riseCap = 0.75;
   let fallCap = 1.2;
@@ -46959,7 +46994,7 @@ function updateBowlerRhythm(innings, bowlerId, event) {
     return;
   }
 
-  const current = getBowlerRhythmLevel(bowler, bowlingCard);
+  const current = getBowlerRhythmWithSpellGap(bowler, bowlingCard, innings);
   const overIndex = Math.floor(Math.max(innings.balls - 1, 0) / 6);
   const conditionsEdge = getBowlingConditionsAdvantage(innings.conditions, bowler, overIndex) * 900;
   const recentEconomy = bowlingCard.balls > 0 ? (bowlingCard.runsConceded * 6) / bowlingCard.balls : 6;
@@ -47212,17 +47247,18 @@ function createEmptyInnings({ battingSide, battingLabel, bowlingSide, bowlingLab
     ),
     bowlingCards: Object.fromEntries(
       bowlingRoster.map((player) => [
-        player.id,
-        {
-          id: player.id,
-          name: player.name,
-          balls: 0,
-          runsConceded: 0,
-          wickets: 0,
-          rhythm: getInitialBowlerRhythm(player),
-        },
-      ]),
-    ),
+      player.id,
+      {
+        id: player.id,
+        name: player.name,
+        balls: 0,
+        runsConceded: 0,
+        wickets: 0,
+        rhythm: getInitialBowlerRhythm(player),
+        lastOverBowled: null,
+      },
+    ]),
+  ),
     currentOver: {
       startBalls: 0,
       events: [],
@@ -47432,7 +47468,9 @@ function applyActiveBatterConfidenceAtOverEnd(innings, overSummary) {
     if (!player || !card || card.out) {
       return;
     }
-    card.confidence = clamp(round(getBatterConfidenceLevel(player, card, innings) + adjustment), 0, 99);
+    const modifiers = getBatterConfidenceModifiers(player);
+    const scaledAdjustment = adjustment > 0 ? adjustment * modifiers.rise : adjustment * modifiers.fall;
+    card.confidence = clamp(round(getBatterConfidenceLevel(player, card, innings) + scaledAdjustment), 0, 99);
   });
 }
 
@@ -47452,6 +47490,9 @@ function finishOver(innings) {
   innings.overs.push(overSummary);
   applyOverConfidenceAdjustment(innings, overSummary);
   applyActiveBatterConfidenceAtOverEnd(innings, overSummary);
+  if (overSummary.bowlerId && innings.bowlingCards[overSummary.bowlerId]) {
+    innings.bowlingCards[overSummary.bowlerId].lastOverBowled = overSummary.overNumber;
+  }
   innings.lastBowlerId = innings.currentOver.bowlerId;
   innings.currentOver = {
     startBalls: innings.balls,
@@ -47500,14 +47541,15 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
   const batterConfidenceFactor = (batterConfidence - 45) / 100;
   const teamConfidence = getTeamConfidence(innings);
   const teamConfidenceFactor = (teamConfidence - 45) / 100;
-  const bowlerRhythm = getBowlerRhythmLevel(bowler, bowlingCard);
+  const bowlerRhythm = getBowlerRhythmWithSpellGap(bowler, bowlingCard, innings);
   const bowlerRhythmFactor = (bowlerRhythm - 45) / 100;
-  const battingPosition = innings.teamRoster.indexOf(striker.id);
-  const isTopOrder = battingPosition >= 0 && battingPosition <= 3;
-  const sightingFactor = battingCard.balls < 12 ? (12 - battingCard.balls) / 12 : 0;
-  const recentWickets = getRecentWicketCount(innings);
   const batterStrength = striker.batting;
   const bowlerStrength = bowler.bowling;
+  const battingPosition = innings.teamRoster.indexOf(striker.id);
+  const isTopOrder = battingPosition >= 0 && battingPosition <= 3;
+  const isLowerOrder = battingPosition >= 6 || batterStrength < 68;
+  const sightingFactor = battingCard.balls < 12 ? (12 - battingCard.balls) / 12 : 0;
+  const recentWickets = getRecentWicketCount(innings);
   const battingEdge = (batterStrength - bowlerStrength) * 0.0007;
   const earlyNewBall = overIndex < POWERPLAY_END ? 0.006 : 0;
   const deathFactor = overIndex >= DEATH_OVERS_START ? 0.008 : 0;
@@ -47555,6 +47597,24 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
     : 0;
   const anchorShield = batterStrength >= 92 ? 0.007 : batterStrength >= 84 ? 0.004 : batterStrength <= 50 ? -0.003 : 0;
   const lowerOrderSlowdown = batterStrength < 55 && innings.wickets >= 5 ? 0.02 : 0;
+  const topOrderDamage = getTopOrderDamage(innings);
+  const collapseMode = isLowerOrder && (topOrderDamage >= 2 || innings.wickets >= 4);
+  const collapseStability = collapseMode
+    ? striker.aggressionLevel === "Very Cautious"
+      ? 0.012
+      : striker.aggressionLevel === "Cautious"
+        ? 0.008
+        : striker.aggressionLevel === "Balanced"
+          ? 0.004
+          : 0
+    : 0;
+  const collapsePanic = collapseMode
+    ? striker.aggressionLevel === "Very Aggressive"
+      ? 0.015
+      : striker.aggressionLevel === "Aggressive"
+        ? 0.01
+        : 0.003
+    : 0;
   const wicketChance = clamp(
     0.024 +
       intent.wicket +
@@ -47576,6 +47636,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       topOrderShield -
       lowerOrderRisk -
       anchorShield +
+      collapsePanic -
+      collapseStability +
       earlyWicketMod,
     0.008,
     0.165,
@@ -47614,6 +47676,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       bowlerRhythmFactor * 0.016 +
       teamConfidenceFactor * 0.003 -
       lowerOrderSlowdown +
+      collapsePanic * 0.35 -
+      collapseStability * 0.8 +
       qualityShield * 0.55 +
       earlyBoundaryMod,
     0.02,
@@ -47632,6 +47696,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       bowlerRhythmFactor * 0.008 +
       teamConfidenceFactor * 0.002 -
       lowerOrderSlowdown * 0.6 +
+      collapsePanic * 0.45 -
+      collapseStability * 0.7 +
       earlyBoundaryMod * 0.65,
     0.002,
     0.08,
@@ -47646,6 +47712,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       settledFactor * 0.008 +
       batterConfidenceFactor * 0.006 -
       bowlerRhythmFactor * 0.004 +
+      collapseStability * 0.2 -
+      collapsePanic * 0.08 +
       earlyRotateMod * 0.38 +
       qualityShield * 0.32,
     0.015,
@@ -47662,6 +47730,8 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       (teamConfidence < 35 ? 0.01 : 0) +
       batterConfidenceFactor * 0.012 -
       bowlerRhythmFactor * 0.01 +
+      collapseStability * 0.55 -
+      collapsePanic * 0.16 +
       earlyRotateMod +
       qualityShield * 0.32,
     0.12,
@@ -48646,9 +48716,13 @@ function getLiveContext(state) {
     settledNonStriker: getBatterSettledLevel(nonStriker, innings.battingCards[innings.nonStrikerId]),
     confidenceStriker: getBatterConfidenceLevel(striker, innings.battingCards[innings.strikerId], innings),
     confidenceNonStriker: getBatterConfidenceLevel(nonStriker, innings.battingCards[innings.nonStrikerId], innings),
-    bowlerRhythm: bowler ? getBowlerRhythmLevel(bowler, innings.bowlingCards[bowler.id]) : null,
+    bowlerRhythm: bowler ? getBowlerRhythmWithSpellGap(bowler, innings.bowlingCards[bowler.id], innings) : null,
     lastBowlerRhythm: match.latestOver?.bowlerId
-      ? getBowlerRhythmLevel(innings.bowlingById.get(match.latestOver.bowlerId), innings.bowlingCards[match.latestOver.bowlerId])
+      ? getBowlerRhythmWithSpellGap(
+        innings.bowlingById.get(match.latestOver.bowlerId),
+        innings.bowlingCards[match.latestOver.bowlerId],
+        innings,
+      )
       : null,
     teamConfidence: getTeamConfidence(innings),
     partnershipRuns: getCurrentPartnershipRuns(innings),
@@ -49777,6 +49851,7 @@ function resultsHistoryMarkup(includeLatest = false) {
                   <p class="schedule-stage">${escapeHtml(result.stage)}</p>
                   <h3>${escapeHtml(result.opponent)}</h3>
                   <p>${escapeHtml(result.summary)}</p>
+                  <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</p>
                 </div>
                 <div class="schedule-scorelines">
                   ${result.inningsOrderLines

@@ -1128,6 +1128,7 @@ function resultsHistoryMarkup(includeLatest = false) {
                   <p class="schedule-stage">${escapeHtml(result.stage)}</p>
                   <h3>${escapeHtml(result.opponent)}</h3>
                   <p>${escapeHtml(result.summary)}</p>
+                  <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</p>
                 </div>
                 <div class="schedule-scorelines">
                   ${result.inningsOrderLines
