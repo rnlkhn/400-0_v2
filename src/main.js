@@ -137,7 +137,7 @@ function getStatusMessage() {
   }
 
   if (state.phase === "finished" && state.finishedView === "summary") {
-    return "The tournament is wrapped. Use the summary to review the standout batting and bowling performers before starting the next campaign.";
+    return "The tournament is wrapped. Use the summary to review the leading batting and bowling performers before starting the next campaign.";
   }
 
   if (state.champion) {
@@ -1083,7 +1083,7 @@ function latestResultMarkup() {
           `)
           .join("")}
       </div>
-      <p><strong>Standout:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.standout || ""))}</p>
+      <p><strong>Man of the Match:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.manOfTheMatch || ""))}</p>
       <section class="scorecard-summary">
         <h4>Scorecard</h4>
         ${state.latestMatch.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}

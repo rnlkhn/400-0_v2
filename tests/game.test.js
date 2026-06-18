@@ -100,6 +100,37 @@ test("county mode provides a recommended bowler once the user is defending", () 
   assert.ok(getRecommendedBowler(state));
 });
 
+test("county recommendation avoids defaulting to spin too early on hard seam-friendly decks", () => {
+  let state = buildCompletedXI("county");
+  state = revealNextOpponent(state, constantRandom(0.2));
+  state = chooseTossDecision(state, "bowl");
+  state = startMatch(state, constantRandom(0.35));
+
+  state.currentMatch.userTeam = [
+    { id: "pace-1", name: "New Ball Seamer", batting: 18, bowling: 86, bowlingStyle: "Fast Medium", bowlingHand: "Right" },
+    { id: "pace-2", name: "Support Seamer", batting: 17, bowling: 81, bowlingStyle: "Medium Fast", bowlingHand: "Right" },
+    { id: "spin-1", name: "Lead Spinner", batting: 20, bowling: 89, bowlingStyle: "Off Break", bowlingHand: "Right" },
+  ];
+
+  const innings = state.currentMatch.innings[0];
+  innings.balls = 11 * 6;
+  innings.conditions = {
+    weather: { id: "clear", label: "Clear", batting: 2, seam: -1, swing: -1, spin: 0, chase: 1 },
+    surface: { id: "hard", label: "Hard", batting: 1, seam: 1, spin: -1, pace: 4 },
+    outfield: { id: "fast", label: "Fast outfield", batting: 3, boundary: 0.03, double: -0.008 },
+  };
+  innings.bowlingCards = {
+    "pace-1": { id: "pace-1", name: "New Ball Seamer", balls: 24, runsConceded: 18, wickets: 1 },
+    "pace-2": { id: "pace-2", name: "Support Seamer", balls: 18, runsConceded: 16, wickets: 1 },
+    "spin-1": { id: "spin-1", name: "Lead Spinner", balls: 0, runsConceded: 0, wickets: 0 },
+  };
+  innings.lastBowlerId = "pace-2";
+  innings.bowlingRoster = ["pace-1", "pace-2", "spin-1"];
+  state.currentMatch.awaiting = { type: "choose-bowler", overNumber: 12 };
+
+  assert.equal(getRecommendedBowler(state), "pace-1");
+});
+
 test("choosing to bowl first starts the match without pre-selecting openers", () => {
   let state = buildCompletedXI();
   state = revealNextOpponent(state, constantRandom(0.2));
@@ -194,6 +225,7 @@ test("simulating the full match produces a result and updates the run state", ()
   assert.ok(["ready", "finished"].includes(state.phase));
   assert.equal(state.results.length, 1);
   assert.ok(state.latestMatch.summary.length > 0);
+  assert.ok(state.latestMatch.manOfTheMatch);
 });
 
 test("simulateMatch does not recurse forever when pregame is unresolved", () => {

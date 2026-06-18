@@ -514,18 +514,30 @@ function getMatchupAdvantage(striker, bowler) {
 
 function getBowlingConditionsAdvantage(conditions, bowler, overIndex) {
   const flags = getStyleFlags(bowler);
+  const spinWindow = getSpinRecommendationWindow(conditions);
+  const spinWear = clamp((overIndex - spinWindow) / 10, 0, 1);
+  const freshBallFactor = clamp((18 - overIndex) / 18, 0, 1);
   let advantage = 0;
 
   if (flags.pace) {
-    advantage += (conditions.weather.seam + conditions.surface.pace) * 0.0024;
+    advantage += (conditions.weather.seam + conditions.surface.pace) * 0.0022 * (0.55 + freshBallFactor * 0.75);
   }
 
   if (flags.swing) {
-    advantage += conditions.weather.swing * 0.0018;
+    advantage += conditions.weather.swing * 0.0016 * (0.45 + freshBallFactor * 0.9);
   }
 
   if (flags.spin) {
-    advantage += conditions.surface.spin * 0.0026;
+    advantage += conditions.surface.spin * (overIndex >= spinWindow ? 0.0018 + spinWear * 0.0014 : 0.00045);
+    advantage += conditions.weather.spin * (overIndex >= spinWindow ? 0.001 + spinWear * 0.0008 : 0.00025);
+  }
+
+  if (flags.wrist && overIndex >= spinWindow) {
+    advantage += 0.002 + spinWear * 0.0025;
+  }
+
+  if (flags.finger && overIndex >= spinWindow + 2) {
+    advantage += 0.0015 + spinWear * 0.0018;
   }
 
   if (overIndex < POWERPLAY_END && flags.seam) {
@@ -536,8 +548,8 @@ function getBowlingConditionsAdvantage(conditions, bowler, overIndex) {
     advantage += 0.006;
   }
 
-  if (overIndex >= 20 && flags.spin) {
-    advantage += 0.006;
+  if (overIndex >= spinWindow && flags.spin) {
+    advantage += 0.002 + spinWear * 0.004;
   }
 
   return advantage;
@@ -825,9 +837,18 @@ function buildAIBattingOrder(roster) {
   return [...openers, ...remaining];
 }
 
+function getSpinRecommendationWindow(conditions) {
+  const spinSupport = conditions.weather.spin + conditions.surface.spin;
+  const seamSupport = conditions.weather.seam + conditions.weather.swing + conditions.surface.seam + conditions.surface.pace;
+  return clamp(18 - Math.max(spinSupport - 3, 0) + Math.max(seamSupport - 5, 0) * 0.45, 14, 23);
+}
+
 function scoreBowlerForPhase(player, overNumber, conditions) {
   const flags = getStyleFlags(player);
+  const spinWindow = getSpinRecommendationWindow(conditions);
+  const wornBallFactor = clamp((overNumber - spinWindow) / 10, 0, 1);
   let score = player.bowling;
+
   if (overNumber < POWERPLAY_END) {
     score += flags.pace ? 8 : -6;
     score += conditions.weather.seam + conditions.weather.swing;
@@ -835,8 +856,16 @@ function scoreBowlerForPhase(player, overNumber, conditions) {
     score += flags.pace ? 7 : -4;
     score += player.batting < 40 ? 2 : 0;
   } else {
-    score += flags.spin ? 7 : 0;
-    score += conditions.surface.spin * (flags.spin ? 1.2 : 0.3);
+    if (overNumber < spinWindow) {
+      score += flags.pace ? 4 : -5;
+      score += (conditions.weather.seam + conditions.surface.pace) * 0.8;
+      score += flags.spin ? conditions.surface.spin * 0.2 : 0;
+    } else {
+      score += flags.spin ? 4 + wornBallFactor * 6 : 0;
+      score += conditions.surface.spin * (flags.spin ? (0.65 + wornBallFactor * 0.55) : 0.25);
+      score += conditions.weather.spin * (flags.spin ? (0.45 + wornBallFactor * 0.35) : 0.15);
+      score += flags.pace ? Math.max(1.5 - wornBallFactor * 3.5, -2) : 0;
+    }
   }
   return score;
 }
@@ -881,16 +910,21 @@ function chooseAIBowler(innings, teamRoster, byId) {
   const eligibleIds = getEligibleBowlerIds(innings, teamRoster, byId);
   const bowlerId = eligibleIds[0];
   const overNumber = Math.floor(innings.balls / 6);
+  const spinWindow = getSpinRecommendationWindow(innings.conditions);
   const player = byId.get(bowlerId);
   const flags = getStyleFlags(player);
   let intent = "balanced";
 
   if (overNumber < POWERPLAY_END || overNumber >= DEATH_OVERS_START) {
     intent = flags.pace ? "attacking" : "balanced";
+  } else if (flags.spin && overNumber >= spinWindow + 4) {
+    intent = innings.target ? "defensive" : "balanced";
+  } else if (flags.spin && overNumber >= spinWindow) {
+    intent = innings.target ? "balanced" : "balanced";
   } else if (flags.spin && innings.target) {
-    intent = "defensive";
-  } else if (flags.spin) {
     intent = "balanced";
+  } else if (flags.spin) {
+    intent = "attacking";
   }
 
   return { bowlerId, intent, eligibleIds };
@@ -1079,6 +1113,40 @@ function buildCurrentScoreline(innings) {
   return innings.wickets >= 10 ? `${innings.score}` : `${innings.score}/${innings.wickets}`;
 }
 
+function applyOverConfidenceAdjustment(innings, overSummary) {
+  const overRuns = overSummary.events.reduce((total, event) => total + (/^\d+$/.test(event) ? Number(event) : 0), 0);
+  const maiden = overRuns === 0;
+  const requiredRate = getRequiredRunRate(innings);
+  const currentRate = getCurrentRunRate(innings);
+  let adjustment = 0;
+
+  if (maiden) {
+    adjustment -= 2;
+    if (innings.target) {
+      if ((requiredRate || 0) >= 9.5) {
+        adjustment -= 2;
+      } else if ((requiredRate || 0) >= 7) {
+        adjustment -= 1;
+      }
+    }
+  }
+
+  if (innings.target) {
+    const pressureGap = (requiredRate || 0) - currentRate;
+    if (pressureGap >= 3) {
+      adjustment -= 2;
+    } else if (pressureGap >= 1.5) {
+      adjustment -= 1;
+    } else if (pressureGap <= -2.5) {
+      adjustment += 1;
+    }
+  }
+
+  if (adjustment !== 0) {
+    innings.teamConfidence = clamp(round((innings.teamConfidence ?? innings.confidenceBase ?? 40) + adjustment), 0, 99);
+  }
+}
+
 function finishOver(innings) {
   const overSummary = {
     overNumber: Math.floor(innings.currentOver.startBalls / 6) + 1,
@@ -1093,6 +1161,7 @@ function finishOver(innings) {
     requiredRate: getRequiredRunRate(innings),
   };
   innings.overs.push(overSummary);
+  applyOverConfidenceAdjustment(innings, overSummary);
   innings.lastBowlerId = innings.currentOver.bowlerId;
   innings.currentOver = {
     startBalls: innings.balls,
@@ -1467,6 +1536,74 @@ function buildScorecardSummary(innings) {
   return { batting, bowling };
 }
 
+function scoreBattingPerformance(card, innings) {
+  const strikeRate = card.balls ? (card.runs * 100) / card.balls : 0;
+  const runShare = innings.score > 0 ? card.runs / innings.score : 0;
+
+  return (
+    card.runs * 1.02 +
+    card.fours * 0.35 +
+    card.sixes * 0.7 +
+    Math.min(runShare * 34, 22) +
+    clamp((strikeRate - 85) / 10, -8, 12) +
+    (card.notOut ? 4 : 0) +
+    (card.runs >= 100 ? 8 : card.runs >= 50 ? 3 : 0)
+  );
+}
+
+function scoreBowlingPerformance(card, innings) {
+  const economy = card.balls ? (card.runsConceded * 6) / card.balls : 99;
+  const strikeRate = card.wickets ? card.balls / card.wickets : 99;
+  const workload = card.balls / 6;
+  const inningsLength = Math.max(1, innings.balls / 6);
+
+  return (
+    card.wickets * 31 +
+    clamp((6.2 - economy) * 6, -10, 22) +
+    clamp((24 - strikeRate) * 0.7, -4, 12) +
+    Math.min(workload * 1.1, 11) +
+    (card.wickets >= 5 ? 12 : card.wickets >= 4 ? 6 : card.wickets >= 3 ? 2 : 0) +
+    (innings.score <= 220 ? 3 : 0) +
+    (inningsLength >= 45 ? 2 : 0)
+  );
+}
+
+function pickManOfTheMatch(match) {
+  const performances = new Map();
+
+  function upsert(player, side, add) {
+    const current = performances.get(player.id) || {
+      id: player.id,
+      name: player.name,
+      side,
+      score: 0,
+    };
+    current.score += add;
+    performances.set(player.id, current);
+  }
+
+  for (const innings of match.innings) {
+    for (const [playerId, card] of Object.entries(innings.battingCards)) {
+      if (card.balls <= 0) {
+        continue;
+      }
+      const player = innings.teamById.get(playerId);
+      upsert(player, innings.battingSide, scoreBattingPerformance(card, innings));
+    }
+
+    for (const [playerId, card] of Object.entries(innings.bowlingCards)) {
+      if (card.balls <= 0) {
+        continue;
+      }
+      const player = innings.bowlingById.get(playerId);
+      upsert(player, innings.bowlingSide, scoreBowlingPerformance(card, innings));
+    }
+  }
+
+  return [...performances.values()]
+    .sort((left, right) => right.score - left.score || normalizeName(left.name).localeCompare(normalizeName(right.name)))[0] || null;
+}
+
 function buildResult(match) {
   const [firstInnings, secondInnings] = match.innings;
   const firstScore = buildCurrentScoreline(firstInnings);
@@ -1488,14 +1625,7 @@ function buildResult(match) {
       ? `${opponentName} chased it with ${wicketsInHand} ${wicketsInHand === 1 ? "wicket" : "wickets"} in hand.`
       : `${opponentName} defended well and beat you by ${marginRuns} ${marginRuns === 1 ? "run" : "runs"}.`;
 
-  const standoutInnings = userWon
-    ? secondWon
-      ? secondInnings
-      : firstInnings
-    : secondWon
-      ? secondInnings
-      : firstInnings;
-  const standout = buildScorecardSummary(standoutInnings).batting[0] || buildScorecardSummary(standoutInnings).bowling[0];
+  const manOfTheMatch = pickManOfTheMatch(match);
 
   return {
     opponentId: match.opponent.id,
@@ -1506,7 +1636,7 @@ function buildResult(match) {
     userWon,
     winner,
     summary: outcomeCopy,
-    standout: standout?.name || "",
+    manOfTheMatch: manOfTheMatch?.name || "",
     userScore: match.userBattingFirst ? firstScore : secondScore,
     opponentScore: match.userBattingFirst ? secondScore : firstScore,
     inningsOrderLines: [
