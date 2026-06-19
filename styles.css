@@ -600,6 +600,42 @@ button {
   margin: 6px 0 0;
 }
 
+.schedule-award {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.schedule-award span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(165, 118, 47, 0.12);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.schedule-award strong {
+  color: var(--grass-dark);
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.schedule-award--detail {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid rgba(17, 59, 34, 0.1);
+  border-radius: 14px;
+  background: rgba(245, 247, 241, 0.85);
+}
+
 @media (min-width: 960px) {
   .layout-grid {
     grid-template-columns: minmax(0, 1.9fr) minmax(320px, 0.95fr);

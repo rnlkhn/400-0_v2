@@ -185,6 +185,7 @@ const PHASES = {
 const TOTAL_OVERS = 50;
 const POWERPLAY_END = 10;
 const DEATH_OVERS_START = 40;
+const FINAL_POWERPLAY_START = 45;
 const ROSTER_SIZE = 11;
 
 const GAME_PLAYER_NAME_ALIASES = new Map([
@@ -524,6 +525,8 @@ function getBowlingConditionsAdvantage(conditions, bowler, overIndex) {
   const spinWindow = getSpinRecommendationWindow(conditions);
   const spinWear = clamp((overIndex - spinWindow) / 10, 0, 1);
   const freshBallFactor = clamp((18 - overIndex) / 18, 0, 1);
+  const deathPhase = overIndex >= DEATH_OVERS_START;
+  const finalPowerplay = overIndex >= FINAL_POWERPLAY_START;
   let advantage = 0;
 
   if (flags.pace) {
@@ -551,26 +554,34 @@ function getBowlingConditionsAdvantage(conditions, bowler, overIndex) {
     advantage += 0.01;
   }
 
-  if (overIndex >= DEATH_OVERS_START && flags.pace) {
-    advantage += 0.006;
+  if (deathPhase && flags.pace) {
+    advantage += finalPowerplay ? 0.009 : 0.005;
   }
 
   if (overIndex >= spinWindow && flags.spin) {
     advantage += 0.002 + spinWear * 0.004;
+    if (deathPhase) {
+      advantage += conditions.surface.spin >= 2 ? 0.0025 : -0.0015;
+      if (finalPowerplay && conditions.surface.spin < 2) {
+        advantage -= 0.0015;
+      }
+    }
   }
 
   return advantage;
 }
 
 function getBattingConditionsAdvantage(conditions, overIndex) {
+  const deathPhase = overIndex >= DEATH_OVERS_START;
+  const finalPowerplay = overIndex >= FINAL_POWERPLAY_START;
   let batting = (conditions.weather.batting + conditions.surface.batting + conditions.outfield.batting) * 0.0018;
 
   if (overIndex < POWERPLAY_END) {
     batting += 0.008;
   }
 
-  if (overIndex >= DEATH_OVERS_START) {
-    batting += 0.012;
+  if (deathPhase) {
+    batting += finalPowerplay ? 0.014 : 0.008;
   }
 
   return batting;
@@ -690,16 +701,14 @@ function getIncomingBatterConfidence(innings, player) {
   const requiredRate = innings.target ? getRequiredRunRate(innings) : null;
   const currentRate = getCurrentRunRate(innings);
   const pressureGap = innings.target ? Math.max((requiredRate || 0) - currentRate, 0) : 0;
-  const partnershipRuns = getCurrentPartnershipRuns(innings);
   const collapseMode = lowerOrderBatter && (topOrderDamage >= 2 || innings.wickets >= 4);
 
   let confidence =
     getInitialBatterConfidence(player) +
-    clamp((player.batting - 72) * 0.1, -3, 6) +
-    clamp((teamConfidence - 40) * 0.12, -4, 5) +
-    Math.min(wicketsInHand * 0.18, 1.6) -
-    recentWickets * 1.35 -
-    Math.min(partnershipRuns * 0.03, 1.6);
+    clamp((player.batting - 72) * 0.12, -3, 7) +
+    clamp((teamConfidence - 40) * 0.14, -4, 6) +
+    Math.min(wicketsInHand * 0.16, 1.4) -
+    recentWickets * 1.15;
 
   if (pressureGap >= 3.5) {
     confidence -= 2.2;
@@ -719,7 +728,7 @@ function getIncomingBatterConfidence(innings, player) {
             : -2.2;
   }
 
-  return clamp(round(confidence), 18, 78);
+  return clamp(round(confidence), 22, 82);
 }
 
 function getBatterConfidenceLevel(player, battingCard, innings) {
@@ -839,39 +848,43 @@ function getConfidenceTarget(innings) {
   const activeRuns = activeBatters.reduce((total, batter) => total + batter.card.runs, 0);
   const nextBatterQuality = getNextBatterQuality(innings);
   const scoringBaseline = innings.target ? Math.max(requiredRate || 0, 5.2) : 5.2;
-  const scoringMomentum = clamp((recentOverRunRate - scoringBaseline) * 1.2, -4, 8);
+  const scoringMomentum = clamp((recentOverRunRate - scoringBaseline) * 1.35, -4, 10);
   const chaseControl = innings.target
-    ? clamp(9 - Math.max((requiredRate || 0) - currentRate, 0) * 2.2 + Math.min((10 - innings.wickets) * 0.28, 2.5), -8, 10)
+    ? clamp(10.5 - Math.max((requiredRate || 0) - currentRate, 0) * 2 + Math.min((10 - innings.wickets) * 0.34, 3), -8, 12)
     : clamp((currentRate - 4.8) * 1.45, -4, 7);
   const finishLineBoost = innings.target
     ? innings.score >= innings.target * 0.82
       ? clamp(
-        (innings.score / innings.target - 0.82) * 42 +
-          Math.max(8 - innings.wickets, 0) * 0.38 -
-          Math.max((requiredRate || 0) - currentRate, 0) * 0.6,
+        (innings.score / innings.target - 0.82) * 48 +
+          Math.max(8 - innings.wickets, 0) * 0.42 -
+          Math.max((requiredRate || 0) - currentRate, 0) * 0.5,
         0,
-        7,
+        9,
       )
       : 0
     : 0;
   const collapseExposure = innings.wickets >= 8 ? 10 : innings.wickets >= 6 ? 6 : innings.wickets >= 4 ? 3 : 0;
+  const chaseCruiseBoost = innings.target && innings.score >= innings.target * 0.6 && innings.wickets <= 3
+    ? clamp((innings.score / innings.target - 0.6) * 24 + Math.max(3 - innings.wickets, 0) * 1.2, 0, 8)
+    : 0;
 
   return clamp(
     round(
       innings.confidenceBase +
         settledAverage * 0.06 +
-        (batterConfidenceAverage - 40) * 0.2 +
-        Math.max(activeQuality - 70, 0) * 0.18 +
-        Math.max(nextBatterQuality - 66, 0) * 0.1 +
+        (batterConfidenceAverage - 40) * 0.28 +
+        Math.max(activeQuality - 70, 0) * 0.22 +
+        Math.max(nextBatterQuality - 66, 0) * 0.12 +
         Math.min(activeRuns * 0.045, 14) +
-        Math.min(partnershipRuns * 0.075, 11) +
+        Math.min(partnershipRuns * 0.085, 13) +
         Math.min(partnershipBalls * 0.018, 3) +
         scoringMomentum +
         chaseControl +
-        finishLineBoost -
+        finishLineBoost +
+        chaseCruiseBoost -
         innings.wickets * 1.85 -
-        topOrderDamage * 1.4 -
-        recentWickets * 2.5 -
+        topOrderDamage * 1.25 -
+        recentWickets * 2.15 -
         collapseExposure,
     ),
     0,
@@ -903,29 +916,29 @@ function updateTeamConfidence(innings, event) {
     )
     : 0;
   const riseCap = event === "6"
-    ? 0.32
+    ? 0.95
     : event === "4"
-      ? 0.24
+      ? 0.7
       : event === "3"
-        ? 0.18
+        ? 0.42
         : event === "2"
-          ? 0.12
+          ? 0.28
           : event === "1"
-            ? 0.08
+            ? 0.14
             : event === "0"
               ? pressureGap >= 2.5
                 ? 0.01
-                : 0.03
+                : 0.02
               : 0;
   const fallCap = event === "W"
-    ? clamp(2.2 - wicketShockBuffer * 0.45, 0.9, 2.2)
+    ? clamp(1.8 - wicketShockBuffer * 0.35, 0.7, 1.8)
     : event === "0"
       ? pressureGap >= 3
         ? 0.12
         : pressureGap >= 1.5
-          ? 0.08
-          : 0.03
-      : 0.18;
+          ? 0.06
+          : 0.02
+      : 0.1;
 
   innings.teamConfidence = clamp(
     round(current + clamp(delta, -fallCap, riseCap)),
@@ -990,28 +1003,28 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
 
   switch (event) {
     case "6":
-      riseCap = 1.7;
+      riseCap = 1.25;
       break;
     case "4":
-      riseCap = 1.2;
+      riseCap = 0.9;
       break;
     case "3":
-      riseCap = 0.95;
+      riseCap = 0.7;
       break;
     case "2":
-      riseCap = 0.72;
+      riseCap = 0.5;
       break;
     case "1":
-      riseCap = 0.42;
-      fallCap = 0.32;
+      riseCap = 0.28;
+      fallCap = 0.2;
       break;
     case "0":
       riseCap = 0.1;
-      fallCap = pressureGap >= 2 ? 0.4 : 0.18;
+      fallCap = pressureGap >= 2 ? 0.28 : 0.12;
       break;
     case "W":
       riseCap = 0;
-      fallCap = clamp(4.8 + pressureGap * 0.45 - Math.max(batter.batting - 80, 0) * 0.045, 3, 5.8);
+      fallCap = clamp(4.2 + pressureGap * 0.35 - Math.max(batter.batting - 80, 0) * 0.04, 2.8, 5.2);
       break;
     default:
       break;
@@ -1046,27 +1059,27 @@ function updateBowlerRhythm(innings, bowlerId, event) {
 
   switch (event) {
     case "W":
-      riseCap = 2.1;
+      riseCap = 1.5;
       break;
     case "0":
-      riseCap = 0.75;
-      fallCap = 0.25;
+      riseCap = 0.6;
+      fallCap = 0.15;
       break;
     case "1":
-      riseCap = 0.3;
-      fallCap = 0.25;
+      riseCap = 0.24;
+      fallCap = 0.18;
       break;
     case "2":
-      riseCap = 0.25;
-      fallCap = 0.32;
+      riseCap = 0.18;
+      fallCap = 0.24;
       break;
     case "4":
       riseCap = 0.1;
-      fallCap = current >= 72 ? 0.9 : 1.15;
+      fallCap = current >= 72 ? 0.7 : 0.95;
       break;
     case "6":
       riseCap = 0;
-      fallCap = current >= 72 ? 1.35 : 1.75;
+      fallCap = current >= 72 ? 1.05 : 1.4;
       break;
     default:
       break;
@@ -1233,12 +1246,24 @@ function chooseAIBowler(innings, teamRoster, byId) {
   const flags = getStyleFlags(player);
   let intent = "balanced";
 
-  if (overNumber < POWERPLAY_END || overNumber >= DEATH_OVERS_START) {
+  const deathPhase = overNumber >= DEATH_OVERS_START;
+  const finalPowerplay = overNumber >= FINAL_POWERPLAY_START;
+  const highSpinConditions = innings.conditions.surface.spin >= 2 || innings.conditions.weather.spin >= 2;
+
+  if (overNumber < POWERPLAY_END) {
     intent = flags.pace ? "attacking" : "balanced";
+  } else if (deathPhase) {
+    if (flags.pace) {
+      intent = finalPowerplay ? "attacking" : "balanced";
+    } else if (flags.spin && highSpinConditions && player.bowling >= 86 && !finalPowerplay) {
+      intent = "balanced";
+    } else {
+      intent = "defensive";
+    }
   } else if (flags.spin && overNumber >= spinWindow + 4) {
     intent = innings.target ? "defensive" : "balanced";
   } else if (flags.spin && overNumber >= spinWindow) {
-    intent = innings.target ? "balanced" : "balanced";
+    intent = "balanced";
   } else if (flags.spin && innings.target) {
     intent = "balanced";
   } else if (flags.spin) {
@@ -1443,36 +1468,40 @@ function applyOverConfidenceAdjustment(innings, overSummary) {
   let adjustment = 0;
 
   if (maiden) {
-    adjustment -= 0.3;
+    adjustment -= 0.18;
     if (innings.target) {
       if ((requiredRate || 0) >= 10.5) {
-        adjustment -= 0.9;
+        adjustment -= 0.5;
       } else if ((requiredRate || 0) >= 8.5) {
-        adjustment -= 0.45;
+        adjustment -= 0.28;
       }
     }
   }
 
   if (innings.target) {
     if (pressureGap >= 4) {
-      adjustment -= 0.4;
+      adjustment -= 0.22;
     } else if (pressureGap >= 2.25) {
-      adjustment -= 0.25;
+      adjustment -= 0.14;
     } else if (pressureGap <= -4) {
-      adjustment += 0.65;
+      adjustment += 0.7;
     } else if (pressureGap <= -2.5) {
-      adjustment += 0.35;
+      adjustment += 0.42;
     }
   }
 
   if (overRuns >= 8) {
-    adjustment += 0.3;
+    adjustment += 0.16;
   }
 
   if (overRuns >= 12) {
-    adjustment += 0.45;
+    adjustment += 0.24;
   } else if (overRuns <= 2 && !maiden && innings.target && (requiredRate || 0) >= 7.5) {
-    adjustment -= 0.3;
+    adjustment -= 0.16;
+  }
+
+  if (innings.target && innings.score >= innings.target * 0.75 && innings.wickets <= 3) {
+    adjustment += 0.22;
   }
 
   if (adjustment !== 0) {
@@ -1487,11 +1516,11 @@ function applyActiveBatterConfidenceAtOverEnd(innings, overSummary) {
 
   let adjustment = 0;
   if (overRuns >= 12) {
-    adjustment = 0.6;
+    adjustment = 0.28;
   } else if (overRuns >= 8) {
-    adjustment = 0.35;
+    adjustment = 0.16;
   } else if (overRuns === 0) {
-    adjustment = pressureGap >= 2 ? -0.45 : -0.2;
+    adjustment = pressureGap >= 2 ? -0.22 : -0.1;
   }
 
   if (!adjustment) {
@@ -1593,10 +1622,19 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
   const recentWickets = getRecentWicketCount(innings);
   const battingEdge = (batterStrength - bowlerStrength) * 0.0007;
   const earlyNewBall = overIndex < POWERPLAY_END ? 0.006 : 0;
-  const deathFactor = overIndex >= DEATH_OVERS_START ? 0.008 : 0;
+  const deathPhase = overIndex >= DEATH_OVERS_START;
+  const finalPowerplay = overIndex >= FINAL_POWERPLAY_START;
+  const deathFactor = deathPhase ? (finalPowerplay ? 0.013 : 0.007) : 0;
   const qualityShield = clamp((batterStrength - 70) * 0.00042, -0.005, 0.014);
   const topOrderShield = isTopOrder ? clamp(0.006 + Math.max(batterStrength - 80, 0) * 0.00018, 0.006, 0.015) : 0;
   const lowerOrderRisk = batterStrength < 45 ? 0.018 : batterStrength < 55 ? 0.012 : batterStrength < 70 ? 0.004 : 0;
+  const deathIntentBoost = deathPhase
+    ? (finalPowerplay ? 0.012 : 0.007) + chasePressure * 0.004
+    : 0;
+  const deathWicketRisk = deathPhase
+    ? (isLowerOrder ? (finalPowerplay ? 0.015 : 0.009) : finalPowerplay ? 0.006 : 0.003)
+    : 0;
+  const deathControlDrop = deathPhase ? (finalPowerplay ? 0.026 : 0.014) : 0;
   let earlyWicketMod = 0;
   let earlyBoundaryMod = 0;
   let earlyRotateMod = 0;
@@ -1665,6 +1703,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       earlyNewBall -
       battingConditions +
       deathFactor +
+      deathWicketRisk +
       chasePressure * 0.008 -
       battingEdge +
       newBatterRisk +
@@ -1691,6 +1730,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       bowlingConditions * 0.8 -
       battingConditions * 0.45 -
       chasePressure * 0.03 +
+      deathControlDrop +
       (1 - settledFactor) * 0.032 +
       bowlerRhythmFactor * 0.06 -
       batterConfidenceFactor * 0.03 -
@@ -1711,6 +1751,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       matchup * 0.18 +
       intent.boundary +
       (overIndex < POWERPLAY_END ? 0.012 : 0) +
+      deathIntentBoost +
       chasePressure * 0.012 +
       settledFactor * 0.014 +
       batterConfidenceFactor * 0.015 -
@@ -1730,7 +1771,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       aggression.six +
       battingEdge * 1.2 -
       bowlingConditions * 0.25 +
-      (overIndex >= DEATH_OVERS_START ? 0.012 : 0) +
+      (deathPhase ? (finalPowerplay ? 0.016 : 0.01) : 0) +
       chasePressure * 0.008 +
       settledFactor * 0.005 +
       batterConfidenceFactor * 0.011 -
@@ -1749,7 +1790,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       innings.conditions.outfield.double +
       aggression.rotate * 0.35 -
       intent.single * 0.12 +
-      (overIndex >= DEATH_OVERS_START ? 0.006 : 0) +
+      (deathPhase ? (finalPowerplay ? 0.008 : 0.004) : 0) +
       settledFactor * 0.008 +
       batterConfidenceFactor * 0.006 -
       bowlerRhythmFactor * 0.004 +
@@ -1766,7 +1807,7 @@ function resolveBall(innings, bowler, bowlerIntentId, random) {
       aggression.rotate +
       intent.single -
       chasePressure * 0.006 -
-      (overIndex >= DEATH_OVERS_START ? 0.008 : 0) +
+      (deathPhase ? (finalPowerplay ? 0.014 : 0.007) : 0) +
       settledFactor * 0.018 +
       (teamConfidence < 35 ? 0.01 : 0) +
       batterConfidenceFactor * 0.012 -

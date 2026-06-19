@@ -817,12 +817,30 @@ function formatRate(value) {
   return Number.isFinite(value) ? value.toFixed(2) : "0.00";
 }
 
+function getOversPhaseLabel(balls) {
+  const completedOvers = Math.floor((balls || 0) / 6);
+
+  if (completedOvers < 10) {
+    return "PP1";
+  }
+
+  if (completedOvers < 40) {
+    return "Middle";
+  }
+
+  if (completedOvers < 45) {
+    return "Death";
+  }
+
+  return "PP3";
+}
+
 function resultScorecardDetailsMarkup(result) {
   return `
     <details class="scorecard-details">
       <summary>View scorecard</summary>
       <div class="scorecard-details__body">
-        <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</p>
+        <p class="schedule-award schedule-award--detail"><span>POTM</span><strong>${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</strong></p>
         ${result.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
       </div>
     </details>
@@ -1043,7 +1061,7 @@ function liveMatchMarkup() {
           </div>
           <div><span>Last Over</span><strong>${escapeHtml(lastOverText)}</strong></div>
           <div><span>Last Wicket</span><strong>${lastWicket ? `${escapeHtml(cleanPlayerName(lastWicket.name))} ${escapeHtml(formatBattingEntry(lastWicket))}` : "None"}</strong></div>
-          <div><span>Powerplay</span><strong>${Math.floor(innings.balls / 6) < 10 ? "On" : "Off"}</strong></div>
+          <div><span>Phase</span><strong>${escapeHtml(getOversPhaseLabel(innings.balls))}</strong></div>
           <div><span>Over</span><strong>${escapeHtml(formatOvers(innings.balls))}</strong></div>
           <div><span>Run Rate</span><strong>${formatRate(live.currentRate)}</strong></div>
           ${live.requiredRate ? `<div><span>Required Rate</span><strong>${formatRate(live.requiredRate)}</strong></div>` : ""}
@@ -1095,7 +1113,7 @@ function latestResultMarkup() {
           `)
           .join("")}
       </div>
-      <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(state.latestMatch.playerOfTheMatch || state.latestMatch.manOfTheMatch || ""))}</p>
+      <p class="schedule-award schedule-award--detail"><span>POTM</span><strong>${escapeHtml(cleanPlayerName(state.latestMatch.playerOfTheMatch || state.latestMatch.manOfTheMatch || ""))}</strong></p>
       <section class="scorecard-summary">
         <h4>Scorecard</h4>
         ${state.latestMatch.innings.map((innings, index) => fullInningsCardMarkup(innings, index === 0 ? "1st Inn" : "2nd Inn")).join("")}
@@ -1128,7 +1146,7 @@ function resultsHistoryMarkup(includeLatest = false) {
                   <p class="schedule-stage">${escapeHtml(result.stage)}</p>
                   <h3>${escapeHtml(result.opponent)}</h3>
                   <p>${escapeHtml(result.summary)}</p>
-                  <p><strong>Player of the Match:</strong> ${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</p>
+                  <p class="schedule-award"><span>POTM</span><strong>${escapeHtml(cleanPlayerName(result.playerOfTheMatch || result.manOfTheMatch || ""))}</strong></p>
                 </div>
                 <div class="schedule-scorelines">
                   ${result.inningsOrderLines
