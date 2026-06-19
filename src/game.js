@@ -676,6 +676,52 @@ function getBatterSettledLevel(player, battingCard) {
   return clamp(round(progress * 99), 0, 99);
 }
 
+function getIncomingBatterConfidence(innings, player) {
+  if (!innings || !player) {
+    return getInitialBatterConfidence(player);
+  }
+
+  const battingPosition = innings.teamRoster.indexOf(player.id);
+  const lowerOrderBatter = battingPosition >= 6 || player.batting < 68;
+  const topOrderDamage = getTopOrderDamage(innings);
+  const recentWickets = getRecentWicketCount(innings);
+  const wicketsInHand = Math.max(10 - innings.wickets, 0);
+  const teamConfidence = getTeamConfidence(innings);
+  const requiredRate = innings.target ? getRequiredRunRate(innings) : null;
+  const currentRate = getCurrentRunRate(innings);
+  const pressureGap = innings.target ? Math.max((requiredRate || 0) - currentRate, 0) : 0;
+  const partnershipRuns = getCurrentPartnershipRuns(innings);
+  const collapseMode = lowerOrderBatter && (topOrderDamage >= 2 || innings.wickets >= 4);
+
+  let confidence =
+    getInitialBatterConfidence(player) +
+    clamp((player.batting - 72) * 0.1, -3, 6) +
+    clamp((teamConfidence - 40) * 0.12, -4, 5) +
+    Math.min(wicketsInHand * 0.18, 1.6) -
+    recentWickets * 1.35 -
+    Math.min(partnershipRuns * 0.03, 1.6);
+
+  if (pressureGap >= 3.5) {
+    confidence -= 2.2;
+  } else if (pressureGap >= 2) {
+    confidence -= 1.1;
+  }
+
+  if (collapseMode) {
+    confidence += player.aggressionLevel === "Very Cautious"
+      ? 2.8
+      : player.aggressionLevel === "Cautious"
+        ? 1.9
+        : player.aggressionLevel === "Balanced"
+          ? 0.9
+          : player.aggressionLevel === "Aggressive"
+            ? -1.1
+            : -2.2;
+  }
+
+  return clamp(round(confidence), 18, 78);
+}
+
 function getBatterConfidenceLevel(player, battingCard, innings) {
   if (!player || !battingCard) {
     return innings?.confidenceBase ?? 40;
@@ -698,7 +744,7 @@ function getBowlerRhythmWithSpellGap(player, bowlingCard, innings) {
 
   const currentOverNumber = Math.floor(innings.balls / 6) + 1;
   const oversSinceSpell = Math.max(currentOverNumber - bowlingCard.lastOverBowled - 1, 0);
-  const gapPenalty = oversSinceSpell <= 2 ? 0 : Math.min((oversSinceSpell - 2) * 2, 12);
+  const gapPenalty = oversSinceSpell <= 1 ? 0 : Math.min((oversSinceSpell - 1) * 2.6, 16);
 
   return clamp(round(baseRhythm - gapPenalty), 0, 99);
 }
@@ -766,7 +812,7 @@ function getInitialConfidenceBase(previousInnings) {
   }
 
   if (didPreviousInningsCollapse(previousInnings)) {
-    return 55;
+    return 32;
   }
 
   return 40;
@@ -793,27 +839,39 @@ function getConfidenceTarget(innings) {
   const activeRuns = activeBatters.reduce((total, batter) => total + batter.card.runs, 0);
   const nextBatterQuality = getNextBatterQuality(innings);
   const scoringBaseline = innings.target ? Math.max(requiredRate || 0, 5.2) : 5.2;
-  const scoringMomentum = clamp((recentOverRunRate - scoringBaseline) * 1.6, -6, 9);
+  const scoringMomentum = clamp((recentOverRunRate - scoringBaseline) * 1.2, -4, 8);
   const chaseControl = innings.target
-    ? clamp(10 - Math.max((requiredRate || 0) - currentRate, 0) * 2.6 + Math.min((10 - innings.wickets) * 0.35, 3), -10, 12)
-    : clamp((currentRate - 4.8) * 1.8, -5, 8);
+    ? clamp(9 - Math.max((requiredRate || 0) - currentRate, 0) * 2.2 + Math.min((10 - innings.wickets) * 0.28, 2.5), -8, 10)
+    : clamp((currentRate - 4.8) * 1.45, -4, 7);
+  const finishLineBoost = innings.target
+    ? innings.score >= innings.target * 0.82
+      ? clamp(
+        (innings.score / innings.target - 0.82) * 42 +
+          Math.max(8 - innings.wickets, 0) * 0.38 -
+          Math.max((requiredRate || 0) - currentRate, 0) * 0.6,
+        0,
+        7,
+      )
+      : 0
+    : 0;
   const collapseExposure = innings.wickets >= 8 ? 10 : innings.wickets >= 6 ? 6 : innings.wickets >= 4 ? 3 : 0;
 
   return clamp(
     round(
       innings.confidenceBase +
-        settledAverage * 0.1 +
-        (batterConfidenceAverage - 40) * 0.34 +
-        Math.max(activeQuality - 70, 0) * 0.14 +
-        Math.max(nextBatterQuality - 66, 0) * 0.06 +
-        Math.min(activeRuns * 0.035, 10) +
-        Math.min(partnershipRuns * 0.1, 9) +
-        Math.min(partnershipBalls * 0.024, 4) +
+        settledAverage * 0.06 +
+        (batterConfidenceAverage - 40) * 0.2 +
+        Math.max(activeQuality - 70, 0) * 0.18 +
+        Math.max(nextBatterQuality - 66, 0) * 0.1 +
+        Math.min(activeRuns * 0.045, 14) +
+        Math.min(partnershipRuns * 0.075, 11) +
+        Math.min(partnershipBalls * 0.018, 3) +
         scoringMomentum +
-        chaseControl -
-        innings.wickets * 2.1 -
-        topOrderDamage * 1.8 -
-        recentWickets * 3.1 -
+        chaseControl +
+        finishLineBoost -
+        innings.wickets * 1.85 -
+        topOrderDamage * 1.4 -
+        recentWickets * 2.5 -
         collapseExposure,
     ),
     0,
@@ -837,37 +895,37 @@ function updateTeamConfidence(innings, event) {
   const partnershipRuns = getCurrentPartnershipRuns(innings);
   const wicketShockBuffer = event === "W"
     ? clamp(
-      Math.max(nextBatterQuality - 62, 0) * 0.06 +
-        wicketsInHand * 0.09 +
-        Math.min(partnershipRuns, 36) * 0.025,
+      Math.max(nextBatterQuality - 62, 0) * 0.07 +
+        wicketsInHand * 0.1 +
+        Math.min(partnershipRuns, 36) * 0.03,
       0,
-      2.4,
+      2.8,
     )
     : 0;
   const riseCap = event === "6"
-    ? 0.95
+    ? 0.32
     : event === "4"
-      ? 0.72
+      ? 0.24
       : event === "3"
-        ? 0.62
+        ? 0.18
         : event === "2"
-          ? 0.45
+          ? 0.12
           : event === "1"
-            ? 0.28
+            ? 0.08
             : event === "0"
               ? pressureGap >= 2.5
-                ? 0.08
-                : 0.14
+                ? 0.01
+                : 0.03
               : 0;
   const fallCap = event === "W"
-    ? clamp(4.2 - wicketShockBuffer, 1.6, 4.2)
+    ? clamp(2.2 - wicketShockBuffer * 0.45, 0.9, 2.2)
     : event === "0"
       ? pressureGap >= 3
-        ? 0.3
+        ? 0.12
         : pressureGap >= 1.5
-          ? 0.18
-          : 0.08
-      : 0.55;
+          ? 0.08
+          : 0.03
+      : 0.18;
 
   innings.teamConfidence = clamp(
     round(current + clamp(delta, -fallCap, riseCap)),
@@ -932,10 +990,10 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
 
   switch (event) {
     case "6":
-      riseCap = 1.9;
+      riseCap = 1.7;
       break;
     case "4":
-      riseCap = 1.35;
+      riseCap = 1.2;
       break;
     case "3":
       riseCap = 0.95;
@@ -949,7 +1007,7 @@ function updateBatterConfidence(innings, batterId, bowlerId, event) {
       break;
     case "0":
       riseCap = 0.1;
-      fallCap = pressureGap >= 2 ? 0.5 : 0.24;
+      fallCap = pressureGap >= 2 ? 0.4 : 0.18;
       break;
     case "W":
       riseCap = 0;
@@ -1385,36 +1443,36 @@ function applyOverConfidenceAdjustment(innings, overSummary) {
   let adjustment = 0;
 
   if (maiden) {
-    adjustment -= 0.6;
+    adjustment -= 0.3;
     if (innings.target) {
       if ((requiredRate || 0) >= 10.5) {
-        adjustment -= 1.4;
+        adjustment -= 0.9;
       } else if ((requiredRate || 0) >= 8.5) {
-        adjustment -= 0.8;
+        adjustment -= 0.45;
       }
     }
   }
 
   if (innings.target) {
     if (pressureGap >= 4) {
-      adjustment -= 0.75;
+      adjustment -= 0.4;
     } else if (pressureGap >= 2.25) {
-      adjustment -= 0.45;
+      adjustment -= 0.25;
     } else if (pressureGap <= -4) {
-      adjustment += 1.2;
+      adjustment += 0.65;
     } else if (pressureGap <= -2.5) {
-      adjustment += 0.75;
+      adjustment += 0.35;
     }
   }
 
   if (overRuns >= 8) {
-    adjustment += 1;
+    adjustment += 0.3;
   }
 
   if (overRuns >= 12) {
-    adjustment += 0.8;
+    adjustment += 0.45;
   } else if (overRuns <= 2 && !maiden && innings.target && (requiredRate || 0) >= 7.5) {
-    adjustment -= 0.6;
+    adjustment -= 0.3;
   }
 
   if (adjustment !== 0) {
@@ -1429,11 +1487,11 @@ function applyActiveBatterConfidenceAtOverEnd(innings, overSummary) {
 
   let adjustment = 0;
   if (overRuns >= 12) {
-    adjustment = 1;
+    adjustment = 0.6;
   } else if (overRuns >= 8) {
-    adjustment = 1;
+    adjustment = 0.35;
   } else if (overRuns === 0) {
-    adjustment = pressureGap >= 2 ? -1 : -0.5;
+    adjustment = pressureGap >= 2 ? -0.45 : -0.2;
   }
 
   if (!adjustment) {
@@ -1499,6 +1557,11 @@ function chooseNextBatterAutomatically(innings) {
 
 function assignIncomingBatter(innings, nextBatterId) {
   innings.strikerId = nextBatterId;
+  const player = innings.teamById.get(nextBatterId);
+  const battingCard = innings.battingCards[nextBatterId];
+  if (player && battingCard && battingCard.balls === 0 && !battingCard.out) {
+    battingCard.confidence = getIncomingBatterConfidence(innings, player);
+  }
 }
 
 function resolveBall(innings, bowler, bowlerIntentId, random) {
